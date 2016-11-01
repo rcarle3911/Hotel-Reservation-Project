@@ -1,0 +1,25 @@
+{
+  "name": "martian-motel",
+  "version": "0.0.1",
+  "description": "CMCS 495 Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rcarle3911/hotel-reservation-project.git"
+  },
+  "keywords": [
+    "CMSC495",
+    "hotel",
+    "reservation",
+    "project"
+  ],
+  "author": "Robert Carle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rcarle3911/hotel-reservation-project/issues"
+  },
+  "homepage": "https://github.com/rcarle3911/hotel-reservation-project#readme"
+}
