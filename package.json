@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/rcarle3911/hotel-reservation-project/issues"
   },
-  "homepage": "https://github.com/rcarle3911/hotel-reservation-project#readme"
+  "homepage": "https://github.com/rcarle3911/hotel-reservation-project#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
