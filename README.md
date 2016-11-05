@@ -1,3 +1,6 @@
+# Document Repository
+
+All documents can be dumpd in Google Drive. Here is the link https://drive.google.com/drive/folders/0By5eYxjK61RceXg1WjYxYXBNa3c?usp=sharing.
 # Hotel-Reservation-Project
 
 This website will be designed using a MEAN stack. MEAN is comprised of MongoDB, Express, AngularJS, and Node.js. The website is running of off a Raspberry Pi that will pull files from this repository as needed. To set up a development environment please follow these steps.
