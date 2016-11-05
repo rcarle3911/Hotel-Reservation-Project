@@ -14,6 +14,8 @@ Go to https://www.mongodb.com/download-center?jmp=hero#community and install v3.
 
 Make a git folder somewhere on your computer and clone this repository over to it. There are many ways to do this. I installed GitBash, but there are some GUI clients that will work as well.
 
+Check out this Git/GitHub [tutorial](https://www.youtube.com/watch?v=vR-y_2zWrIE&index=1&list=PLWKjhJtqVAbkFiqHnNaxpOPhh9tSWMXIF).
+
 # Start Nodejs Server
 
 Once you have cloned the repository, you should have a hotel-reservation-project folder somewhere. Navigate to this folder via the command line. For example, if your folder is located here C:\git\hotel-reservation-project, you could type cd C:\git\hotel-reservation-project to get there. Alternively, Windows users could navigate via the file explorer to the folder, shift-right-click on it, and select open command window here.
