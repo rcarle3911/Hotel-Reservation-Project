@@ -6,7 +6,9 @@ All documents can be dumped in Google Drive. Here is the link https://drive.goog
 This website will be designed using a MEAN stack. MEAN is comprised of MongoDB, Express, AngularJS, and Node.js. The website is running of off a Raspberry Pi that will pull files from this repository as needed. To set up a development environment please follow these steps.
 
 #Mockup of Sites
+
 Customer Front End - https://app.moqups.com/brandingcraze/LZLHfAlWDl/view
+
 Business Front End - https://app.moqups.com/jwmooreiv@gmail.com/cuc29MCJIU/view/page/a95c7641a
 
 # Install Node.js
