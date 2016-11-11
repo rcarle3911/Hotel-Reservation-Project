@@ -38,7 +38,7 @@ Check out this Git/GitHub [tutorial](https://www.youtube.com/watch?v=vR-y_2zWrIE
 
 Once you have cloned the repository, you should have a hotel-reservation-project folder somewhere. Navigate to this folder via the command line. For example, if your folder is located here C:\git\hotel-reservation-project, you could type cd C:\git\hotel-reservation-project to get there. Alternively, Windows users could navigate via the file explorer to the folder, shift-right-click on it, and select open command window here.
 
-Once you're there run npm install to get all of the dependencies.
+Once you're there enter <b>npm install</b> to get all of the dependencies.
 
 ## Start Nodejs Server
 
