@@ -8,6 +8,7 @@ This website will be designed using a MEAN stack. MEAN is comprised of MongoDB, 
 #Mockup of Sites
 
 Customer Front End - https://app.moqups.com/brandingcraze/LZLHfAlWDl/view
+                     https://app.moqups.com/jordan.fournier/LvuF2bKdVi/view
 
 Business Front End - https://app.moqups.com/jwmooreiv@gmail.com/cuc29MCJIU/view/page/a95c7641a
 
