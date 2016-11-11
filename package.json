@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/rcarle3911/hotel-reservation-project#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongojs": "^2.4.0"
   }
 }
