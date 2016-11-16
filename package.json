@@ -1,8 +1,8 @@
 {
   "name": "martian-motel",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CMCS 495 Project",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,16 +16,26 @@
     "reservation",
     "project"
   ],
-  "author": "Robert Carle",
+  "author": "Martian Group",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rcarle3911/hotel-reservation-project/issues"
   },
   "homepage": "https://github.com/rcarle3911/hotel-reservation-project#readme",
   "dependencies": {
+    "bcryptjs": "^2.1.0",
     "body-parser": "^1.15.2",
+    "ejs": "^2.3.3",
     "express": "^4.14.0",
+    "express-jwt": "^3.0.1",
+    "express-session": "^1.11.3",
+    "jsonwebtoken": "^5.0.2",
+    "lodash": "^3.10.0",
+    "mongodb": "^2.1.16",
     "mongojs": "^2.4.0",
-    "nodemailer": "^2.6.4"
+    "nodemailer": "^2.6.4",
+    "q": "^1.4.1",
+    "request": "^2.58.0",
+    "rootpath": "^0.1.2"
   }
 }

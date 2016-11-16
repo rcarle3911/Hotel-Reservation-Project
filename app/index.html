@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">    
+    
+    <title>Martian Motel - Home</title>
+    
+    <meta charset="utf-8">
+	<meta name="description" content="The Martian Motel">
+	<meta name="keywords" content="Martian Motel, Mars, Space Hotel">
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="robots" content="noindex, follow">
+	<meta name="robots" content="index, nofollow">	
+	<meta name="author" content="The Martian Group">	
+	<meta name="copyright" content="The Martian Group">	   
+
+    <!-- <link href="app-content/app.css" rel="stylesheet" /> -->
+    <link id="pagestyle" rel="stylesheet" type="text/css" href="app-content/stylesheet.css" media="screen">
+</head>
+    
+<body class="container">
+    <!-- header -->
+    <header>
+        <ul class="nav nav-tabs">
+            <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
+            <li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About</a></li>
+            <li ng-class="{active: activeTab === 'services'}"><a ui-sref="about">Services</a></li>
+            <li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="about">Reservations</a></li>
+            <li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="about">Gallery</a></li>
+            <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
+            <li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
+            <li><a href="/login" target="_self">Login</a></li><br>
+            <div id="logo">
+                <img src="app-content/textlogo.png" height="100" width="270">
+            </div>
+        </ul>
+        <div class="flash-message" ng-if="flash">
+            <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+        </div>
+
+    </header>
+    
+    <!-- main -->
+    <main ui-view></main>
+
+    <!-- footer -->
+    <footer>
+        <div class="login">
+		  <h4>Employees</h4>
+		  <a href="login.html">Login</a>
+		  <br>
+		  <a href="careers.html">Careers</a>
+        </div>
+        <div class="copy">
+		  <img src="app-content/logo.png" height="50" width="50"><br>Copyright &#169; 2016 The Martian Group<br>
+        </div>
+        <div class="contact">
+		  <h4>Contact Us</h4>
+		  <p>101 Olympus Drive <br>
+		  87999 Mars<br>
+		  +99 86797 87783
+		  <a href="mailto:motelmartian@gmail.com">info@martianmotel.com</a>
+		  </p>
+		<br>
+	</div>
+    </footer>
+
+    <!-- external scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
+    <!-- application scripts -->
+    <script src="app.js"></script>
+    <script src="app-services/user.service.js"></script>
+    <script src="app-services/contact.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+    <script src="home/index.controller.js"></script>
+    <script src="account/index.controller.js"></script>
+    <script src="contact/index.controller.js"></script>
+</body>
+</html>

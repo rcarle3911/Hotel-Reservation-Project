@@ -1,0 +1,135 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #222222;
+}
+
+li {
+    float: right;
+	padding-top:48px;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 13px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+	color:red;
+    background-color: #777777;
+}
+
+#background {
+    background-image: url("background.jpg");
+    background-position:  center top;
+    background-repeat: no-repeat;
+	height:20em;
+	background-size: cover;
+    padding: 10 px;
+
+}
+#background2 {
+    background-image: url("skyhotel.jpg");
+    background-position:  center top;
+    background-repeat: no-repeat;
+	height:20em;
+	background-size: cover;
+    padding: 10 px;
+
+}
+
+#logo {
+	float:left;
+	padding-left:20px;
+	padding-bottom:10px;
+}
+
+body{
+	font-family:neuropol,georgia, arial, sans-serif;
+	color:red;
+	min-width:900px;
+	max-width:1500px;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+
+h1{
+	clear:all;
+	font-size:20px;
+	text-align:center;
+}
+h2{
+	font-size:20px;
+	text-decoration: underline;
+	text-align:center;
+}
+h3{
+	font-size:18px;
+}
+h4{
+	font-size:16px;
+	text-align:center;	
+}
+
+p{
+	font-size:12px;
+}
+
+footer{
+	display:-webkit-flex;
+	display:flex;
+	-webkit-justify-content:space-between;
+	justify-content:space-between;
+	background-color:#222222;
+	color:white;
+	height:120px;
+	padding:2px;
+}
+
+.contact{
+	width:200px;
+	height:80px;
+	text-align:center;
+	padding-right:50px;
+}
+.copy{
+	width:350px;
+	height:80px;
+	padding-top:15px;
+	line-height:30px;
+	text-align:center;
+	font-size:12px;
+
+}
+.login{
+	width:200px;
+	height:80px;
+	padding-top:10px;
+	padding-left:50px;
+	text-align:center;
+}
+#rcorners{
+	background-color:white;
+    border-radius: 10px;
+    border: 1px solid black;
+	float:right;
+	padding: 15px;
+	margin-top: 5px;
+	margin-right: 75px;
+    width: 25%;
+    height: 50%; 
+	box-shadow: 0px 8px 16px 0px black;
+	clear:all;
+}
+#search{
+	float:right;
+	padding-right:5px;
+	font-style:"color :black;
+}
+

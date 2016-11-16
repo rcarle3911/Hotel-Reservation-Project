@@ -1,0 +1,28 @@
+<h1>Contact List App</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>         
+          <th>Email</th>
+          <th>Number</th>
+          <th>Action</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input class="form-control" ng-model="vm.contact.name"></td>
+          <td><input class="form-control" ng-model="vm.contact.email"></td>
+          <td><input class="form-control" ng-model="vm.contact.number"></td>
+          <td><button class="btn btn-primary" ng-click="vm.addContact()">Add Contact</button></td>
+          <td><button class="btn btn-info" ng-click="vm.updateContact()">Update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="vm.deselectContact()">Clear</button></td>
+        </tr>
+        <tr ng-repeat="contact in vm.contactlist">
+          <td>{{contact.name}}</td>
+          <td>{{contact.email}}</td>
+          <td>{{contact.number}}</td>
+          <td><button class="btn btn-danger" ng-click="vm.removeContact(contact._id)">Remove</button></td>
+          <td><button class="btn btn-warning" ng-click="vm.editContact(contact._id)">Edit</button></td>
+        </tr>
+      </tbody>
+    </table>
