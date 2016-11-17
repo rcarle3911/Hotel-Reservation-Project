@@ -8,11 +8,11 @@ All documents can be dumped in Google Drive. Here is the link https://drive.goog
 
 ##Mockup of Sites
 
-1. Customer Front End 
+Customer Front End 
 * https://app.moqups.com/jordan.fournier/LvuF2bKdVi/view (Current Version)
-* https://app.moqups.com/brandingcraze/LZLHfAlWDl/view (Previous Version)
+* ~~https://app.moqups.com/brandingcraze/LZLHfAlWDl/view~~ (Previous Version)
 
-2. Business Front End 
+Business Front End 
 * https://app.moqups.com/jwmooreiv@gmail.com/cuc29MCJIU/view/page/a95c7641a
 
 ##Diagrams
