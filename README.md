@@ -4,7 +4,8 @@ This website will be designed using a MEAN stack. MEAN is comprised of MongoDB, 
 
 # Documentation
 
-All documents can be dumped in Google Drive. Here is the link https://drive.google.com/drive/folders/0By5eYxjK61RceXg1WjYxYXBNa3c?usp=sharing.
+All documents can be dumped in Google Drive. Here is the link 
+* https://drive.google.com/drive/folders/0By5eYxjK61RceXg1WjYxYXBNa3c?usp=sharing.
 
 ##Mockup of Sites
 
@@ -17,7 +18,8 @@ Business Front End
 
 ##Diagrams
 
-Dataflow Diagram - https://www.lucidchart.com/invitations/accept/17bf75c8-30ee-410d-8377-cbcb63cc7bcd
+Dataflow Diagram 
+* https://www.lucidchart.com/invitations/accept/17bf75c8-30ee-410d-8377-cbcb63cc7bcd
 
 # Server Installation Guide
 
