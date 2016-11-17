@@ -6,13 +6,14 @@ This website will be designed using a MEAN stack. MEAN is comprised of MongoDB, 
 
 All documents can be dumped in Google Drive. Here is the link https://drive.google.com/drive/folders/0By5eYxjK61RceXg1WjYxYXBNa3c?usp=sharing.
 
-
 ##Mockup of Sites
 
-Customer Front End - https://app.moqups.com/brandingcraze/LZLHfAlWDl/view
-                     https://app.moqups.com/jordan.fournier/LvuF2bKdVi/view
+1. Customer Front End 
+* https://app.moqups.com/jordan.fournier/LvuF2bKdVi/view (Current Version)
+* https://app.moqups.com/brandingcraze/LZLHfAlWDl/view (Previous Version)
 
-Business Front End - https://app.moqups.com/jwmooreiv@gmail.com/cuc29MCJIU/view/page/a95c7641a
+2. Business Front End 
+* https://app.moqups.com/jwmooreiv@gmail.com/cuc29MCJIU/view/page/a95c7641a
 
 ##Diagrams
 
