@@ -31,6 +31,13 @@
                 controller: 'Contact.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'contact' }
+            })
+            .state('about', {
+                url: '/about',
+                templateUrl: 'about/index.html',
+                controller: 'About.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'contact' }
             });
     }
 

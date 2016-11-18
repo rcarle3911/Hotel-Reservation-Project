@@ -37,7 +37,7 @@ li a:hover, .dropdown:hover .dropbtn {
     background-image: url("skyhotel.jpg");
     background-position:  center top;
     background-repeat: no-repeat;
-	height:100%;
+	height:42em;
 	background-size: cover;
     padding: 10 px;
 
