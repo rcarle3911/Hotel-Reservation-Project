@@ -8,7 +8,7 @@ ul {
 
 li {
     float: right;
-	padding-top:48px;
+	padding-top:23px;
 }
 
 li a, .dropbtn {
@@ -28,7 +28,7 @@ li a:hover, .dropdown:hover .dropbtn {
     background-image: url("background.jpg");
     background-position:  center top;
     background-repeat: no-repeat;
-	height:20em;
+	height:42em;
 	background-size: cover;
     padding: 10 px;
 
@@ -37,7 +37,7 @@ li a:hover, .dropdown:hover .dropbtn {
     background-image: url("skyhotel.jpg");
     background-position:  center top;
     background-repeat: no-repeat;
-	height:20em;
+	height:100%;
 	background-size: cover;
     padding: 10 px;
 
@@ -45,19 +45,16 @@ li a:hover, .dropdown:hover .dropbtn {
 
 #logo {
 	float:left;
-	padding-left:20px;
-	padding-bottom:10px;
+    padding:15px 15px 15px 25px;
 }
 
 body{
 	font-family:neuropol,georgia, arial, sans-serif;
 	color:red;
 	min-width:900px;
-	max-width:1500px;
+	max-width:2300px;
 	margin-left:auto;
 	margin-right:auto;
-    padding: 20px 0;
-
 }
 
 h1{

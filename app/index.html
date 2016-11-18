@@ -25,10 +25,13 @@
     <link id="pagestyle" rel="stylesheet" type="text/css" href="app-content/stylesheet.css" media="screen">
 </head>
     
-<body class="container">
+<body>
     <!-- header -->
     <header>
-        <ul class="nav nav-tabs">
+        <ul>
+            <div id="logo">
+                <img src="app-content/textlogo.png" height="100" width="270">
+            </div>
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
             <li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About</a></li>
             <li ng-class="{active: activeTab === 'services'}"><a ui-sref="about">Services</a></li>
@@ -36,10 +39,7 @@
             <li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="about">Gallery</a></li>
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
             <li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
-            <li><a href="/login" target="_self">Login</a></li><br>
-            <div id="logo">
-                <img src="app-content/textlogo.png" height="100" width="270">
-            </div>
+            <li><a href="/login" target="_self">Login</a></li><br>            
         </ul>
         <div class="flash-message" ng-if="flash">
             <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
@@ -59,7 +59,8 @@
 		  <a href="careers.html">Careers</a>
         </div>
         <div class="copy">
-		  <img src="app-content/logo.png" height="50" width="50"><br>Copyright &#169; 2016 The Martian Group<br>
+            <img src="app-content/logo.png" height="50" width="50"><br>
+            Copyright &#169; 2016 The Martian Group<br>
         </div>
         <div class="contact">
 		  <h4>Contact Us</h4>
@@ -68,8 +69,8 @@
 		  +99 86797 87783
 		  <a href="mailto:motelmartian@gmail.com">info@martianmotel.com</a>
 		  </p>
-		<br>
-	</div>
+		  <br>
+        </div>
     </footer>
 
     <!-- external scripts -->
