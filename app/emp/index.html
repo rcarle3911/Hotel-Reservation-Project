@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    
+
+    <meta charset="UTF-8">
+    <title>Martian Hotel</title>
+</head>
+
+<body>
+    <br />
+    <div class="container-fluid">
+        <ul class="nav nav-tabs" id="myTabs">
+            <li class="active"><a href="#reservations" data-url="/app/emp/pages/reservations.html">Reservations</a></li>
+            <li><a href="#checkin" data-url="/app/emp/pages/checkin.html">Check In</a></li>
+            <li><a href="#checkout" data-url="/app/emp/pages/checkout.html">Check Out</a></li>
+            <li><a href="#manager" data-url="/app/emp/pages/manager.html">Management</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="reservations"></div>
+            <div class="tab-pane" id="checkin"></div>
+            <div class="tab-pane" id="checkout"></div>
+            <div class="tab-pane" id="manager"></div>
+        </div>
+    </div>
+    <!-- external scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <!-- Latest compiled and minified bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- application scripts -->
+    <script src="emp.js"></script>
+</body>
+
+</html>
