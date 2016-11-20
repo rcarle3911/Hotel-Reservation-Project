@@ -13,8 +13,8 @@
 </head>
 
 <body>
-    <div class="container">
-                <H2>Check in</H2>
+   <div class="container-fluid">
+        <H2>Check in</H2>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -29,23 +29,56 @@
                     <td>Doe, John</td>
                     <td>dd/mmm/yyyy</td>
                     <td>dd/mmm/yyyy</td>
-                    <td><button type="button" class="btn btn-warning">Check In</button></td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                    </td>
                 </tr>
                 <tr>
                     <td>Doe, John</td>
                     <td>dd/mmm/yyyy</td>
                     <td>dd/mmm/yyyy</td>
-                    <td><button type="button" class="btn btn-warning">Check In</button></td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                    </td>
                 </tr>
                 <tr>
                     <td>Doe, John</td>
                     <td>dd/mmm/yyyy</td>
                     <td>dd/mmm/yyyy</td>
-                    <td><button type="button" class="btn btn-warning">Check In</button></td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </div>
+        <!-- Modal -->
+        <div class="modal fade" id="checkinModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h1>Check In</h1>
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs" id="modalTabs">
+                            <li class="active"><a href="#Tab1" data-url="pages/modalcheckin.html">Check In</a></li>
+                            <li><a href="#Tab2" data-url="pages/modalhistory.html">Hisory</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Tab1"></div>
+                            <div class="tab-pane" id="Tab2"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+        <!-- application scripts -->
+    <script src="pages/modal.js"></script>
 </body>
 
 </html>
