@@ -12,18 +12,6 @@ var service = {};
 
 service.create = create;
 
-//Test Code
-service.create({
-    firstName: "Martian",
-    lastName: "Group",
-    dob: new Date("12/31/1970"),
-    phone: "(999)999-9999",
-    email: "motelmartian@gmail.com",
-    address: "123 Main St, Springfield, MO, 90210",
-    permission: "customer",
-    password: "123456"
-    });
-
 module.exports = service;
 
 /**
@@ -65,7 +53,7 @@ function create(userParam) {
                 transporter.sendMail({
                     from: '"Martian Motel" <motelmartian@gmail.com>',
                     to: user.email,
-                    subject: 'Welcome to the Martian Motel Group',
+                    subject: 'Welcome to the Martian Motel ' + user.firstName,
                     text: 'Your username is ' + user.email,
                     html: '<p>Your username is <b>' + user.email + '</b></p>'
                 }, function(error, info) {
