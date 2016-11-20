@@ -1,6 +1,6 @@
 # Hotel-Reservation-Project
 
-This website will be designed using a MEAN stack. MEAN is comprised of MongoDB, Express, AngularJS, and Node.js. The website is running of off a Raspberry Pi that will pull files from this repository as needed. To set up a development environment please follow these steps.
+This website will be designed using a MEAN stack. MEAN is comprised of MongoDB, Express, AngularJS, and Node.js. The website is running of off a ~~Raspberry Pi~~ [ODROID C2](http://www.hardkernel.com/main/products/prdt_info.php) that will pull files from this repository as needed. To set up a development environment, please follow the server installation steps.
 
 # Documentation
 
