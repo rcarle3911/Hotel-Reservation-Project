@@ -12,6 +12,6 @@ $('#myTabs a').click(function (e) {
 });
 
 // load first tab content
-$('#reservations').load($('.active a').attr("data-url"),function(result){
+$('#checkin').load($('.active a').attr("data-url"),function(result){
   $('.active a').tab('show');
 });
