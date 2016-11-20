@@ -29,8 +29,8 @@
     <!-- header -->
     <header>
         <ul>
-            <div id="logo"><a href="/update">
-                <img src="app-content/textlogo.png" height="100" width="270"></a>
+            <div id="logo">
+                <img src="app-content/textlogo.png" height="100" width="270">
             </div>
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
             <li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About</a></li>
@@ -59,7 +59,9 @@
 		  <a href="careers.html">Careers</a>
         </div>
         <div class="copy">
-            <img src="app-content/logo.png" height="50" width="50"><br>
+            <a href="/update">
+                <img src="app-content/logo.png" height="50" width="50">
+            </a><br>
             Copyright &#169; 2016 The Martian Group<br>
         </div>
         <div class="contact">
