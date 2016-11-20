@@ -49,5 +49,11 @@ app.get('/', function (req, res) {
     return res.redirect('/app');
 });
 
+app.get('/update', function (req, res) {
+	const { spawn } = require('child_process');
+	const deploySh = spawn('sh', ['hotel.sh'], {
+        cwd: '/home/alarm'})
+});
+
 app.listen(3000);
 console.log("Server running on port 3000");
