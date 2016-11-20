@@ -55,6 +55,15 @@ You'll need something to edit the html and javascript files. You could use notep
 <li><a href="http://brackets.io">Brackets</a></li>
 <li><a href="https://sublimetext.com">Sublime</a></li>
 <li><a href="https://notepad-plus-plus.org">Notepad++</a></li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+
+<u>More Tools</u>
+<li><a href="https://www.lucidchart.com/">LucidChart.com</a></li>
+<li><a href="http://www.bootply.com/">Bootstrap playground</a></li>http://www.bootply.com/
+<li><a href="https://pixlr.com/">pixlr online photoshop</a></li>
+<li><a href="https://moqups.com/">Moqups.com</a></li>
+
+
 </ul>
 
 Some IDEs offer nodejs development environments. I was able to set one up with eclipse. They can make the development process easier, especially if you're comfortable with it.
