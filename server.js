@@ -52,7 +52,8 @@ app.get('/', function (req, res) {
 app.get('/update', function (req, res) {
 	const { spawn } = require('child_process');
 	const deploySh = spawn('sh', ['hotel.sh'], {
-        cwd: '/home/alarm'})
+        cwd: '/home/alarm'});
+	return res.redirect('/app');
 });
 
 app.listen(3000);
