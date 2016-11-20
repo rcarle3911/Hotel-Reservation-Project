@@ -1,4 +1,4 @@
-$('#myTabs a').click(function (e) {
+$('#modalTabs a').click(function (e) {
 	e.preventDefault();
   
 	var url = $(this).attr("data-url");
@@ -12,10 +12,6 @@ $('#myTabs a').click(function (e) {
 });
 
 // load first tab content
-<<<<<<< HEAD
-$('#Tab1').load($('.active a').attr("data-url"),function(result){
-=======
-$('#reservations').load($('.active a').attr("data-url"),function(result){
->>>>>>> master
+$('#ModalCheckIn').load($('.active a').attr("data-url"),function(result){
   $('.active a').tab('show');
 });
