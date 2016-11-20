@@ -12,6 +12,6 @@ $('#modalTabs a').click(function (e) {
 });
 
 // load first tab content
-$('#Tab1').load($('.active a').attr("data-url"),function(result){
+$('#ModalCheckIn').load($('.active a').attr("data-url"),function(result){
   $('.active a').tab('show');
 });

@@ -1,1 +1,74 @@
-Modal Checkin under construction
+<div class="container-fluid">
+    <div class="col-xs-2">
+        <label for="sel1">Room list:</label>
+        <select class="form-control" id="sel1">
+    <option>1 Q</option>
+    <option>2 Q</option>
+    <option>1 K</option>
+    <option>1 K Suite</option>
+  </select>
+    </div>
+    <div class="col-xs-2">
+        <label for="sel1">Guests:</label>
+        <select class="form-control" id="sel1">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select>
+    </div>
+    <div class="col-xs-2">
+        <label for="sel1">Room #</label>
+        <select class="form-control" id="sel1">
+    <option>101</option>
+    <option>102</option>
+    <option>103</option>
+    <option>...</option>
+    <option>201</option>
+    <option>202</option>
+    <option>203</option>
+    <option>204</option>
+    <option>...</option>
+    <option>301</option>
+    <option>302</option>
+    <option>303</option>
+    <option>304</option>
+  </select>
+    </div>
+    <div class="form-group">
+        <label for="datetimepicker1">Check-in:</label>
+       <div class='input-group date' id='datetimepicker1'>
+           
+           <input type='text' class="form-control" />
+           <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+           </span>
+        </div>
+       <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+   </div>
+    <div class="col-xs-6">
+        <label for="fName">First Name:</label>
+        <input type="text" class="form-control" id="fName">
+    </div>
+    <div class="col-xs-6">
+        <label for="lName">Last Name:</label>
+        <input type="text" class="form-control" id="lName">
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="text" class="form-control" id="Phone">
+    </div>
+    <div class="form-group">
+        <label for="email">email:</label>
+        <input type="text" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+        <label for="cc">Card Number:</label>
+        <input type="text" class="form-control" id="cc">
+    </div>
+</div>
+</div>

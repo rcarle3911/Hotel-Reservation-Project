@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    
+
+    <meta charset="UTF-8">
+    <title>Martian Hotel</title>
+</head>
+
+<body>
+    <br />
 <div class="container-fluid">
 <H2>
     Check in</H2>
@@ -48,12 +66,12 @@
                 <h1>Check In</h1>
                 <!-- Tabs -->
                 <ul class="nav nav-tabs" id="modalTabs">
-                    <li class="active"><a href="#Tab1" data-url="pages/modalcheckin.html">Check In</a></li>
-                    <li><a href="#Tab2" data-url="pages/modalhistory.html">Hisory</a></li>
+                    <li class="active"><a href="#ModalCheckIn" data-url="pages/modalcheckin.html">Check In</a></li>
+                    <li><a href="#ModalCheckInHistory" data-url="pages/modalhistory.html">Hisory</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="Tab1"></div>
-                    <div class="tab-pane" id="Tab2"></div>
+                    <div class="tab-pane active" id="ModalCheckIn"></div>
+                    <div class="tab-pane" id="ModalCheckInHistory"></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -64,4 +82,6 @@
     </div>
 </div>
 <!-- application scripts -->
-<script src="pages/modal.js"></script>
+    <script src="pages/checkin.modal.js"></script>
+</body>
+</html>
