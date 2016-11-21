@@ -129,6 +129,31 @@ footer{
 	box-shadow: 0px 8px 16px 0px black;
 	clear:all;
 }
+
+#rcorners2{
+	clear:all;
+	font-size:14px;
+	text-align:center;
+	background-color:black;
+    border-radius: 10px;
+    border: 1px solid black;
+	float:right;
+	padding: 15px;
+	margin-top: 50px;
+	margin-right: 50px;
+	width:auto;
+	box-shadow: 0px 8px 16px 0px black;
+}
+legend{
+	line-height:inherit;
+	font-size:14px;
+	text-align:center;
+	color:white;
+	margin-bottom:0;
+	padding:0;
+	border-bottom:none;
+}
+
 #search{
 	float:right;
 	padding-right:5px;
