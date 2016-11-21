@@ -5,6 +5,26 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var config = require('config.json');
 
+
+//Test Code
+var userService = require('services/users.service');
+userService.create({
+    firstName: "John",
+    lastName: "Smith",
+    dob: new Date(),
+    phone: "(999)999-9999",
+    email: "motelmartian@gmail.com",
+    address: "123 Main St, Riverside, CO 12345",
+    permission: "manager",
+    password: "CMSC495@UMUC"
+    })
+	.then(function () {
+		console.log("New User Created");
+	})
+	.catch(function (err) {
+		console.log(err);
+	});
+
 /** Node mailer example use
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
@@ -12,7 +32,7 @@ var adminEmailList = 'motelmartian@gmail.com, rcarle3911@gmail.com, jordanf08@gm
 
 var mailOptions = {
 	from: '"Martian Motel" <motelmartian@gmail.com>',
-	to: '';
+	to: 'adminEmailList',
 	cc: 'motelmartian@gmail.com',
 	subject: 'Martian Motel',
 	text: 'Server Online',
@@ -34,6 +54,7 @@ app.use(session({ secret: config.secret, resave: false, saveUninitialized: true}
 // Routes
 app.use('/app', require('./controllers/app.controller'));
 app.use('/emp', require('./controllers/emp.controller'));
+
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
