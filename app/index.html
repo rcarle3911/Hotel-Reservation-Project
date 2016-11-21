@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">    
     
-    <title>Martian Motel - Home</title>
+    <title>Martian Motel</title>
     
     <meta charset="utf-8">
 	<meta name="description" content="The Martian Motel">
@@ -34,9 +34,9 @@
             </div>
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
             <li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About</a></li>
-            <li ng-class="{active: activeTab === 'services'}"><a ui-sref="about">Services</a></li>
-            <li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="about">Reservations</a></li>
-            <li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="about">Gallery</a></li>
+            <li ng-class="{active: activeTab === 'services'}"><a ui-sref="services">Services</a></li>
+            <li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="reservations">Reservations</a></li>
+            <li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="gallery">Gallery</a></li>
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
             <li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
             <li><a href="/login" target="_self">Login</a></li><br>            
@@ -54,7 +54,7 @@
     <footer>
         <div class="login">
 		  <h4>Employees</h4>
-		  <a href="emp/index.html">Login</a>
+		  <a href="/emp">Login</a>
 		  <br>
 		  <a href="careers.html">Careers</a>
         </div>
@@ -82,11 +82,6 @@
 
     <!-- application scripts -->
     <script src="app.js"></script>
-    <script src="app-services/user.service.js"></script>
-    <script src="app-services/contact.service.js"></script>
     <script src="app-services/flash.service.js"></script>
-    <script src="home/index.controller.js"></script>
-    <script src="account/index.controller.js"></script>
-    <script src="contact/index.controller.js"></script>
 </body>
 </html>

@@ -12,10 +12,6 @@ $('#myTabs a').click(function (e) {
 });
 
 // load first tab content
-<<<<<<< HEAD
 $('#Tab1').load($('.active a').attr("data-url"),function(result){
-=======
-$('#reservations').load($('.active a').attr("data-url"),function(result){
->>>>>>> master
   $('.active a').tab('show');
 });
