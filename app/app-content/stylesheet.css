@@ -118,20 +118,20 @@ footer{
 }
 #rcorners{
 	background-color:white;
-    border-radius: 10px;
-    border: 1px solid black;
+    	border-radius: 10px;
+    	border: 1px solid black;
 	float:right;
 	padding: 15px;
 	margin-top: 5px;
 	margin-right: 75px;
-    width: 25%;
-    height: 50%; 
+    	width: 25%;
+    	height: 50%; 
 	box-shadow: 0px 8px 16px 0px black;
 	clear:all;
 }
 
 #rcorners2{
-	clear:all;
+	clear:both;
 	font-size:14px;
 	text-align:left;
 	background-color:black;
