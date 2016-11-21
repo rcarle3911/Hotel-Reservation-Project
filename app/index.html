@@ -35,15 +35,15 @@
             <div id="logo">
                 <img src="app-content/textlogo.png" height="100" width="270">
             </div>
-            <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
-            <li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About</a></li>
-            <li ng-class="{active: activeTab === 'services'}"><a ui-sref="services">Services</a></li>
-            <li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="reservations">Reservations</a></li>
-            <li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="gallery">Gallery</a></li>
-            <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
-            <li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
-            <li><a href="/login" target="_self">Login</a></li><br>            
-        </ul>
+		<li><a href="/login" target="_self">Login</a></li><br>
+		<li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
+		<li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
+		<li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="gallery">Gallery</a></li>
+		<li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="reservations">Reservations</a></li>
+		<li ng-class="{active: activeTab === 'services'}"><a ui-sref="services">Services</a></li>
+		<li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About Us</a></li>
+		<li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>	
+	</ul>
         <div class="flash-message" ng-if="flash">
             <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
         </div>
