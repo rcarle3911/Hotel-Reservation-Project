@@ -1,52 +1,41 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Martian Hotel</title>
-</head>
-
-<body>
-    <br />
 <div class="container-fluid">
-<H2>
-    Check in</H2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Check In Date</th>
-            <th>Check Out Date</th>
-            <th class="text-center">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Doe, John</td>
-            <td>dd/mmm/yyyy</td>
-            <td>dd/mmm/yyyy</td>
-            <td class="text-center">
-                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Doe, John</td>
-            <td>dd/mmm/yyyy</td>
-            <td>dd/mmm/yyyy</td>
-            <td class="text-center">
-                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Doe, John</td>
-            <td>dd/mmm/yyyy</td>
-            <td>dd/mmm/yyyy</td>
-            <td class="text-center">
-                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <H2>Check in</H2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Check In Date</th>
+                <th>Check Out Date</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Doe, John</td>
+                <td>dd/mmm/yyyy</td>
+                <td>dd/mmm/yyyy</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Doe, John</td>
+                <td>dd/mmm/yyyy</td>
+                <td>dd/mmm/yyyy</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Doe, John</td>
+                <td>dd/mmm/yyyy</td>
+                <td>dd/mmm/yyyy</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="checkinModal" role="dialog">
@@ -58,7 +47,7 @@
                 <h1>Check In</h1>
                 <!-- Tabs -->
                 <ul class="nav nav-tabs" id="modalTabs">
-                    <li class="activeM"><a href="#ModalCheckIn" data-url="pages/modalcheckin.html">Check In</a></li>
+                    <li class="activeM"><a href="#ModalCheckIn" data-url="pages/checkinModal.html">Check In</a></li>
                     <li><a href="#ModalCheckInHistory" data-url="pages/modalhistory.html">Hisory</a></li>
                 </ul>
                 <div class="tab-content">
@@ -74,6 +63,4 @@
     </div>
 </div>
 <!-- application scripts -->
-    <script src="pages/checkin.modal.js"></script>
-</body>
-</html>
+<script src="pages/checkin.modal.js"></script>
