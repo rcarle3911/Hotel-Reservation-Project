@@ -107,6 +107,11 @@ footer{
 	padding-left:50px;
 	text-align:center;
 }
+#search{
+	float:right;
+	padding-right:5px;
+	font-style:"color :black;
+}
 #rcorners{
 	clear:both;
 	font-size:14px;
