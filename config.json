@@ -1,4 +1,5 @@
 {
     "apiUrl": "http://localhost:3000/api",
-    "secret": "U%P2oW+ 9(cxd631a3oY!-wZ3vD:t^ngB1p$ONB;a1K{{>=fdtju%QQXI+ -~T7U"
+    "secret": "U%P2oW+ 9(cxd631a3oY!-wZ3vD:t^ngB1p$ONB;a1K{{>=fdtju%QQXI+ -~T7U",
+    "adminEmails": "motelmartian@gmail.com, rcarle3911@gmail.com, jordanf08@gmail.com, jwmooreiv@gmail.com, dsteele0301@gmail.com, smith.glenisha@me.com, audioinstalr@yahoo.com, blacksmith_22@yahoo.com, fish5802@gmail.com"
 }

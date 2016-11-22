@@ -5,48 +5,6 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var config = require('config.json');
 
-
-//Test Code
-var userService = require('services/users.service');
-userService.create({
-    firstName: "John",
-    lastName: "Smith",
-    dob: new Date(),
-    phone: "(999)999-9999",
-    email: "motelmartian@gmail.com",
-    address: "123 Main St, Riverside, CO 12345",
-    permission: "manager",
-    password: "CMSC495@UMUC"
-    })
-	.then(function () {
-		console.log("New User Created");
-	})
-	.catch(function (err) {
-		console.log(err);
-	});
-
-/** Node mailer example use
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
-var adminEmailList = 'motelmartian@gmail.com, rcarle3911@gmail.com, jordanf08@gmail.com, jwmooreiv@gmail.com, dsteele0301@gmail.com, smith.glenisha@me.com, audioinstalr@yahoo.com, blacksmith_22@yahoo.com, fish5802@gmail.com';
-
-var mailOptions = {
-	from: '"Martian Motel" <motelmartian@gmail.com>',
-	to: 'adminEmailList',
-	cc: 'motelmartian@gmail.com',
-	subject: 'Martian Motel',
-	text: 'Server Online',
-	html: '<b>Server Online</b>'
-};
-
-transporter.sendMail(mailOptions, function(error, info) {
-	if(error) {
-		return console.log(error);
-	}
-	console.log('Message sent: ' + info.response);
-});
-**/
-
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true}));
@@ -70,3 +28,48 @@ app.get('/update', function (req, res) {
 
 app.listen(3000);
 console.log("Server running on port 3000");
+
+//test();
+/**
+ * Testing function
+ */
+function test() {
+var admin = {
+    firstName: "John",
+    lastName: "Smith",
+    dob: new Date(),
+    phone: "(999)999-9999",
+    email: "motelmartian@gmail.com",
+    address: "123 Main St, Riverside, CO 12345",
+    permission: "manager",
+    password: "CMSC495@UMUC"
+    },
+	
+	rsrv = {
+		userEmail: admin.email,
+		roomID: null,
+		startDate: new Date("12/20/2016"),
+		endDate: new Date("12/30/2016"),
+		numGuests: 3,
+		price: 72.34
+	},
+	
+	userService = require('services/users.service'),
+	resrvService = require('services/reservation.service');
+
+userService.create(admin)
+	.then(function () {
+		console.log("New User Created");
+	})
+	.catch(function (err) {
+		console.log(err);
+	});
+
+resrvService.create(rsrv)
+	.then(function () {
+		console.log("New Reservation Created");
+	})
+	.catch(function (err) {
+		console.log(err);
+	});
+}

@@ -57,9 +57,8 @@ function create(userParam) {
                     text: 'Your username is ' + user.email,
                     html: '<p>Your username is <b>' + user.email + '</b></p>'
                 }, function(error, info) {
-                    if (error) {
-                        return console.log(error);
-                    }
+                    if (error) return console.log(error);
+                    
                     console.log('Message sent: ' + info.response);
                 });
 
