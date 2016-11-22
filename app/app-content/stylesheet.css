@@ -7,7 +7,7 @@ ul {
 }
 li {
     float: right;
-	padding-top:23px;
+	padding-top:43px;
 }
 li a, .dropbtn {
     display: inline-block;
@@ -46,7 +46,7 @@ li a:hover, .dropdown:hover .dropbtn {
 body{
 	font-family:neuropol,georgia, arial, sans-serif;
 	color:red;
-	min-width:900px;
+	min-width:1200px;
 	max-width:2300px;
 	margin-left:auto;
 	margin-right:auto;
@@ -66,8 +66,13 @@ h3{
 }
 h4{
 	font-size:16px;
-	color:red;
+	color:white;
 	text-align:center;	
+}
+h5{
+	font-size:16px;
+	color:red;
+	text-align:left;	
 }
 p{
 	font-size:12px;
@@ -118,8 +123,8 @@ footer{
 	color:white;
 	text-align:left;
 	background-color:black;
-    	border-radius: 10px;
-    	border: 1px solid black;
+    border-radius: 10px;
+    border: 1px solid black;
 	float:right;
 	padding: 15px;
 	margin-top: 5px;
@@ -149,14 +154,32 @@ footer{
 	color:white;
 	text-align:left;
 	background-color:black;
-    	border-radius: 10px;
-    	border: 1px solid black;
+    border-radius: 10px;
+    border: 1px solid black;
 	float:right;
 	padding: 15px;
 	margin-top: 10px;
 	margin-right:50px;
 	margin-left:auto;
 	width:auto;
+	height:600px;
+	box-shadow: 0px 8px 16px 0px black;
+}
+#rcorners5{
+	clear:both;
+	font-size:12px;
+	line-height:15px;
+	color:white;
+	text-align:center;
+	background-color:black;
+    border-radius: 10px;
+    border: 1px solid black;
+	padding: 15px;
+	margin-top: 10px;
+	margin-right:100px;
+	margin-left:100px;
+	width:auto;
+	min-width:1000px;
 	height:600px;
 	box-shadow: 0px 8px 16px 0px black;
 }
@@ -169,8 +192,8 @@ footer{
 	color:white;
 	text-align:left;
 	background-color:black;
-    	border-radius: 10px;
-    	border: 1px solid black;
+    border-radius: 10px;
+    border: 1px solid black;
 	float:left;
 	margin-top: 10px;
 	margin-right:50px;
@@ -180,11 +203,20 @@ footer{
 	height:600px;
 	box-shadow: 0px 8px 16px 0px black;
 }
+
 #servicescontent{
 	display:-webkit-flex;
 	display:flex;
 	-webkit-justify-content:space-between;
 	justify-content:space-between;
+}
+#gallerycontent{
+	display:-webkit-flex;
+	display:flex;
+	-webkit-justify-content:space-between;
+	justify-content:space-between;
+	padding:20px;
+
 }
 legend{
 	line-height:inherit;
@@ -200,8 +232,8 @@ legend{
 	font-size:12px;
 	text-align:left;
 	background-color:black;
-    	border-radius: 10px;
-    	border: 1px solid black;
+    border-radius: 10px;
+    border: 1px solid black;
 	padding: 15px;
 	margin-left: auto;
 	margin-right: auto;
