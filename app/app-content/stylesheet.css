@@ -176,11 +176,11 @@ footer{
     border: 1px solid black;
 	padding: 15px;
 	margin-top: 10px;
-	margin-right:100px;
-	margin-left:100px;
-	width:auto;
+	margin-right:auto;
+	margin-left:auto;
+	width:1100px;
 	min-width:1000px;
-	height:600px;
+	height:550px;
 	box-shadow: 0px 8px 16px 0px black;
 }
 #photoslide{
@@ -215,7 +215,7 @@ footer{
 	display:flex;
 	-webkit-justify-content:space-between;
 	justify-content:space-between;
-	padding:20px;
+	padding:30px;
 
 }
 legend{
