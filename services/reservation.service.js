@@ -1,4 +1,5 @@
 var Q = require('q');
+var fs = require('fs')
 var mongojs = require('mongojs');
 var db = mongojs('hotel', ['reservations', 'users']);
 var nodemailer = require('nodemailer');
@@ -31,12 +32,13 @@ function create(resrvParam) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
                         console.log(user);
                         //Send email confirmation
+                        var htmlstream = fs.createReadStream('./services/resConfEmail.html');
                         transporter.sendMail({
                             from: '"Martian Motel" <motelmartian@gmail.com>',
                             to: resrvParam.userEmail,
                             subject: 'Welcome to the Martian Motel ' + user.firstName,
                             text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
-                            html: '<p>Your reservation for ' + resrvParam.startDate + ' is booked!</p>'
+                            html: htmlstream
                         }, function(error, info) {
                             if (error) return console.log(error);
 
