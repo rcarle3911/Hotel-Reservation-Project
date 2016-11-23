@@ -1,41 +1,69 @@
 <div class="container-fluid">
-    <H2>Reservations</H2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Check In Date</th>
-                <th>Check Out Date</th>
-                <th class="text-center">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Doe, John</td>
-                <td>dd/mmm/yyyy</td>
-                <td>dd/mmm/yyyy</td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">Edit</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Doe, John</td>
-                <td>dd/mmm/yyyy</td>
-                <td>dd/mmm/yyyy</td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">Edit</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Doe, John</td>
-                <td>dd/mmm/yyyy</td>
-                <td>dd/mmm/yyyy</td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">Edit</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="col-md-12">
+            <H2>Reservations</H2>
+        </div>
+        <div class="col-md-8">
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#name">Name</a></li>
+                      <li><a href="#checkin">Check-In</a></li>
+                      <li><a href="#checkout">Check-Out</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#all">Anything</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">         
+                <input type="text" class="form-control" name="x" placeholder="Search term...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-warning btn-default" data-toggle="modal" data-target="#myresModal">New Reservation</button>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Check In Date</th>
+                        <th>Check Out Date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Doe, John</td>
+                        <td>dd/mmm/yyyy</td>
+                        <td>dd/mmm/yyyy</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">Edit</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Doe, John</td>
+                        <td>dd/mmm/yyyy</td>
+                        <td>dd/mmm/yyyy</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">Edit</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Doe, John</td>
+                        <td>dd/mmm/yyyy</td>
+                        <td>dd/mmm/yyyy</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     <!-- Modal -->
     <div class="modal fade" id="myresModal" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -45,7 +73,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h1>Edit Reservervation</h1>
                     <div class="container-fluid">
-                        <div class="col-xs-2">
+                        <div class="col-md-2">
                             <label for="sel1">Room list:</label>
                             <select class="form-control" id="sel1">
                                 <option>1 Q</option>
@@ -54,7 +82,7 @@
                                 <option>1 K Suite</option>
                             </select>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-md-2">
                             <label for="sel1">Guests:</label>
                             <select class="form-control" id="sel1">
                                 <option>1</option>
@@ -63,7 +91,7 @@
                                 <option>4</option>
                             </select>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-md-2">
                             <label for="sel1">Room #</label>
                             <select class="form-control" id="sel1">
                                 <option>101</option>
@@ -82,11 +110,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-md-6">
                         <label for="fName">First Name:</label>
                         <input type="text" class="form-control" id="fName">
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-md-6">
                         <label for="lName">Last Name:</label>
                         <input type="text" class="form-control" id="lName">
                     </div>
