@@ -6,6 +6,14 @@ var service = {};
 
 service.create = create;
 service.delete = _delete;
+service.delByRmNum = delByRmNum;
+service.edit = edit;
+service.getRmCntByType = getRmCntByType;
+service.getRmByType = getRmByType;
+service.getRmCntBySpace = getRmCntBySpace;
+service.getRmBySpace = getRmBySpace;
+service.getRooms = getRooms;
+service.getRmByNum = getRmByNum;
 
 module.exports = service;
 
@@ -37,7 +45,7 @@ function _delete(_id) {
     return deferred.promise;
 }
 
-function deleteByRmNum(rmNum) {
+function delByRmNum(rmNum) {
     var deferred = Q.defer();
 
     db.rooms.remove(
@@ -48,5 +56,61 @@ function deleteByRmNum(rmNum) {
         }
     );
 
+    return deferred.promise;
+}
+
+function edit(rnParam) {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+
+    return deferred.promise;
+}
+
+function getRmCntByType(rmType) {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+
+    return deferred.promise;
+}
+
+function getRmByType(rmType) {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+    
+    return deferred.promise;
+}
+
+function getRmCntBySpace(numAdults, numChild) {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+    
+    return deferred.promise;
+}
+
+function getRmBySpace(numAdults, numChild) {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+    
+    return deferred.promise;
+}
+
+function getRooms() {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+    
+    return deferred.promise;
+}
+
+function getRmByNum(rmNum) {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+    
     return deferred.promise;
 }
