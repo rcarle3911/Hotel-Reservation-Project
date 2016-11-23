@@ -12,6 +12,6 @@ $('#myTabs a').click(function (e) {
 });
 
 // load first tab content
-$('#Tab1').load($('.active a').attr("data-url"),function(result){
-  $('.active a').tab('show');
+$('#Tab1').load($('.activeZ a').attr("data-url"),function(result){
+  $('.activeZ a').tab('show');
 });
