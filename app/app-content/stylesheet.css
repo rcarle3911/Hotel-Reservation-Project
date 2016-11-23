@@ -38,6 +38,17 @@ li a:hover, .dropdown:hover .dropbtn {
     padding: 10 px;
 
 }
+
+#background3 {
+    background-image: url("bg.jpeg");
+    background-position:  center top;
+    background-repeat: no-repeat;
+	height:53em;
+	background-size: cover;
+    padding: 10 px;
+
+}
+
 #logo {
 	float:left;
     padding:15px 15px 15px 25px;
