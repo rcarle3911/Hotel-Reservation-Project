@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// serve angular app files from the '/emp' route
-router.use('/', express.static('emp'));
+// Serve angular app files from the '/emp' route
+router.use('/', express.static('login'));
 
 module.exports = router;

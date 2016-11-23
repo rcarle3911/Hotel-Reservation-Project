@@ -12,6 +12,7 @@ app.use(session({ secret: config.secret, resave: false, saveUninitialized: true}
 // Routes
 app.use('/app', require('./controllers/app.controller'));
 app.use('/emp', require('./controllers/emp.controller'));
+app.use('/login', require('./controllers/login.controller'));
 
 // make '/app' default route
 app.get('/', function (req, res) {
