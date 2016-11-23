@@ -1,4 +1,4 @@
-$('#myTabs a').click(function (e) {
+$('#modalCOTabs a').click(function (e) {
 	e.preventDefault();
   
 	var url = $(this).attr("data-url");
@@ -12,6 +12,6 @@ $('#myTabs a').click(function (e) {
 });
 
 // load first tab content
-$('#Tab1').load($('.activeZ a').attr("data-url"),function(result){
-  $('.activeZ a').tab('show');
+$('#ModalCheckOut').load($('.activeC a').attr("data-url"),function(result){
+  $('.activeC a').tab('show');
 });

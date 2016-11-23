@@ -5,12 +5,10 @@ ul {
     overflow: hidden;
     background-color: #222222;
 }
-
 li {
     float: right;
-	padding-top:23px;
+	padding-top:43px;
 }
-
 li a, .dropbtn {
     display: inline-block;
     color: white;
@@ -18,12 +16,10 @@ li a, .dropbtn {
     padding: 14px 13px;
     text-decoration: none;
 }
-
 li a:hover, .dropdown:hover .dropbtn {
 	color:red;
     background-color: #777777;
 }
-
 #background {
     background-image: url("background.jpg");
     background-position:  center top;
@@ -42,7 +38,6 @@ li a:hover, .dropdown:hover .dropbtn {
     padding: 10 px;
 
 }
-
 #logo {
 	float:left;
     padding:15px 15px 15px 25px;
@@ -51,12 +46,11 @@ li a:hover, .dropdown:hover .dropbtn {
 body{
 	font-family:neuropol,georgia, arial, sans-serif;
 	color:red;
-	min-width:900px;
+	min-width:1200px;
 	max-width:2300px;
 	margin-left:auto;
 	margin-right:auto;
 }
-
 h1{
 	clear:all;
 	font-size:20px;
@@ -72,13 +66,17 @@ h3{
 }
 h4{
 	font-size:16px;
+	color:white;
 	text-align:center;	
 }
-
+h5{
+	font-size:16px;
+	color:red;
+	text-align:left;	
+}
 p{
 	font-size:12px;
 }
-
 footer{
 	display:-webkit-flex;
 	display:flex;
@@ -89,11 +87,9 @@ footer{
 	height:120px;
 	padding:2px;
 }
-
 .flash-message {
     margin-top: 20px;
 }
-
 .contact{
 	width:200px;
 	height:80px;
@@ -116,14 +112,19 @@ footer{
 	padding-left:50px;
 	text-align:center;
 }
+#search{
+	float:right;
+	padding-right:5px;
+	font-style:"color :black;
+}
 #rcorners{
 	clear:both;
-	font-size:12px;
+	font-size:14px;
 	color:white;
 	text-align:left;
 	background-color:black;
-    	border-radius: 10px;
-   	border: 1px solid black;
+    border-radius: 10px;
+    border: 1px solid black;
 	float:right;
 	padding: 15px;
 	margin-top: 5px;
@@ -136,14 +137,86 @@ footer{
 	font-size:14px;
 	text-align:left;
 	background-color:black;
-    	border-radius: 10px;
-    	border: 1px solid black;
+    border-radius: 10px;
+    border: 1px solid black;
 	float:right;
 	padding: 15px;
 	margin-top: 50px;
 	margin-right: 50px;
 	width:auto;
 	box-shadow: 0px 8px 16px 0px black;
+}
+#rcorners3{
+	clear:both;
+	font-size:12px;
+	line-height:15px;
+	overflow:scroll;
+	color:white;
+	text-align:left;
+	background-color:black;
+    border-radius: 10px;
+    border: 1px solid black;
+	float:right;
+	padding: 15px;
+	margin-top: 10px;
+	margin-right:50px;
+	margin-left:auto;
+	width:auto;
+	height:600px;
+	box-shadow: 0px 8px 16px 0px black;
+}
+#rcorners5{
+	clear:both;
+	font-size:12px;
+	line-height:15px;
+	color:white;
+	text-align:center;
+	background-color:black;
+    border-radius: 10px;
+    border: 1px solid black;
+	padding: 15px;
+	margin-top: 10px;
+	margin-right:auto;
+	margin-left:auto;
+	width:1100px;
+	min-width:1000px;
+	height:550px;
+	box-shadow: 0px 8px 16px 0px black;
+}
+#photoslide{
+	clear:both;
+	font-size:12px;
+	font-family:georgia;
+	line-height:15px;
+	overflow:scroll;
+	color:white;
+	text-align:left;
+	background-color:black;
+    border-radius: 10px;
+    border: 1px solid black;
+	float:left;
+	margin-top: 10px;
+	margin-right:50px;
+	margin-left:50px;
+	min-width:350px;
+	max-width:350px;
+	height:600px;
+	box-shadow: 0px 8px 16px 0px black;
+}
+
+#servicescontent{
+	display:-webkit-flex;
+	display:flex;
+	-webkit-justify-content:space-between;
+	justify-content:space-between;
+}
+#gallerycontent{
+	display:-webkit-flex;
+	display:flex;
+	-webkit-justify-content:space-between;
+	justify-content:space-between;
+	padding:30px;
+
 }
 legend{
 	line-height:inherit;
@@ -154,10 +227,18 @@ legend{
 	padding:0;
 	border-bottom:none;
 }
-
-#search{
-	float:right;
-	padding-right:5px;
-	font-style:"color :black;
+.form-container{
+	clear:both;
+	font-size:12px;
+	text-align:left;
+	background-color:black;
+    border-radius: 10px;
+    border: 1px solid black;
+	padding: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	width:600px;
+	box-shadow: 0px 8px 16px 0px black;	
 }
+
 
