@@ -1,16 +1,13 @@
 <div class="container-fluid">
-    <div class="navbar" id="mgrNav">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="mgrpages/mgrusers.html">User Accounts</a></li>
-            <li class="divider-vertical"></li>
-            <li><a href="mgrpages/mgroccrpt.html">Occupancy Report</a></li>
-            <li><a href="mgrpages/mgrmaidrpt.html">Housekeeping</a></li>
-        </ul>
-    </div>
-    <div id="MgrContainer">
-        <h1>
-            Home PAGE
-        </h1>
+    <ul class="nav nav-pills nav-justified" id="mgrTabs">
+        <li class="activeA"><a href="#mgrUser" data-url="mgrpages/mgrusers.html">User Accounts</a></li>
+        <li><a href="#mgrOcc" data-url="mgrpages/mgroccrpt.html">Occupancy Report</a></li>
+        <li><a href="#mgrMaid" data-url="mgrpages/mgrmaidrpt.html">Housekeeping</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="mgrUser"></div>
+        <div class="tab-pane" id="mgrOcc"></div>
+        <div class="tab-pane" id="mgrMaid"></div>
     </div>
 </div>
 <script src="pages/Mgr.js"></script>

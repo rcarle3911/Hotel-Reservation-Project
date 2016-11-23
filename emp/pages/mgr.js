@@ -1,17 +1,17 @@
-$(document).ready(function () {
-    $('.nav li').click(function (event) {
-        event.preventDefault();
+$('#mgrTabs a').click(function (e) {
+	e.preventDefault();
+  
+	var url = $(this).attr("data-url");
+  	var href = this.hash;
+  	var pane = $(this);
+	
+	// ajax load from data-url
+	$(href).load(url,function(result){      
+	    pane.tab('show');
+	});
+});
 
-        //remove all pre-existing active classes
-        //$('.active').removeClass('active');
-
-        //add the active class to the link we clicked
-        //$(this).addClass('active');
-
-        //Load the content
-        //e.g.
-        //load the page that the link was pointing to
-        $('#MgrContainer').load($(this).find('a').attr('href'));
-
-    });
+// load first tab content
+$('#mgrUser').load($('.activeA a').attr("data-url"),function(result){
+  $('.activeA a').tab('show');
 });
