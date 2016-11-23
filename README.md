@@ -44,7 +44,9 @@ Once you have cloned the repository, you should have a hotel-reservation-project
 Once you're there enter <b>npm install</b> to get all of the dependencies.
 
 ## Start Nodejs Server
-
+___
+NOTE: Before starting the server, make sure <b>mongod</b> is running in the background. Navigate to the mongo installation directory and run mongod.exe. 
+___
 To start the server, enter <b>node server</b> into the command window while in the project directory. It should say Server running on port 3000. If you visit localhost:3000 from your browser and the site comes up, everything is good to go. Terminate the command to stop the server.
 
 ## Set up Code Editor
