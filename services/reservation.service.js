@@ -1,7 +1,7 @@
 var Q = require('q');
 var fs = require('fs')
 var mongojs = require('mongojs');
-var db = mongojs('hotel', ['reservations', 'users']);
+var db = mongojs('hotel', ['pastRes', 'presentRes', 'futureRes', 'users', 'rooms']);
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
 
@@ -23,10 +23,11 @@ function create(resrvParam) {
     db.users.findOne(
         { email: resrvParam.userEmail },
         function (err, userFound) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
             if (userFound) user = userFound;
             if (!isAvailable(resrvParam)) deferred.reject("No availability for selected dates");
             else {
-                db.reservations.insert(
+                db.futureRes.insert(
                     resrvParam,
                     function (err, doc) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
