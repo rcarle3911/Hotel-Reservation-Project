@@ -8,11 +8,14 @@ var service = {};
 
 service.create = create;
 service.delete = _delete;
-service.delByRmNum = delByRmNum;
+service.delRmByNum = delRmByNum;
 service.edit = edit;
 service.getRmByType = getRmByType;
+service.getAvailRmByType = getAvailRmByType;
 service.getRmBySpace = getRmBySpace;
+service.getAvailRmBySpace = getAvailRmBySpace;
 service.getRooms = getRooms;
+service.getAvailRooms = getAvailRooms;
 service.getRmByNum = getRmByNum;
 service.update = update;
 
@@ -36,8 +39,14 @@ function update() {
             countType(types[i])
             .then(function(doc) {
                 writeData(doc);
+            })
+            .catch(function(err) {
+                console.log(err);
             });
         }
+    })
+    .catch(function (err) {
+        console.log(err);
     });
 
     getSpaceList()
@@ -48,8 +57,14 @@ function update() {
             countSpace(spaces[i])
             .then(function (doc) {
                 writeData(doc);
+            })
+            .catch(function(err) {
+                console.log(err);
             });
         }
+    })
+    .catch(function (err) {
+        console.log(err);
     });
 
     function getSpaceList() {
@@ -154,7 +169,7 @@ function _delete(_id) {
     return deferred.promise;
 }
 
-function delByRmNum(num) {
+function delRmByNum(num) {
     var deferred = Q.defer();
 
     db.rooms.remove(
@@ -206,10 +221,52 @@ function getRmByType(type) {
     return deferred.promise;
 }
 
-function getRmBySpace(numAdults, numChild) {
+function getAvailRmByType(type) {
     var deferred = Q.defer();
 
-    deferred.resolve();
+    db.rooms.find(
+        { $and: 
+            [{ type: type },
+            { avail: true }]
+        },
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
+
+    return deferred.promise;
+}
+
+function getRmBySpace(space) {
+    var deferred = Q.defer();
+
+    db.rooms.find(
+        { "type.space" : { $gte: space } },
+        function (err, doc) {
+            if (err) deferred.resolve(err);
+            deferred.resolve(doc);
+        }
+    );
+
+    return deferred.promise;
+}
+
+function getAvailRmBySpace(space) {
+    var deferred = Q.defer();
+
+    db.rooms.find(
+        { $and: 
+            [{ "type.space": 
+                { $gte: space }
+            },
+            { avail: true }]
+        },
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
     
     return deferred.promise;
 }
@@ -217,15 +274,38 @@ function getRmBySpace(numAdults, numChild) {
 function getRooms() {
     var deferred = Q.defer();
 
-    deferred.resolve();
+    db.rooms.find({}, function (err, doc) {
+        if (err) deferred.reject(err.name + ': ' + err.message);
+        deferred.resolve(doc);
+    })
     
+    return deferred.promise;
+}
+
+function getAvailRooms() {
+    var deferred = Q.defer();
+
+    db.rooms.find(
+        { avail: true },
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
+
     return deferred.promise;
 }
 
 function getRmByNum(rmNum) {
     var deferred = Q.defer();
 
-    deferred.resolve();
+    db.rooms.findOne(
+        { num: rmNum }, 
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
     
     return deferred.promise;
 }

@@ -60,8 +60,8 @@ function test() {
 
 	room = {
 		type: rmType,
-		num: 101,
-		avail: true
+		num: 103,
+		avail: false
 	},
 	
 	rsrv = {
@@ -89,10 +89,11 @@ function test() {
 	resrvService = require('services/reservation.service'),
 	roomService = require('services/room.service');
 
-	createUser();
-	createRoom();
-	createRes();
-	roomService.update();
+	//createUser();
+	//createRoom();
+	//createRes();
+	//roomService.update();
+	//testRoomFunctions();
 
 	function createUser() {
 		userService.create(user)
@@ -127,14 +128,25 @@ function test() {
 			});
 	}
 
-	function getRoomByType() {
-		roomService.getRmByType(rmType)
-			.then(function (doc) {
-				console.log(doc);
+	function testRoomFunctions() {
+
+		roomService.getRooms()
+		.then(function (roomList) {
+			console.log("Room List");
+			console.log(roomList);
+			roomService.getAvailRooms()
+			.then(function (aRoomList) {
+				console.log("Available Room List");
+				console.log(aRoomList);
 			})
-			.catch(function (err) {
+			.catch(function(err) {
 				console.log(err);
 			});
+		})
+		.catch(function (err) {
+			console.log(err);
+		});
+
 	}
 
 		

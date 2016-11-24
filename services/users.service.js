@@ -9,6 +9,11 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
 
 var service = {};
+    group = Object.freeze({
+		CUSTOMER: 0,
+		EMPLOYEE: 1,
+		MANAGER: 2
+	}),
 
 service.create = create;
 
@@ -43,7 +48,7 @@ function create(userParam) {
     function createUser() {
         var user = _.omit(userParam, 'password');
         user.password = bcrypt.hashSync(userParam.password, 10);        
-        user.permission = "customer";
+        user.group = group.CUSTOMER;
         db.users.insert(
             user,
             function (err, doc) {
