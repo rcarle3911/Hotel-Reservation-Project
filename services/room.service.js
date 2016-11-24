@@ -8,9 +8,9 @@ service.create = create;
 service.delete = _delete;
 service.delByRmNum = delByRmNum;
 service.edit = edit;
-service.getRmCntByType = getRmCntByType;
+service.countByType = countByType;
 service.getRmByType = getRmByType;
-service.getRmCntBySpace = getRmCntBySpace;
+service.countBySpace = countBySpace;
 service.getRmBySpace = getRmBySpace;
 service.getRooms = getRooms;
 service.getRmByNum = getRmByNum;
@@ -20,14 +20,25 @@ module.exports = service;
 function create(rmParam) {
     var deferred = Q.defer();
 
-    db.rooms.insert(
-        rmParam,
-        function (err, docs) {
+    db.rooms.findOne(
+        { num: rmParam.num },
+        function (err, room) {
             if (err) deferred.reject(err.name + ': ' + err.message);
-            deferred.resolve(docs);
+            if (room) {
+                //Room Number is already in database
+                deferred.reject('Room Number ' + rmParam.num + ' is already in the database. Use edit to make changes.');
+            } else {
+                db.rooms.insert(
+                    rmParam,
+                    function (err, docs) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                        deferred.resolve(docs);
+                    }
+                );
+            }
         }
     );
-
+    
     return deferred.promise;
 }
 
@@ -45,11 +56,11 @@ function _delete(_id) {
     return deferred.promise;
 }
 
-function delByRmNum(rmNum) {
+function delByRmNum(num) {
     var deferred = Q.defer();
 
     db.rooms.remove(
-        { rmNum: rmNum },
+        { num: num },
         function (err, docs) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             deferred.resolve(docs);
@@ -59,31 +70,57 @@ function delByRmNum(rmNum) {
     return deferred.promise;
 }
 
-function edit(rnParam) {
-    var deferred = Q.defer();
+function edit(_id, rmParam) {
+    var deferred = Q.defer(),
 
-    deferred.resolve();
+        set = {
+            type: rmParam.type,
+            num: rmParam.num,
+            avail: rmParam.avail
+        };
+
+    db.rooms.findAndModify({
+        query: {_id: mongojs.ObjectID(_id) },
+        update: {$set: set},
+        new: true},
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
 
     return deferred.promise;
 }
 
-function getRmCntByType(rmType) {
+function countByType(type) {
     var deferred = Q.defer();
 
-    deferred.resolve();
+    db.rooms.count( 
+        { type: type },
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
 
     return deferred.promise;
 }
 
-function getRmByType(rmType) {
+function getRmByType(type) {
     var deferred = Q.defer();
 
-    deferred.resolve();
+    db.rooms.find(
+        { type: type },
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
     
     return deferred.promise;
 }
 
-function getRmCntBySpace(numAdults, numChild) {
+function countBySpace(numAdults, numChild) {
     var deferred = Q.defer();
 
     deferred.resolve();
