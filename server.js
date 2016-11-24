@@ -30,7 +30,7 @@ app.get('/update', function (req, res) {
 app.listen(3000);
 console.log("Server running on port 3000");
 
-test();
+//test();
 /**
  * Testing function
  */
@@ -89,10 +89,9 @@ function test() {
 	resrvService = require('services/reservation.service'),
 	roomService = require('services/room.service');
 
-	//createUser();
-	//createRes();
-	//createRoom();
-	//getRoomByType();
+	createUser();
+	createRoom();
+	createRes();
 	roomService.update();
 
 	function createUser() {
