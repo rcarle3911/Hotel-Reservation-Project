@@ -106,7 +106,14 @@ function test() {
 	}
 
 	function createRes() {
-		resrvService.create(rsrv);
+		resrvService.create(rsrv)
+			.then(function (doc) {
+				console.log("New Reservation Created")
+				console.log(doc);
+			})
+			.catch(function (err) {
+				console.log(err);
+			})
 	}
 	
 	function createRoom() {

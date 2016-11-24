@@ -18,6 +18,12 @@ service.update = update;
 
 module.exports = service;
 
+/**
+ * Grabs a list of distinct types from the rooms database.
+ * Counts how many of each type in the list exist in the rooms database.
+ * Writes the value to config.json.
+ * Repeats the process for distinct space values. 
+ */
 function update() {    
     // Wipe rooms data
     config.rooms = {"type": {}, "space": {}};
@@ -104,6 +110,9 @@ function update() {
     }
 }
 
+/**
+ * Enforces unique room numbers
+ */
 function create(rmParam) {
     var deferred = Q.defer();
 
