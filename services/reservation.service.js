@@ -13,24 +13,23 @@ service.isAvailable = isAvailable;
 module.exports = service;
 
 /**
- * Creates a reservation object
+ * Creates a reservation object. Does not defer.
  * @param {any} resrvParam
  */
 function create(resrvParam) {
-    var deferred = Q.defer();
     var user = {firstName: "Guest"};
-    
+
     db.users.findOne(
         { email: resrvParam.userEmail },
         function (err, userFound) {
-            if (err) deferred.reject(err.name + ': ' + err.message);
+            if (err) return console.log(err.name + ': ' + err.message);
             if (userFound) user = userFound;
-            if (!isAvailable(resrvParam)) deferred.reject("No availability for selected dates");
+            if (!isAvailable(resrvParam)) return console.log("No availability for selected dates");
             else {
                 db.futureRes.insert(
                     resrvParam,
                     function (err, doc) {
-                        if (err) deferred.reject(err.name + ': ' + err.message);
+                        if (err) return console.log(err.name + ': ' + err.message);
                         console.log(user);
                         //Send email confirmation
                         var htmlstream = fs.createReadStream('./services/resConfEmail.html');
@@ -45,17 +44,16 @@ function create(resrvParam) {
 
                             console.log('Message sent: ' + info.response);
                         });
-                    deferred.resolve();
+                        console.log(doc);
                 });
             }
         });
-    
 
-    return deferred.promise;
 }
 /**
  * @todo Check for availability here
  */
 function isAvailable(resrvParam) {
+    
     return true;
 }
