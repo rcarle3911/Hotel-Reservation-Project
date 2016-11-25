@@ -30,7 +30,7 @@ app.get('/update', function (req, res) {
 app.listen(3000);
 console.log("Server running on port 3000");
 
-test();
+//test();
 /**
  * Testing function
  */
@@ -60,8 +60,8 @@ function test() {
 
 	room = {
 		type: rmType,
-		num: 101,
-		avail: true
+		num: 103,
+		avail: false
 	},
 	
 	rsrv = {
@@ -78,16 +78,22 @@ function test() {
 		num: "1234123412341234",
 		exp: new Date(2020, 12, 31),
 		cvv: "123",
-	}
+	},
 
 	payment = {
 		resID: rsrv._id || 0, // Get from db
 		payID: payDetail._id || 0 // Get from db
-	}
+	},
 	
 	userService = require('services/users.service'),
-	resrvService = require('services/reservation.service');
+	resrvService = require('services/reservation.service'),
 	roomService = require('services/room.service');
+
+	//createUser();
+	//createRoom();
+	//createRes();
+	//roomService.update();
+	//testRoomFunctions();
 
 	function createUser() {
 		userService.create(user)
@@ -103,12 +109,12 @@ function test() {
 	function createRes() {
 		resrvService.create(rsrv)
 			.then(function (doc) {
-				console.log("New Reservation Created");
+				console.log("New Reservation Created")
 				console.log(doc);
 			})
 			.catch(function (err) {
 				console.log(err);
-			});
+			})
 	}
 	
 	function createRoom() {
@@ -122,14 +128,25 @@ function test() {
 			});
 	}
 
-	function getRoomByType() {
-		roomService.getRmByType(rmType)
-			.then(function (doc) {
-				console.log(doc);
+	function testRoomFunctions() {
+
+		roomService.getRooms()
+		.then(function (roomList) {
+			console.log("Room List");
+			console.log(roomList);
+			roomService.getAvailRooms()
+			.then(function (aRoomList) {
+				console.log("Available Room List");
+				console.log(aRoomList);
 			})
-			.catch(function (err) {
+			.catch(function(err) {
 				console.log(err);
 			});
+		})
+		.catch(function (err) {
+			console.log(err);
+		});
+
 	}
 
 		
