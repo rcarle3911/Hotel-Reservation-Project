@@ -15,3 +15,4 @@ $('#myTabs a').click(function (e) {
 $('#Tab1').load($('.activeZ a').attr("data-url"),function(result){
   $('.activeZ a').tab('show');
 });
+
