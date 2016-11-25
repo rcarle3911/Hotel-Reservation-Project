@@ -15,3 +15,15 @@ $('#modalCOTabs a').click(function (e) {
 $('#ModalCheckOut').load($('.activeC a').attr("data-url"),function(result){
   $('.activeC a').tab('show');
 });
+
+oTable = $('#tblCheckout').DataTable( {
+        "paging":         false,
+				"pageLength": -1,
+        "ordering": true,
+        "info":     false, 
+				"filter": true
+    } );
+
+$('#txtCheckoutSearch').keyup(function(){
+      oTable.search($(this).val()).draw() ;
+});
