@@ -8,4 +8,6 @@ otblHistory = $('#tblHistory').DataTable({
 
 $('#txtHisotySearch').keyup(function () {
     otblHistory.search($(this).val()).draw();
-})
+}); 
+
+otblHistory.destroy();
