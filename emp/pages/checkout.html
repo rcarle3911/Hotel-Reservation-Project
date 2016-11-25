@@ -1,28 +1,12 @@
 <div id="checkoutdiv" class="container-fluid">
-    <div class="col-md-12">
-        <H2>Check out</H2>
-    </div>
-        <div class="col-md-8">
-		    <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#name">Name</a></li>
-                      <li><a href="#checkin">Check-In</a></li>
-                      <li><a href="#checkout">Check-Out</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#all">Anything</a></li>
-                    </ul>
-                </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+         <div class="col-md-4 pull-right" style="Padding: 5px;">
+        <div class="input-group">
+            <input id="txtCheckoutSearch" type="text" class="form-control" name="x" placeholder="Filter Grid...">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
         </div>
+    </div>
     <div class="col-md-12">
         <table class="table table-striped">
             <thead>
