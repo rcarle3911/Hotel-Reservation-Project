@@ -59,7 +59,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h1>Edit Reservervation</h1>
+                    <h1>Reservervation</h1>
                     <div class="container-fluid">
                         <div class="col-md-12">
                         <div class="col-md-2">
@@ -144,7 +144,7 @@
                         </div>
                         <div class="col-md-2">
                             <label for="CVVCode">CVV Code: </label>
-                            <input id="CVVCode" type="number" min="000" max="999" class="form-control" > 
+                            <input id="CVVCode" type="text" pattern="[0-9]{3}" maxlength="3" class="form-control" > 
                             </div>
                         <div class="col-md-4">
                             <label for="dtCCExp">Exp. Date: </label>
