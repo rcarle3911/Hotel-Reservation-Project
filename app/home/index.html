@@ -15,26 +15,48 @@
 	</form>
 </div>
 <br>
+
+
+
 <div id="rcorners2">
+<legend>CHECK AVAILABILITY AND RATES</legend><br>
+	<div class="dropdown form-group">
+		<label>Check-In</label>
+		<a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#"
+		   href="#">
+			<div class="input-group date">
+				<input type="text" class="form-control" data-ng-model="dateRangeStart">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</a>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			<datetimepicker data-ng-model="dateRangeStart"
+							data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
+							data-on-set-time="startDateOnSetTime()"
+							data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+		</ul>
+	</div>
+
+
+	<div class="dropdown form-group">
+		<label>Check-Out</label>
+		<a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="#"
+		   href="#">
+			<div class="input-group date">
+				<input type="text" class="form-control" data-ng-model="dateRangeEnd">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</a>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			<datetimepicker data-ng-model="dateRangeEnd"
+							data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
+							data-on-set-time="endDateOnSetTime()"
+							data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+		</ul>
+	</div>
+	<br>
 	<form name="availability" action="availability.html" onsubmit="return userAvailability()" method="post">
 		<fieldset>
-			<legend>CHECK AVAILABILITY AND RATES</legend><br>
-			Arriving
-			<input type="date" name="Arriving" tabindex="1"/><br><br>
-			Departing
-			<input type="date" name="Departing" tabindex="2"/><br><br>
-			Nights
-			<select tabindex="3">
-				<option value="">select</option>			
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-				<option value="13">13</option>
-				<option value="14">14</option>
-			</select>
 			Adults
 			<select tabindex="4">
 				<option value="">select</option>			
@@ -58,7 +80,7 @@
 				<option value="6">6</option>
 				<option value="7">7</option>
 				<option value="8">8</option>
-			</select><br>
+			</select>
 		</fieldset>
 		<br>
 		<input type="submit" value="Submit" tabindex="6"> 
