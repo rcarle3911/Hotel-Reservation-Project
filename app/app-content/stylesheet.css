@@ -1,3 +1,4 @@
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -7,7 +8,7 @@ ul {
 }
 li {
     float: right;
-	padding-top:43px;
+	padding-top:30px;
 }
 li a, .dropbtn {
     display: inline-block;
@@ -51,7 +52,7 @@ li a:hover, .dropdown:hover .dropbtn {
 
 #logo {
 	float:left;
-    padding:15px 15px 15px 25px;
+    padding:3px 15px 3px 25px;
 }
 
 body{
@@ -96,7 +97,7 @@ footer{
 	justify-content:space-between;
 	background-color:#222222;
 	color:white;
-	height:120px;
+	height:110px;
 	padding:2px;
 }
 .flash-message {
@@ -107,6 +108,7 @@ footer{
 	height:80px;
 	text-align:center;
 	padding-right:50px;
+	line-height:15px;
 }
 .copy{
 	width:350px;
@@ -274,6 +276,8 @@ legend{
 	display:flex;
 	-webkit-justify-content:space-between;
 	justify-content:space-between;
+	margin-left: auto;
+	margin-right: auto;
 }
 .col-md-8{
 
