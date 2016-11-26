@@ -61,6 +61,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h1>Edit Reservervation</h1>
                     <div class="container-fluid">
+                        <div class="col-md-12">
                         <div class="col-md-2">
                             <label for="sel1">Room list:</label>
                             <select class="form-control" id="sel1">
@@ -79,31 +80,84 @@
                                 <option>4</option>
                             </select>
                         </div>
+                        <div class="col-md-4">
+                            <label for="dtCheckIn">Check-in: </label>
+                            <input id="dtCheckIn" type="date" class="form-control" > 
+                           
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dtCheckOut">Check-out:</label>
+                            <input id="dtCheckOut" type="date" class="form-control">
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="fName">First Name:</label>
-                        <input type="text" class="form-control" id="fName">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label for="fName">First Name:</label>
+                            <input type="text" class="form-control" id="fName">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lName">Last Name:</label>
+                            <input type="text" class="form-control" id="lName">
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="lName">Last Name:</label>
-                        <input type="text" class="form-control" id="lName">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <label for="fName">Street:</label>
+                            <input type="text" class="form-control" id="Street">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lName">City:</label>
+                            <input type="text" class="form-control" id="City">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="lName">State:</label>
+                            <input type="text" class="form-control" id="State">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="lName">Zip:</label>
+                            <input type="text" class="form-control" id="Zip">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Phone:</label>
-                        <input type="text" class="form-control" id="Phone">
+                    <div class="col-md-12">
+                         <div class="col-md-6">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" class="form-control" id="Phone">
+                        </div>
+                         <div class="col-md-6">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">email:</label>
-                        <input type="text" class="form-control" id="email">
-                    </div>
-                    <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <label for="sel1">Card Type:</label>
+                            <select class="form-control" id="sel1">
+                                <option>Visa</option>
+                                <option>Amex</option>
+                                <option>MasterCard</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
                         <label for="cc">Card Number:</label>
-                        <input type="text" class="form-control" id="cc">
+                        <input type="number" class="form-control" id="cc">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="CVVCode">CVV Code: </label>
+                            <input id="CVVCode" type="number" min="000" max="999" class="form-control" > 
+                            </div>
+                        <div class="col-md-4">
+                            <label for="dtCCExp">Exp. Date: </label>
+                            <input id="dtCCExpMonth" type="month" class="form-control" > 
+                            </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                    <div class="col-md-12" style="padding-top:5px;">
+                        <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                        <button type="button" class="btn btn-success pull-right" data-dismiss="modal">Save</button>
+                            </div>
+                    <div>
                 </div>
             </div>
         </div>
