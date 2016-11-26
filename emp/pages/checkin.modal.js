@@ -15,3 +15,15 @@ $('#modalTabs a').click(function (e) {
 $('#ModalCheckIn').load($('.activeM a').attr("data-url"),function(result){
   $('.activeM a').tab('show');
 });
+
+oTable = $('#tblCheckin').DataTable( {
+        "paging":         false,
+				"pageLength": -1,
+        "ordering": true,
+        "info":     false, 
+				"filter": true
+    } );
+
+$('#txtCheckinSearch').keyup(function(){
+      oTable.search($(this).val()).draw() ;
+});

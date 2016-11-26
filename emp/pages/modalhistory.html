@@ -1,1 +1,65 @@
-History page under construction. 
+<div class="col-md-4 pull-right" style="Padding: 5px;">
+    <div class="input-group">
+        <input id="txtHisotySearch" type="text" class="form-control" name="x" placeholder="Filter Grid...">
+        <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+        </span>
+    </div>
+</div>
+<table id="tblHistory" class="table table-striped table-bordered" cellspacing="0" width="100%" style="margin: 5px;">
+    <thead>
+        <tr>
+            <th>Date Time</th>
+            <th>Action</th>
+            <th>Note</th>
+            <th>User</th>
+            <th>Room</th>
+            <th>CreatedBy</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Date Time</td>
+            <td>Action</td>
+            <td>Note</td>
+            <td>User</td>
+            <td>Room</td>
+            <td>CreatedBy</td>
+            <td class="text-center">
+                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Delete (If Note)</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Date Time</td>
+            <td>Action</td>
+            <td>New Note</td>
+            <td>User</td>
+            <td>Room</td>
+            <td>CreatedBy</td>
+            <td class="text-center">
+                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Delete (If Note)</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Date Time</td>
+            <td>Action</td>
+            <td>Note</td>
+            <td>User</td>
+            <td>Room</td>
+            <td>CreatedBy</td>
+            <td class="text-center">
+                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Delete (If Note)</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="form-group">
+    <label for="comment">Add Note:</label>
+    <textarea class="form-control" rows="5" id="comment"></textarea>
+</div>
+<div>
+    <button type="button" class="btn btn-success btn-md pull-right" data-toggle="modal" data-target="#checkinModal">Submit Note</button>
+</div>
+<!-- application scripts -->
+<script src="pages/modalHistory.js"></script>

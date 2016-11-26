@@ -1,93 +1,81 @@
 <div class="container-fluid">
-    <div class="col-md-12">
-        <H2>Check in</H2>        
+    <div class="col-md-4 pull-right" style="Padding: 5px;">
+        <div class="input-group">
+            <input id="txtCheckinSearch" type="text" class="form-control" name="x" placeholder="Filter Grid...">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
     </div>
-    <div class="col-xs-8">
-		    <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#name">Name</a></li>
-                      <li><a href="#checkin">Check-In</a></li>
-                      <li><a href="#checkout">Check-Out</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#all">Anything</a></li>
-                    </ul>
-                </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <button type="button" class="btn btn-warning btn-default" data-toggle="modal" data-target="#checkinModal">Add Walk-in</button>
-        </div>
-        <div class="col-md-12">
-        <table class="table table-striped">
+    <div class="col-md-4" style="Padding: 5px;">
+        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#checkinModal">
+            <i class="glyphicon glyphicon-plus"></i>Add Walk-in</button>
+    </div>
+    <div class="col-md-12">
+        <table id="tblCheckin" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Check In Date</th>
                     <th>Check Out Date</th>
+                    <th>Phone #</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Doe, John</td>
+                    <td>Rogers, Buck</td>
                     <td>dd/mmm/yyyy</td>
                     <td>dd/mmm/yyyy</td>
+                    <td>(nnn) nnn-nnnn</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">
+                            <i class="glyphicon glyphicon-log-in"></i>&nbsp;Check In</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Doe, Jane</td>
+                    <td>dd/mmm/yyyy</td>
+                    <td>dd/mmm/yyyy</td>
+                    <td>(nnn) nnn-nnnn</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">
+                            <i class="glyphicon glyphicon-log-in"></i>&nbsp;Check In</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Doe, John</td>
                     <td>dd/mmm/yyyy</td>
                     <td>dd/mmm/yyyy</td>
+                    <td>(nnn) nnn-nnnn</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Doe, John</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">Check In</button>
+                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkinModal">
+                            <i class="glyphicon glyphicon-log-in"></i>&nbsp;Check In</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-<!-- Modal -->
-<div class="modal fade" id="checkinModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h1>Check In</h1>
-                <!-- Tabs -->
-                <ul class="nav nav-tabs" id="modalTabs">
-                    <li class="activeM"><a href="#ModalCheckIn" data-url="pages/checkinModal.html">Check In</a></li>
-                    <li><a href="#ModalCheckInHistory" data-url="pages/modalhistory.html">Hisory</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="ModalCheckIn"></div>
-                    <div class="tab-pane" id="ModalCheckInHistory"></div>
+    <!-- Modal -->
+    <div class="modal fade" id="checkinModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1>Check In: Name </h1>
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs" id="modalTabs">
+                        <li class="activeM"><a href="#ModalCheckIn" data-url="pages/checkinModal.html">Check In</a></li>
+                        <li><a href="#ModalCheckInHistory" data-url="pages/modalhistory.html">Hisory</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="ModalCheckIn"></div>
+                        <div class="tab-pane" id="ModalCheckInHistory"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>
-</div>
-<!-- application scripts -->
-<script src="pages/checkin.modal.js"></script>
+    <!-- application scripts -->
+    <script src="pages/checkin.modal.js"></script>
