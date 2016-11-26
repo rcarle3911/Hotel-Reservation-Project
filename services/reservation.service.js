@@ -4,7 +4,7 @@ var mongojs = require('mongojs');
 var db = mongojs('hotel', ['pastRes', 'presentRes', 'futureRes', 'users', 'rooms']);
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
-
+var config = require('config.json');
 var service = {};
 
 service.create = create;
@@ -52,7 +52,7 @@ function create(resrvParam) {
 
 }
 /**
- * @todo Check for availability here
+ * @todo Use config.json to get total room numbers.
  */
 function isAvailable(resrvParam) {
     
