@@ -80,3 +80,10 @@ function rmTypeCount(resrvParam, callback) {
         callback(null, totCount);
     });
 }
+
+//Check for Current Reservations - these will be located in the presentRes going forward
+function currentRes(){
+    db.futureRes.find({startDate: {$lte : today}, endDate: {$gte : today}}).count(function(err, count){
+        console.log("Current Reservations: " + count);
+    });
+}
