@@ -1,3 +1,32 @@
+/* Tablet Landscape */
+@media screen and (max-width: 1060px) {
+    #primary { width:67%; }
+    #secondary { width:30%; margin-left:3%;}  
+}
+
+/* Tabled Portrait */
+@media screen and (max-width: 768px) {
+    #primary { width:100%; }
+    #secondary { width:100%; margin:0; border:none; }
+}
+@media (min-device-width:600px) {
+    img[data-src-600px] {
+        content: attr(data-src-600px, url);
+    }
+}
+@media (min-device-width:800px) {
+    img[data-src-800px] {
+        content: attr(data-src-800px, url);
+    }
+}
+
+@media (min-width: 640px) { body {font-size:1.4rem;} } 
+@media (min-width:960px) { body {font-size:1.4rem;} } 
+@media (min-width:1100px) { body {font-size:1.4rem;} } 
+
+img { 
+	max-width: 100%; 
+	}
 
 ul {
     list-style-type: none;
@@ -234,7 +263,7 @@ footer{
 	margin-left:50px;
 	min-width:350px;
 	max-width:350px;
-	height:600px;
+	max-height:600px;
 	box-shadow: 0px 8px 16px 0px black;
 }
 
