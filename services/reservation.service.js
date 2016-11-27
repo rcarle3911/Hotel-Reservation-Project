@@ -55,6 +55,7 @@ function create(resrvParam) {
                     });
             }});
 }
+
 /**
  * Check for availability here
  */
@@ -71,6 +72,7 @@ function isAvailable(resrvParam, callback) {
         });
     });
 }
+
 /**
  * Count by Room Types
  */
@@ -81,9 +83,18 @@ function rmTypeCount(resrvParam, callback) {
     });
 }
 
-//Check for Current Reservations - these will be located in the presentRes going forward
+/**
+ * Check for Current Reservations - these will be located in the presentRes going forward
+ */
 function currentRes(){
     db.futureRes.find({startDate: {$lte : today}, endDate: {$gte : today}}).count(function(err, count){
         console.log("Current Reservations: " + count);
     });
+}
+
+/**
+ * Remove a reservation. Will need the remove query to be changed depending on how we decide to delete reservations. 
+ */
+function delReserv(resrvParam){
+    db.futureRes.remove(resrvParam); //db.futureRes.remove(resrvParam, {justOne: true}); will remove just one entry if similar entries exist
 }
