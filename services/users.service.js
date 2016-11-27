@@ -21,7 +21,7 @@ service.editByEmail = editByEmail;
 service.delete = _delete;
 service.authenticate = authenticate;
 service.getUsers = getUsers;
-serivce.getById = getById;
+service.getById = getById;
 
 module.exports = service;
 
