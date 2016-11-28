@@ -16,6 +16,7 @@ var service = {};
 	}),
 
 service.create = create;
+service.editGroup = editGroup;
 service.edit = edit;
 service.editByEmail = editByEmail;
 service.delete = _delete;
@@ -78,6 +79,22 @@ function create(userParam) {
     }
 
     return deferred.promise;
+}
+
+/**
+ * This function should be protected.
+ */
+function editGroup(_id, group) {
+    var deferred = Q.defer();
+
+    db.user.update(
+        { _id: mongojs.ObjectID(_id) },
+        { group: group},
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
 }
 
 function edit(_id, userParam) {

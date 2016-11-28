@@ -10,6 +10,7 @@ var lock;
 var service = {};
 
 service.create = create;
+service.edit = edit;
 service.isAvailable = isAvailable;
 service.getPresentRes = getPresentRes;
 service.deleteFuture = deleteFuture;
@@ -21,29 +22,95 @@ module.exports = service;
 function create(resrvParam) {
     var deferred = Q.defer();
     
-    timeout();
+    timeout(createRes, resrvParam, null, deferred);
 
     return deferred.promise;
 
-    function timeout() {
-        setTimeout(function () {
-            if (!lock) {
-                lock = true;
-                console.log("Reservation database locked for editing");
-                createRes(resrvParam)
-                .then(function (doc) {
-                    lock = false;
-                    deferred.resolve(doc);
-                })
-                .catch(function (err) {
-                    lock = false;
-                    deferred.reject(err)
-                });
-            } else {
-                timeout();
+}
+
+function timeout(toRun, param1, param2, deferred) {
+    setTimeout(function () {
+        if (!lock) {
+            lock = true;
+            console.log("Reservation database locked for editing");
+            toRun(param1)
+            .then(function (doc) {
+                lock = false;
+                deferred.resolve(doc);
+            })
+            .catch(function (err) {
+                lock = false;
+                deferred.reject(err)
+            });
+        } else {
+            timeout();
+        }
+    }, 100);
+}
+
+function edit(_id, resrvParam) {
+    var deferred = Q.defer();
+    
+    timeout(editRes, _id, resrvParam, deferred);
+
+    return deferred.promise;    
+}
+
+function editRes(_id, resrvParam) {
+    var deferred = Q.defer()
+    
+    isAvailable(resrvParam)
+    .then( function () {
+        var set = {
+            roomType: resrvParam.roomType,
+            startDate: resrvParam.startDate,
+            endDate: resrvParam.endDate,
+            numGuests: resrvParam.numGuests
+        };
+        /**
+         * This chain will check the future, present, and past databases for a id match.
+         * Once it's found it's removed and the chain stops.
+         */
+        db.futureRes.findAndModify({
+            query: {_id: mongojs.ObjectID(_id) },
+            update: {$set: set},
+            new: true},
+            function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+                if (doc) deferred.resolve(doc);
+                else { //Not found in future database
+                    db.presentRes.findAndModify({
+                        query: {_id: mongojs.ObjectID(_id) },
+                        update: {$set: set},
+                        new: true},
+                        function (err, doc) {
+                            if (err) deferred.reject(err.name + ': ' + err.message);
+                            if (doc) deferred.resolve(doc);
+                            else { //Not found in present database
+                                db.pastRes.findAndModify({
+                                    query: {_id: mongojs.ObjectID(_id) },
+                                    update: {$set: set},
+                                    new: true},
+                                    function (err, doc) {
+                                        if (err) deferred.reject(err.name + ': ' + err.message);
+                                        //Resolve whether or not it was found.
+                                        deferred.resolve(doc);
+                                    }
+                                );                                
+                            }
+                        }
+                    );
+                }
             }
-        }, 100);
-    }
+        );
+    })
+    .catch( function (err) {
+        deferred.reject(err);
+    });
+    
+
+    return deferred.promise;
+}    
 }
 
 /**
@@ -182,6 +249,34 @@ function getPresentRes(){
     );
 
     return deferred.promise;
+}
+
+function getPastRes(){
+    var deferred = Q.defer();
+
+    db.pastRes.find(
+        {},
+        function(err, list){
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(list);
+        }
+    );
+
+    return deferred.promise;    
+}
+
+function getFutureRes(){
+    var deferred = Q.defer();
+
+    db.futureRes.find(
+        {},
+        function(err, list){
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(list);
+        }
+    );
+
+    return deferred.promise;    
 }
 
 /**
