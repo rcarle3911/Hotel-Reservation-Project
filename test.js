@@ -17,15 +17,15 @@
     },
 
 	rmType = {
-		name: "Double Queen Deluxe",
+		name: "King Suite",
 		desc: "Text that makes you want this room",
-		space: 4
+		space: 3
 	},
 
 	room = {
 		type: rmType,
-		num: 103,
-		avail: false
+		num: 200,
+		avail: true
 	},
 	
 	rsrv = {
@@ -55,7 +55,7 @@
 
 	//createUser();
 	//createRoom();
-	createRes();
+	//createRes();
 	//roomService.update();
 	//testRoomFunctions();
 
@@ -71,7 +71,9 @@
 	}
 
 	function createRes() {
-		resrvService.create(rsrv)
+		for (var i = 0; i < 20; i++) {
+			var rsrvInput = JSON.parse(JSON.stringify(rsrv));
+			resrvService.create(rsrvInput)
 			.then(function (doc) {
 				console.log("New Reservation Created")
 				console.log(doc);
@@ -80,10 +82,15 @@
 				console.log("Reservation failed");
 				console.log(err);
 			})
+		}
+		
 	}
 	
 	function createRoom() {
-		roomService.create(room)
+		for (var i = 0; i < 10; i ++) {
+			var roomInput = JSON.parse(JSON.stringify(room));
+			roomInput.num += i;
+			roomService.create(roomInput)
 			.then(function (doc) {
 				console.log("New Room Created");
 				console.log(doc);
@@ -91,6 +98,8 @@
 			.catch(function (err) {
 				console.log(err);
 			});
+		}
+
 	}
 
 	function testRoomFunctions() {

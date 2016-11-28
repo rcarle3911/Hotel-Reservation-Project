@@ -5,21 +5,55 @@ var db = mongojs('hotel', ['pastRes', 'presentRes', 'futureRes', 'users', 'rooms
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
 var config = require('config.json');
+var lock;
 
 var service = {};
 
 service.create = create;
 service.isAvailable = isAvailable;
+service.getPresentRes = getPresentRes;
+service.deleteFuture = deleteFuture;
+service.deletePresent = deletePresent;
+service.deletePast = deletePast;
 
 module.exports = service;
+
+function create(resrvParam) {
+    var deferred = Q.defer();
+    
+    timeout();
+
+    return deferred.promise;
+
+    function timeout() {
+        setTimeout(function () {
+            if (!lock) {
+                lock = true;
+                console.log("Reservation database locked for editing");
+                createRes(resrvParam)
+                .then(function (doc) {
+                    lock = false;
+                    deferred.resolve(doc);
+                })
+                .catch(function (err) {
+                    lock = false;
+                    deferred.reject(err)
+                });
+            } else {
+                timeout();
+            }
+        }, 100);
+    }
+}
 
 /**
  * Creates a reservation object.
  * @param {any} resrvParam
  */
-function create(resrvParam) {
+function createRes(resrvParam) {
     var deferred = Q.defer();
     var user = {firstName: "Guest"};
+
 
     db.users.findOne(
         { email: resrvParam.userEmail },
@@ -29,7 +63,7 @@ function create(resrvParam) {
                 if (userFound) user = userFound;
                 isAvailable(resrvParam)
                 .then( function() {
-                    createRes();
+                    createReservation();
                 })
                 .catch( function(err) {
                     deferred.reject(err);
@@ -38,7 +72,7 @@ function create(resrvParam) {
         }
     );
 
-    function createRes() {
+    function createReservation() {
         db.futureRes.insert(
         resrvParam,
         function (err, doc) {
@@ -54,7 +88,7 @@ function create(resrvParam) {
             }, function(error, info) {
                 if (error) return console.log(error);
                 console.log('Message sent: ' + info.response);
-            });
+            });            
             deferred.resolve(doc);
             }
         );
@@ -170,10 +204,10 @@ function deleteFuture(_id) {
     */
 }
 
-function deleteCurrent(_id) {
+function deletePresent(_id) {
     var deferred = Q.defer();
 
-    db.currentRes.remove(
+    db.presentRes.remove(
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
