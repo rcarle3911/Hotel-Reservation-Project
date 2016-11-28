@@ -34,6 +34,7 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #222222;
+	font-family:neuropol
 }
 li {
     float: right;
@@ -47,7 +48,7 @@ li a, .dropbtn {
     text-decoration: none;
 }
 li a:hover, .dropdown:hover .dropbtn {
-	color:red;
+	color:r#808080;
     background-color: #777777;
 }
 #background {
@@ -85,8 +86,8 @@ li a:hover, .dropdown:hover .dropbtn {
 }
 
 body{
-	font-family:neuropol,georgia, arial, sans-serif;
-	color:red;
+	font-family: neuropol, arial, sans-serif;
+	color:#black;
 	min-width:1200px;
 	max-width:2300px;
 	margin-left:auto;
@@ -94,7 +95,7 @@ body{
 }
 h1{
 	clear:all;
-	color:red;
+	color:#808080;
 	font-size:20px;
 	text-align:center;
 }
@@ -113,8 +114,9 @@ h4{
 }
 h5{
 	font-size:16px;
-	color:red;
-	text-align:left;	
+	color:#808080;
+	text-align:left;
+	font-family:
 }
 p{
 	font-size:12px;
@@ -131,7 +133,6 @@ footer{
 }
 #check{
 	text-align:center;
-
 }
 .flash-message {
     margin-top: 20px;
@@ -159,17 +160,12 @@ footer{
 	padding-left:50px;
 	text-align:center;
 }
-#search{
-	float:right;
-	padding-right:5px;
-	font-style:"color :black;
-}
 #rcorners{
 	clear:both;
 	font-size:14px;
 	color:white;
 	text-align:left;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	float:right;
@@ -183,7 +179,8 @@ footer{
 	clear:both;
 	font-size:14px;
 	text-align:left;
-	background-color:black;
+	color:#808080;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	float:right;
@@ -200,7 +197,7 @@ footer{
 	overflow:scroll;
 	color:white;
 	text-align:left;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	float:right;
@@ -218,7 +215,7 @@ footer{
 	line-height:5px;
 	color:white;
 	text-align:center;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	padding-top:40px;
@@ -234,7 +231,7 @@ footer{
 	line-height:15px;
 	color:white;
 	text-align:center;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	padding: 15px;
@@ -292,9 +289,10 @@ legend{
 }
 .form-container{
 	clear:both;
-	font-size:12px;
+	font-size:14px;
+	color:#808080;
 	text-align:left;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	padding: 15px;
@@ -311,9 +309,15 @@ legend{
 	justify-content:space-between;
 	margin-left: auto;
 	margin-right: auto;
+	color:#808080;
 }
 .col-md-8{
-
 	padding-left:100px;
 }
+#search{
+	float:right;
+	padding-right:5px;
+	font-style:"color :black;
+}
+
 
