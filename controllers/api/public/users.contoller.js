@@ -15,6 +15,17 @@ router.get('/invoice/:id', getInvoice);
 
 module.exports = router;
 
+function getUsers(req, res) {
+    userService.getUsers()
+    .then( function (users) {
+        if (users) res.send(users);
+        else res.status(404)
+    })
+    .catch( function(err) {
+        res.status(400).send(err);
+    });
+}
+
 function getInvoice(req, res) {
     res.status(501).send('Service not defined');
 }
@@ -67,6 +78,9 @@ function getCurrentUser(req, res) {
 }
 
 function editUser(req, res) {
+    /**
+     * @todo give this api access to the JWT token
+     */
     var userId = req.user.sub;
     if (req.params._id !== userId) {
         // can only update own account
@@ -95,7 +109,7 @@ function deleteUser(req, res) {
         return res.status(401).send('You can only delete your own account');
     }
 
-    userService.delete(userId)
+    userService.delete(userID)
         .then(function () {
             res.sendStatus(200);
         })

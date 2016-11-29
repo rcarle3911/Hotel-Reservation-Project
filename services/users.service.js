@@ -188,7 +188,7 @@ function authenticate(email, password) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
             if (user && bcrypt.compareSync(password, user.password)) {
-                deferred.resolve(jwt.sign({ sub: user._id }, config.secret));
+                deferred.resolve(jwt.sign({ sub: user._id, group: user.group }, config.secret));
             } else {
                 deferred.reject("Authentication Failed");
             }
