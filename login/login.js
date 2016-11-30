@@ -13,7 +13,7 @@
         $stateProvider
             .state('login', {
                 url: '/',
-                templateUrl: 'home/index.html',
+                templateUrl: '/login/index.html',
                 controller: 'Login.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'login' }

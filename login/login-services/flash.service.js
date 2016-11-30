@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('login')
         .factory('FlashService', Service);
 
     function Service($rootScope) {
