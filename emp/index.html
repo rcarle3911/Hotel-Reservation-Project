@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -8,6 +8,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
+    <!-- UI Grid -->
+    <link rel="styleSheet" href="/release/ui-grid.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
     <meta charset="UTF-8">
     <title>Martian Hotel</title>
@@ -16,6 +18,11 @@
     .dataTables_filter {
         display: none;
     }
+    .myGrid {
+        width: 500px;
+        height: 250px;
+    }
+    
 </style>
 
 <body>
@@ -43,6 +50,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <!-- code.jquery.com/jquery-1.12.3.js -->
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <!-- UI Grid -->
+    <script src="/release/ui-grid.min.js"></script>
     <!-- Latest compiled and minified bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
