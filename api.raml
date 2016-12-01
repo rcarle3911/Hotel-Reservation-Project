@@ -1,0 +1,59 @@
+#%RAML 0.8
+title: Public API
+version: 1.0
+baseUri: http://martianmotel.ddns.net/public
+/users:
+  /authenticate:
+    post:
+      description: |
+        Authenticates users with a email and passord. Returns a JWT token in $window.token
+      queryParameters:
+        email:
+          displayName: Email
+          type: string
+          description: The user's email address
+          example: motelmartian@gmail.com
+          required: true
+        password:
+          displayName: Password
+          type: string
+          description: The user's password in plain text
+          example: password1234
+          required: true
+  /register:
+    post:
+      queryParameters:
+        email:
+          displayName: Email
+          type: string
+          description: The user's email address
+          example: motelmartian@gmail.com
+          required: true
+        password:
+          displayName: Password
+          type: string
+          description: The user's password in plain text
+          example: password1234
+          required: true
+        firstName:
+          type: string
+          example: John
+          required: true
+        lastName:
+          type: string
+          example: Smith
+          required: true
+        dob:
+          type: date
+          displayName: Date of Birth
+          example: 12/17/2016
+          required: false
+        phone:
+          type: string
+          example: 999-688-1234
+          required: false
+        address:
+          type: string
+          example: 123 Main St, Springfield, CA, 90210
+          required: true
+/reservation:
