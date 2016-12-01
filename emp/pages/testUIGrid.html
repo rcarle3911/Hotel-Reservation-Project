@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <!-- change angular to 1.3.x and ng-if on tabs breaks -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="http://ui-grid.info/release/ui-grid-unstable.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css" />
+</head>
+
+<body>
+    <div ng-controller="EmpCtrl as view">
+        <tabset>
+
+            <tab ng-repeat="tab in view.tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+                <div ng-include="tab.content"></div>
+            </tab>
+
+            <tab heading="Static Grid" select="view.tabSelect()" deselect="view.tabShown = !view.tabShown">
+                <div id="grid1" ui-grid="view.gridOptions" class="grid" ng-if="view.tabShown"></div>
+            </tab>            
+            
+            
+        </tabset>
+    </div>
+    <script src="/emp/emp.js"></script>
+</body>
+
+</html>

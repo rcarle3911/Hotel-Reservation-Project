@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -8,7 +8,10 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <!-- UI Grid -->
+    <link rel="stylesheet" type="text/css" href="http://ui-grid.info/release/ui-grid.css">
+
+
     <meta charset="UTF-8">
     <title>Martian Hotel</title>
 </head>
@@ -16,10 +19,20 @@
     .dataTables_filter {
         display: none;
     }
+    .myGrid {
+        width: 100%;
+        height: 250px;
+    }
+    
 </style>
 
 <body>
+
+
+    <!-- redo tabs with this http://plnkr.co/edit/bAqoP9oY5apKAvvPQxOe?p=preview --> 
+
     <div class="container-fluid">
+            <a href="pages/testUIGrid.html">Testing site</a>
         <!-- Add Logo or Text Link back to Homepage (Customer Site) -->
         <!-- Add Title H1 or H2 Martian Hotel - Employee Managment Site -->
         <div id="logo" style="text-align:center;">
@@ -41,13 +54,15 @@
     <!-- external scripts -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <!-- code.jquery.com/jquery-1.12.3.js -->
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+    <!-- UI Grid -->
+    <script src="http://ui-grid.info/release/ui-grid.js"></script>
     <!-- Latest compiled and minified bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <!-- application scripts -->
     <script src="emp.js"></script>
+    <script src="pages/tabs.js"></script>
 </body>
 
 </html>
