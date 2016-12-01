@@ -7,6 +7,11 @@ app.controller('EmpCtrl', ['$timeout', function ($timeout) {
 var view = this; 
 view.tabShown = false; 
 
+view.tabs = [
+    { title:'Reservations', content:'reservations.html' },
+    { title:'Check-In', content:'checkin.html'}
+  ];
+
  view.data = [{
       "firstName": "Cox",
       "lastName": "Carney",
@@ -54,3 +59,7 @@ view.tabShown = false;
     
   }
 ]);
+
+app.controller('TabsDemoCtrl', function ($scope) {
+  
+});
