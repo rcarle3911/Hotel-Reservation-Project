@@ -39,18 +39,12 @@
     <header>
         <ul>
             <div id="logo">
-				<a href="index.html">
+				<a href="/app">
 					<img src="/app/app-content/textlogo.png" height="100" width="270">
 				</a>
             </div>
-			<li><a href="/login" target="_self">Login</a></li>
-			<li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
-			<li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
-			<li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="gallery">Gallery</a></li>
-			<li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="reservations">Reservations</a></li>
-			<li ng-class="{active: activeTab === 'services'}"><a ui-sref="services">Services</a></li>
-			<li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About Us</a></li>
-			<li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>	
+			<li ng-class="{active: activeTab === 'login'}"><a ui-sref="login">Login</a></li>
+			<li ng-class="{active: activeTab === 'register'}"><a ui-sref="register">Register</a></li>	
 		</ul>
         <div class="flash-message" ng-if="flash">
             <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
@@ -95,7 +89,7 @@
     <script src="login.js"></script>
 
     <!-- controllers -->
-    <script src="index.controller.js"></script>
+    <script src="login/index.controller.js"></script>
 
     <!-- services -->
     <script src="login-services/flash.service.js"></script>
