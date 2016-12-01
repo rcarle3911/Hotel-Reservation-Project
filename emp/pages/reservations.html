@@ -1,4 +1,7 @@
-<div class="container-fluid">
+    <div ng-controller="ResCtrl">
+        <div id="resGrid" ui-grid="{ data: myData }" class="grid"></div>
+        
+    </div><div class="container-fluid">
     <div class="col-md-4 pull-right" style="Padding: 5px;">
         <div class="input-group">
             <input id="txtResSearch" type="text" class="form-control" name="x" placeholder="Filter Grid...">
@@ -11,57 +14,17 @@
         <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myresModal">
             <i class="glyphicon glyphicon-plus"></i>New Reservation</button>
     </div>
-    <div class="col-md-12">
-        <table id="tblRes" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Check In Date</th>
-                    <th>Check Out Date</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Rogers, John</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">
-                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Dane, Jane</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">
-                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Buck, John</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myresModal">
-                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="myresModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h1>Reservervation</h1>
-                    <div class="container-fluid">
-                        <div class="col-md-12">
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myresModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h1>Reservervation</h1>
+                <div class="container-fluid">
+                    <div class="col-md-12">
                         <div class="col-md-2">
                             <label for="sel1">Room list:</label>
                             <select class="form-control" id="sel1">
@@ -82,8 +45,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="dtCheckIn">Check-in: </label>
-                            <input id="dtCheckIn" type="date" class="form-control" > 
-                           
+                            <input id="dtCheckIn" type="date" class="form-control">
                         </div>
                         <div class="col-md-4">
                             <label for="dtCheckOut">Check-out:</label>
@@ -119,11 +81,11 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                         <div class="col-md-6">
+                        <div class="col-md-6">
                             <label for="phone">Phone:</label>
                             <input type="tel" class="form-control" id="Phone">
                         </div>
-                         <div class="col-md-6">
+                        <div class="col-md-6">
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" id="email">
                         </div>
@@ -139,29 +101,30 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                        <label for="cc">Card Number:</label>
-                        <input type="number" class="form-control" id="cc">
+                            <label for="cc">Card Number:</label>
+                            <input type="number" class="form-control" id="cc">
                         </div>
                         <div class="col-md-2">
                             <label for="CVVCode">CVV Code: </label>
-                            <input id="CVVCode" type="text" pattern="[0-9]{3}" maxlength="3" class="form-control" > 
-                            </div>
+                            <input id="CVVCode" type="text" pattern="[0-9]{3}" maxlength="3" class="form-control">
+                        </div>
                         <div class="col-md-4">
                             <label for="dtCCExp">Exp. Date: </label>
-                            <input id="dtCCExpMonth" type="month" class="form-control" > 
-                            </div>
+                            <input id="dtCCExpMonth" type="month" class="form-control">
+                        </div>
                     </div>
                     <div class="col-md-12" style="padding-top:5px;">
                         <div class="col-md-6">
-                            </div>
-                            <div class="col-md-6">
-                        <button type="button" class="btn btn-success pull-right" data-dismiss="modal">Save</button>
-                            </div>
-                    <div>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-success pull-right" data-dismiss="modal">Save</button>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script src="pages/reservations.js"></script>
