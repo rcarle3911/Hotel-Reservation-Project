@@ -8,8 +8,10 @@ var view = this;
 view.tabShown = false; 
 
 view.tabs = [
-    { title:'Reservations', content:'reservations.html' },
-    { title:'Check-In', content:'checkin.html'}
+    { title:'Reservations', content:'reservations.html', icon: 'glyphicon glyphicon-calendar' },
+    { title:'Check In', content:'checkin.html', icon: 'glyphicon glyphicon-log-in'},
+    { title:'Check-Out', content:'checkout.html', icon: 'glyphicon glyphicon-log-out'}, 
+    { title:'Management', content:'../mgrpages/manager.html', icon: 'glyphicon glyphicon-wrench'}
   ];
 
  view.data = [{
