@@ -41,6 +41,8 @@
             .state('reservations', {
                 url: '/reservations',
                 templateUrl: 'reservations/index.html',
+                controller: 'Res.IndexController',
+                controllerAs: 'vm',
                 data: { activeTab: 'reservations' }
             })
             .state('gallery', {
