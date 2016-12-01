@@ -1,13 +1,44 @@
+/* Tablet Landscape */
+@media screen and (max-width: 1060px) {
+    #primary { width:67%; }
+    #secondary { width:30%; margin-left:3%;}  
+}
+
+/* Tabled Portrait */
+@media screen and (max-width: 768px) {
+    #primary { width:100%; }
+    #secondary { width:100%; margin:0; border:none; }
+}
+@media (min-device-width:600px) {
+    img[data-src-600px] {
+        content: attr(data-src-600px, url);
+    }
+}
+@media (min-device-width:800px) {
+    img[data-src-800px] {
+        content: attr(data-src-800px, url);
+    }
+}
+
+@media (min-width: 640px) { body {font-size:1.4rem;} } 
+@media (min-width:960px) { body {font-size:1.4rem;} } 
+@media (min-width:1100px) { body {font-size:1.4rem;} } 
+
+img { 
+	max-width: 100%; 
+	}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #222222;
+	font-family:neuropol
 }
 li {
     float: right;
-	padding-top:43px;
+	padding-top:30px;
 }
 li a, .dropbtn {
     display: inline-block;
@@ -17,7 +48,7 @@ li a, .dropbtn {
     text-decoration: none;
 }
 li a:hover, .dropdown:hover .dropbtn {
-	color:red;
+	color:r#808080;
     background-color: #777777;
 }
 #background {
@@ -51,12 +82,12 @@ li a:hover, .dropdown:hover .dropbtn {
 
 #logo {
 	float:left;
-    padding:15px 15px 15px 25px;
+    padding:3px 15px 3px 25px;
 }
 
 body{
-	font-family:neuropol,georgia, arial, sans-serif;
-	color:red;
+	font-family: neuropol, arial, sans-serif;
+	color:#black;
 	min-width:1200px;
 	max-width:2300px;
 	margin-left:auto;
@@ -64,7 +95,7 @@ body{
 }
 h1{
 	clear:all;
-	color:red;
+	color:#808080;
 	font-size:20px;
 	text-align:center;
 }
@@ -83,8 +114,9 @@ h4{
 }
 h5{
 	font-size:16px;
-	color:red;
-	text-align:left;	
+	color:#808080;
+	text-align:left;
+	font-family:
 }
 p{
 	font-size:12px;
@@ -96,8 +128,11 @@ footer{
 	justify-content:space-between;
 	background-color:#222222;
 	color:white;
-	height:120px;
+	height:110px;
 	padding:2px;
+}
+#check{
+	text-align:center;
 }
 .flash-message {
     margin-top: 20px;
@@ -107,6 +142,7 @@ footer{
 	height:80px;
 	text-align:center;
 	padding-right:50px;
+	line-height:15px;
 }
 .copy{
 	width:350px;
@@ -124,17 +160,12 @@ footer{
 	padding-left:50px;
 	text-align:center;
 }
-#search{
-	float:right;
-	padding-right:5px;
-	font-style:"color :black;
-}
 #rcorners{
 	clear:both;
 	font-size:14px;
 	color:white;
 	text-align:left;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	float:right;
@@ -148,14 +179,15 @@ footer{
 	clear:both;
 	font-size:14px;
 	text-align:left;
-	background-color:black;
+	color:#808080;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	float:right;
 	padding: 15px;
 	margin-top: 50px;
 	margin-right: 50px;
-	width:auto;
+	width:300px;
 	box-shadow: 0px 8px 16px 0px black;
 }
 #rcorners3{
@@ -165,7 +197,7 @@ footer{
 	overflow:scroll;
 	color:white;
 	text-align:left;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	float:right;
@@ -183,7 +215,7 @@ footer{
 	line-height:5px;
 	color:white;
 	text-align:center;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	padding-top:40px;
@@ -199,7 +231,7 @@ footer{
 	line-height:15px;
 	color:white;
 	text-align:center;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	padding: 15px;
@@ -228,7 +260,7 @@ footer{
 	margin-left:50px;
 	min-width:350px;
 	max-width:350px;
-	height:600px;
+	max-height:600px;
 	box-shadow: 0px 8px 16px 0px black;
 }
 
@@ -257,9 +289,10 @@ legend{
 }
 .form-container{
 	clear:both;
-	font-size:12px;
+	font-size:14px;
+	color:#808080;
 	text-align:left;
-	background-color:black;
+	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
 	padding: 15px;
@@ -274,11 +307,17 @@ legend{
 	display:flex;
 	-webkit-justify-content:space-between;
 	justify-content:space-between;
+	margin-left: auto;
+	margin-right: auto;
+	color:#808080;
 }
 .col-md-8{
-
 	padding-left:100px;
 }
-.col-md-4{
-
+#search{
+	float:right;
+	padding-right:5px;
+	font-style:"color :black;
 }
+
+

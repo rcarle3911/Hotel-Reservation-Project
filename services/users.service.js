@@ -16,6 +16,13 @@ var service = {};
 	}),
 
 service.create = create;
+service.editGroup = editGroup;
+service.edit = edit;
+service.editByEmail = editByEmail;
+service.delete = _delete;
+service.authenticate = authenticate;
+service.getUsers = getUsers;
+service.getById = getById;
 
 module.exports = service;
 
@@ -40,7 +47,7 @@ function create(userParam) {
         });
 
     /**
-     * Copies userParam without plaintext password. 
+     * Copies userParam without plaintext password and creates customer user by default. 
      * Hashes the password and stores it into the password field.
      * Inserts user into the database.
      * Sends user email upon success.
@@ -70,6 +77,153 @@ function create(userParam) {
                 deferred.resolve();
             });
     }
+
+    return deferred.promise;
+}
+
+/**
+ * This function should be protected.
+ */
+function editGroup(_id, group) {
+    var deferred = Q.defer();
+
+    db.user.update(
+        { _id: mongojs.ObjectID(_id) },
+        { group: group},
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
+}
+
+function edit(_id, userParam) {
+    var deferred = Q.defer();
+
+    db.users.findOne(
+        {_id: mongojs.ObjectID(_id)},
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            if (user.email !== userParam.email) {
+                // To ensure unique emails, check if email already exists
+                db.users.findOne(
+                    { email: userParam.email },
+                    function (err, user) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                        if (user) deferred.reject('The email ' + userParam.email + ' is alread in use.');
+                        else editUser();
+                    }
+                );
+            }
+        }
+    );
+
+    function editUser() {
+        var set = {
+            firstName: userParam.firstName,
+            lastName: userParam.lastName,
+            dob: userParam.dob,
+            phone: userParam.phone,
+            email: userParam.email,
+            address: userParam.address,
+        };
+
+        if (userParam.password) {
+            set.password = bcrypt.hashSync(userParam.password, 10);
+        }
+
+        db.users.update(
+            { _id: mongojs.ObjectID(_id) },
+            { $set: set },
+            function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+                deferred.resolve(doc);
+            }
+        );
+    }
+
+    return deferred.promise;
+}
+
+function editByEmail(email, userParam) {
+    var deferred = Q.defer();
+
+    db.users.findOne(
+        { email: email },
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            if (user) {
+                edit(user._id, userParam)
+                .then(function(doc) {
+                    deferred.resolve(doc);
+                })
+                .catch(function(err) {
+                    deferred.reject(err);
+                });
+            }
+        }
+    );
+}
+
+function _delete(_id) {
+    var deferred = Q.defer();
+
+    db.users.remove(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, doc) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
+        }
+    );
+
+    return deferred.promise;
+}
+
+function authenticate(email, password) {
+    var deferred = Q.defer();
+
+    db.users.findOne(
+        { email: email },
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+
+            if (user && bcrypt.compareSync(password, user.password)) {
+                deferred.resolve(jwt.sign({ sub: user._id, group: user.group }, config.secret));
+            } else {
+                deferred.reject("Authentication Failed");
+            }
+        }
+    );
+
+    return deferred.promise;
+}
+
+function getUsers() {
+    var deferred = Q.defer();
+
+    db.users.find(
+        {}, // Returns all users
+        {password: 0}, // Excludes password field for security
+        function(err, users) {
+            if (err) deferred.reject(err.name + ': ' + err.message); 
+            deferred.resolve(users);
+        }
+    );
+
+    return deferred.promise;
+}
+
+function getById(_id) {
+    var deferred = Q.defer();
+
+    db.users.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        { password: 0 }, // Excludes password field
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(user);
+        }
+    );
 
     return deferred.promise;
 }

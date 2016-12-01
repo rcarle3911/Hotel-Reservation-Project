@@ -19,13 +19,18 @@
 	<meta name="robots" content="noindex, follow">
 	<meta name="robots" content="index, nofollow">	
 	<meta name="author" content="The Martian Group">	
-	<meta name="copyright" content="The Martian Group">	   
+	<meta name="copyright" content="The Martian Group">	 
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">	
 
     <!-- <link href="app-content/app.css" rel="stylesheet" /> -->
     <link id="pagestyle" rel="stylesheet" type="text/css" href="app-content/stylesheet.css" media="screen">
 
 	<!--<favicon icon> -->
 	<link href="app-content/rocketicon.ico" rel="icon" type="image/x-icon" />
+	
+	
 
 </head>
     
@@ -34,7 +39,9 @@
     <header>
         <ul>
             <div id="logo">
-                <img src="app-content/textlogo.png" height="100" width="270">
+				<a href="index.html">
+					<img src="app-content/textlogo.png" height="100" width="270">
+				</a>
             </div>
 			<li><a href="/login" target="_self">Login</a></li>
 			<li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
@@ -55,7 +62,7 @@
     <main ui-view></main>
 
     <!-- footer -->
-    <footer class="navbar navbar-fixed-bottom">
+    <footer class="footer">
         <div class="login">
 		  <h4>Employees</h4>
 		  <a href="/emp">Login</a>
@@ -78,6 +85,7 @@
 		  <br>
         </div>
     </footer>
+	
     <!-- external scripts -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
@@ -85,6 +93,12 @@
 
     <!-- application scripts -->
     <script src="app.js"></script>
+
+    <!-- controllers -->
+    <script src="home/index.controller.js"></script>
+
+    <!-- services -->
     <script src="app-services/flash.service.js"></script>
+	
 </body>
 </html>
