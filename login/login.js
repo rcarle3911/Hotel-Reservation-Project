@@ -18,6 +18,11 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'login' }
             })
+            .state('register', {
+                url: '/register',
+                templateUrl: 'register/index.html',
+                data: { activeTab: 'register' }
+            })
     }
 
     //Bootstrap angular
