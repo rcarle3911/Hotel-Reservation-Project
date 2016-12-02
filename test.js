@@ -82,8 +82,7 @@
 				console.log("Reservation failed");
 				console.log(err);
 			})
-		}
-		
+		}		
 	}
 	
 	function createRoom() {
