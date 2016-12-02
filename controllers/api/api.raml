@@ -1,0 +1,70 @@
+#%RAML 1.0
+title: Public API
+version: 1.0
+baseUri: http://martianmotel.ddns.net/public
+types:
+  Password:
+    minLength: 8
+  Phone:
+    pattern: ^[0-9()-]+$
+  Reservation:
+    properties:
+      userEmail: string
+      roomType:
+        properties:
+          name: string
+          desc: string
+          space: integer
+      startDate: datetime
+      endDate: datetime
+      numGuests: integer
+      price: number
+  User:
+    properties:
+      firstName: string
+      lastName: string
+      dob: datetime
+      phone: Phone
+      email: string
+      address: string
+      password: Password
+  RoomType:
+  Room:
+  Payment:
+  Login:
+    properties:
+      email: string
+      password: Password
+  ResCheck:
+    properties:
+      type: RoomType
+      spaceNeeded: integer
+      startDate: datetime
+      endDate: datetime
+/users:
+  /authenticate:
+    post:
+      description: |
+        Authenticates users with a email and passord. Returns a JWT token.
+      body:
+        application/json:
+          type: Login
+  /register:
+    post:
+      body:
+        application/json:
+          type: User
+/reservation:
+  post:
+    description: |
+      Creates a reservation based on the parameters passed.
+    body:
+      application/json:
+        type: Reservation
+  /check:
+    get:
+      description: |
+        Checks for availability and returns a boolean.
+      body:
+        application/json:
+          type: ResCheck

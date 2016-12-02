@@ -13,6 +13,7 @@ app.use(session({ secret: config.secret, resave: false, saveUninitialized: true}
 app.use('/app', require('./controllers/app.controller'));
 app.use('/emp', require('./controllers/emp.controller'));
 app.use('/login', require('./controllers/login.controller'));
+app.use('/api', express.static('./controllers/api'));
 
 // make '/app' default route
 app.get('/', function (req, res) {
