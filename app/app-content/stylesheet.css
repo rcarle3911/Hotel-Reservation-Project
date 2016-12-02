@@ -121,6 +121,7 @@ p{
 	font-size:12px;
 }
 footer{
+	clear:both;
 	display:-webkit-flex;
 	display:flex;
 	-webkit-justify-content:space-between;
@@ -210,6 +211,7 @@ footer{
 }
 #rcorners4{
 	clear:both;
+	float:right;
 	font-size:12px;
 	line-height:5px;
 	color:white;
@@ -217,12 +219,32 @@ footer{
 	background-color:#222222;
     border-radius: 10px;
     border: 1px solid black;
-	padding-top:40px;
+	padding:20px;
 	margin-top:60px;
-	margin-right:100px;
+	margin-right:60px;
 	max-width:1000px;
 	height:475px;
 	box-shadow: 0px 8px 16px 0px black;
+}
+.row{
+	clear:both;
+	display:-webkit-flex;
+	display:flex;
+	-webkit-justify-content:space-between;
+	justify-content:space-between;
+	margin-left: auto;
+	margin-right: auto;
+	color:#808080;
+}
+.col-md-8{
+	max-width:600px;
+	max-height:600px;
+	width:auto;
+	height:auto;
+	clear:both;
+	float:left;
+	padding-left:100px;
+	padding-top:40px;
 }
 #rcorners5{
 	clear:both;
@@ -313,6 +335,12 @@ legend{
 	color:#808080;
 }
 .col-md-8{
+	max-width:600px;
+	max-height:600px;
+	width:auto;
+	height:auto;
+	clear:both;
+	float:left;
 	padding-left:100px;
 }
 #search{

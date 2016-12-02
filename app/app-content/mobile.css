@@ -198,6 +198,7 @@ footer{
 }
 #rcorners4{
 	clear:both;
+	float:none;
 	font-size:12px;
 	line-height:5px;
 	color:white;
@@ -212,6 +213,26 @@ footer{
 	height:420px;
 	max-width:340px;
 	box-shadow: 0px 8px 16px 0px black;
+}
+.row{
+	clear:both;
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	color:#808080;
+}
+
+.col-md-8{
+	float:none;
+	text-align:center;
+	padding-left:000px;
+	padding-top:50px;
+	max-width:300px;
+	max-height:300px;
+	width:auto;
+	height:auto;
+	margin-right:auto;
+	margin-left:auto;
 }
 #rcorners5{
 	clear:both;
@@ -282,26 +303,7 @@ legend{
 	margin-right: auto;
 	box-shadow: 0px 8px 16px 0px black;	
 }
-.row{
-	clear:both;
-	margin-left: auto;
-	margin-right: auto;
-	color:#808080;
-}
-.row2{
-	clear:both;
-	text-align:center;
-	margin-left: auto;
-	margin-right: auto;
-	color:#808080;
-}
-.col-md-8{
-	padding-left:000px;
-	padding-top:50px;
-	max-width:300px;
-	margin-right:auto;
-	margin-left:auto;
-}
+
 #search{
 	clear:both;
 	float:none;
