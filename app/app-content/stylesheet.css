@@ -54,7 +54,7 @@ li a:hover, .dropdown:hover .dropbtn {
 }
 #background {
     background-image: url("background.jpg");
-    background-position:  center top;
+    background-position:  center;
     background-repeat: no-repeat;
 	height:53em;
 	background-size: cover;
@@ -137,14 +137,14 @@ footer{
     margin-top: 20px;
 }
 .contact{
-	width:200px;
+	max-width:200px;
 	height:80px;
 	text-align:center;
 	padding-right:50px;
 	line-height:15px;
 }
 .copy{
-	width:350px;
+	max-width:350px;
 	height:80px;
 	padding-top:15px;
 	line-height:30px;
@@ -153,7 +153,7 @@ footer{
 
 }
 .login{
-	width:200px;
+	max-width:200px;
 	height:80px;
 	line-height:16px;
 	padding-left:50px;
@@ -171,7 +171,7 @@ footer{
 	padding: 15px;
 	margin-top: 5px;
 	margin-right: 50px;
-	width:480px;
+	max-width:480px;
 	box-shadow: 0px 8px 16px 0px black;
 }
 #rcorners2{
@@ -186,7 +186,7 @@ footer{
 	padding: 15px;
 	margin-top: 50px;
 	margin-right: 50px;
-	width:300px;
+	max-width:300px;
 	box-shadow: 0px 8px 16px 0px black;
 }
 #rcorners3{
@@ -220,7 +220,7 @@ footer{
 	padding-top:40px;
 	margin-top:60px;
 	margin-right:100px;
-	width:400px;
+	max-width:400px;
 	height:475px;
 	box-shadow: 0px 8px 16px 0px black;
 }
@@ -297,7 +297,7 @@ legend{
 	padding: 15px;
 	margin-left: auto;
 	margin-right: auto;
-	width:600px;
+	max-width:600px;
 	box-shadow: 0px 8px 16px 0px black;	
 }
 .row{
