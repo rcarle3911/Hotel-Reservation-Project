@@ -1,7 +1,7 @@
 #%RAML 1.0
-title: Public API
+title: API
 version: 1.0
-baseUri: http://martianmotel.ddns.net/public
+baseUri: http://martianmotel.ddns.net/api
 types:
   Password:
     minLength: 8
@@ -29,19 +29,35 @@ types:
       address: string
       password: Password
   RoomType:
+    properties:
+      name: string
+      desc: string
+      space: integer
   Room:
+    properties:
+      rmType: RoomType
+      num: integer
+      avail: boolean
+  CreditCard:
+    pattern: \b\d{13,16}\b
+  CVV:
+    pattern: /^[0-9]{3,4}$/
   Payment:
+    properties:
+      userEmail: string
+      num: CreditCard
+      exp: datetime
+      cvv: CVV
   Login:
     properties:
       email: string
       password: Password
   ResCheck:
     properties:
-      type: RoomType
-      spaceNeeded: integer
+      type: RoomType | integer #If type is integer it will be treated as space needed
       startDate: datetime
       endDate: datetime
-/users:
+/public/users:
   /authenticate:
     post:
       description: |
@@ -51,10 +67,12 @@ types:
           type: Login
   /register:
     post:
+      description: |
+        Creates a user with the input.
       body:
         application/json:
           type: User
-/reservation:
+/public/reservation:
   post:
     description: |
       Creates a reservation based on the parameters passed.
