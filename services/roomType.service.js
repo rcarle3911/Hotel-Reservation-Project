@@ -19,7 +19,7 @@ function create(rmTypeParam) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
                 if (doc) deferred.reject("Type name already exists in the database.");
                 else {
-                    db.insert(
+                    db.rmTypes.insert(
                         rmTypeParam,
                         function(err, doc) {
                             if (err) deferred.reject(err.name + ': ' + err.message);
