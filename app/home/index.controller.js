@@ -10,8 +10,14 @@
      * The services are defined in the app/app-services folder and loaded on the app/index.html page.
      * This controller is loaded in the app/index.html page as well and linked to the appropriate 
      */
-    function Controller($state, FlashService) {
+    function Controller($state, FlashService, $scope) {
         var vm = this; // Allows you to interact with the page. Think of it as $scope, but less chance of conflict.
+
+        $scope.formInfo = {}
+        $scope.saveData = function() {
+                console.log($scope.formInfo);
+ 
+        };      
 
         vm.reservation = null; // You can set fields with vm and use them on the page
         vm.checkAvail = checkAvail; // Links the checkAvail function defined here with checkAvail on the page through vm.
