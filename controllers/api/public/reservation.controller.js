@@ -8,13 +8,12 @@ var resService = require('../../../services/reservation.service.js');
 router.get('/', getFutureRes);
 router.post('/', reserve);
 router.get('/check', isAvailable);
-//router.post('/', register);
-//router.post('/authenticate', login);
-//router.get('/current', getCurrentUser);
-//router.get('/:_id', getUserByID);
-//router.put('/:_id', editUser);
-//router.delete('/:_id', deleteUser);
-//router.get('/invoice/:id', getInvoice);
+router.get('/past', getPastRes);
+router.get('/current', getPresentRes);
+router.get('/:_id', getResByID);
+router.put('/:_id', editRes);
+router.delete('/:_id', deleteRes);
+router.get('/find', findRes);
 
 module.exports = router;
 
@@ -23,7 +22,43 @@ function getFutureRes(req, res) {
     .then( function (list) {
         if (list) res.send(list);
         //else res.status(404)
-        else res.status(400).send("User Not Here");
+        else res.status(400).send("Reservation Not Here");
+    })
+    .catch( function(err) {
+        res.status(400).send(err);
+    });
+}
+
+function getPastRes(req, res) {
+    resService.getPastRes()
+    .then( function (list) {
+        if (list) res.send(list);
+        //else res.status(404)
+        else res.status(400).send("Reservation Not Here");
+    })
+    .catch( function(err) {
+        res.status(400).send(err);
+    });
+}
+
+function getPresentRes(req, res) {
+    resService.getPresentRes()
+    .then( function (list) {
+        if (list) res.send(list);
+        //else res.status(404)
+        else res.status(400).send("Reservation Not Here");
+    })
+    .catch( function(err) {
+        res.status(400).send(err);
+    });
+}
+
+function getResByID(req, res) {
+    resService.getResByID(req.params._id)
+    .then( function (list) {
+        if (list) res.send(list);
+        //else res.status(404)
+        else res.status(400).send("Reservation Not Here");
     })
     .catch( function(err) {
         res.status(400).send(err);
@@ -50,4 +85,16 @@ function isAvailable(req, res) {
 	.catch(function(err){
 		res.status(400).send(err);
 	});
+}
+
+function editRes(req, res) {
+    res.status(501).send('Service not defined');
+}
+
+function deleteRes(req, res) {
+    res.status(501).send('Service not defined');
+}
+
+function findRes(req, res) {
+    res.status(501).send('Service not defined');
 }
