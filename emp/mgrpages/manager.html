@@ -1,21 +1,12 @@
 <div class="container-fluid">
-    <ul class="nav nav-pills nav-justified" id="mgrTabs" style="Padding: 5px;">
-        <li class="activeA"><a href="#mgrUser" data-url="mgrpages/mgrusers.html">
-        <i class="glyphicon glyphicon-user"></i>&nbsp;
-        User Accounts</a></li>
-        <li><a href="#mgrRooms" data-url="mgrpages/mgrrooms.html">
-        <i class="glyphicon glyphicon-bed"></i>&nbsp;Room Management</a></li>
-       
-        <li><a href="#mgrOcc" data-url="mgrpages/mgroccrpt.html">
-        <i class="glyphicon glyphicon-list-alt"></i>&nbsp;Occupancy Report</a></li>
-        <li><a href="#mgrMaid" data-url="mgrpages/mgrmaidrpt.html">
-        <i class="glyphicon glyphicon-file"></i>&nbsp;Housekeeping Report</a></li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane active" id="mgrUser"></div>
-        <div class="tab-pane" id="mgrRooms"></div>
-        <div class="tab-pane" id="mgrOcc"></div>
-        <div class="tab-pane" id="mgrMaid"></div>
+    <div ng-controller="mgrCtrl as modal" >
+        <tabset type="pills" class="tab-container" >
+            <tab ng-repeat="tab in modal.tabs" active="tab.active" disable="tab.disabled">
+                <tab-heading>
+                    <i class={{tab.icon}}></i> &nbsp; {{tab.title}}
+                </tab-heading>
+                <div ng-include="tab.contenturl"></div>
+            </tab>
+        </tabset>
     </div>
 </div>
-<script src="mgrpages/mgr.js"></script>
