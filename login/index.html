@@ -26,7 +26,8 @@
 
     <!-- <link href="app-content/app.css" rel="stylesheet" /> -->
     <link id="pagestyle" rel="stylesheet" type="text/css" href="/app/app-content/stylesheet.css" media="screen">
-
+	<link rel="stylesheet" media="(max-width: 640px)" href="/app/app-content/mobile.css">
+	
 	<!--<favicon icon> -->
 	<link href="/app/app-content/rocketicon.ico" rel="icon" type="image/x-icon" />
 	
@@ -44,7 +45,8 @@
 				</a>
             </div>
 			<li ng-class="{active: activeTab === 'login'}"><a ui-sref="login">Login</a></li>
-			<li ng-class="{active: activeTab === 'register'}"><a ui-sref="register">Register</a></li>	
+			<li ng-class="{active: activeTab === 'register'}"><a ui-sref="register">Register</a></li>
+			<li><a href="/app/index.html">Home</a></li>			
 		</ul>
         <div class="flash-message" ng-if="flash">
             <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
@@ -90,6 +92,7 @@
 
     <!-- controllers -->
     <script src="login/index.controller.js"></script>
+    <script src="reservations/index.controller.js"></script>
 
     <!-- services -->
     <script src="login-services/flash.service.js"></script>

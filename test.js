@@ -23,7 +23,7 @@
 	},
 
 	room = {
-		type: rmType,
+		rmType: rmType,
 		num: 200,
 		avail: true
 	},
@@ -82,8 +82,7 @@
 				console.log("Reservation failed");
 				console.log(err);
 			})
-		}
-		
+		}		
 	}
 	
 	function createRoom() {

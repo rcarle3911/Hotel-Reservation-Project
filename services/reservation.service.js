@@ -110,7 +110,6 @@ function editRes(_id, resrvParam) {
     
 
     return deferred.promise;
-}    
 }
 
 /**

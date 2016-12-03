@@ -2,7 +2,7 @@ var Q = require('q');
 var fs = require('fs');
 var config = require('config.json');
 var mongojs = require('mongojs');
-var db = mongojs('hotel', ['rooms']);
+var db = mongojs('hotel', ['rooms', 'rmTypes']);
 	
 var service = {};
 
@@ -20,6 +20,7 @@ service.getRmByNum = getRmByNum;
 service.update = update;
 
 module.exports = service;
+
 
 /**
  * Grabs a list of distinct types from the rooms database.
