@@ -2,67 +2,47 @@
 <html ng-app="app">
 
 <head>
-    <!-- Latest compiled and minified CSS -->
+    <!-- change angular to 1.3.x and ng-if on tabs breaks -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.js"></script> -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>  
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="http://ui-grid.info/release/ui-grid-unstable.js"></script>
+        <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
-    <!-- UI Grid -->
-    <link rel="stylesheet" type="text/css" href="http://ui-grid.info/release/ui-grid.css">
-
-
-    <meta charset="UTF-8">
-    <title>Martian Hotel</title>
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css" />
 </head>
-<style>
-    .dataTables_filter {
-        display: none;
-    }
-    .myGrid {
-        width: 800px;
-        height: 250px;
-    }
-    
-</style>
 
 <body>
-
-
-    <!-- redo tabs with this http://plnkr.co/edit/bAqoP9oY5apKAvvPQxOe?p=preview --> 
-
-    <div class="container-fluid">
-            <a href="pages/testUIGrid.html">Testing site</a>
-        <!-- Add Logo or Text Link back to Homepage (Customer Site) -->
+    <!-- Add Logo or Text Link back to Homepage (Customer Site) -->
         <!-- Add Title H1 or H2 Martian Hotel - Employee Managment Site -->
         <div id="logo" style="text-align:center;">
-            <a href="/app"><img src="../app/app-content/textlogo.png" height="75" width="203" /></a>
+            <a href="/app"><img src="/app/app-content/textlogo.png" height="75" width="203" /></a>
         </div>
-        <ul class="nav nav-tabs" id="myTabs">
-            <li class="activeZ"><a href="#Tab1" data-url="/emp/pages/reservations.html"><i class="glyphicon glyphicon-calendar"></i>&nbsp;Reservations</a></li>
-            <li><a href="#Tab2" data-url="/emp/pages/checkin.html"><i class="glyphicon glyphicon-log-in"></i>&nbsp;Check In</a></li>
-            <li><a href="#Tab3" data-url="/emp/pages/checkout.html"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Check Out</a></li>
-            <li><a href="#Tab4" data-url="/emp/mgrpages/manager.html"><i class="glyphicon glyphicon-wrench"></i>&nbsp;Management</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="Tab1"></div>
-            <div class="tab-pane" id="Tab2"></div>
-            <div class="tab-pane" id="Tab3"></div>
-            <div class="tab-pane" id="Tab4"></div>
-        </div>
-    </div>
-    <!-- external scripts -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <div ng-controller="EmpCtrl as view">
+        <tabset>
 
-    <!-- UI Grid -->
-    <script src="http://ui-grid.info/release/ui-grid.js"></script>
-    <!-- Latest compiled and minified bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <!-- application scripts -->
-    <script src="emp.js"></script>
-    <script src="pages/tabs.js"></script>
+            <tab ng-repeat="tab in view.tabs" active="tab.active" disable="tab.disabled">
+                <tab-heading>
+                    <i class={{tab.icon}}></i> &nbsp; {{tab.title}}
+                </tab-heading>
+                <div ng-include="tab.contenturl"></div>
+            </tab>
+
+            <tab heading="Static Grid" select="view.tabSelect()" deselect="view.tabShown = !view.tabShown">
+                <div id="grid1" ui-grid="view.gridOptions" class="grid" ng-if="view.tabShown"></div>
+            </tab> 
+            
+        </tabset>
+    </div>
+    <script src="/emp/emp.js"></script>
+    <script src="/emp/pages/reservations.module.js"></script>
+    <script src="/emp/pages/reservations.component.js"></script>
 </body>
 
 </html>

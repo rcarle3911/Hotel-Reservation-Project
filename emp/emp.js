@@ -1,6 +1,6 @@
 
 //Controller Stuff
-var app = angular.module('app', ['ui.bootstrap','ui.grid']);
+var app = angular.module('app', ['ui.bootstrap','ui.grid', 'reservations']);
 
 app.controller('EmpCtrl', ['$timeout', function ($timeout) {
 
@@ -8,10 +8,10 @@ var view = this;
 view.tabShown = false; 
 
 view.tabs = [
-    { title:'Reservations', content:'reservations.html', icon: 'glyphicon glyphicon-calendar' },
-    { title:'Check In', content:'checkin.html', icon: 'glyphicon glyphicon-log-in'},
-    { title:'Check-Out', content:'checkout.html', icon: 'glyphicon glyphicon-log-out'}, 
-    { title:'Management', content:'../mgrpages/manager.html', icon: 'glyphicon glyphicon-wrench'}
+    { title:'Reservations', contenturl:'/emp/pages/reservations.html', icon: 'glyphicon glyphicon-calendar' },
+    { title:'Check In', contenturl:'/emp/pages/checkin.html', icon: 'glyphicon glyphicon-log-in'},
+    { title:'Check-Out', contenturl:'/emp/pages/checkout.html', icon: 'glyphicon glyphicon-log-out'}, 
+    { title:'Management', contenturl:'/emp/mgrpages/manager.html', icon: 'glyphicon glyphicon-wrench'}
   ];
 
  view.data = [{
