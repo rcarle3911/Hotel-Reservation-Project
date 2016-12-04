@@ -10,6 +10,7 @@ service.create = create;
 service.delete = _delete;
 service.delRmByNum = delRmByNum;
 service.edit = edit;
+service.getRoomByID = getRoomByID;
 service.getRmByType = getRmByType;
 service.getAvailRmByType = getAvailRmByType;
 service.getRmBySpace = getRmBySpace;
@@ -131,7 +132,7 @@ function update() {
  */
 function create(rmParam) {
     var deferred = Q.defer();
-
+    /*
     db.rooms.findOne(
         { num: rmParam.num },
         function (err, room) {
@@ -140,6 +141,7 @@ function create(rmParam) {
                 //Room Number is already in database
                 deferred.reject('Room Number ' + rmParam.num + ' is already in the database. Use edit to make changes.');
             } else {
+                */
                 db.rooms.insert(
                     rmParam,
                     function (err, docs) {
@@ -148,10 +150,22 @@ function create(rmParam) {
                         deferred.resolve(docs);
                     }
                 );
-            }
+           // }
+      //  }
+    //);
+
+    return deferred.promise;
+}
+
+function getRoomByID(_id) {
+    var deferred = Q.defer();
+    db.rooms.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, room) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(room);
         }
     );
-
     return deferred.promise;
 }
 

@@ -1,8 +1,8 @@
-var config = require('../../../config.json');
+var config = require('config.json');
 var express = require('express');
 var app = express();
 var router = express.Router();
-var resService = require('../../../services/reservation.service.js');
+var resService = require('services/reservation.service.js');
 
 // Routes to receive HTTP requests
 router.get('/', getFutureRes);
