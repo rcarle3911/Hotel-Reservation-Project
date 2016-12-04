@@ -49,8 +49,15 @@ function addRoom(req, res) {
 }
 
 function editRoom(req, res) {
-    res.status(501).send('Service not defined');
+    roomService.edit(req.params._id, req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
+
 
 function deleteRoom(req, res) {
     res.status(501).send('Service not defined');

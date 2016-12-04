@@ -72,7 +72,7 @@ function update() {
     function getSpaceList() {
         var deferred = Q.defer();
         db.rooms.distinct(
-            "type.space",
+            "rmType.space",
             null,
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
@@ -85,7 +85,7 @@ function update() {
     function getTypeList() {
         var deferred = Q.defer();
         db.rooms.distinct(
-            "type", 
+            "rmType", 
             null, 
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
@@ -98,7 +98,7 @@ function update() {
     function countType(type) {
         var deferred = Q.defer();
         db.rooms.count(
-            { type: type },
+            { rmType: type },
             function (err, doc) {
                 if (err) return err.name + ': ' + err.message;
                 var result = {cat: "type", key: type.name, value: (doc + "")};
@@ -203,7 +203,7 @@ function edit(_id, rmParam) {
     var deferred = Q.defer(),
 
         set = {
-            type: rmParam.type,
+            rmType: rmParam.rmType,
             num: rmParam.num,
             avail: rmParam.avail
         };
