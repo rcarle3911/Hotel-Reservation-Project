@@ -88,7 +88,13 @@ function isAvailable(req, res) {
 }
 
 function editRes(req, res) {
-    res.status(501).send('Service not defined');
+    resService.edit(req.params._id, req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function deleteRes(req, res) {

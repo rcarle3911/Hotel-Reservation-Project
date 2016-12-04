@@ -24,6 +24,7 @@ module.exports = service;
 
 function create(resrvParam) {
     var deferred = Q.defer();
+    /*
     resrvParam = {
         userEmail: resrvParam.userEmail,
         roomType: resrvParam.roomType,
@@ -32,6 +33,7 @@ function create(resrvParam) {
         numGuests: resrvParam.numGuests,
         price: resrvParam.price,
     }
+    */
     timeout(createRes, resrvParam, null, deferred);
 
     return deferred.promise;
@@ -43,7 +45,7 @@ function timeout(toRun, param1, param2, deferred) {
         if (!lock) {
             lock = true;
             console.log("Reservation database locked for editing");
-            toRun(param1)
+            toRun(param1,param2)
             .then(function (doc) {
                 lock = false;
                 deferred.resolve(doc);
@@ -72,10 +74,12 @@ function editRes(_id, resrvParam) {
     isAvailable(resrvParam)
     .then( function () {
         var set = {
+            userEmail: resrvParam.userEmail,
             roomType: resrvParam.roomType,
             startDate: resrvParam.startDate,
             endDate: resrvParam.endDate,
-            numGuests: resrvParam.numGuests
+            numGuests: resrvParam.numGuests,
+            price: resrvParam.price
         };
         /**
          * This chain will check the future, present, and past databases for a id match.
@@ -129,7 +133,6 @@ function editRes(_id, resrvParam) {
 function createRes(resrvParam) {
     var deferred = Q.defer();
     var user = {firstName: "Guest"};
-
 
     db.users.findOne(
         { email: resrvParam.userEmail },
