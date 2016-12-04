@@ -274,7 +274,9 @@ footer{
 	max-height:600px;
 	box-shadow: 0px 8px 16px 0px black;
 }
-
+::-webkit-scrollbar { 
+    display: none; 
+}
 #servicescontent{
 	display:inline;
 

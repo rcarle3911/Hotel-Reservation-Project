@@ -16,12 +16,22 @@ service.getPresentRes = getPresentRes;
 service.deleteFuture = deleteFuture;
 service.deletePresent = deletePresent;
 service.deletePast = deletePast;
+service.getFutureRes = getFutureRes;
+service.getPastRes = getPastRes;
+service.getResByID = getResByID;
 
 module.exports = service;
 
 function create(resrvParam) {
     var deferred = Q.defer();
-    
+    resrvParam = {
+        userEmail: resrvParam.userEmail,
+        roomType: resrvParam.roomType,
+        startDate: new Date(resrvParam.startDate),
+        endDate: new Date(resrvParam.endDate),
+        numGuests: resrvParam.numGuests,
+        price: resrvParam.price,
+    }
     timeout(createRes, resrvParam, null, deferred);
 
     return deferred.promise;
@@ -321,5 +331,32 @@ function deletePast(_id) {
         }
     );
 
+    return deferred.promise;
+}
+
+function getResByID(_id) {
+    var deferred = Q.defer();
+    db.futureRes.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, resrv) {
+            if (resrv) deferred.resolve(resrv);
+            else { //Not found in future database
+                db.presentRes.findOne(
+                    { _id: mongojs.ObjectID(_id) },
+                    function (err, resrv) {
+                        if (resrv) deferred.resolve(resrv);
+                        else { //Not found in current database
+                            db.pastRes.findOne(
+                                { _id: mongojs.ObjectID(_id) },
+                                function (err, resrv) {
+                                    deferred.resolve(resrv);
+                                }
+                            ); 
+                        }
+                    }
+                );
+            }
+        }
+    );
     return deferred.promise;
 }
