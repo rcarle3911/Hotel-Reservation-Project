@@ -21,8 +21,8 @@ types:
       price: number
   User:
     properties:
-      firstName: string
-      lastName: string
+      firstname: string
+      lastname: string
       dob: datetime
       phone: Phone
       email: string
@@ -87,6 +87,11 @@ types:
         application/json:
           type: ResCheck
 /protected/users:
+  /{user._id}:
+    delete:
+    put:
+    get:
+  /current:
 /protected/reservation:
 /protected/room:
   /type:

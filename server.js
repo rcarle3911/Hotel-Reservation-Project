@@ -3,11 +3,15 @@ var express = require('express');
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var expressJwt = require('express-jwt');
 var config = require('config.json');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true}));
+
+// Secures API with JWT
+app.use('/api/protected', expressJwt({ secret: config.secret }));
 
 // Routes
 app.use('/app', require('./controllers/app.controller'));
@@ -16,6 +20,8 @@ app.use('/login', require('./controllers/login.controller'));
 app.use('/api', express.static('./controllers/api'));
 app.use('/api/public/users', require('./controllers/api/public/users.controller.js'));
 app.use('/api/public/reservation', require('./controllers/api/public/reservation.controller.js'));
+app.use('/api/protected/users', require('./controllers/api/protected/users.controller.js'));
+
 
 // make '/app' default route
 app.get('/', function (req, res) {

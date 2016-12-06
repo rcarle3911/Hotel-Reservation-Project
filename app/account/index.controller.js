@@ -10,13 +10,43 @@
      * The services are defined in the app/app-services folder and loaded on the app/index.html page.
      * This controller is loaded in the app/index.html page as well and linked to the appropriate 
      */
-    function Controller($state, FlashService, $scope) {
+    function Controller(UserService, FlashService) {
+        var vm = this;
+        
+        vm.user = null;
+        vm.saveUser = saveUser;
+        vm.deleteUser = deleteUser;
 
-        $scope.formInfo = {}
-        $scope.saveData = function() {
-                console.log($scope.formInfo);
- 
-        };      
+        initController();
+
+        function initController() {
+            UserService.GetCurrent().then(function (user) {
+                vm.user = user;
+            });
+        }
+
+        function saveUser() {
+            UserService.Update(vm.user)
+                .then(function () {
+                    FlashService.Success('User updated');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+        }
+
+        function deleteUser() {
+            UserService.Delete(vm.user._id)
+                .then(function () {
+                    /**
+                     * @todo Log user out when directed to /login
+                     */
+                    $window.location = '/login';
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+        }
     }
 
 })();
