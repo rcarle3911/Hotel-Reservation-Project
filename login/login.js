@@ -11,7 +11,7 @@
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
-            .state('/login', {
+            .state('login', {
                 url: '/',
                 templateUrl: 'login/index.html',
                 controller: 'Login.IndexController',

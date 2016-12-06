@@ -35,11 +35,12 @@ function getUserByID(req, res) {
 }
 
 function login(req, res) {
-    console.log(req.body);
     userService.authenticate(req.body.username, req.body.password)
         .then(function (token) {
             if (token) {
                 // authentication successful
+                req.session.token = token;
+
                 res.send({ token: token });
             } else {
                 // authentication failed
