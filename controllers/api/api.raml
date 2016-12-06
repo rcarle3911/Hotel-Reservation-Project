@@ -21,8 +21,8 @@ types:
       price: number
   User:
     properties:
-      firstName: string
-      lastName: string
+      firstname: string
+      lastname: string
       dob: datetime
       phone: Phone
       email: string
@@ -50,7 +50,7 @@ types:
       cvv: CVV
   Login:
     properties:
-      email: string
+      username: string
       password: Password
   ResCheck:
     properties:
@@ -86,3 +86,12 @@ types:
       body:
         application/json:
           type: ResCheck
+/protected/users:
+  /{user._id}:
+    delete:
+    put:
+    get:
+  /current:
+/protected/reservation:
+/protected/room:
+  /type:
