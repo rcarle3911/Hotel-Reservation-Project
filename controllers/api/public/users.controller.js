@@ -1,11 +1,11 @@
 var config = require('config.json');
 var express = require('express');
 var router = express.Router();
-var userService = require('services/user.service');
+var userService = require('services/users.service');
 
 // Routes to receive HTTP requests
 router.get('/', getUsers);
-router.post('/', register);
+router.post('/register', register);
 router.post('/authenticate', login);
 router.get('/current', getCurrentUser);
 router.get('/:_id', getUserByID);
@@ -35,6 +35,7 @@ function getUserByID(req, res) {
 }
 
 function login(req, res) {
+    console.log(req.body);
     userService.authenticate(req.body.username, req.body.password)
         .then(function (token) {
             if (token) {

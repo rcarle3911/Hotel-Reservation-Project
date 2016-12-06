@@ -21,6 +21,8 @@
             .state('register', {
                 url: '/register',
                 templateUrl: 'register/index.html',
+                controller: 'Registration.IndexController',
+                controllerAs: 'vm',
                 data: { activeTab: 'register' }
             })
     }
