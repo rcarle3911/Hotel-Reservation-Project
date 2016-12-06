@@ -15,7 +15,9 @@
 
         vm.user = null; // You can set fields with vm and use them on the page
         vm.login = login; // Links the checkAvail function defined here with checkAvail on the page through vm.
-
+		vm.register = register; //redirects to Register page
+		vm.forgotPass = forgotPass 
+		
         initController();
 
         function initController() {
@@ -34,6 +36,9 @@
                 FlashService.Error(error);
             });
         }
+		function register() {
+			location.href = "http://martianmotel.ddns.net/login/#/register";
+		}
     }
 
 })();
