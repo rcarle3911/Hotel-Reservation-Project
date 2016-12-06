@@ -18,7 +18,6 @@
         }
 
         function Authenticate(credentials) {
-            console.log(credentials);
             return $http.post('/api/public/users/authenticate/', credentials).then(handleSuccess, handleError);
         }
 

@@ -10,7 +10,7 @@
      * The services are defined in the app/app-services folder and loaded on the app/index.html page.
      * This controller is loaded in the app/index.html page as well and linked to the appropriate 
      */
-    function Controller(LoginService, FlashService) {
+    function Controller($window, LoginService, FlashService) {
         var vm = this; // Allows you to interact with the page. Think of it as $scope, but less chance of conflict.
 
         vm.user = null; // You can set fields with vm and use them on the page
@@ -24,10 +24,11 @@
         }
 
         function login() {
-            console.log(vm.user);
             LoginService.Authenticate(vm.user)
-            .then(function() {
+            .then(function(token) {                
                 FlashService.Success("Logged in");
+                $window.jwtToken = token;
+                
             })
             .catch(function(error) {
                 FlashService.Error(error);
