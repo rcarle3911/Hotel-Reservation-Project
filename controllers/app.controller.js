@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/token', function (req, res) {
-    res.send(req.session.token);
+    if (req.session.token) res.send(req.session.token);
+    else res.send(null);
 });
 
 // Serve angular app files from the '/app' route
