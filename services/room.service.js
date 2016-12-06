@@ -10,6 +10,7 @@ service.create = create;
 service.delete = _delete;
 service.delRmByNum = delRmByNum;
 service.edit = edit;
+service.getRoomByID = getRoomByID;
 service.getRmByType = getRmByType;
 service.getAvailRmByType = getAvailRmByType;
 service.getRmBySpace = getRmBySpace;
@@ -71,7 +72,7 @@ function update() {
     function getSpaceList() {
         var deferred = Q.defer();
         db.rooms.distinct(
-            "type.space",
+            "rmType.space",
             null,
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
@@ -84,7 +85,7 @@ function update() {
     function getTypeList() {
         var deferred = Q.defer();
         db.rooms.distinct(
-            "type", 
+            "rmType", 
             null, 
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
@@ -97,7 +98,7 @@ function update() {
     function countType(type) {
         var deferred = Q.defer();
         db.rooms.count(
-            { type: type },
+            { rmType: type },
             function (err, doc) {
                 if (err) return err.name + ': ' + err.message;
                 var result = {cat: "type", key: type.name, value: (doc + "")};
@@ -131,7 +132,7 @@ function update() {
  */
 function create(rmParam) {
     var deferred = Q.defer();
-
+    /*
     db.rooms.findOne(
         { num: rmParam.num },
         function (err, room) {
@@ -140,6 +141,7 @@ function create(rmParam) {
                 //Room Number is already in database
                 deferred.reject('Room Number ' + rmParam.num + ' is already in the database. Use edit to make changes.');
             } else {
+                */
                 db.rooms.insert(
                     rmParam,
                     function (err, docs) {
@@ -148,10 +150,22 @@ function create(rmParam) {
                         deferred.resolve(docs);
                     }
                 );
-            }
+           // }
+      //  }
+    //);
+
+    return deferred.promise;
+}
+
+function getRoomByID(_id) {
+    var deferred = Q.defer();
+    db.rooms.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, room) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(room);
         }
     );
-
     return deferred.promise;
 }
 
@@ -189,7 +203,7 @@ function edit(_id, rmParam) {
     var deferred = Q.defer(),
 
         set = {
-            type: rmParam.type,
+            rmType: rmParam.rmType,
             num: rmParam.num,
             avail: rmParam.avail
         };

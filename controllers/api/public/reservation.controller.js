@@ -1,8 +1,8 @@
-var config = require('../../../config.json');
+var config = require('config.json');
 var express = require('express');
 var app = express();
 var router = express.Router();
-var resService = require('../../../services/reservation.service.js');
+var resService = require('services/reservation.service.js');
 
 // Routes to receive HTTP requests
 router.get('/', getFutureRes);
@@ -88,7 +88,13 @@ function isAvailable(req, res) {
 }
 
 function editRes(req, res) {
-    res.status(501).send('Service not defined');
+    resService.edit(req.params._id, req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function deleteRes(req, res) {
