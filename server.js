@@ -14,6 +14,8 @@ app.use('/app', require('./controllers/app.controller'));
 app.use('/emp', require('./controllers/emp.controller'));
 app.use('/login', require('./controllers/login.controller'));
 app.use('/api', express.static('./controllers/api'));
+app.use('/api/public/users', require('./controllers/api/public/users.controller.js'));
+app.use('/api/public/reservation', require('./controllers/api/public/reservation.controller.js'));
 
 // make '/app' default route
 app.get('/', function (req, res) {
