@@ -1,4 +1,14 @@
 
+<script>
+  $( function() {
+    $( "#checkin" ).datepicker();
+  } );
+  
+  $( function() {
+    $( "#checkout" ).datepicker();
+  } );
+</script>
+
 
 <div id="background">
 <br>
@@ -22,47 +32,19 @@
 <div id="rcorners2">
 
 <legend>CHECK AVAILABILITY AND RATES</legend><br>
-	
-	<form class="form" role="form">
-	<div class="dropdown form-group">
-		<label>Check-In</label>
-		<a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#"
-		   href="#">
-			<div class="input-group date">
-				<input type="text" class="form-control" ng-model="formInfo.Arrival">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			</div>
-		</a>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			<datetimepicker data-ng-model="dateRangeStart"
-							data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
-							data-on-set-time="startDateOnSetTime()"
-							data-before-render="startDateBeforeRender($dates)"></datetimepicker>
-		</ul>
-	</div>
 
-
-	<div class="dropdown form-group">
-		<label>Check-Out</label>
-		<a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="#"
-		   href="#">
-			<div class="input-group date">
-				<input type="text" class="form-control" ng-model="formInfo.Depart">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			</div>
-		</a>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			<datetimepicker data-ng-model="dateRangeEnd"
-							data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
-							data-on-set-time="endDateOnSetTime()"
-							data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
-		</ul>
-	</div>
-	<br>
 	<form name="availability" action="availability.html" onsubmit="return userAvailability()" method="post">
+		<h5>Check-in:</h5> 
+			<input type="text" id="checkin" required>
+		<br>
+		<h5>Check-out:</h5> 
+			<input type="text" id="checkout" required>
+		<br>			
+		<br>
+		<br>
 		<fieldset>
 			Adults
-			<select tabindex="4" ng-model="formInfo.Adults">
+			<select tabindex="4" ng-model="formInfo.Adults" required>
 				<option value="">select</option>			
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -86,7 +68,8 @@
 				<option value="8">7</option>
 			</select>
 		</fieldset>
-		<br><br>
+		<br>
+		<br>
 		<div id="check">
 			<!--Button maps to checkAvail function in app/home/index.controller.js -->
 			<button type="submit" ng-click="saveData()" ng-click ="vm.checkAvail()">Check Availability</button>	
