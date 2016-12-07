@@ -277,6 +277,34 @@ function getPastRes(){
     return deferred.promise;    
 }
 
+function getUserRes(_id) {
+    var deferred = Q.defer();
+    
+    db.users.find(
+        {_id: mongojs.ObjectID(_id)},
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            if (!user) deferred.reject("User not found");
+            db.presentRes.find(
+                {userEmail: user.email},
+                function(err, pList) {
+                    if (err) deferred.reject(err.name + ': ' + err.message);
+                    db.futureRes.find(
+                        {userEmail: userEmail},
+                        function(err, fList) {
+                            if (err) deferred.reject(err.name + ': ' + err.message);
+                            deferred.resolve(pList.concat(fList));
+                        }
+                    );
+                }
+            );
+        }
+    );
+
+
+    return deferred.promise;      
+}
+
 function getFutureRes(){
     var deferred = Q.defer();
 
