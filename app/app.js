@@ -56,9 +56,16 @@
 
     //Bootstrap angular
     function run($http, $rootScope, $window) {
-        // add JWT token as default auth header
-        if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
+        $rootScope.logout = function() {
+            $window.jwtToken = null;            
+            $rootScope.isLoggedIn = false;
+        }
 
+        // add JWT token as default auth header
+        if ($window.jwtToken) {
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
+            $rootScope.isLoggedIn = true;
+        }
         // update active tab on state change
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.activeTab = toState.data.activeTab;
