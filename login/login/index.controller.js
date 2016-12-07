@@ -26,10 +26,10 @@
 
         function login() {
             LoginService.Authenticate(vm.user)
-            .then(function(token) {                
+            .then(function(token) {   		
                 FlashService.Success("Logged in");
-                $window.jwtToken = token;
-                
+				$window.location = '/app';	
+       
             })
             .catch(function(error) {
                 FlashService.Error(error);
