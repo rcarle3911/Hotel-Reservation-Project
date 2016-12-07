@@ -238,16 +238,13 @@ footer{
 	height:475px;
 	box-shadow: 0px 8px 16px 0px black;
 }
-.row{
+.row2{
 	clear:both;
-	display:-webkit-flex;
-	display:flex;
-	-webkit-justify-content:space-between;
-	justify-content:space-between;
-	margin-left: auto;
-	margin-right: auto;
+	overflow:scroll;
+	max-height:600px;
 	color:#808080;
 }
+
 .col-md-8{
 	max-width:600px;
 	max-height:600px;
@@ -311,9 +308,6 @@ footer{
 	display:flex;
 	-webkit-justify-content:space-between;
 	justify-content:space-between;
-	:15px;
-	
-
 }
 legend{
 	line-height:inherit;
@@ -326,6 +320,7 @@ legend{
 }
 .form-container{
 	clear:both;
+	overflow:scroll;
 	font-size:14px;
 	color:#808080;
 	text-align:left;
@@ -338,25 +333,7 @@ legend{
 	max-width:600px;
 	box-shadow: 0px 8px 16px 0px black;	
 }
-.row{
-	clear:both;
-	display:-webkit-flex;
-	display:flex;
-	-webkit-justify-content:space-between;
-	justify-content:space-between;
-	margin-left: auto;
-	margin-right: auto;
-	color:#808080;
-}
-.col-md-8{
-	max-width:600px;
-	max-height:600px;
-	width:auto;
-	height:auto;
-	clear:both;
-	float:left;
-	padding-left:100px;
-}
+
 #search{
 	clear:right;
 	float:right;
