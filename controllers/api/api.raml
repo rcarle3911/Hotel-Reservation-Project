@@ -19,6 +19,9 @@ types:
       endDate: datetime
       numGuests: integer
       price: number
+  Reservations:
+    type: Reservation[]
+    uniqueItems: true
   User:
     properties:
       firstname: string
@@ -28,16 +31,25 @@ types:
       email: string
       address: string
       password: Password
+  Users:
+    type: User[]
+    uniqueItems: true
   RoomType:
     properties:
       name: string
       desc: string
       space: integer
+  RoomTypes:
+    type: RoomType[]
+    uniqueItems: true
   Room:
     properties:
       rmType: RoomType
       num: integer
       avail: boolean
+  Rooms:
+    type: Room[]
+    uniqueItems: true
   CreditCard:
     pattern: \b\d{13,16}\b
   CVV:
@@ -86,12 +98,82 @@ types:
       body:
         application/json:
           type: ResCheck
+      responses:
+        200:
+          body:
+            application/json:
+              type: boolean
 /protected/users:
-  /{user._id}:
+  /{userID}:
     delete:
+      description: |
+        Deletes the user given in the parameters.
     put:
+      description: |
+        Updates the user by the ID in parameters.
+      body:
+        application/json:
+          type: User
     get:
+      description: |
+        Retrieves user information from the database based on ID.
+      responses:
+        200:
+          body:
+            application/json:
+              type: User
   /current:
+    get:
+      description: |
+        Gets information about the user logged in.
+      responses:
+        200:
+          body:
+            application/json:
+              type: User
+  /email:
+    /{userEmail}:
+      get:
+        description: |
+          Retrieves the user in the database that matches the given email.
+        responses:
+          200:
+            body:
+              application/json:
+                type: User
 /protected/reservation:
+  get:
+    description: |
+      Retrieves a list of all future and present reservation objects from the database for the user logged in.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Reservations
+  /{resID}:
+    put:
+      description: |
+        Updates the reservation by ID with the object in the body
+      body:
+        application/json:
+          type: Reservation
+    delete:
+      description: |
+        Deletes the reservation by ID.
+    patch:
+      description: |
+        Modifies a reservation state from "Not Checked In" to "Checked In" or "Checked In" to "Checked Out"
+      body:
+        application/json:
+          type: datetime
+  /find:
+    get:
+      description: |
+        Retrieves all reservations in the database.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Reservations
 /protected/room:
   /type:
