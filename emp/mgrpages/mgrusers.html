@@ -6,30 +6,55 @@
         </div>
         <div class="col-md-4 pull-right" style="Padding: 5px;">
             <div class="input-group">
-                <input id="txtUserSearch" type="text" class="form-control" name="x" 
-                placeholder="Filter Grid..." ng-model="txtFilter">
+                <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtFilter">
                 <span class="input-group-addon">
                 <i class="glyphicon glyphicon-search"></i>
             </span>
             </div>
         </div>
-        
     </div>
-    <div class="col-md-12">
-        <table id="tblUsers" class="table table-striped table-bordered" cellspacing="0" width="100%" 
-        ng-app="mgrUsers" ng-controller="userCtrl">
+    <div class="col-md-12" ng-controller="userCtrl">
+        Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}<br><br>
+        <table id="tblUsers" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Edit User</th>
-                    <th>Name</th>
-                    <th>email</th>
-                    <th>User Role</th>
+                    <th>
+                        <a href="#" ng-click="orderByField = 'last_name'; reverseSort = !reverseSort">
+                        Name 
+                        <span ng-show="orderByField == 'last_name'">
+                            <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                        </a>
+                    </th>
+                    <th><a href="#" ng-click="orderByField = 'email'; reverseSort = !reverseSort">
+                        Email
+                        <span ng-show="orderByField == 'email'">
+                            <span ng-show="!reverseSort">
+                            <i class="glyphicon glyphicon-triangle-top"></i>
+                            </span>
+                            <span ng-show="reverseSort">
+                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                            </span>
+                        </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByField = 'Role'; reverseSort = !reverseSort">
+                        User Role
+                        <span ng-show="orderByField == 'Role'">
+                        <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
+                        <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                        </a>
+                    </th>
                     <th>Phone #</th>
                     <th class="text-center">Disable/Enable</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in users | filter : txtFilter"> 
+                <tr ng-repeat="user in users | filter:txtFilter | orderBy:orderByField:reverseSort">
                     <td class="text-center">
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#userModal">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user.id}}</button>
@@ -69,5 +94,5 @@
             </div>
         </div>
     </div>
-<script src="/emp/mgrpages/mgrUsers.js"></script>
+    <script src="/emp/mgrpages/mgrUsers.js"></script>
 </div>
