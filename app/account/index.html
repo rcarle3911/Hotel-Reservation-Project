@@ -3,7 +3,7 @@
 
 <div id="search">
 	<form method="get" action="http://www.google.com/search">
-		<div style="border:padding:4px;width:30em;">
+		<div style="border:padding:4px;maxwidth:30em;">
 			<table border="0" align="center" cellpadding="0">
 				<tr><td>
 				<input type="text" name="q" size="25" maxlength="255" value="" />
@@ -22,22 +22,22 @@
     <form method="post">
         <div class="form-group">
             <label for="firstName">First name</label>
-            <input type="text" id="firstName" class="form-control" ng-model="vm.user.firstName" required />
+            <input type="text" id="firstName" class="form-control" ng-model="formInfo.FirstName" required />
         </div>
         <div class="form-group">
             <label for="lastName">Last name</label>
-            <input type="text" id="lastName" class="form-control" ng-model="vm.user.lastName" required />
+            <input type="text" id="lastName" class="form-control" ng-model="formInfo.Lastname" required />
         </div>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" class="form-control" ng-model="vm.user.username" required />
+            <input type="text" id="username" class="form-control" ng-model="formInfo.Username" required />
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" ng-model="vm.user.password" />
+            <input type="password" id="password" class="form-control" ng-model="formInfo.Password" />
         </div>
         <div class="form-group">
-            <button class="btn btn-primary" ng-click="vm.saveUser()">Save</button>
+            <button class="btn btn-primary" ng-click="saveData()">Save</button>
             <button class="btn btn-danger" ng-click="vm.deleteUser()">Delete</button>
         </div>
     </form>

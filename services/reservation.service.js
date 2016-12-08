@@ -16,12 +16,24 @@ service.getPresentRes = getPresentRes;
 service.deleteFuture = deleteFuture;
 service.deletePresent = deletePresent;
 service.deletePast = deletePast;
+service.getFutureRes = getFutureRes;
+service.getPastRes = getPastRes;
+service.getResByID = getResByID;
 
 module.exports = service;
 
 function create(resrvParam) {
     var deferred = Q.defer();
-    
+    /*
+    resrvParam = {
+        userEmail: resrvParam.userEmail,
+        roomType: resrvParam.roomType,
+        startDate: new Date(resrvParam.startDate),
+        endDate: new Date(resrvParam.endDate),
+        numGuests: resrvParam.numGuests,
+        price: resrvParam.price,
+    }
+    */
     timeout(createRes, resrvParam, null, deferred);
 
     return deferred.promise;
@@ -33,7 +45,7 @@ function timeout(toRun, param1, param2, deferred) {
         if (!lock) {
             lock = true;
             console.log("Reservation database locked for editing");
-            toRun(param1)
+            toRun(param1,param2)
             .then(function (doc) {
                 lock = false;
                 deferred.resolve(doc);
@@ -62,10 +74,12 @@ function editRes(_id, resrvParam) {
     isAvailable(resrvParam)
     .then( function () {
         var set = {
+            userEmail: resrvParam.userEmail,
             roomType: resrvParam.roomType,
             startDate: resrvParam.startDate,
             endDate: resrvParam.endDate,
-            numGuests: resrvParam.numGuests
+            numGuests: resrvParam.numGuests,
+            price: resrvParam.price
         };
         /**
          * This chain will check the future, present, and past databases for a id match.
@@ -110,7 +124,6 @@ function editRes(_id, resrvParam) {
     
 
     return deferred.promise;
-}    
 }
 
 /**
@@ -120,7 +133,6 @@ function editRes(_id, resrvParam) {
 function createRes(resrvParam) {
     var deferred = Q.defer();
     var user = {firstName: "Guest"};
-
 
     db.users.findOne(
         { email: resrvParam.userEmail },
@@ -322,5 +334,32 @@ function deletePast(_id) {
         }
     );
 
+    return deferred.promise;
+}
+
+function getResByID(_id) {
+    var deferred = Q.defer();
+    db.futureRes.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, resrv) {
+            if (resrv) deferred.resolve(resrv);
+            else { //Not found in future database
+                db.presentRes.findOne(
+                    { _id: mongojs.ObjectID(_id) },
+                    function (err, resrv) {
+                        if (resrv) deferred.resolve(resrv);
+                        else { //Not found in current database
+                            db.pastRes.findOne(
+                                { _id: mongojs.ObjectID(_id) },
+                                function (err, resrv) {
+                                    deferred.resolve(resrv);
+                                }
+                            ); 
+                        }
+                    }
+                );
+            }
+        }
+    );
     return deferred.promise;
 }

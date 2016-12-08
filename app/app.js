@@ -21,6 +21,8 @@
             .state('account', {
                 url: '/account',
                 templateUrl: 'account/index.html',
+                controller: 'Account.IndexController',
+                controllerAs: 'vm',
                 data: { activeTab: 'account' }
             })
             .state('contact', {
@@ -41,6 +43,8 @@
             .state('reservations', {
                 url: '/reservations',
                 templateUrl: 'reservations/index.html',
+                controller: 'Res.IndexController',
+                controllerAs: 'vm',
                 data: { activeTab: 'reservations' }
             })
             .state('gallery', {
