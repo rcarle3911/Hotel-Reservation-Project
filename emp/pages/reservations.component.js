@@ -1,11 +1,12 @@
 'use strict';
 
 angular.
-  module('reservations').
+  module('app').
   component('reservations', {
     templateUrl: '/emp/pages/reservations.template.html',
-    controller: 
-      function reservationsController() {
+    controller: ['datatable',
+      function reservationsController(datatable) {
+        this.query='';
         this.reservations = [ //replace with get from resource (restful database service)
           {
             userID : '1',
@@ -40,8 +41,7 @@ angular.
             price : '1500' 
           }          
         ];
-        this.query = "";
-        this.action = "create";
+        this.btnVisible = 'visible';  
         switch(this.action){
           case "create":
             this.btnIcon = "glyphicon glyphicon-plus";
@@ -54,12 +54,55 @@ angular.
           break;
 
           case "checkout":
-            this.btnIcon = "glyphicon glyphicon-log-out";
-            this.btnTxt = " Check-out"
+            this.btnVisible = 'hidden';
           break;
         }
-        
-        
-      }
-    
+        var datatableConfig = {
+            "name":"simple_datatable",
+            "columns":[
+                {
+                    "header":"test",
+                    "property":"test",
+                    "order":true,
+                    "type":"text",
+                    "edit":true
+                },
+                {
+                    "header":"test2",
+                    "property":"test2",
+                    "order":true,
+                    "type":"text"
+                }
+            ],
+            "edit":{
+                "active":true,
+                "columnMode":true
+            },
+            "pagination":{
+                "mode":'local'
+            },
+            "order":{
+                "mode":'local'
+            },
+            "remove":{
+                "active":true,
+                "mode":'local'
+            }
+        };
+
+        //Simple exemple of data
+        var datatableData = [{"test":1, "test2":1000},{"test":1, "test2":1000},{"test":1, "test2":1000},
+        {"test":1, "test2":1000},{"test":1, "test2":1000},{"test":1, "test2":1000},
+        {"test":1, "test2":1000}];
+
+        //Init the datatable with his configuration
+        this.datatable = datatable(datatableConfig);
+        //Set the data to the datatable
+        this.datatable.setData(datatableData);
+      }],
+    bindings: {
+      action: '@',
+      datatable: '&'
+    }
+     
   });
