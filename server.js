@@ -22,10 +22,6 @@ app.use('/api/public/users', require('./controllers/api/public/users.controller.
 app.use('/api/public/reservation', require('./controllers/api/public/reservation.controller.js'));
 app.use('/api/protected/users', require('./controllers/api/protected/users.controller.js'));
 app.use('/api/protected/room', require('./controllers/api/protected/room.controller.js'));
-<<<<<<< HEAD
-=======
-
->>>>>>> rcarle3911/master
 
 // make '/app' default route
 app.get('/', function (req, res) {
