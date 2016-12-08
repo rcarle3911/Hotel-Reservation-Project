@@ -17,7 +17,13 @@ router.get('/find', findRes);
 module.exports = router;
 
 function checkInOut(req, res) {
-    res.status(501).send('Service not defined');
+    resService.checkInOut(req.params._id, new Date())
+    .then( function () {
+        res.status(200);
+    })
+    .catch( function (error) {
+        res.status(400).send(err);
+    });
 }
 
 function getUserRes(req, res) {
