@@ -35,14 +35,13 @@
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user.id}}</button>
                     </td>
                     <td>{{user.last_name}}, {{user.first_name}}</td>
-                    <td>{{user.email}}</td>
+                    <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{user.Role}}</td>
                     <td>{{user.phone}}</td>
                     <td class="text-center">
-                        {{user.Status}}
-                        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#userModal">
+                        <button ng-show="user.Status" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#userModal">
                             <i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disable</button>
-                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#userModal">
+                        <button ng-hide="user.Status" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#userModal">
                             <i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enable</button>
                     </td>
                 </tr>
