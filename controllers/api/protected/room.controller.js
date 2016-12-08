@@ -60,9 +60,22 @@ function editRoom(req, res) {
 
 
 function deleteRoom(req, res) {
-    res.status(501).send('Service not defined');
+    roomService.delete(req.params._id)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function toggleRoom(req, res) {
-    res.status(501).send('Service not defined');
+    req.body.avail = !req.body.avail;
+    roomService.edit(req.params._id, req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
