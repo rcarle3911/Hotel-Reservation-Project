@@ -6,6 +6,7 @@ var userService = require('services/users.service');
 // Routes to receive HTTP requests
 router.post('/register', register);
 router.post('/authenticate', login);
+router.post('/forgotPass', forgotPass);
 
 module.exports = router;
 
@@ -38,4 +39,8 @@ function register(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
+}
+
+function forgotPass(req, res) {
+    res.status(501).send('You Forgot Your Password!');
 }

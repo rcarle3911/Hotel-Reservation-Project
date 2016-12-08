@@ -23,6 +23,7 @@ service.delete = _delete;
 service.authenticate = authenticate;
 service.getUsers = getUsers;
 service.getById = getById;
+service.forgotPass = forgotPass;
 
 module.exports = service;
 
@@ -226,4 +227,8 @@ function getById(_id) {
     );
 
     return deferred.promise;
+}
+
+function forgotPass() {
+    
 }
