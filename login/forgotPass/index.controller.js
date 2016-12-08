@@ -18,7 +18,7 @@
         }
 
         function forgotPass() {
-            LoginService.Create(vm.user)
+            LoginService.forgotPass(vm.user)
             .then(function () {
                 FlashService.Success('Message Sent!');
             })
