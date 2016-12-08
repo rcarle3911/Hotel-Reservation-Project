@@ -23,7 +23,6 @@ app.use('/api/public/reservation', require('./controllers/api/public/reservation
 app.use('/api/protected/users', require('./controllers/api/protected/users.controller.js'));
 app.use('/api/protected/room', require('./controllers/api/protected/room.controller.js'));
 
-
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
