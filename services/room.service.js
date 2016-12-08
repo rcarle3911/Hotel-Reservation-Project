@@ -5,6 +5,11 @@ var mongojs = require('mongojs');
 var db = mongojs('hotel', ['rooms', 'rmTypes']);
 	
 var service = {};
+    group = Object.freeze({
+		CUSTOMER: 0,
+		EMPLOYEE: 1,
+		MANAGER: 2
+	});
 
 service.create = create;
 service.delete = _delete;

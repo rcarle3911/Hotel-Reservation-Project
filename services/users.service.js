@@ -13,7 +13,7 @@ var service = {};
 		CUSTOMER: 0,
 		EMPLOYEE: 1,
 		MANAGER: 2
-	}),
+	});
 
 service.create = create;
 service.editGroup = editGroup;

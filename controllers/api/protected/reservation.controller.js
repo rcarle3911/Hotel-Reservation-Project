@@ -89,7 +89,13 @@ function editRes(req, res) {
 }
 
 function deleteRes(req, res) {
-    res.status(501).send('Service not defined');
+    resService.delete(req.params._id)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function findRes(req, res) {

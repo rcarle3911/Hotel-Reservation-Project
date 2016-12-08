@@ -8,9 +8,15 @@ var config = require('config.json');
 var lock;
 
 var service = {};
+    group = Object.freeze({
+		CUSTOMER: 0,
+		EMPLOYEE: 1,
+		MANAGER: 2
+	});
 
 service.create = create;
 service.edit = edit;
+service.delete = _delete;
 service.isAvailable = isAvailable;
 service.getPresentRes = getPresentRes;
 service.deleteFuture = deleteFuture;
@@ -19,6 +25,7 @@ service.deletePast = deletePast;
 service.getFutureRes = getFutureRes;
 service.getPastRes = getPastRes;
 service.getResByID = getResByID;
+service.checkInOut = checkInOut;
 
 module.exports = service;
 
@@ -68,7 +75,7 @@ function edit(_id, resrvParam) {
     return deferred.promise;    
 }
 
-function editRes(_id, resrvParam) {
+function editRes(_id, resrvParam, group) {
     var deferred = Q.defer()
     
     isAvailable(resrvParam)
@@ -81,6 +88,12 @@ function editRes(_id, resrvParam) {
             numGuests: resrvParam.numGuests,
             price: resrvParam.price
         };
+
+        //Only employees and managers can directly set check in and check out dates.
+        if (group > 0) {
+            if (resrvParam.checkIn) set.checkIn = resrvParam.checkIn;
+            if (resrvParam.checkIn) set.checkOut = resrvParam.checkOut;
+        }
         /**
          * This chain will check the future, present, and past databases for a id match.
          * Once it's found it's removed and the chain stops.
@@ -172,6 +185,37 @@ function createRes(resrvParam) {
             }
         );
     }        
+
+    return deferred.promise;
+}
+
+function _delete(_id) {
+    var deferred = Q.defer();
+
+    deleteFuture(_id)
+    .then(function (doc) {
+        if (doc["nRemoved"] === 0) {
+            deletePresent(_id)
+            .then(function (doc) {
+                if (doc["nRemoved"] === 0 ) {
+                    deletePast(_id)
+                    .then(function (doc) {
+                        deferred.resolve(doc);
+                    })
+                    .catch(function (error) {
+                        deferred.reject(error);
+                    })
+                } else deferred.resolve(doc);
+            })
+            .catch(function (error) {
+                deferred.reject(error);
+            });
+        } else deferred.resolve(doc);
+    })
+    .catch(function (error) {
+        deferred.reject(error);
+    });
+
 
     return deferred.promise;
 }
@@ -330,6 +374,7 @@ function deleteFuture(_id) {
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
         }
     );
 
@@ -346,6 +391,7 @@ function deletePresent(_id) {
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
         }
     );
 
@@ -359,6 +405,7 @@ function deletePast(_id) {
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
         }
     );
 
@@ -389,5 +436,37 @@ function getResByID(_id) {
             }
         }
     );
+    return deferred.promise;
+}
+
+function checkInOut(_id, date) {
+    var deferred = Q.defer();
+
+    getResByID(_id)
+    .then(function (resrv) {
+        if (!resrv.checkIn) {
+            resrv.checkIn = date;
+            deleteFuture(_id);
+            db.presentRes.insert(resrv,
+            function (err, doc) {
+                deferred.resolve(doc);
+            });
+        }
+        else if (!resrv.checkOut) {
+            resrv.checkOut = date;
+            deletePresent(_id);
+            db.pastRes.insert(resrv,
+            function (err, doc) {
+                deferred.resolve(doc);
+            });
+        }
+        else {
+            deferred.reject("Customer already checked out");
+        }
+    })
+    .catch(function (error) {
+        deferred.reject(error);
+    });
+
     return deferred.promise;
 }
