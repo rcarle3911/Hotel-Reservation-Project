@@ -10,7 +10,7 @@
      * The services are defined in the app/app-services folder and loaded on the app/index.html page.
      * This controller is loaded in the app/index.html page as well and linked to the appropriate 
      */
-    function Controller(UserService, FlashService) {
+    function Controller($window, UserService, FlashService) {
         var vm = this;
         
         vm.user = null;
