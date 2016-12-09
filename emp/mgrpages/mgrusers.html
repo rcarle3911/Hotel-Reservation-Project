@@ -1,20 +1,18 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="userCtrl">
     <div class="col-md-12">
-        <div class="col-md-4 pull-left" style="Padding: 5px;">
+        <div class="col-md-1 pull-left" style="Padding: 5px;">
             <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#userModal">
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
-        <div class="col-md-4 pull-right" style="Padding: 5px;">
-            <div class="input-group">
-                <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtFilter">
-                <span class="input-group-addon">
-                <i class="glyphicon glyphicon-search"></i>
-            </span>
-            </div>
+        <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
+                <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtFilter.text" />
+                <span ng-if="txtFilter.text" ng-click="clearFilter()" class="glyphicon glyphicon-remove form-control-feedback" 
+                style="cursor: pointer; pointer-events: all; margin-top: 5px;"
+                    uib-tooltip="clear">
+                </span>
         </div>
     </div>
-    <div class="col-md-12" ng-controller="userCtrl">
-        Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}<br><br>
+    <div class="col-md-12">
         <table id="tblUsers" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -54,7 +52,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in users | filter:txtFilter | orderBy:orderByField:reverseSort">
+                <tr ng-repeat="user in users | filter:txtFilter.text | orderBy:orderByField:reverseSort">
                     <td class="text-center">
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#userModal">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user.id}}</button>

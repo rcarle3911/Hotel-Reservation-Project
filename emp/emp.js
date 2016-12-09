@@ -209,4 +209,9 @@ app.controller('userCtrl', function ($scope) {
         "Role": "Manager",
         "Status": false
     }];
+    $scope.clearFilter = function() {
+      console.log("xxx");
+      $scope.txtFilter = null; 
+      
+    };
 });
