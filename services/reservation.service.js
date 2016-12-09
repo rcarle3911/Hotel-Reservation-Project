@@ -26,6 +26,7 @@ service.getFutureRes = getFutureRes;
 service.getPastRes = getPastRes;
 service.getResByID = getResByID;
 service.checkInOut = checkInOut;
+service.getUserRes = getUserRes;
 
 module.exports = service;
 

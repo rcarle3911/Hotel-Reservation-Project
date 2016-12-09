@@ -24,6 +24,7 @@ service.authenticate = authenticate;
 service.getUsers = getUsers;
 service.getById = getById;
 service.forgotPass = forgotPass;
+service.getUserByEmail = getUserByEmail;
 
 module.exports = service;
 
@@ -231,4 +232,18 @@ function getById(_id) {
 
 function forgotPass() {
     
+}
+
+function getUserByEmail(email) {
+    var deferred = Q.defer();
+
+    db.users.findOne(
+        { email: email },
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(user);
+        }
+    );
+
+    return deferred.promise;
 }

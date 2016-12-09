@@ -67,11 +67,14 @@ types:
   ResCheck:
     properties:
       rmType:
-        required: false
         type: RoomType
+        required: false
       space: integer
       startDate: datetime
       endDate: datetime
+  PassReset:
+    properties:
+      email: string
 /public/users:
   /authenticate:
     post:
@@ -87,6 +90,14 @@ types:
       body:
         application/json:
           type: User
+  /forgotPass:
+    post:
+      description: |
+        Resets users pass and sends it to their email.
+      body:
+        application/json:
+          type: PassReset
+
 /public/reservation:
   post:
     description: |
@@ -107,6 +118,14 @@ types:
             application/json:
               type: boolean
 /protected/users:
+  get:
+    description: |
+      Gets all users from the database.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Users
   /{_id}:
     delete:
       description: |
@@ -135,7 +154,7 @@ types:
             application/json:
               type: User
   /email:
-    /{_id}:
+    /{email}:
       get:
         description: |
           Retrieves the user in the database that matches the given email.
@@ -154,6 +173,13 @@ types:
           application/json:
             type: Reservations
   /{_id}:
+    get:
+      description: |
+        Gets the reservation matching an ID.
+      responses:
+        200:
+          application/json:
+            type: Reservation
     put:
       description: |
         Updates the reservation by ID with the object in the body
@@ -194,6 +220,14 @@ types:
       application/json:
         type: Room
   /{_id}:
+    get:
+      description: |
+        Gets the room matching the ID.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Room
     put:
       description: |
         Updates a room in the database.

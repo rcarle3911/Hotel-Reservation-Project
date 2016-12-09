@@ -3,14 +3,21 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var roomService = require('services/room.service.js');
+var roomTypeService = require('services/roomType.service.js');
 
 // Routes to receive HTTP requests
 router.get('/', getRooms);
-router.post('/add', addRoom);
+router.post('/', addRoom);
 router.get('/:_id', getRoomByID);
 router.put('/:_id', editRoom);
 router.delete('/:_id', deleteRoom);
-router.get('/toggle', toggleRoom);
+router.patch('/:_id', toggleRoom);
+router.get('/available', getAvailRooms);
+router.get('/type', getRoomTypes);
+router.post('/type', addRoomType);
+router.get('/type/:_id', getRmTypeByID);
+router.put('/type/:_id', editRmType);
+router.delete('/type/:_id', deleteRmType);
 
 module.exports = router;
 
@@ -78,4 +85,28 @@ function toggleRoom(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
+}
+
+function getAvailRooms(req, res) {
+    res.status(501).send("Work in progress");
+}
+
+function getRoomTypes(req, res) {
+    res.status(501).send("Work in progress");
+}
+
+function addRoomType(req, res) {
+    res.status(501).send("Work in progress");
+}
+
+function getRmTypeByID(req, res) {
+    res.status(501).send("Work in progress");
+}
+
+function editRmType(req, res) {
+    res.status(501).send("Work in progress");
+}
+
+function deleteRmType(req, res) {
+    res.status(501).send("Work in progress");
 }
