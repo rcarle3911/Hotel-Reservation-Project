@@ -270,6 +270,7 @@ function forgotPass(email) {
             deferred.resolve();
         }
     );
+    return deferred.promise;
 }
 
 function getUserByEmail(email) {
