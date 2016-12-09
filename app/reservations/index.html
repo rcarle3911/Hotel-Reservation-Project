@@ -1,3 +1,13 @@
+<script>
+  $( function() {
+    $( "#checkin" ).datepicker();
+  } );
+  
+  $( function() {
+    $( "#checkout" ).datepicker();
+  } );
+</script>
+
 <div id="background3">
     <br>
 
@@ -30,15 +40,15 @@
                 <h2>Contact Information</h2>
                 <div class="form-group">
                     <label for="inputName">Name</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Luke Skywalker" ng-model="formInfo.Name">
+                    <input type="text" class="form-control" id="inputName" placeholder="Luke Skywalker" ng-model="formInfo.Name" required/>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
-                    <input type="text" class="form-control" id="InputEmail" placeholder="luke.skywalker@deathstar.com" ng-model="formInfo.Email">
+                    <input type="text" class="form-control" id="InputEmail" placeholder="luke.skywalker@deathstar.com" ng-model="formInfo.Email" required/>
                 </div>
                 <div class="form-group">
-                    <label for="room-type">Room Type</label>
-                    <select class="form-control" ng-model="formInfo.Room">
+                    <label for="room-type" >Room Type</label>
+                    <select required class="form-control" ng-model="formInfo.Room" >
                         <option selected></option>
                         <option value="1">Standard</option>
                         <option value="2">Standard Plus</option>
@@ -48,15 +58,15 @@
                 </div>
                 <div class="form-group">
                     <label for="arrival">Arrival</label>
-                    <input type="text" class="form-control" id="arrival" placeholder="01/15/2017" ng-model="formInfo.Arrival"/>
+                    <input type="text" class="form-control" id="checkin" placeholder="01/15/2017" ng-model="formInfo.Arrival" required />
                 </div>
                 <div class="form-group">
                     <label for="departing">Departing</label>
-                    <input type="text" class="form-control" id="departing" placeholder="01/16/2017" ng-model="formInfo.Departing"/>
+                    <input type="text" class="form-control" id="checkout" placeholder="01/16/2017" ng-model="formInfo.Departing" required />
                 </div>
                 <div class="form-group">
                         <label for="adults">Total Guests</label>
-                        <select class="form-control" ng-model="formInfo.Adults">
+                        <select required class="form-control" ng-model="formInfo.Adults">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -69,14 +79,13 @@
                 </div>    
             </div>
         </div>
-		
+
         <div class="col-md-6">
             <div class="form-container">
                 <h2>Payment Information</h2>
-
                 <div class="form-group">
                     <label for="credit-type">Credit Card Type</label>
-                    <select class="form-control" ng-model="formInfo.CardType">
+                    <select required class="form-control" ng-model="formInfo.CardType">
                         <option selected></option>
                         <option value="1">MasterCard</option>
                         <option value="2">Chase</option>
@@ -87,12 +96,12 @@
                 </div>
                 <div class="form-group">
                     <label for="creditcardnumber">Credit Card Number</label>
-                    <input type="text" class="form-control" id="cardnumber" placeholder="8888 8888 8888 8888" ng-model="formInfo.CardNum">
+                    <input type="text" class="form-control" id="cardnumber" placeholder="8888 8888 8888 8888" ng-model="formInfo.CardNum" 	required/>
                 </div>
-                <div class="form-group">
+                <div class="form-group"	>
                     <div class="col-xs-6">
                         <label for="month">Month</label>
-                        <select class="form-control" ng-model="formInfo.Month">
+                        <select required class="form-control" ng-model="formInfo.Month">
                             <option selected>01</option>
                             <option value="1">02</option>
                             <option value="2">03</option>
@@ -108,10 +117,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group"	>
                     <div class="col-xs-6">
                         <label for="years">Year</label>
-                        <select class="form-control" ng-model="formInfo.Year">
+                        <select required class="form-control" ng-model="formInfo.Year" >
                             <option selected>16</option>
                             <option value="1">17</option>
                             <option value="2">18</option>
@@ -122,7 +131,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nameoncard">Name on Card</label>
-                    <input type="text" class="form-control" id="nameoncard" placeholder="Luke Skywalker" ng-model="formInfo.CardName">
+                    <input type="text" class="form-control" id="nameoncard" placeholder="Luke Skywalker" ng-model="formInfo.CardName"	required/>
                 </div>
                 <div class="form-group">
                     <label for="comment">Additional Comments:</label>
