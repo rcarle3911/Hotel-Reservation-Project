@@ -107,7 +107,7 @@ types:
             application/json:
               type: boolean
 /protected/users:
-  /{userID}:
+  /{_id}:
     delete:
       description: |
         Deletes the user given in the parameters.
@@ -135,7 +135,7 @@ types:
             application/json:
               type: User
   /email:
-    /{userEmail}:
+    /{_id}:
       get:
         description: |
           Retrieves the user in the database that matches the given email.
@@ -153,7 +153,7 @@ types:
         body:
           application/json:
             type: Reservations
-  /{resID}:
+  /{_id}:
     put:
       description: |
         Updates the reservation by ID with the object in the body
@@ -193,7 +193,7 @@ types:
     body:
       application/json:
         type: Room
-  /{RoomId}:
+  /{_id}:
     put:
       description: |
         Updates a room in the database.
@@ -238,7 +238,7 @@ types:
       body:
         application/json:
           type: RoomType
-    /{typeId}:
+    /{_id}:
       get:
         description: |
           Retrieves object by ID.
