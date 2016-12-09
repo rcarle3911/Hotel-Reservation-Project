@@ -18,27 +18,44 @@
 
 <h1>My Account</h1>
 <br>
-<div class="form-container">
-    <form method="post">
-        <div class="form-group">
-            <label for="firstname">First name</label>
-            <input type="text" id="firstname" class="form-control" ng-model="vm.user.firstname" required />
-        </div>
-        <div class="form-group">
-            <label for="lastname">Last name</label>
-            <input type="text" id="lastname" class="form-control" ng-model="vm.user.lastname" required />
-        </div>
-        <div class="form-group">
-            <label for="email">Username</label>
-            <input type="text" id="email" class="form-control" ng-model="vm.user.email" required />
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" ng-model="vm.user.password" />
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary" ng-click="vm.saveUser()">Save</button>
-            <button class="btn btn-danger" ng-click="vm.deleteUser()">Delete</button>
-        </div>
-    </form>
+<div class="row2">
+    <form class="form" role="form">
+		<div class="col-md-6">
+		<div class="form-container">
+			<form method="post">
+				<div class="form-group">
+					<label for="firstname">First name</label>
+					<input type="text" id="firstname" class="form-control" ng-model="vm.user.firstname" required />
+				</div>
+				<div class="form-group">
+					<label for="lastname">Last name</label>
+					<input type="text" id="lastname" class="form-control" ng-model="vm.user.lastname" required />
+				</div>
+				<div class="form-group">
+					<label for="email">Username</label>
+					<input type="text" id="email" class="form-control" ng-model="vm.user.email" required />
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" class="form-control" ng-model="vm.user.password" />
+				</div><br>
+				<div class="form-group">
+					<button class="btn btn-primary" ng-click="vm.saveUser()">Save Changes</button>
+					<button class="btn btn-danger" ng-click="vm.deleteUser()">Delete Account</button>
+				</div>
+			</form>
+		</div>
+		</div>
+
+		<div class="col-md-6">
+            <div class="form-container">
+				<form  method="get">
+					<div class="form-group">
+						<label for="comment">Upcoming Reservations</label>
+						<textarea class="form-control" rows="16" id="comment" ng-model="vm.user.protected.reservation.find"></textarea>
+					</div>
+				</form>
+			</div>
+		</div>
+	</form>
 </div>

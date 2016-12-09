@@ -51,3 +51,19 @@ function getAll() {
 
     return deferred.promise;
 }
+
+function edit() {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+
+    return deferred.promise;
+}
+
+function _delete() {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+
+    return deferred.promise;
+}
