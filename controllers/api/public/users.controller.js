@@ -42,5 +42,11 @@ function register(req, res) {
 }
 
 function forgotPass(req, res) {
-    res.status(501).send('You Forgot Your Password!');
+    userService.forgotPass(req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }

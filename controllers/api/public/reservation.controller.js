@@ -21,7 +21,7 @@ function reserve(req, res) {
 }
 
 function isAvailable(req, res) {
-	resService.isAvailable(req.body)
+	resService.isAvailable(req.params)
 	.then(function(stuff) {
 		//res.sendStatus(200); //# of rooms available?
 		if(stuff) res.send(stuff);

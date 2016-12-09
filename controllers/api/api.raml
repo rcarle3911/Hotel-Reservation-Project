@@ -67,11 +67,14 @@ types:
   ResCheck:
     properties:
       rmType:
-        required: false
         type: RoomType
+        required: false
       space: integer
       startDate: datetime
       endDate: datetime
+  PassReset:
+    properties:
+      email: string
 /public/users:
   /authenticate:
     post:
@@ -87,6 +90,14 @@ types:
       body:
         application/json:
           type: User
+  /forgotPass:
+    post:
+      description: |
+        Resets users pass and sends it to their email.
+      body:
+        application/json:
+          type: PassReset
+
 /public/reservation:
   post:
     description: |
@@ -98,7 +109,7 @@ types:
     get:
       description: |
         Checks for availability and returns a boolean.
-      body:
+      queryParameters:
         application/json:
           type: ResCheck
       responses:
@@ -107,7 +118,15 @@ types:
             application/json:
               type: boolean
 /protected/users:
-  /{userID}:
+  get:
+    description: |
+      Gets all users from the database.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Users
+  /{_id}:
     delete:
       description: |
         Deletes the user given in the parameters.
@@ -135,7 +154,7 @@ types:
             application/json:
               type: User
   /email:
-    /{userEmail}:
+    /{email}:
       get:
         description: |
           Retrieves the user in the database that matches the given email.
@@ -153,7 +172,14 @@ types:
         body:
           application/json:
             type: Reservations
-  /{resID}:
+  /{_id}:
+    get:
+      description: |
+        Gets the reservation matching an ID.
+      responses:
+        200:
+          application/json:
+            type: Reservation
     put:
       description: |
         Updates the reservation by ID with the object in the body
@@ -179,4 +205,88 @@ types:
             application/json:
               type: Reservations
 /protected/room:
+  get:
+    description: |
+      Retrieves all rooms in the database.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Rooms
+  post:
+    description: |
+      Adds a room to the database. Room numbers must be unique.
+    body:
+      application/json:
+        type: Room
+  /{_id}:
+    get:
+      description: |
+        Gets the room matching the ID.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Room
+    put:
+      description: |
+        Updates a room in the database.
+      body:
+        application/json:
+          type: Room
+    delete:
+      description: |
+        Deletes the room from the database.
+    patch:
+      description: |
+        Toggles a rooms availability.
+  /available:
+    get:
+      description: |
+        Retrieves all rooms that are not occupied.
+      queryParameters:
+        space:
+          type: integer
+          required: false
+      responses:
+        200:
+          body:
+            application/json:
+              type: Rooms
   /type:
+    get:
+      description: |
+        Retrieves all room types from the database.
+      queryParameters:
+        space:
+          type: integer
+          required: false
+      responses:
+        200:
+          body:
+            application/json:
+              type: RoomTypes
+    post:
+      description: |
+        Adds a room type to the database.
+      body:
+        application/json:
+          type: RoomType
+    /{_id}:
+      get:
+        description: |
+          Retrieves object by ID.
+        responses:
+          200:
+            body:
+              application/json:
+                type: RoomType
+      put:
+        description: |
+          Updates Room type by ID.
+        body:
+          application/json:
+            type: RoomType
+      delete:
+        description: |
+          Deletes the Room type by ID.
