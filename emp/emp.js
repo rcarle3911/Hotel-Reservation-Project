@@ -45,6 +45,9 @@ view.tabs = [
 ]);
 
 app.controller('userCtrl', function ($scope) {
+    $scope.orderByField = 'last_name'; 
+    $scope.reverseSort = false;
+
     $scope.users = [{
         "id": 2,
         "first_name": "Melissa",
