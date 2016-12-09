@@ -20,7 +20,7 @@
         function forgotPass() {
             LoginService.forgotPass(vm.user)
             .then(function () {
-                FlashService.Success('Message Sent!');
+                FlashService.Success('Message Sent!');	
             })
             .catch(function (error) {
                 FlashService.Error(error);

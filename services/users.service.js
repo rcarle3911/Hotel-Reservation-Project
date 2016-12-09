@@ -6,6 +6,7 @@ var Q = require('q');
 var mongojs = require('mongojs');
 var db = mongojs('hotel', ['users']);
 var nodemailer = require('nodemailer');
+var randomstring = require("randomstring");
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
 
 var service = {};
@@ -229,6 +230,45 @@ function getById(_id) {
     return deferred.promise;
 }
 
-function forgotPass() {
+function forgotPass(email) {
+    var deferred = Q.defer();
+    db.users.findOne(
+        email,
+        function(err,user){
+            if (err) deferred.reject(err.name + ': ' + err.message);
+
+            if (user) {
+                var newPass = randomstring.generate(8);
+                transporter.sendMail({
+                    from: '"Martian Motel" <motelmartian@gmail.com>',
+                    to: user.email,
+                    subject: 'Reset Your Martian Motel Password',
+                    html: "<p>Your username is: " + user.email
+                    +"<br>Your password is: " + newPass + "</p>"
+                    +"<p>Click <a href='http://localhost:3000/login/'>here</a> to login."
+                }, 
+                function(error, info) {
+                    if (error) return console.log(error);              
+                    console.log('Message sent: ' + info.response);
+                });
+                newPass = bcrypt.hashSync(newPass, 10);
+                db.users.update(
+                    { _id: user._id },
+                    { $set:
+                        {
+                            password: newPass
+                        }
+                    },
+                    function (err, doc) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                    });
+            }
+            else {
+                deferred.reject("User Does Not Exist");
+            }
+            deferred.resolve();
+        }
+    );
     
+    return deferred.promise;
 }
