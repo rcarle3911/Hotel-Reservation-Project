@@ -1,0 +1,37 @@
+<div id="background">
+<br>
+
+<div id="search">
+	<form method="get" action="http://www.google.com/search">
+		<div style="border:padding:4px;maxwidth:30em;">
+			<table border="0" align="center" cellpadding="0">
+				<tr><td>
+				<input type="text" name="q" size="25" maxlength="255" value="" />
+				<input type="submit" value="Search" /></td></tr>
+				<tr><td align="center" style="font-size:75%">
+				</td></tr>
+			</table>
+		</div>
+	</form>
+</div>
+<br>
+
+<h1>Forgot Your Password?</h1>
+<br>
+<div class="form-container">
+    <form method="post">
+        <p class="title">
+        To reset your password, please enter your username.
+        <br/>
+        Martian Motel will send the password reset instructions to the email address for this account.
+        <br/><br/>
+        If you don't know the username or your email address, please <a tabindex="3" href="mailto:motelmartian@gmail.com">Contact Us</a> for further assistance.
+        <div class="form-group">
+            <label form="email">Username</label>
+            <input type="text" id="email" class="form-control" ng-model="vm.user.email"  />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" ng-click="vm.forgotPass()">Submit</button>
+        </div>
+    </form>
+</div>

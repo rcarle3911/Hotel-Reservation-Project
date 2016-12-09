@@ -10,6 +10,7 @@
 
         service.Create = Create;
         service.Authenticate = Authenticate;
+        service.forgotPass = forgotPass;
 
         return service;
 
@@ -19,6 +20,10 @@
 
         function Authenticate(credentials) {
             return $http.post('/api/public/users/authenticate/', credentials).then(handleSuccess, handleError);
+        }
+
+        function forgotPass(user) {
+            return $http.post('/api/public/users/forgotPass/', user).then(handleSuccess, handleError);
         }
 
         // private functions
