@@ -10,8 +10,8 @@ var service = {};
 	});
 
 service.create = create;
-service.edit = edit;
-service.delete = _delete;
+//service.edit = edit;
+//service.delete = _delete;
 service.getAll = getAll;
 
 module.exports = service;
