@@ -178,8 +178,9 @@ types:
         Gets the reservation matching an ID.
       responses:
         200:
-          application/json:
-            type: Reservation
+          body:
+            application/json:
+              type: Reservation
     put:
       description: |
         Updates the reservation by ID with the object in the body
