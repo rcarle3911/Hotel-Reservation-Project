@@ -10,6 +10,7 @@ router.get('/:_id', getUserByID);
 router.put('/:_id', editUser);
 router.delete('/:_id', deleteUser);
 router.get('/invoice/:id', getInvoice);
+router.get('/email/:email', getUserByEmail);
 
 module.exports = router;
 
@@ -69,7 +70,6 @@ function editUser(req, res) {
 }
 
 function deleteUser(req, res) {
-    console.log(req.user);
     var userId = req.user.sub;
     if (req.params._id !== userId) {
         // can only delete own account
@@ -82,6 +82,17 @@ function deleteUser(req, res) {
     userService.delete(userId)
         .then(function () {
             res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
+function getUserByEmail(req, res) {
+    userService.getUserByEmail(req.params.email)
+        .then(function (user) {
+            if (!user) res.status(404).send("No user found with " + req.params.email);
+            res.send(user);
         })
         .catch(function (err) {
             res.status(400).send(err);
