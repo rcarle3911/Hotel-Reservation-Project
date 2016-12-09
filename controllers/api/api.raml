@@ -179,4 +179,80 @@ types:
             application/json:
               type: Reservations
 /protected/room:
+  get:
+    description: |
+      Retrieves all rooms in the database.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Rooms
+  post:
+    description: |
+      Adds a room to the database. Room numbers must be unique.
+    body:
+      application/json:
+        type: Room
+  /{RoomId}:
+    put:
+      description: |
+        Updates a room in the database.
+      body:
+        application/json:
+          type: Room
+    delete:
+      description: |
+        Deletes the room from the database.
+    patch:
+      description: |
+        Toggles a rooms availability.
+  /available:
+    get:
+      description: |
+        Retrieves all rooms that are not occupied.
+      queryParameters:
+        space:
+          type: integer
+          required: false
+      responses:
+        200:
+          body:
+            application/json:
+              type: Rooms
   /type:
+    get:
+      description: |
+        Retrieves all room types from the database.
+      queryParameters:
+        space:
+          type: integer
+          required: false
+      responses:
+        200:
+          body:
+            application/json:
+              type: RoomTypes
+    post:
+      description: |
+        Adds a room type to the database.
+      body:
+        application/json:
+          type: RoomType
+    /{typeId}:
+      get:
+        description: |
+          Retrieves object by ID.
+        responses:
+          200:
+            body:
+              application/json:
+                type: RoomType
+      put:
+        description: |
+          Updates Room type by ID.
+        body:
+          application/json:
+            type: RoomType
+      delete:
+        description: |
+          Deletes the Room type by ID.
