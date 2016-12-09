@@ -191,7 +191,7 @@ footer{
 #rcorners2{
 	clear:both;
 	font-size:14px;
-	text-align:left;
+	text-align:center;
 	color:#808080;
 	background-color:#222222;
     border-radius: 10px;
@@ -349,6 +349,10 @@ legend{
 	margin-right: auto;
 	color:#808080;
 }
+.row2{
+	margin-left: auto;
+	margin-right: auto;
+}
 .col-md-8{
 	max-width:600px;
 	max-height:600px;
@@ -358,6 +362,7 @@ legend{
 	float:left;
 	padding-left:100px;
 }
+
 #search{
 	clear:right;
 	float:right;

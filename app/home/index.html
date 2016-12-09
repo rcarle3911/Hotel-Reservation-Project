@@ -40,10 +40,9 @@
 		<h5>Check-out:</h5> 
 			<input type="text" id="checkout" required>
 		<br>			
-		<br>
-		<br>
+
 		<fieldset>
-			Adults
+			<h5>Total Guests</h5>
 			<select tabindex="4" ng-model="formInfo.Adults" required>
 				<option value="">select</option>			
 				<option value="1">1</option>
@@ -55,20 +54,7 @@
 				<option value="7">7</option>
 				<option value="8">8</option>
 			</select>
-			Children
-			<select tabindex="5" ng-model="formInfo.Children">
-				<option value="">select</option>			
-				<option value="1">0</option>
-				<option value="2">1</option>
-				<option value="3">2</option>
-				<option value="4">3</option>
-				<option value="5">4</option>
-				<option value="6">5</option>
-				<option value="7">6</option>
-				<option value="8">7</option>
-			</select>
 		</fieldset>
-		<br>
 		<br>
 		<div id="check">
 			<!--Button maps to checkAvail function in app/home/index.controller.js -->
