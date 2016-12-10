@@ -137,7 +137,7 @@ function update() {
  */
 function create(rmParam) {
     var deferred = Q.defer();
-    /*
+    
     db.rooms.findOne(
         { num: rmParam.num },
         function (err, room) {
@@ -146,7 +146,6 @@ function create(rmParam) {
                 //Room Number is already in database
                 deferred.reject('Room Number ' + rmParam.num + ' is already in the database. Use edit to make changes.');
             } else {
-                */
                 db.rooms.insert(
                     rmParam,
                     function (err, docs) {
@@ -155,9 +154,9 @@ function create(rmParam) {
                         deferred.resolve(docs);
                     }
                 );
-           // }
-      //  }
-    //);
+            }
+        }
+    );
 
     return deferred.promise;
 }
@@ -206,21 +205,30 @@ function delRmByNum(num) {
 
 function edit(_id, rmParam) {
     var deferred = Q.defer(),
-
         set = {
             rmType: rmParam.rmType,
             num: rmParam.num,
             avail: rmParam.avail
         };
 
-    db.rooms.findAndModify({
-        query: {_id: mongojs.ObjectID(_id) },
-        update: {$set: set},
-        new: true},
-        function (err, doc) {
+    db.rooms.findOne( //enforces unique room numbers
+        { num: rmParam.num },
+        function (err, foundRoom) {
             if (err) deferred.reject(err.name + ': ' + err.message);
-            update();
-            deferred.resolve(doc);
+            if (foundRoom && foundRoom._id !== _id) {
+                deferred.reject('Room number ' + rmParam.num + ' already exists');
+            } else {
+                db.rooms.findAndModify({
+                    query: {_id: mongojs.ObjectID(_id) },
+                    update: {$set: set},
+                    new: true},
+                    function (err, doc) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                        update();
+                        deferred.resolve(doc);
+                    }
+                );
+            }
         }
     );
 
