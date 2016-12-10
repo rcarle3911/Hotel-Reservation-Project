@@ -6,8 +6,8 @@
 	}),
 
 	user = {
-		firstName: "John",
-		lastName: "Smith",
+		firstname: "John",
+		lastname: "Smith",
 		dob: new Date(),
 		phone: "(999)999-9999",
 		email: "motelmartian@gmail.com",
@@ -38,7 +38,7 @@
 	},
 
 	payDetail = {
-		userID: user._id || 0, // Get from db
+		userEmail: user.email,
 		num: "1234123412341234",
 		exp: new Date(2020, 12, 31),
 		cvv: "123",
@@ -55,7 +55,7 @@
 
 	//createUser();
 	//createRoom();
-	//createRes();
+	createRes();
 	//roomService.update();
 	//testRoomFunctions();
 

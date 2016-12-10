@@ -29,8 +29,7 @@ function checkInOut(req, res) {
 function getUserRes(req, res) {
     resService.getUserRes(req.user.sub)
     .then( function (list) {
-        if (list) res.send(list);
-        else res.status(400).send("No Reservations Found");
+        res.send(list);
     })
     .catch( function(err) {
         res.status(400).send(err);
