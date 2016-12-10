@@ -68,7 +68,7 @@ function create(userParam) {
                 transporter.sendMail({
                     from: '"Martian Motel" <motelmartian@gmail.com>',
                     to: user.email,
-                    subject: 'Welcome to the Martian Motel ' + user.firstName,
+                    subject: 'Welcome to the Martian Motel ' + user.firstname,
                     text: 'Your username is ' + user.email,
                     html: '<p>Your username is <b>' + user.email + '</b></p>'
                 }, function(error, info) {
