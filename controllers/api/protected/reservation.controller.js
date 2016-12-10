@@ -8,6 +8,7 @@ var resService = require('services/reservation.service.js');
 router.get('/', getUserRes);
 router.get('/past', getPastRes);
 router.get('/current', getPresentRes);
+router.get('/future', getFutureRes);
 router.get('/:_id', getResByID);
 router.put('/:_id', editRes);
 router.delete('/:_id', deleteRes);

@@ -258,6 +258,19 @@ types:
           body:
             application/json:
               type: Reservations
+  /future:
+    get:
+      description: |
+        Retrieves all future reservations that match the query parameters.
+      queryParameters:
+        application/json:
+          required: false
+          type: ResQuery
+      responses:
+        200:
+          body:
+            application/json:
+              type: Reservations
 /protected/room:
   get:
     description: |
