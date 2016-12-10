@@ -54,17 +54,47 @@ function getAll() {
 }
 
 function edit(_id, rmType) {
-    var deferred = Q.defer();
+    var deferred = Q.defer(),
+        set = {
+            name: rmType.name,
+            desc: rmType.desc,
+            space: rmType.space
+        };
 
-    deferred.resolve();
+    db.rmTypes.findOne( //enforces unique room type names
+        { name: rmType.name },
+        function (err, foundType) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            if (foundType && foundType._id !== _id) {
+                deferred.reject('Room Type with name ' + rmType.name + ' already exists.');
+            } else {
+                db.rmTypes.findAndModify({
+                    query: {_id: mongojs.ObjectID(_id) },
+                    update: {$set: set},
+                    new: true
+                    },
+                    function (err, doc) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                        deferred.resolve(doc);
+                    }
+                );
+            }
+        }
+    );
 
     return deferred.promise;
 }
 
-function _delete() {
+function _delete(_id) {
     var deferred = Q.defer();
 
-    deferred.resolve();
+   db.rmTypes.remove(
+       { _id: mongojs.ObjectID(_id) },
+       function (err, docs) {
+           if (err) deferred.reject(err.name + ': ' + err.message);
+           deferred.resolve(docs);
+       }
+   );
 
     return deferred.promise;
 }
@@ -72,7 +102,13 @@ function _delete() {
 function getById(_id) {
     var deferred = Q.defer();
 
-    deferred.resolve();
-
+    db.rmTypes.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, room) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(room);
+        }
+    );
+    
     return deferred.promise;
 }
