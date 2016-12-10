@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <div ng-controller="mgrCtrl as modal" >
+    <div ng-controller="mgrCtrl" >
         <tabset type="pills" class="tab-container" >
-            <tab ng-repeat="tab in modal.tabs" active="tab.active" disable="tab.disabled">
+            <tab ng-repeat="tab in tabs" active="tab.active" disable="tab.disabled">
                 <tab-heading>
                     <i class={{tab.icon}}></i> &nbsp; {{tab.title}}
                 </tab-heading>
