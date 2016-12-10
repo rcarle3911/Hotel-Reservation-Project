@@ -64,18 +64,7 @@ app.controller('userCtrl', function ($scope, $http, $window) {
 
     $http.get('/api/protected/users').then(function (res) {
         console.log(res.data);
-        for (var i = 0, len = res.length; i < len; i++){
-            res[i]._id = JSON.parse(res[i]._id);
-            res[i].address = JSON.parse(res[i].address);
-            res[i].dateofbirth = JSON.parse(res[i].dateofbirth);
-            res[i].email = JSON.parse(res[i].email);
-            res[i].firstname = JSON.parse(res[i].firstname);
-            res[i].group = JSON.parse(res[i].group);
-            res[i].lastname = JSON.parse(res[i].lastname);
-            res[i].phone = JSON.parse(res[i].phone);
-        }
-        vm.users = res.data;
-        console.log(res.data);
+        angular.copy(res, vm.users);
     });
 
     vm.clearFilter = function () {
