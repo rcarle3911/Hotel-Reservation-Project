@@ -18,9 +18,9 @@
                 <tr>
                     <th>Edit User</th>
                     <th>
-                        <a href="#" ng-click="orderByField = 'last_name'; reverseSort = !reverseSort">
+                        <a href="#" ng-click="orderByField = 'lastname'; reverseSort = !reverseSort">
                         Name 
-                        <span ng-show="orderByField == 'last_name'">
+                        <span ng-show="orderByField == 'lastname'">
                             <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
                             <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
                         </span>
@@ -39,9 +39,9 @@
                         </a>
                     </th>
                     <th>
-                        <a href="#" ng-click="orderByField = 'Role'; reverseSort = !reverseSort">
-                        User Role
-                        <span ng-show="orderByField == 'Role'">
+                        <a href="#" ng-click="orderByField = 'group'; reverseSort = !reverseSort">
+                        User group
+                        <span ng-show="orderByField == 'group'">
                         <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
                         <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
                         </span>
@@ -57,9 +57,9 @@
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#userModal">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user.id}}</button>
                     </td>
-                    <td>{{user.last_name}}, {{user.first_name}}</td>
+                    <td>{{user.lastname}}, {{user.firstname}}</td>
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
-                    <td>{{user.Role}}</td>
+                    <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
                     <td class="text-center">
                         <button ng-show="user.Status" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#userModal">
