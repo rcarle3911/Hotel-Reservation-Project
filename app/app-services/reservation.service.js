@@ -38,7 +38,11 @@
 
         // private functions
         function handleSuccess(res) {
-            return res.data;
+            var arr = [];
+            for(var i = 0; i < res.data.length; i++){
+                arr = arr.concat(JSON.stringify(res.data[i]));
+            } 
+            return arr;      
         }
 
         function handleError(res) {

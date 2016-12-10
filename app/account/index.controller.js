@@ -25,7 +25,7 @@
                 
             });
             ResService.GetAll().then(function(reservations) {
-                console.log(reservations);
+                vm.reservations = reservations;
             });
         }
 
