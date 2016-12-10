@@ -48,6 +48,7 @@ function getCurrentUser(req, res) {
 }
 
 function editUser(req, res) {
+    
     /**
      * @todo give this api access to the JWT token
      */
@@ -60,7 +61,7 @@ function editUser(req, res) {
         return res.status(401).send('You can only update your own account');
     }
 
-    userService.update(userId, req.body)
+    userService.edit(userId, req.body)
         .then(function () {
             res.sendStatus(200);
         })

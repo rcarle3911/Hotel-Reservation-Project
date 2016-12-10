@@ -106,6 +106,7 @@ function edit(_id, userParam) {
     db.users.findOne(
         {_id: mongojs.ObjectID(_id)},
         function (err, user) {
+            
             if (err) deferred.reject(err.name + ': ' + err.message);
             if (user.email !== userParam.email) {
                 // To ensure unique emails, check if email already exists
@@ -113,22 +114,24 @@ function edit(_id, userParam) {
                     { email: userParam.email },
                     function (err, user) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
-                        if (user) deferred.reject('The email ' + userParam.email + ' is alread in use.');
+                        if (user) deferred.reject('The email ' + userParam.email + ' is already in use.');
                         else editUser();
                     }
                 );
             }
+            else editUser();
         }
     );
 
     function editUser() {
+        
         var set = {
-            firstName: userParam.firstName,
-            lastName: userParam.lastName,
-            dob: userParam.dob,
+            firstname: userParam.firstname,
+            lastname: userParam.lastname,
             phone: userParam.phone,
             email: userParam.email,
             address: userParam.address,
+            dateofbirth: userParam.dateofbirth   
         };
 
         if (userParam.password) {
@@ -246,7 +249,7 @@ function forgotPass(email) {
                     subject: 'Reset Your Martian Motel Password',
                     html: "<p>Your username is: " + user.email
                     +"<br>Your password is: " + newPass + "</p>"
-                    +"<p>Click <a href='http://localhost:3000/login/'>here</a> to login."
+                    +"<p>Click <a href='http://martianmotel.ddns.net/login/'>here</a> to login."
                 }, 
                 function(error, info) {
                     if (error) return console.log(error);              
