@@ -86,7 +86,11 @@ app.controller('userCtrl', function ($scope, $http) {
     };
 });
 
-
+$(function () {
+    $.get('/emp/token', function (token) {
+        if (token) window.jwtToken = token;
+    });
+});
 
 
 

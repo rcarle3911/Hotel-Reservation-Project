@@ -12,6 +12,7 @@
         service.Delete = Delete;
         service.Edit = Edit;
         service.Check = Check;
+        service.GetAll = GetAll;
 
         return service;
 
@@ -29,6 +30,10 @@
 
         function Check(_id, rsrv) {
             return $http.get('/api/public/reservation/check', {params: rsrv}).then(handleSuccess, handleError);
+        }
+
+        function GetAll() {
+            return $http.get('/api/protected/reservation').then(handleSuccess, handleError);
         }
 
         // private functions

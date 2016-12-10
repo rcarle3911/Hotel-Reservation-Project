@@ -63,7 +63,7 @@ function timeout(toRun, param1, param2, deferred) {
                 deferred.reject(err)
             });
         } else {
-            timeout();
+            timeout(toRun, param1, param2, deferred);
         }
     }, 100);
 }
@@ -175,7 +175,7 @@ function createRes(resrvParam) {
             transporter.sendMail({
                 from: '"Martian Motel" <motelmartian@gmail.com>',
                 to: resrvParam.userEmail,
-                subject: 'Welcome to the Martian Motel ' + user.firstName,
+                subject: 'Welcome to the Martian Motel ' + user.firstname,
                 text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
                 html: htmlstream
             }, function(error, info) {
@@ -325,7 +325,7 @@ function getPastRes(){
 function getUserRes(_id) {
     var deferred = Q.defer();
     
-    db.users.find(
+    db.users.findOne(
         {_id: mongojs.ObjectID(_id)},
         function (err, user) {
             if (err) deferred.reject(err.name + ': ' + err.message);
@@ -335,7 +335,7 @@ function getUserRes(_id) {
                 function(err, pList) {
                     if (err) deferred.reject(err.name + ': ' + err.message);
                     db.futureRes.find(
-                        {userEmail: userEmail},
+                        {userEmail: user.email},
                         function(err, fList) {
                             if (err) deferred.reject(err.name + ': ' + err.message);
                             deferred.resolve(pList.concat(fList));
