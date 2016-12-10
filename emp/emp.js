@@ -54,22 +54,22 @@ app.controller('mgrCtrl', function ($scope) {
 });
 
 app.controller('userCtrl', function ($scope, $http, $window) {
-    var vm = this;
-    vm.orderByField = 'lastname';
-    vm.reverseSort = false;
+    $scope.orderByField = 'lastname';
+    $scope.reverseSort = false;
 
-    vm.users = [];
+    $scope.users = [];
 
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
     $http.get('/api/protected/users').then(function (res) {
         console.log(res.data);
-        angular.copy(res, vm.users);
+        $scope.users = JSON.parse(JSON.stringify(res.data));
+        console.log($scope.users);
     });
 
-    vm.clearFilter = function () {
+    $scope.clearFilter = function () {
         console.log("Cleared Filter");
-        vm.txtFilter = null;
+        $scope.txtFilter = null;
 
     };
 });
