@@ -18,9 +18,9 @@
                 <tr>
                     <th>Edit User</th>
                     <th>
-                        <a href="#" ng-click="orderByField = 'lastname'; reverseSort = !reverseSort">
+                        <a href="#" ng-click="orderByField = 'lastName'; reverseSort = !reverseSort">
                         Name 
-                        <span ng-show="orderByField == 'lastname'">
+                        <span ng-show="orderByField == 'lastName'">
                             <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
                             <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
                         </span>
@@ -52,12 +52,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in users | filter:txtFilter.text | orderBy:orderByField:reverseSort">
+                <!--| filter:txtFilter.text | orderBy:orderByField:reverseSort-->
+                <tr ng-repeat="user in users track by $index ">
                     <td class="text-center">
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#userModal">
-                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user.id}}</button>
+                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user._id}}</button>
                     </td>
-                    <td>{{user.lastname}}, {{user.firstname}}</td>
+                    <td>{{user.lastName}}, {{user.firstName}}</td>
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
