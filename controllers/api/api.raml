@@ -11,10 +11,8 @@ types:
     properties:
       userEmail: string
       roomType:
-        properties:
-          name: string
-          desc: string
-          space: integer
+        type: string
+        description: Id retrieved from database
       startDate: datetime
       endDate: datetime
       numGuests: integer
@@ -44,7 +42,9 @@ types:
     uniqueItems: true
   Room:
     properties:
-      rmType: RoomType
+      rmType:
+        type: string
+        description: Id retrieved from database
       num: integer
       avail: boolean
   Rooms:
@@ -67,7 +67,8 @@ types:
   ResCheck:
     properties:
       rmType:
-        type: RoomType
+        type: string
+        description: Id retrieved from database
         required: false
       space: integer
       startDate: datetime
@@ -248,6 +249,19 @@ types:
     get:
       description: |
         Retrieves all checked out reservations that match the query parameters.
+      queryParameters:
+        application/json:
+          required: false
+          type: ResQuery
+      responses:
+        200:
+          body:
+            application/json:
+              type: Reservations
+  /future:
+    get:
+      description: |
+        Retrieves all future reservations that match the query parameters.
       queryParameters:
         application/json:
           required: false
