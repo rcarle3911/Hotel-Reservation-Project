@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller="userCtrl">
     <div class="col-md-12">
-        <div class="col-md-1 pull-left" style="Padding: 5px;">
-            <button type="button" class="btn btn-info btn-md">
+        <div class="col-md-1 pull-left" style="Padding: 5px;" ng-controller="modalAccountFormController">
+            <button type="button" class="btn btn-info btn-md" ng-click="showForm()">
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
         <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
@@ -72,3 +72,4 @@
         </table>
     </div>
 </div>
+<script src="/emp/mgrpages/mgrusers.modal.js"></script>

@@ -7,7 +7,7 @@ $(function () {
 //Controller Stuff
 var app = angular.module('app', ['ultimateDataTableServices', 'ui.bootstrap', 'reservations']);
 
-//Employee pages tabs
+//Employee pages tabs (on /emp/index.html)
 app.controller('EmpCtrl', ['$scope', function ($scope) {
 
     $scope.tabs = [{

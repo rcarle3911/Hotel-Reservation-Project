@@ -1,4 +1,4 @@
-//Manager Pages Tabs
+//Manager Pages Tabs (on manager.html)
 angular.module('app').controller('mgrCtrl',['$scope', function ($scope) {
         $scope.tabs = [{
             title: 'User Accounts',

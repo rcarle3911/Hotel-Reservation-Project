@@ -1,4 +1,4 @@
-//User Accounts Page get all users / Clear filter
+//User Accounts Page get all users / Clear filter (on mgrusers.html)
 angular.module('app').controller('userCtrl', ['$scope', '$http','$window', function ($scope, $http, $window) {
     $scope.orderByField = 'lastname';
     $scope.reverseSort = false;
@@ -17,3 +17,4 @@ angular.module('app').controller('userCtrl', ['$scope', '$http','$window', funct
 
     };
 }]);
+
