@@ -57,14 +57,13 @@ app.controller('userCtrl', function ($scope, $http, $window) {
     $scope.orderByField = 'lastname';
     $scope.reverseSort = false;
 
-
     $scope.users = [];
 
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
     $http.get('/api/protected/users').then(function (res) {
         console.log(res.data);
-        $scope.users = JSON.stringify(res.data);
+        $scope.users = JSON.parse(JSON.stringify(res.data));
         console.log($scope.users);
     });
 
