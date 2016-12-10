@@ -7,13 +7,9 @@ $(function () {
 //Controller Stuff
 var app = angular.module('app', ['ultimateDataTableServices', 'ui.bootstrap', 'reservations']);
 
-app.controller('EmpCtrl', ['$timeout', function ($timeout) {
+app.controller('EmpCtrl', function ($scope) {
 
-    var view = this;
-    view.tabShown = false;
-
-
-    view.tabs = [{
+    $scope.tabs = [{
         title: 'Reservations',
         contenturl: '/emp/pages/reservations.html',
         icon: 'glyphicon glyphicon-calendar',
@@ -34,26 +30,10 @@ app.controller('EmpCtrl', ['$timeout', function ($timeout) {
         icon: 'glyphicon glyphicon-wrench',
         usesres: 'hidden'
     }];
-
-    view.tabSelect = function () {
-        $timeout(function () {
-            view.tabShown = true;
-        });
-    };
-
-
-}]);
-
-app.controller('TabsDemoCtrl', function ($scope) {
-
 });
 
-app.controller('mgrCtrl', ['$timeout', function ($timeout) {
-
-    var view = this;
-    view.tabShown = false;
-
-    view.tabs = [{
+app.controller('mgrCtrl', function ($scope) {
+    $scope.tabs = [{
         title: 'User Accounts',
         contenturl: '/emp/mgrpages/mgrusers.html',
         icon: 'glyphicon glyphicon-user'
@@ -71,7 +51,7 @@ app.controller('mgrCtrl', ['$timeout', function ($timeout) {
         icon: 'glyphicon glyphicon-file'
     }];
 
-}]);
+});
 
 app.controller('userCtrl', function ($scope, $http, $window) {
     var vm = this;
