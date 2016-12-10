@@ -1,3 +1,9 @@
+$(function () {
+    $.get('/emp/token', function (token) {
+        if (token) window.jwtToken = token;
+    });
+});
+
 //Controller Stuff
 var app = angular.module('app', ['ultimateDataTableServices', 'ui.bootstrap', 'reservations']);
 
@@ -67,12 +73,14 @@ app.controller('mgrCtrl', ['$timeout', function ($timeout) {
 
 }]);
 
-app.controller('userCtrl', function ($scope, $http) {
+app.controller('userCtrl', function ($scope, $http, $window) {
     var vm = this;
     vm.orderByField = 'lastname';
     vm.reverseSort = false;
 
     vm.users = [];
+
+    if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
     $http.get('/api/protected/users').then(function (res) {
         console.log(res.data);
@@ -85,14 +93,6 @@ app.controller('userCtrl', function ($scope, $http) {
 
     };
 });
-
-$(function () {
-    $.get('/emp/token', function (token) {
-        if (token) window.jwtToken = token;
-    });
-});
-
-
 
 //saved 
 //{

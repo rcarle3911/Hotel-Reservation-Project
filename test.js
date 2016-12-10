@@ -55,7 +55,7 @@
 
 	//createUser();
 	//createRoom();
-	createRes();
+	//createRes();
 	//roomService.update();
 	//testRoomFunctions();
 
