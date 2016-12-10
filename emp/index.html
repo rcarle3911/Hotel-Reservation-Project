@@ -43,13 +43,13 @@
             <a href="/app"><img src="/app/app-content/textlogo.png" height="75" width="203" /></a>
         </div>
         
-        <div ng-controller="EmpCtrl as view">
+        <!--<div ng-controller="EmpCtrl as view">
         <tabset>
             <tab>
                 <tab-heading>
                    <h4><i class='glyphicon glyphicon-calendar'>  Reservations</i></h4>
                 </tab-heading>
-            <reservations action='create'></reservations>
+                <ng-include src="'/emp/pages/reservations.html'"></ng-include>
          </tab>
             <tab>
                 <tab-heading>
@@ -69,23 +69,20 @@
                 </tab-heading>
                 <ng-include src="'/emp/mgrpages/manager.html'"></ng-include>                
             </tab>
-            
         </tabset>
-        </div>
+        </div>-->
         
 
-    <!--div ng-controller="EmpCtrl as view">
+    <div ng-controller="EmpCtrl as view">
         <tabset>
             <tab ng-repeat="tab in view.tabs">
                 <tab-heading>
                     <i class={{tab.icon}}></i> &nbsp; {{tab.title}}
                 </tab-heading>
                 <div ng-include="tab.contenturl"></div>
-                <reservations  action={{tab.content}}></reservations><!style = 'visibility : {{tab.usesres}}'>
-            </tab>
-            
+           </tab>
         </tabset>
-    </div-->    
+    </div>    
 </body>
 
 </html>
