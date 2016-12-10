@@ -44,7 +44,9 @@ types:
     uniqueItems: true
   Room:
     properties:
-      rmType: RoomType
+      rmType:
+        type: string
+        description: Id retrieved from database
       num: integer
       avail: boolean
   Rooms:
