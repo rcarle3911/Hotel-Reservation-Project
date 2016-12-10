@@ -1,13 +1,21 @@
 $(function () {
     $.get('/emp/token', function (token) {
-        if (token) window.jwtToken = token;
+        if (token) 
+        {
+            window.jwtToken = token;
+        }
+        else
+        {
+            window.location.href = '/login';
+        }
     });
 });
 
 //Controller Stuff
 var app = angular.module('app', ['ultimateDataTableServices', 'ui.bootstrap', 'reservations']);
 
-app.controller('EmpCtrl', function ($scope) {
+//Employee pages tabs (on /emp/index.html)
+app.controller('EmpCtrl', ['$scope', function ($scope) {
 
     $scope.tabs = [{
         title: 'Reservations',
@@ -30,46 +38,4 @@ app.controller('EmpCtrl', function ($scope) {
         icon: 'glyphicon glyphicon-wrench',
         usesres: 'hidden'
     }];
-});
-
-app.controller('mgrCtrl', function ($scope) {
-    $scope.tabs = [{
-        title: 'User Accounts',
-        contenturl: '/emp/mgrpages/mgrusers.html',
-        icon: 'glyphicon glyphicon-user'
-    }, {
-        title: 'Room Management',
-        contenturl: '/emp/mgrpages/mgrrooms.html',
-        icon: 'glyphicon glyphicon-bed'
-    }, {
-        title: 'Occupancy Report',
-        contenturl: '/emp/mgrpages/mgroccrpt.html',
-        icon: 'glyphicon glyphicon-list-alt'
-    }, {
-        title: 'Housekeeping Report',
-        contenturl: '/emp/mgrpages/mgrmaidrpt.html',
-        icon: 'glyphicon glyphicon-file'
-    }];
-
-});
-
-app.controller('userCtrl', function ($scope, $http, $window) {
-    $scope.orderByField = 'lastname';
-    $scope.reverseSort = false;
-
-    $scope.users = [];
-
-    if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
-
-    $http.get('/api/protected/users').then(function (res) {
-        console.log(res.data);
-        $scope.users = JSON.parse(JSON.stringify(res.data));
-        console.log($scope.users);
-    });
-
-    $scope.clearFilter = function () {
-        console.log("Cleared Filter");
-        $scope.txtFilter = null;
-
-    };
-});
+}]);
