@@ -26,6 +26,16 @@
                 FlashService.Error(error);
             });
         }
+
+        vm.clear = function () {
+        vm.user.firstname = '';
+        vm.user.lastname = '';
+        vm.user.dateofbirth = '';
+        vm.user.phone = '';
+        vm.user.email = ''; 
+        vm.user.address = '';
+        vm.user.password = '';      
+        };
             
     }
 
