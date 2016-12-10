@@ -224,71 +224,80 @@ function _delete(_id) {
 /**
  * Check for availability here
  */
-function isAvailable(resrvParam, callback) {
+function isAvailable(resrvParam) {
     var deferred = Q.defer();
-    var total = config.rooms.type[resrvParam.roomType.name];
 
-    db.futureRes.count(
-        { $and: [
-            { startDate: { $lte: resrvParam.endDate } },
-            { endDate: { $gte: resrvParam.startDate } },
-            { roomType: resrvParam.roomType }
-        ]},
-        function (err, futureCount) {
-            console.log("Count Result");
-            console.log(futureCount);
-            if (err) deferred.reject(err.name + ': ' + err.message);
-            if (futureCount >= total) {                
-                deferred.reject("No Availability for " + resrvParam.roomType.name);
-            } else {
-                db.presentRes.count(
+    if (resrvParam.roomType) {
+        typeCount(resrvParam.roomType)
+        .then(function () {
+            deferred.resolve();
+        })
+        .catch(function (err) {
+            deferred.reject(err);
+        });
+    } else {
+        db.rmTypes.find(
+            { space: {$gte: resrvParam.space} }, //Returns an array of room types that meet the space requirement
+            function (err, rmTypes) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+                var avail = false;
+                for (var i = 0; i < rmTypes.length; i++) {
+                    typeCount(rmTypes[i]._id)
+                    .then(function () {
+                        avail = true;
+                        deferred.resolve();
+                    });
+                }
+                setTimeout(function() {
+                    if (!avail) deferred.reject("Timed Out");
+                }, 5000);
+            }
+        );
+    }
+
+    function typeCount (rmType) {
+        var deferred = Q.defer();
+
+        db.rooms.count(
+            { rmType: rmType },
+            function (err, total) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+                db.futureRes.count(
                     { $and: [
                         { startDate: { $lte: resrvParam.endDate } },
                         { endDate: { $gte: resrvParam.startDate } },
                         { roomType: resrvParam.roomType }
                     ]},
-                    function (err, currentCount) {
-                        if (err) deferred.reject(err.name + ': ' + err.message)
-                        if ((futureCount + currentCount) >= total) {
-                            deferred.reject("No Availability for " + resrvParam.roomType.name);
+                    function (err, futureCount) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                        if (futureCount >= total) {                
+                            deferred.reject("No Availability");
                         } else {
-                            deferred.resolve();
+                            db.presentRes.count(
+                                { $and: [
+                                    { startDate: { $lte: resrvParam.endDate } },
+                                    { endDate: { $gte: resrvParam.startDate } },
+                                    { roomType: resrvParam.roomType }
+                                ]},
+                                function (err, currentCount) {
+                                    if (err) deferred.reject(err.name + ': ' + err.message)
+                                    if ((futureCount + currentCount) >= total) {
+                                        deferred.reject("No Availability");
+                                    } else {
+                                        deferred.resolve();
+                                    }
+                                }
+                            );
                         }
                     }
-                );
+                );              
             }
-        }
-    );
+        );
+
+        return deferred.promise;
+    }
 
     return deferred.promise;
-    /** This algorithm will count all reservations that match the room type and any that match your date parameters.
-     * We also need to count the current reservations.
-    rmTypeCount(resrvParam, function(err, totCount){
-        db.futureRes.find({startDate: {$gte : resrvParam.startDate, $lt : resrvParam.endDate}, rmType: resrvParam.rmType}).count(function(err, count){
-            if(err) return callback(err);
-            if(count <= totCount){
-                callback(null, true, totCount);
-            }
-            else if(count > totCount){
-                callback(null, false, totCount);
-            }
-        });
-    });
-    */
-}
-
-/**
- * Count by Room Types
- */
-function rmTypeCount(type) {
-    return config.rooms.type[type.name]
-    /** If there's a database of rooms counting the database of rmtypes won't return the total.
-     * This function would always return one since room types should be unique.
-    db.rmTypes.find({name: resrvParam.rmType}).count(function(err, totCount){
-        if(err) return callback(err);
-        callback(null, totCount);
-    });
-    */
 }
 
 /**

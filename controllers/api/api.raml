@@ -11,10 +11,8 @@ types:
     properties:
       userEmail: string
       roomType:
-        properties:
-          name: string
-          desc: string
-          space: integer
+        type: string
+        description: Id retrieved from database
       startDate: datetime
       endDate: datetime
       numGuests: integer
@@ -69,7 +67,8 @@ types:
   ResCheck:
     properties:
       rmType:
-        type: RoomType
+        type: string
+        description: Id retrieved from database
         required: false
       space: integer
       startDate: datetime

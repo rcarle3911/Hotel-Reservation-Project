@@ -23,114 +23,10 @@ service.getAvailRmBySpace = getAvailRmBySpace;
 service.getRooms = getRooms;
 service.getAvailRooms = getAvailRooms;
 service.getRmByNum = getRmByNum;
-service.update = update;
+service.countRmByType = countRmByType;
+service.countRmBySpace = countRmBySpace;
 
 module.exports = service;
-
-
-/**
- * Grabs a list of distinct types from the rooms database.
- * Counts how many of each type in the list exist in the rooms database.
- * Writes the value to config.json.
- * Repeats the process for distinct space values. 
- */
-function update() {    
-    // Wipe rooms data
-    config.rooms = {"type": {}, "space": {}};
-
-    getTypeList()
-    .then(function (types) {
-        var len, i;
-        len = types.length;
-        for (i = 0; i < len; i++) {
-            countType(types[i])
-            .then(function(doc) {
-                writeData(doc);
-            })
-            .catch(function(err) {
-                console.log(err);
-            });
-        }
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
-
-    getSpaceList()
-    .then(function (spaces) {
-        var len, i;
-        len = spaces.length;
-        for (i = 0; i < len; i++) {
-            countSpace(spaces[i])
-            .then(function (doc) {
-                writeData(doc);
-            })
-            .catch(function(err) {
-                console.log(err);
-            });
-        }
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
-
-    function getSpaceList() {
-        var deferred = Q.defer();
-        db.rooms.distinct(
-            "rmType.space",
-            null,
-            function (err, doc) {
-                if (err) deferred.reject(err.name + ': ' + err.message);
-                deferred.resolve(doc);
-            }
-        );
-        return deferred.promise;
-    }
-
-    function getTypeList() {
-        var deferred = Q.defer();
-        db.rooms.distinct(
-            "rmType", 
-            null, 
-            function (err, doc) {
-                if (err) deferred.reject(err.name + ': ' + err.message);
-                deferred.resolve(doc);
-            }
-        );
-        return deferred.promise;
-    }
-
-    function countType(type) {
-        var deferred = Q.defer();
-        db.rooms.count(
-            { rmType: type },
-            function (err, doc) {
-                if (err) return err.name + ': ' + err.message;
-                var result = {cat: "type", key: type.name, value: (doc + "")};
-                deferred.resolve(result);
-            }
-        );
-        return deferred.promise;
-    }
-
-    function countSpace(space) {
-        var deferred = Q.defer();
-        db.rooms.count(
-            { "type.space": {$gte: space}},
-            function (err, doc) {
-                if (err) return err.name + ': ' + err.message;
-                var result = {cat: "space", key: (space + ""), value: (doc + "")}
-                return deferred.resolve(result);
-            }
-        );
-        return deferred.promise;
-    }
-
-    function writeData(result) {
-        config["rooms"][result.cat][result.key] = result.value;
-        fs.writeFileSync('config.json', JSON.stringify(config, null, '\t'));
-    }
-}
 
 /**
  * Enforces unique room numbers
@@ -150,7 +46,6 @@ function create(rmParam) {
                     rmParam,
                     function (err, docs) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
-                        update();
                         deferred.resolve(docs);
                     }
                 );
@@ -180,7 +75,6 @@ function _delete(_id) {
         { _id: mongojs.ObjectID(_id) },
         function (err, docs) {
             if (err) deferred.reject(err.name + ': ' + err.message);
-            update();
             deferred.resolve(docs);
         }
     );
@@ -195,7 +89,6 @@ function delRmByNum(num) {
         { num: num },
         function (err, docs) {
             if (err) deferred.reject(err.name + ': ' + err.message);
-            update();
             deferred.resolve(docs);
         }
     );
@@ -224,7 +117,6 @@ function edit(_id, rmParam) {
                     new: true},
                     function (err, doc) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
-                        update();
                         deferred.resolve(doc);
                     }
                 );
@@ -235,11 +127,11 @@ function edit(_id, rmParam) {
     return deferred.promise;
 }
 
-function getRmByType(type) {
+function getRmByType(rmTypeId) {
     var deferred = Q.defer();
 
     db.rooms.find(
-        { type: type },
+        { rmType: rmTypeId },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             deferred.resolve(doc);
@@ -249,12 +141,12 @@ function getRmByType(type) {
     return deferred.promise;
 }
 
-function getAvailRmByType(type) {
+function getAvailRmByType(rmTypeId) {
     var deferred = Q.defer();
 
     db.rooms.find(
         { $and: 
-            [{ type: type },
+            [{ rmType: rmTypeId },
             { avail: true }]
         },
         function (err, doc) {
@@ -335,5 +227,39 @@ function getRmByNum(rmNum) {
         }
     );
     
+    return deferred.promise;
+}
+
+function countRmByType(_id) {
+    var deferred = Q.defer();
+
+    db.rooms.count(
+        { rmType: _id },
+        function (err, count) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(count);
+        }
+    );
+
+    return deferred.promise;
+};
+
+function countRmBySpace (space) {
+    var deferred = Q.defer()
+
+    db.rmTypes.find(
+        { space: {$gte: space} }, //Returns an array of room types that meet the space requirement
+        function (err, rmTypes) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            db.rooms.count(
+                { rmType: { $in: rmTypes } }, //Counts the number of rooms that have a type in the array
+                function (err, count) {
+                    if (err) deferred.reject(err.name + ': ' + err.message);
+                    deferred.resolve(count);
+                }
+            );
+        }
+    );
+
     return deferred.promise;
 }
