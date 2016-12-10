@@ -75,6 +75,28 @@ types:
   PassReset:
     properties:
       email: string
+  ResQuery:
+    properties:
+      dateRange:
+        required: false
+        description: All reservations that are active within this date range.
+        properties:
+          startDate: datetime
+          endDate: datetime
+      pastDate:
+        type: datetime
+        required: false
+        description: Reservations that end on or past this date.
+      beforeDate:
+        type: datetime
+        required: false
+        description: Reservations that start on or before this date.
+      userId:
+        type: string
+        required: false
+      roomNumber:
+        type: integer
+        required: false
 /public/users:
   /authenticate:
     post:
@@ -199,7 +221,37 @@ types:
   /find:
     get:
       description: |
-        Retrieves all reservations in the database.
+        Retrieves all reservations in the database that match the query parameters.
+      queryParameters:
+        application/json:
+          required: false
+          type: ResQuery
+      responses:
+        200:
+          body:
+            application/json:
+              type: Reservations
+  /current:
+    get:
+      description: |
+        Retrieves all currently checked in reservations that match the query parameters.
+      queryParameters:
+        application/json:
+          required: false
+          type: ResQuery
+      responses:
+        200:
+          body:
+            application/json:
+              type: Reservations
+  /past:
+    get:
+      description: |
+        Retrieves all checked out reservations that match the query parameters.
+      queryParameters:
+        application/json:
+          required: false
+          type: ResQuery
       responses:
         200:
           body:

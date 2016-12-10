@@ -10,9 +10,10 @@ var service = {};
 	});
 
 service.create = create;
-//service.edit = edit;
-//service.delete = _delete;
+service.edit = edit;
+service.delete = _delete;
 service.getAll = getAll;
+service.getById = getById;
 
 module.exports = service;
 
@@ -52,7 +53,7 @@ function getAll() {
     return deferred.promise;
 }
 
-function edit() {
+function edit(_id, rmType) {
     var deferred = Q.defer();
 
     deferred.resolve();
@@ -61,6 +62,14 @@ function edit() {
 }
 
 function _delete() {
+    var deferred = Q.defer();
+
+    deferred.resolve();
+
+    return deferred.promise;
+}
+
+function getById(_id) {
     var deferred = Q.defer();
 
     deferred.resolve();

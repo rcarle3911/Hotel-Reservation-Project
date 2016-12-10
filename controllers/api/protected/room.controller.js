@@ -15,7 +15,7 @@ router.patch('/:_id', toggleRoom);
 router.get('/available', getAvailRooms);
 router.get('/type', getRoomTypes);
 router.post('/type', addRoomType);
-router.get('/type/:_id', getRmTypeByID);
+router.get('/type/:_id', getRmTypeById);
 router.put('/type/:_id', editRmType);
 router.delete('/type/:_id', deleteRmType);
 
@@ -88,25 +88,61 @@ function toggleRoom(req, res) {
 }
 
 function getAvailRooms(req, res) {
-    res.status(501).send("Work in progress");
+    roomService.getAvailRooms(req.params.space)
+        .then(function (rooms) {
+            res.send(rooms);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function getRoomTypes(req, res) {
-    res.status(501).send("Work in progress");
+    roomTypeService.getAll()
+        .then(function (rmTypes) {
+            res.send(rmTypes);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function addRoomType(req, res) {
-    res.status(501).send("Work in progress");
+    roomTypeService.create(req.body)
+        .then(function () {
+            res.status(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
-function getRmTypeByID(req, res) {
-    res.status(501).send("Work in progress");
+function getRmTypeById(req, res) {
+    roomTypeService.getById(req.params._id)
+        .then(function (rmType) {
+            res.send(rmType);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function editRmType(req, res) {
-    res.status(501).send("Work in progress");
+    roomTypeService.edit(req.params._id, req.body)
+        .then(function () {
+            res.status(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
 
 function deleteRmType(req, res) {
-    res.status(501).send("Work in progress");
+    roomTypeService.delete(req.params._id)
+        .then(function () {
+            res.status(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }
