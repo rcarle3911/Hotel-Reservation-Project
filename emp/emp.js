@@ -1,6 +1,13 @@
 $(function () {
     $.get('/emp/token', function (token) {
-        if (token) window.jwtToken = token;
+        if (token) 
+        {
+            window.jwtToken = token;
+        }
+        else
+        {
+            window.location.href = '/login';
+        }
     });
 });
 
