@@ -15,17 +15,17 @@ app.controller('EmpCtrl', ['$timeout', function ($timeout) {
 
     view.tabs = [{
         title: 'Reservations',
-        content: 'create',
+        contenturl: '/emp/pages/reservations.html',
         icon: 'glyphicon glyphicon-calendar',
         usesres: 'visible'
     }, {
         title: 'Check In',
-        content: 'checkin',
+        contenturl: '/emp/pages/checkin.html',
         icon: 'glyphicon glyphicon-log-in',
         usesres: 'visible'
     }, {
         title: 'Check-Out',
-        content: 'checkout',
+        contenturl: '/emp/pages/checkout.html',
         icon: 'glyphicon glyphicon-log-out',
         usesres: 'visible'
     }, {
@@ -84,7 +84,7 @@ app.controller('userCtrl', function ($scope, $http, $window) {
 
     $http.get('/api/protected/users').then(function (res) {
         console.log(res.data);
-        vm.users = res.data; 
+        vm.users = res.data;
     });
 
     vm.clearFilter = function () {
