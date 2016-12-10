@@ -175,7 +175,7 @@ function createRes(resrvParam) {
             transporter.sendMail({
                 from: '"Martian Motel" <motelmartian@gmail.com>',
                 to: resrvParam.userEmail,
-                subject: 'Welcome to the Martian Motel ' + user.firstName,
+                subject: 'Welcome to the Martian Motel ' + user.firstname,
                 text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
                 html: htmlstream
             }, function(error, info) {
