@@ -75,6 +75,7 @@ app.controller('userCtrl', function ($scope, $http, $window) {
             res[i].phone = JSON.parse(res[i].phone);
         }
         vm.users = res.data;
+        console.log(res.data);
     });
 
     vm.clearFilter = function () {
