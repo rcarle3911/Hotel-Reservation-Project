@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller="userCtrl">
     <div class="col-md-12">
         <div class="col-md-1 pull-left" style="Padding: 5px;">
-            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#userModal">
+            <button type="button" class="btn btn-info btn-md">
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
         <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
@@ -54,7 +54,7 @@
             <tbody>
                 <tr ng-repeat="user in users | filter:txtFilter.text | orderBy:orderByField:reverseSort">
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#userModal">
+                        <button type="button" class="btn btn-warning btn-lg">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user._id}}</button>
                     </td>
                     <td>{{user.lastname}}, {{user.firstname}}</td>
@@ -62,35 +62,13 @@
                     <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
                     <td class="text-center">
-                        <button ng-show="user.Status" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#userModal">
+                        <button ng-show="user.Status" type="button" class="btn btn-danger btn-lg">
                             <i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disable</button>
-                        <button ng-hide="user.Status" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#userModal">
+                        <button ng-hide="user.Status" type="button" class="btn btn-success btn-lg">
                             <i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enable</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="userModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h1>User</h1>
-                    <!-- Tabs -->
-                    <ul class="nav nav-tabs" id="modalUserTabs">
-                        <li class="activeN"><a href="#ModalUser" data-url="mgrpages/mgrusersmodal.html">Check In</a></li>
-                        <li><a href="#ModalUserHistory" data-url="mgrPages/mgrusershistorymodal.html">Hisory</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="ModalUser"></div>
-                        <div class="tab-pane" id="ModalUserHistory"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="/emp/mgrpages/mgrUsers.js"></script>
 </div>
