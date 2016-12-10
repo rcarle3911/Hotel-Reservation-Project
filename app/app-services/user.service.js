@@ -15,7 +15,6 @@
         return service;
 
         function Update(user) {
-            //console.log(user)
             return $http.put('/api/protected/users/' + user._id, user).then(handleSuccess, handleError);
         }
 
