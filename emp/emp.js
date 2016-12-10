@@ -215,3 +215,9 @@ app.controller('userCtrl', function ($scope) {
       
     };
 });
+
+$(function () {
+    $.get('/emp/token', function (token) {
+        if (token) window.jwtToken = token;
+    });
+});
