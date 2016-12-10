@@ -71,7 +71,7 @@
     <footer class="footer">
         <div class="login">
 		  <h4>Employees</h4>
-		  <a href="/emp">Login</a>
+		  <a href="{{isLoggedIn ? '/emp' : '/login'}}">{{isLoggedIn ? 'Employee Site' : 'Login'}}</a>
 		  <br>
 		  <a href="careers.html">Careers</a>
           <br>
