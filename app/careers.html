@@ -43,7 +43,7 @@
      
       <!-- employment form -->    
       <form action="mailto:martianmotel@gmail.com" id="EmploymentApplication" method="post" onsubmit="return ValidateForm(this);">
-        <script type="text/javascript">
+        <!-- <script type="text/javascript"> -->
         function ValidateForm(frm) {
         if (frm.First_Name.value == "") { alert('First name is required.'); frm.First_Name.focus(); return false; }
         if (frm.Last_Name.value == "") { alert('Last name is required.'); frm.Last_Name.focus(); return false; }
@@ -52,7 +52,7 @@
         if (frm.Position.value == "") { alert('Position is required.'); frm.Position.focus(); return false; }
         if (frm.Phone.value == "") { alert('Phone is required.'); frm.Phone.focus(); return false; }
         return true; }
-        </script>
+       <!-- </script> -->
         <table border="0" cellpadding="5" cellspacing="0">
         <tr> <td style="width: 50%">
         <label for="First_Name"><b>First name *</b></label><br />
