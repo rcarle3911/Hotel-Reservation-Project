@@ -129,6 +129,13 @@ h5{
 	text-align:left;
 	font-family:
 }
+h6{	
+	font-size:16px;
+	color:#808080;
+	text-align:center;
+	font-family:
+	
+}
 p{
 	font-size:12px;
 }
@@ -238,23 +245,6 @@ footer{
 	height:475px;
 	box-shadow: 0px 8px 16px 0px black;
 }
-.row2{
-	clear:both;
-	overflow:scroll;
-	max-height:600px;
-	color:#808080;
-}
-
-.col-md-8{
-	max-width:600px;
-	max-height:600px;
-	width:auto;
-	height:auto;
-	clear:both;
-	float:left;
-	padding-left:100px;
-	padding-top:40px;
-}
 #rcorners5{
 	clear:both;
 	font-size:12px;
@@ -274,6 +264,46 @@ footer{
 	height:auto;
 	box-shadow: 0px 8px 16px 0px black;
 }
+#rcorners6{
+	clear:both;
+	font-size:12px;
+	line-height:15px;
+	overflow:scroll;
+	color:white;
+	text-align:center;
+	background-color:#222222;
+    border-radius: 10px;
+    border: 1px solid black;
+	padding-top:25px;
+	padding-bottom:25px;
+	margin-top: 10px;
+	margin-right:auto;
+	margin-left:auto;
+	width:auto;
+	max-width:950px;
+	height:auto;
+	max-height:500px;
+	box-shadow: 0px 8px 16px 0px black;
+}
+
+.row2{
+	clear:both;
+	overflow:scroll;
+	max-height:600px;
+	color:#808080;
+}
+
+.col-md-8{
+	max-width:600px;
+	max-height:600px;
+	width:auto;
+	height:auto;
+	clear:both;
+	float:left;
+	padding-left:100px;
+	padding-top:40px;
+}
+
 #photoslide{
 	clear:both;
 	font-size:12px;
