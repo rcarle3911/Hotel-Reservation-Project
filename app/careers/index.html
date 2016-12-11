@@ -1,92 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">    
-
-	<!-- Datepicker theme -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">    
-    
-	<title>Martian Motel</title>
-    
-    <meta charset="utf-8">
-	<meta name="description" content="The Martian Motel">
-	<meta name="keywords" content="Martian Motel, Mars, Space Hotel">
-	<meta name="robots" content="noindex, nofollow">
-	<meta name="robots" content="noindex, follow">
-	<meta name="robots" content="index, nofollow">	
-	<meta name="author" content="The Martian Group">	
-	<meta name="copyright" content="The Martian Group">	 
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="HandheldFriendly" content="true">	
-
-    <!-- <link href="app-content/app.css" rel="stylesheet" /> -->
-    <link id="pagestyle" rel="stylesheet" type="text/css" href="app-content/stylesheet.css" media="screen">
-	<link rel="stylesheet" media="(max-width: 640px)" href="app-content/mobile.css">
-
-	
-	<!--<favicon icon> -->
-	<link href="app-content/rocketicon.ico" rel="icon" type="image/x-icon" />
-	
-	
-
-</head>
-    
-<body>
-    <!-- header -->
-    <header>
-        <ul>
-            <div id="logo">
-				<a href="/app">
-					<img src="app-content/textlogo.png" height="100" width="270">
-				</a>
-            </div>
-			<li><a a href="/login" ng-click="logout()" target="_self">{{isLoggedIn ? 'Logout' : 'Login'}}</a></li>
-			<li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
-			<li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
-			<li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="gallery">Gallery</a></li>
-			<li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="reservations">Reservations</a></li>
-			<li ng-class="{active: activeTab === 'services'}"><a ui-sref="services">Services</a></li>
-			<li ng-class="{active: activeTab === 'about'}"><a ui-sref="about">About Us</a></li>
-			<li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>	
-		</ul>
-        <div class="flash-message" ng-if="flash">
-            <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-        </div>
-
-    </header>
-    
-    <!-- main -->
-    <!--main ui-view="" class="ng-scope"--><div id="background3" class="ng-scope">
+<div id="background2">
 <br>
 
-  <div id="search">
-    <form method="get" action="http://www.google.com/search" class="ng-pristine ng-valid">
-      <div style="border:padding:4px;maxwidth:30em;">
-        <table border="0" align="center" cellpadding="0">
-          <tbody><tr><td>
-          <input type="text" name="q" size="25" maxlength="255" value="">
-          <input type="submit" value="Search"></td></tr>
-          <tr><td align="center" style="font-size:75%">
-          </td></tr>
-        </tbody></table>
-      </div>
-    </form>
-  </div>
-  <br>
+	<div id="search">
+		<form method="get" action="http://www.google.com/search">
+			<div style="border:padding:4px;maxwidth:30em;">
+				<table border="0" align="center" cellpadding="0">
+					<tr><td>
+					<input type="text" name="q" size="25" maxlength="255" value="" />
+					<input type="submit" value="Search" /></td></tr>
+					<tr><td align="center" style="font-size:75%">
+					</td></tr>
+				</table>
+			</div>
+		</form>
+	</div>
+	<br>
+	<br>
  
   <h1>Careers</h1>
   <br>
       <br>
-
+``<div id="rcorners">
     <h2>Work for us!</h2>
 
     <p>Join our team and enjoy a relaxing and fun atmosphere! We offer competitive wages and benefits.</p>
@@ -182,59 +116,6 @@
 
     <p>Fax to: (800) 222-0000</p>
     </div>
+</div>
     
-  <!--/main-->
-
-    <!-- footer -->
-    <footer class="footer">
-        <div class="login">
-		  <h4>Employees</h4>
-		  <a href="{{isLoggedIn ? '/emp' : '/login'}}">{{isLoggedIn ? 'Employee Site' : 'Login'}}</a>
-		  <br>
-		  <a href="careers.html">Careers</a>
-          <br>
-          <a href="/api">API</a>
-        </div>
-        <div class="copy">
-            <a href="/update">
-                <img src="app-content/logo.png" height="50" width="50">
-            </a><br>
-            Copyright &#169; 2016 The Martian Group<br>
-        </div>
-        <div class="contact">
-		  <h4>Contact Us</h4>
-		  <p>101 Olympus Drive <br>
-		  87999 Mars<br>
-		  +99 86797 87783
-		  <a href="mailto:motelmartian@gmail.com">info@martianmotel.com</a>
-		  </p>
-		  <br>
-        </div>
-    </footer>
-	
-    <!-- external scripts -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
-    <!-- load ngmessages -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
-    
-    <!-- application scripts -->
-    <script src="app.js"></script>
-
-    <!-- controllers -->
-    <script src="home/index.controller.js"></script>
-    <script src="reservations/index.controller.js"></script>
-    <script src="account/index.controller.js"></script>
-
-    <!-- services -->
-    <script src="app-services/flash.service.js"></script>
-    <script src="app-services/user.service.js"></script>
-	<script src="app-services/reservation.service.js"></script>
-	
-</body>
-</html>
 
