@@ -51,8 +51,8 @@ function create(resrvParam) {
 function timeout(toRun, param1, param2, deferred) {
     setTimeout(function () {
         if (!lock) {
+            console.log("Checking for availability");
             lock = true;
-            console.log("Reservation database locked for editing");
             toRun(param1,param2)
             .then(function (doc) {
                 lock = false;
@@ -63,6 +63,7 @@ function timeout(toRun, param1, param2, deferred) {
                 deferred.reject(err)
             });
         } else {
+            console.log("Reservation database locked for editing");
             timeout(toRun, param1, param2, deferred);
         }
     }, 100);
