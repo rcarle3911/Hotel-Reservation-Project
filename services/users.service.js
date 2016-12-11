@@ -6,6 +6,7 @@ var Q = require('q');
 var mongojs = require('mongojs');
 var db = mongojs('hotel', ['users']);
 var nodemailer = require('nodemailer');
+var randomstring = require("randomstring");
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
 
 var service = {};
@@ -13,7 +14,7 @@ var service = {};
 		CUSTOMER: 0,
 		EMPLOYEE: 1,
 		MANAGER: 2
-	}),
+	});
 
 service.create = create;
 service.editGroup = editGroup;
@@ -23,6 +24,8 @@ service.delete = _delete;
 service.authenticate = authenticate;
 service.getUsers = getUsers;
 service.getById = getById;
+service.forgotPass = forgotPass;
+service.getUserByEmail = getUserByEmail;
 
 module.exports = service;
 
@@ -65,7 +68,7 @@ function create(userParam) {
                 transporter.sendMail({
                     from: '"Martian Motel" <motelmartian@gmail.com>',
                     to: user.email,
-                    subject: 'Welcome to the Martian Motel ' + user.firstName,
+                    subject: 'Welcome to the Martian Motel ' + user.firstname,
                     text: 'Your username is ' + user.email,
                     html: '<p>Your username is <b>' + user.email + '</b></p>'
                 }, function(error, info) {
@@ -103,6 +106,7 @@ function edit(_id, userParam) {
     db.users.findOne(
         {_id: mongojs.ObjectID(_id)},
         function (err, user) {
+            
             if (err) deferred.reject(err.name + ': ' + err.message);
             if (user.email !== userParam.email) {
                 // To ensure unique emails, check if email already exists
@@ -110,22 +114,24 @@ function edit(_id, userParam) {
                     { email: userParam.email },
                     function (err, user) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
-                        if (user) deferred.reject('The email ' + userParam.email + ' is alread in use.');
+                        if (user) deferred.reject('The email ' + userParam.email + ' is already in use.');
                         else editUser();
                     }
                 );
             }
+            else editUser();
         }
     );
 
     function editUser() {
+        
         var set = {
-            firstName: userParam.firstName,
-            lastName: userParam.lastName,
-            dob: userParam.dob,
+            firstname: userParam.firstname,
+            lastname: userParam.lastname,
             phone: userParam.phone,
             email: userParam.email,
             address: userParam.address,
+            dateofbirth: userParam.dateofbirth   
         };
 
         if (userParam.password) {
@@ -225,5 +231,60 @@ function getById(_id) {
         }
     );
 
+    return deferred.promise;
+}
+
+function forgotPass(email) {
+    var deferred = Q.defer();
+    db.users.findOne(
+        email,
+        function(err,user){
+            if (err) deferred.reject(err.name + ': ' + err.message);
+
+            if (user) {
+                var newPass = randomstring.generate(8);
+                transporter.sendMail({
+                    from: '"Martian Motel" <motelmartian@gmail.com>',
+                    to: user.email,
+                    subject: 'Reset Your Martian Motel Password',
+                    html: "<p>Your username is: " + user.email
+                    +"<br>Your password is: " + newPass + "</p>"
+                    +"<p>Click <a href='http://martianmotel.ddns.net/login/'>here</a> to login."
+                }, 
+                function(error, info) {
+                    if (error) return console.log(error);              
+                    console.log('Message sent: ' + info.response);
+                });
+                newPass = bcrypt.hashSync(newPass, 10);
+                db.users.update(
+                    { _id: user._id },
+                    { $set:
+                        {
+                            password: newPass
+                        }
+                    },
+                    function (err, doc) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                    });
+            }
+            else {
+                deferred.reject("User Does Not Exist");
+            }
+            deferred.resolve();
+        }
+    );
+    return deferred.promise;
+}
+
+function getUserByEmail(email) {
+    var deferred = Q.defer();
+
+    db.users.findOne(
+        { email: email },
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(user);
+        }
+    );
     return deferred.promise;
 }

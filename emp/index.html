@@ -2,58 +2,93 @@
 <html ng-app="app">
 
 <head>
-    <!-- change angular to 1.3.x and ng-if on tabs breaks -->
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.js"></script> -->
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://institut-de-genomique.github.io/Ultimate-DataTable/js/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://institut-de-genomique.github.io/Ultimate-DataTable/css/ultimate-datatable-3.3.1-SNAPSHOT.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
-    <script src="http://ui-grid.info/release/ui-grid-unstable.js"></script>
-        <!-- Latest compiled and minified CSS -->
+    <script src="http://institut-de-genomique.github.io/Ultimate-DataTable/js/ultimate-datatable-3.3.1-SNAPSHOT.js" type="text/javascript"
+        charset="utf-8"></script>
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css" />
+    <script src="resources/moment.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/emp/emp.js"></script>
+    <script src="/emp/mgrpages/controllers/manager.controller.js"></script>
+    <script src="/emp/mgrpages/controllers/mgrusers.controller.js"></script>
+    <script src="/emp/pages/reservations.module.js"></script>
+    <script src="/emp/pages/reservations.component.js"></script>
 </head>
-<style> 
-.tab-container {
-    width: 100%;
-}
-.tab-container ul {
-    text-align: center;
-    align-items: center;
-}
-.tab-container ul li {
-    width: 24.5%;
-}
+<style>
+    .tab-container {
+        width: 100%;
+    }
+    
+    .tab-container ul {
+        text-align: center;
+        align-items: center;
+    }
+    
+    .tab-container ul li {
+        width: 24.5%;
+    }
+    
+    #logo {
+        text-align: center;
+    }
+    
+    #logo img {
+        height: 75px;
+        width: 203px;
+    }
 </style>
-<body>
-    <!-- Add Logo or Text Link back to Homepage (Customer Site) -->
-        <!-- Add Title H1 or H2 Martian Hotel - Employee Managment Site -->
-        <div id="logo" style="text-align:center;">
-            <a href="/app"><img src="/app/app-content/textlogo.png" height="75" width="203" /></a>
-        </div>
-    <div ng-controller="EmpCtrl as view">
-        <tabset>
 
-            <tab ng-repeat="tab in view.tabs" active="tab.active" disable="tab.disabled">
+<body>
+    <div id="logo">
+        <a href="/app"><img src="/app/app-content/textlogo.png" /></a>
+    </div>
+    <!--<div ng-controller="EmpCtrl as view">
+        <tabset>
+            <tab>
+                <tab-heading>
+                   <h4><i class='glyphicon glyphicon-calendar'>  Reservations</i></h4>
+                </tab-heading>
+                <ng-include src="'/emp/pages/reservations.html'"></ng-include>
+         </tab>
+            <tab>
+                <tab-heading>
+                    <h4><i class='glyphicon glyphicon-log-in'>  Check In </i></h4>
+                </tab-heading>
+                <reservations action='checkin'></reservations>
+            </tab>
+            <tab>
+                <tab-heading>
+                   <h4><i class='glyphicon glyphicon-log-out'>  Check-Out </i></h4>
+                </tab-heading>
+                <reservations action='checkout'></reservations>
+            </tab>
+            <tab>
+                <tab-heading>
+                   <h4><i class='glyphicon glyphicon-wrench'>  Management </i></h4>
+                </tab-heading>
+                <ng-include src="'/emp/mgrpages/manager.html'"></ng-include>                
+            </tab>
+        </tabset>
+        </div>-->
+    <div ng-controller="EmpCtrl">
+        <tabset>
+            <tab ng-repeat="tab in tabs">
                 <tab-heading>
                     <i class={{tab.icon}}></i> &nbsp; {{tab.title}}
                 </tab-heading>
                 <div ng-include="tab.contenturl"></div>
             </tab>
-
-            <tab heading="Static Grid" select="view.tabSelect()" deselect="view.tabShown = !view.tabShown">
-                <div id="grid1" ui-grid="view.gridOptions" class="grid" ng-if="view.tabShown"></div>
-            </tab> 
-            
         </tabset>
     </div>
-    <script src="/emp/emp.js"></script>
-    <script src="/emp/pages/reservations.module.js"></script>
-    <script src="/emp/pages/reservations.component.js"></script>
 </body>
 
 </html>

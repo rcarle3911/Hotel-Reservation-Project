@@ -1,71 +1,22 @@
 var config = require('config.json');
 var express = require('express');
-var app = express();
-var router = express.Router();
+var osprey = require('osprey');
+var join = require('path').join;
+var raml = join(__dirname, 'controllers', 'api', 'api.raml');
 var resService = require('services/reservation.service.js');
 
+var handler = osprey.server(raml);
+//var router = osprey.Router({ ramlUriParameters: handler.ramlUriParameters }); //express.Router();
+var router = express.Router();
+
 // Routes to receive HTTP requests
-router.get('/', getFutureRes);
 router.post('/', reserve);
 router.get('/check', isAvailable);
-router.get('/past', getPastRes);
-router.get('/current', getPresentRes);
-router.get('/:_id', getResByID);
-router.put('/:_id', editRes);
-router.delete('/:_id', deleteRes);
-router.get('/find', findRes);
 
 module.exports = router;
 
-function getFutureRes(req, res) {
-    resService.getFutureRes()
-    .then( function (list) {
-        if (list) res.send(list);
-        //else res.status(404)
-        else res.status(400).send("Reservation Not Here");
-    })
-    .catch( function(err) {
-        res.status(400).send(err);
-    });
-}
-
-function getPastRes(req, res) {
-    resService.getPastRes()
-    .then( function (list) {
-        if (list) res.send(list);
-        //else res.status(404)
-        else res.status(400).send("Reservation Not Here");
-    })
-    .catch( function(err) {
-        res.status(400).send(err);
-    });
-}
-
-function getPresentRes(req, res) {
-    resService.getPresentRes()
-    .then( function (list) {
-        if (list) res.send(list);
-        //else res.status(404)
-        else res.status(400).send("Reservation Not Here");
-    })
-    .catch( function(err) {
-        res.status(400).send(err);
-    });
-}
-
-function getResByID(req, res) {
-    resService.getResByID(req.params._id)
-    .then( function (list) {
-        if (list) res.send(list);
-        //else res.status(404)
-        else res.status(400).send("Reservation Not Here");
-    })
-    .catch( function(err) {
-        res.status(400).send(err);
-    });
-}
-
 function reserve(req, res) {
+	console.log("Request received");
     resService.create(req.body)
         .then(function () {
             res.sendStatus(200);
@@ -76,31 +27,12 @@ function reserve(req, res) {
 }
 
 function isAvailable(req, res) {
-	resService.isAvailable(req.body)
+	req.query.space = Number.parseInt(req.query.space);
+	resService.isAvailable(req.query)
 	.then(function(stuff) {
-		//res.sendStatus(200); //# of rooms available?
-		if(stuff) res.send(stuff);
-		else res.status(400).send("Nope");
+		res.sendStatus(200);
 	})
 	.catch(function(err){
 		res.status(400).send(err);
 	});
-}
-
-function editRes(req, res) {
-    resService.edit(req.params._id, req.body)
-        .then(function () {
-            res.sendStatus(200);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
-}
-
-function deleteRes(req, res) {
-    res.status(501).send('Service not defined');
-}
-
-function findRes(req, res) {
-    res.status(501).send('Service not defined');
 }

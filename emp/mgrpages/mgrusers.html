@@ -1,84 +1,68 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="userCtrl">
     <div class="col-md-12">
-        <div class="col-md-4 pull-left" style="Padding: 5px;">
-            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#userModal">
+        <div class="col-md-1 pull-left" style="Padding: 5px;">
+            <button type="button" class="btn btn-info btn-md" ng-click="open()">
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
-        <div class="col-md-4 pull-right" style="Padding: 5px;">
-            <div class="input-group">
-                <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid...">
-                <span class="input-group-addon">
-                <i class="glyphicon glyphicon-search"></i>
+        <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
+            <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtFilter.text"/>
+            <span ng-if="txtFilter.text" ng-click="clearFilter()" class="glyphicon glyphicon-remove form-control-feedback" 
+            style="cursor: pointer; pointer-events: all; margin-top: 5px;" uib-tooltip="clear">
             </span>
-            </div>
         </div>
-        
     </div>
     <div class="col-md-12">
         <table id="tblUsers" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Edit User</th>
-                    <th>Name</th>
-                    <th>email</th>
-                    <th>User Role</th>
+                    <th>
+                        <a href="#" ng-click="orderByField = 'lastname'; reverseSort = !reverseSort">
+                        Name 
+                        <span ng-show="orderByField == 'lastname'">
+                            <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByField = 'email'; reverseSort = !reverseSort">
+                            Email
+                            <span ng-show="orderByField == 'email'">
+                                <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
+                                <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByField = 'group'; reverseSort = !reverseSort">
+                        User group
+                        <span ng-show="orderByField == 'group'">
+                            <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                        </a>
+                    </th>
                     <th>Phone #</th>
                     <th class="text-center">Disable/Enable</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="user in users | filter:txtFilter.text | orderBy:orderByField:reverseSort">
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#userModal">
+                        <button type="button" class="btn btn-warning btn-lg" ng-click="open(user)">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User</button>
                     </td>
-                    <td>Rogers, Buck</td>
-                    <td>Employee</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td>(nnn) nnn-nnnn</td>
+                    <td>{{user.lastname}}, {{user.firstname}}</td>
+                    <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
+                    <td>{{user.group}}</td>
+                    <td>{{user.phone}}</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#userModal">
-                            <i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enable</button>
+                        <div ng-show="user.Status"><i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disabled</div>
+                        <div ng-hide="user.Status"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enabled</div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#userModal">
-                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User</button>
-                    </td>
-                    <td>Rogers, Buck</td>
-                    <td>User</td>
-                    <td>dd/mmm/yyyy</td>
-                    <td>(nnn) nnn-nnnn</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#userModal">
-                            <i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disable</button>
-                    </td>
-                </tr>
-                
             </tbody>
         </table>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="userModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h1>User</h1>
-                    <!-- Tabs -->
-                    <ul class="nav nav-tabs" id="modalUserTabs">
-                        <li class="activeN"><a href="#ModalUser" data-url="mgrpages/mgrusersmodal.html">Check In</a></li>
-                        <li><a href="#ModalUserHistory" data-url="mgrPages/mgrusershistorymodal.html">Hisory</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="ModalUser"></div>
-                        <div class="tab-pane" id="ModalUserHistory"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- application scripts -->
-    <script src="mgrpages/mgrusers.modal.js"></script>
+</div>

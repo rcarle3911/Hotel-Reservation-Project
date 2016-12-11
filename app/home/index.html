@@ -1,5 +1,3 @@
-
-
 <div id="background">
 <br>
 
@@ -22,47 +20,18 @@
 <div id="rcorners2">
 
 <legend>CHECK AVAILABILITY AND RATES</legend><br>
-	
-	<form class="form" role="form">
-	<div class="dropdown form-group">
-		<label>Check-In</label>
-		<a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#"
-		   href="#">
-			<div class="input-group date">
-				<input type="text" class="form-control" ng-model="formInfo.Arrival">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			</div>
-		</a>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			<datetimepicker data-ng-model="dateRangeStart"
-							data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
-							data-on-set-time="startDateOnSetTime()"
-							data-before-render="startDateBeforeRender($dates)"></datetimepicker>
-		</ul>
-	</div>
 
+	<form name="availability">
+		<h5>Check-in:</h5> 
+			<input type="date" required ng-model="vm.res.startDate">
+		<br>
+		<h5>Check-out:</h5> 
+			<input type="date" required ng-model="vm.res.endDate">
+		<br>			
 
-	<div class="dropdown form-group">
-		<label>Check-Out</label>
-		<a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="#"
-		   href="#">
-			<div class="input-group date">
-				<input type="text" class="form-control" ng-model="formInfo.Depart">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			</div>
-		</a>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			<datetimepicker data-ng-model="dateRangeEnd"
-							data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
-							data-on-set-time="endDateOnSetTime()"
-							data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
-		</ul>
-	</div>
-	<br>
-	<form name="availability" action="availability.html" onsubmit="return userAvailability()" method="post">
 		<fieldset>
-			Adults
-			<select tabindex="4" ng-model="formInfo.Adults">
+			<h5>Total Guests:</h5>
+			<select tabindex="4" ng-model="vm.res.space" required>
 				<option value="">select</option>			
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -73,23 +42,11 @@
 				<option value="7">7</option>
 				<option value="8">8</option>
 			</select>
-			Children
-			<select tabindex="5" ng-model="formInfo.Children">
-				<option value="">select</option>			
-				<option value="1">0</option>
-				<option value="2">1</option>
-				<option value="3">2</option>
-				<option value="4">3</option>
-				<option value="5">4</option>
-				<option value="6">5</option>
-				<option value="7">6</option>
-				<option value="8">7</option>
-			</select>
 		</fieldset>
-		<br><br>
+		<br>
 		<div id="check">
 			<!--Button maps to checkAvail function in app/home/index.controller.js -->
-			<button type="submit" ng-click="saveData()" ng-click ="vm.checkAvail()">Check Availability</button>	
+			<button type="submit" ng-click="vm.checkAvail()">Check Availability</button>	
 		</div>
 	</form>
 </form>

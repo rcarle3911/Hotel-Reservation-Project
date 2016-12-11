@@ -6,6 +6,7 @@ var userService = require('services/users.service');
 // Routes to receive HTTP requests
 router.post('/register', register);
 router.post('/authenticate', login);
+router.post('/forgotPass', forgotPass);
 
 module.exports = router;
 
@@ -32,6 +33,16 @@ function login(req, res) {
 
 function register(req, res) {
     userService.create(req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
+function forgotPass(req, res) {
+    userService.forgotPass(req.body)
         .then(function () {
             res.sendStatus(200);
         })

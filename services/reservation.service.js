@@ -8,9 +8,15 @@ var config = require('config.json');
 var lock;
 
 var service = {};
+    group = Object.freeze({
+		CUSTOMER: 0,
+		EMPLOYEE: 1,
+		MANAGER: 2
+	});
 
 service.create = create;
 service.edit = edit;
+service.delete = _delete;
 service.isAvailable = isAvailable;
 service.getPresentRes = getPresentRes;
 service.deleteFuture = deleteFuture;
@@ -19,6 +25,8 @@ service.deletePast = deletePast;
 service.getFutureRes = getFutureRes;
 service.getPastRes = getPastRes;
 service.getResByID = getResByID;
+service.checkInOut = checkInOut;
+service.getUserRes = getUserRes;
 
 module.exports = service;
 
@@ -43,8 +51,8 @@ function create(resrvParam) {
 function timeout(toRun, param1, param2, deferred) {
     setTimeout(function () {
         if (!lock) {
+            console.log("Checking for availability");
             lock = true;
-            console.log("Reservation database locked for editing");
             toRun(param1,param2)
             .then(function (doc) {
                 lock = false;
@@ -55,7 +63,8 @@ function timeout(toRun, param1, param2, deferred) {
                 deferred.reject(err)
             });
         } else {
-            timeout();
+            console.log("Reservation database locked for editing");
+            timeout(toRun, param1, param2, deferred);
         }
     }, 100);
 }
@@ -68,7 +77,7 @@ function edit(_id, resrvParam) {
     return deferred.promise;    
 }
 
-function editRes(_id, resrvParam) {
+function editRes(_id, resrvParam, group) {
     var deferred = Q.defer()
     
     isAvailable(resrvParam)
@@ -81,6 +90,12 @@ function editRes(_id, resrvParam) {
             numGuests: resrvParam.numGuests,
             price: resrvParam.price
         };
+
+        //Only employees and managers can directly set check in and check out dates.
+        if (group > 0) {
+            if (resrvParam.checkIn) set.checkIn = resrvParam.checkIn;
+            if (resrvParam.checkIn) set.checkOut = resrvParam.checkOut;
+        }
         /**
          * This chain will check the future, present, and past databases for a id match.
          * Once it's found it's removed and the chain stops.
@@ -161,7 +176,7 @@ function createRes(resrvParam) {
             transporter.sendMail({
                 from: '"Martian Motel" <motelmartian@gmail.com>',
                 to: resrvParam.userEmail,
-                subject: 'Welcome to the Martian Motel ' + user.firstName,
+                subject: 'Welcome to the Martian Motel ' + user.firstname,
                 text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
                 html: htmlstream
             }, function(error, info) {
@@ -176,74 +191,114 @@ function createRes(resrvParam) {
     return deferred.promise;
 }
 
-/**
- * Check for availability here
- */
-function isAvailable(resrvParam, callback) {
+function _delete(_id) {
     var deferred = Q.defer();
-    var total = config.rooms.type[resrvParam.roomType.name];
 
-    db.futureRes.count(
-        { $and: [
-            { startDate: { $lte: resrvParam.endDate } },
-            { endDate: { $gte: resrvParam.startDate } },
-            { roomType: resrvParam.roomType }
-        ]},
-        function (err, futureCount) {
-            console.log("Count Result");
-            console.log(futureCount);
-            if (err) deferred.reject(err.name + ': ' + err.message);
-            if (futureCount >= total) {                
-                deferred.reject("No Availability for " + resrvParam.roomType.name);
-            } else {
-                db.presentRes.count(
-                    { $and: [
-                        { startDate: { $lte: resrvParam.endDate } },
-                        { endDate: { $gte: resrvParam.startDate } },
-                        { roomType: resrvParam.roomType }
-                    ]},
-                    function (err, currentCount) {
-                        if (err) deferred.reject(err.name + ': ' + err.message)
-                        if ((futureCount + currentCount) >= total) {
-                            deferred.reject("No Availability for " + resrvParam.roomType.name);
-                        } else {
-                            deferred.resolve();
-                        }
-                    }
-                );
-            }
-        }
-    );
+    deleteFuture(_id)
+    .then(function (doc) {
+        if (doc["nRemoved"] === 0) {
+            deletePresent(_id)
+            .then(function (doc) {
+                if (doc["nRemoved"] === 0 ) {
+                    deletePast(_id)
+                    .then(function (doc) {
+                        deferred.resolve(doc);
+                    })
+                    .catch(function (error) {
+                        deferred.reject(error);
+                    })
+                } else deferred.resolve(doc);
+            })
+            .catch(function (error) {
+                deferred.reject(error);
+            });
+        } else deferred.resolve(doc);
+    })
+    .catch(function (error) {
+        deferred.reject(error);
+    });
+
 
     return deferred.promise;
-    /** This algorithm will count all reservations that match the room type and any that match your date parameters.
-     * We also need to count the current reservations.
-    rmTypeCount(resrvParam, function(err, totCount){
-        db.futureRes.find({startDate: {$gte : resrvParam.startDate, $lt : resrvParam.endDate}, rmType: resrvParam.rmType}).count(function(err, count){
-            if(err) return callback(err);
-            if(count <= totCount){
-                callback(null, true, totCount);
-            }
-            else if(count > totCount){
-                callback(null, false, totCount);
-            }
-        });
-    });
-    */
 }
 
 /**
- * Count by Room Types
+ * Check for availability here
  */
-function rmTypeCount(type) {
-    return config.rooms.type[type.name]
-    /** If there's a database of rooms counting the database of rmtypes won't return the total.
-     * This function would always return one since room types should be unique.
-    db.rmTypes.find({name: resrvParam.rmType}).count(function(err, totCount){
-        if(err) return callback(err);
-        callback(null, totCount);
-    });
-    */
+function isAvailable(resrvParam) {
+    var deferred = Q.defer();
+
+    if (resrvParam.roomType) {
+        typeCount(resrvParam.roomType)
+        .then(function () {
+            deferred.resolve();
+        })
+        .catch(function (err) {
+            deferred.reject(err);
+        });
+    } else {
+        db.rmTypes.find(
+            { space: {$gte: resrvParam.space} }, //Returns an array of room types that meet the space requirement
+            function (err, rmTypes) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+                var avail = false;
+                for (var i = 0; i < rmTypes.length; i++) {
+                    typeCount(rmTypes[i]._id)
+                    .then(function () {
+                        avail = true;
+                        deferred.resolve();
+                    });
+                }
+                setTimeout(function() {
+                    if (!avail) deferred.reject("Timed Out");
+                }, 5000);
+            }
+        );
+    }
+
+    function typeCount (rmType) {
+        var deferred = Q.defer();
+
+        db.rooms.count(
+            { rmType: mongojs.ObjectID(rmType) },
+            function (err, total) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+                db.futureRes.count(
+                    { $and: [
+                        { startDate: { $lte: resrvParam.endDate } },
+                        { endDate: { $gte: resrvParam.startDate } },
+                        { roomType: mongojs.ObjectID(rmType) }
+                    ]},
+                    function (err, futureCount) {
+                        if (err) deferred.reject(err.name + ': ' + err.message);
+                        if (futureCount >= total) {                
+                            deferred.reject("No Availability");
+                        } else {
+                            db.presentRes.count(
+                                { $and: [
+                                    { startDate: { $lte: resrvParam.endDate } },
+                                    { endDate: { $gte: resrvParam.startDate } },
+                                    { roomType: mongojs.ObjectID(rmType) }
+                                ]},
+                                function (err, currentCount) {
+                                    if (err) deferred.reject(err.name + ': ' + err.message)
+                                    if ((futureCount + currentCount) >= total) {
+                                        deferred.reject("No Availability");
+                                    } else {
+                                        deferred.resolve();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );              
+            }
+        );
+
+        return deferred.promise;
+    }
+
+    return deferred.promise;
 }
 
 /**
@@ -277,6 +332,34 @@ function getPastRes(){
     return deferred.promise;    
 }
 
+function getUserRes(_id) {
+    var deferred = Q.defer();
+    
+    db.users.findOne(
+        {_id: mongojs.ObjectID(_id)},
+        function (err, user) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+            if (!user) deferred.reject("User not found");
+            db.presentRes.find(
+                {userEmail: user.email},
+                function(err, pList) {
+                    if (err) deferred.reject(err.name + ': ' + err.message);
+                    db.futureRes.find(
+                        {userEmail: user.email},
+                        function(err, fList) {
+                            if (err) deferred.reject(err.name + ': ' + err.message);
+                            deferred.resolve(pList.concat(fList));
+                        }
+                    );
+                }
+            );
+        }
+    );
+
+
+    return deferred.promise;      
+}
+
 function getFutureRes(){
     var deferred = Q.defer();
 
@@ -302,6 +385,7 @@ function deleteFuture(_id) {
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
         }
     );
 
@@ -318,6 +402,7 @@ function deletePresent(_id) {
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
         }
     );
 
@@ -331,6 +416,7 @@ function deletePast(_id) {
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            deferred.resolve(doc);
         }
     );
 
@@ -361,5 +447,37 @@ function getResByID(_id) {
             }
         }
     );
+    return deferred.promise;
+}
+
+function checkInOut(_id, date) {
+    var deferred = Q.defer();
+
+    getResByID(_id)
+    .then(function (resrv) {
+        if (!resrv.checkIn) {
+            resrv.checkIn = date;
+            deleteFuture(_id);
+            db.presentRes.insert(resrv,
+            function (err, doc) {
+                deferred.resolve(doc);
+            });
+        }
+        else if (!resrv.checkOut) {
+            resrv.checkOut = date;
+            deletePresent(_id);
+            db.pastRes.insert(resrv,
+            function (err, doc) {
+                deferred.resolve(doc);
+            });
+        }
+        else {
+            deferred.reject("Customer already checked out");
+        }
+    })
+    .catch(function (error) {
+        deferred.reject(error);
+    });
+
     return deferred.promise;
 }

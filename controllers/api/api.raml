@@ -11,14 +11,15 @@ types:
     properties:
       userEmail: string
       roomType:
-        properties:
-          name: string
-          desc: string
-          space: integer
+        type: string
+        description: Id retrieved from database
       startDate: datetime
       endDate: datetime
       numGuests: integer
       price: number
+  Reservations:
+    type: Reservation[]
+    uniqueItems: true
   User:
     properties:
       firstname: string
@@ -28,16 +29,27 @@ types:
       email: string
       address: string
       password: Password
+  Users:
+    type: User[]
+    uniqueItems: true
   RoomType:
     properties:
       name: string
       desc: string
       space: integer
+  RoomTypes:
+    type: RoomType[]
+    uniqueItems: true
   Room:
     properties:
-      rmType: RoomType
+      rmType:
+        type: string
+        description: Id retrieved from database
       num: integer
       avail: boolean
+  Rooms:
+    type: Room[]
+    uniqueItems: true
   CreditCard:
     pattern: \b\d{13,16}\b
   CVV:
@@ -54,44 +66,299 @@ types:
       password: Password
   ResCheck:
     properties:
-      type: RoomType | integer #If type is integer it will be treated as space needed
+      rmType:
+        type: string
+        description: Id retrieved from database
+        required: false
+      space: integer
       startDate: datetime
       endDate: datetime
-/public/users:
-  /authenticate:
-    post:
-      description: |
-        Authenticates users with a email and passord. Returns a JWT token.
-      body:
-        application/json:
-          type: Login
-  /register:
-    post:
-      description: |
-        Creates a user with the input.
-      body:
-        application/json:
-          type: User
-/public/reservation:
-  post:
+  PassReset:
+    properties:
+      email: string
+  ResQuery:
+    properties:
+      dateRange:
+        required: false
+        description: All reservations that are active within this date range.
+        properties:
+          startDate: datetime
+          endDate: datetime
+      pastDate:
+        type: datetime
+        required: false
+        description: Reservations that end on or past this date.
+      beforeDate:
+        type: datetime
+        required: false
+        description: Reservations that start on or before this date.
+      userId:
+        type: string
+        required: false
+      roomNumber:
+        type: integer
+        required: false
+/public:
+  get:
     description: |
-      Creates a reservation based on the parameters passed.
-    body:
-      application/json:
-        type: Reservation
-  /check:
-    get:
+      API documentation page
+  /users:
+    /authenticate:
+      post:
+        description: |
+          Authenticates users with a email and passord. Returns a JWT token.
+        body:
+          application/json:
+            type: Login
+    /register:
+      post:
+        description: |
+          Creates a user with the input.
+        body:
+          application/json:
+            type: User
+    /forgotPass:
+      post:
+        description: |
+          Resets users pass and sends it to their email.
+        body:
+          application/json:
+            type: PassReset
+
+  /reservation:
+    post:
       description: |
-        Checks for availability and returns a boolean.
+        Creates a reservation based on the parameters passed.
       body:
         application/json:
-          type: ResCheck
-/protected/users:
-  /{user._id}:
-    delete:
-    put:
+          type: Reservation
+    /check:
+      get:
+        description: |
+          Checks for availability and returns a boolean.
+        queryParameters:
+          application/json:
+            type: ResCheck
+        responses:
+          200:
+            body:
+              application/json:
+                type: boolean
+/protected:
+  /users:
     get:
-  /current:
-/protected/reservation:
-/protected/room:
-  /type:
+      description: |
+        Gets all users from the database.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Users
+    /{_id}:
+      delete:
+        description: |
+          Deletes the user given in the parameters.
+      put:
+        description: |
+          Updates the user by the ID in parameters.
+        body:
+          application/json:
+            type: User
+      get:
+        description: |
+          Retrieves user information from the database based on ID.
+        responses:
+          200:
+            body:
+              application/json:
+                type: User
+    /current:
+      get:
+        description: |
+          Gets information about the user logged in.
+        responses:
+          200:
+            body:
+              application/json:
+                type: User
+    /email:
+      /{email}:
+        get:
+          description: |
+            Retrieves the user in the database that matches the given email.
+          responses:
+            200:
+              body:
+                application/json:
+                  type: User
+  /reservation:
+    get:
+      description: |
+        Retrieves a list of all future and present reservation objects from the database for the user logged in.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Reservations
+    /{_id}:
+      get:
+        description: |
+          Gets the reservation matching an ID.
+        responses:
+          200:
+            body:
+              application/json:
+                type: Reservation
+      put:
+        description: |
+          Updates the reservation by ID with the object in the body
+        body:
+          application/json:
+            type: Reservation
+      delete:
+        description: |
+          Deletes the reservation by ID.
+      patch:
+        description: |
+          Modifies a reservation state from "Not Checked In" to "Checked In" or "Checked In" to "Checked Out"
+        body:
+          application/json:
+            type: datetime
+    /find:
+      get:
+        description: |
+          Retrieves all reservations in the database that match the query parameters.
+        queryParameters:
+          application/json:
+            required: false
+            type: ResQuery
+        responses:
+          200:
+            body:
+              application/json:
+                type: Reservations
+    /current:
+      get:
+        description: |
+          Retrieves all currently checked in reservations that match the query parameters.
+        queryParameters:
+          application/json:
+            required: false
+            type: ResQuery
+        responses:
+          200:
+            body:
+              application/json:
+                type: Reservations
+    /past:
+      get:
+        description: |
+          Retrieves all checked out reservations that match the query parameters.
+        queryParameters:
+          application/json:
+            required: false
+            type: ResQuery
+        responses:
+          200:
+            body:
+              application/json:
+                type: Reservations
+    /future:
+      get:
+        description: |
+          Retrieves all future reservations that match the query parameters.
+        queryParameters:
+          application/json:
+            required: false
+            type: ResQuery
+        responses:
+          200:
+            body:
+              application/json:
+                type: Reservations
+  /room:
+    get:
+      description: |
+        Retrieves all rooms in the database.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Rooms
+    post:
+      description: |
+        Adds a room to the database. Room numbers must be unique.
+      body:
+        application/json:
+          type: Room
+    /{_id}:
+      get:
+        description: |
+          Gets the room matching the ID.
+        responses:
+          200:
+            body:
+              application/json:
+                type: Room
+      put:
+        description: |
+          Updates a room in the database.
+        body:
+          application/json:
+            type: Room
+      delete:
+        description: |
+          Deletes the room from the database.
+      patch:
+        description: |
+          Toggles a rooms availability.
+    /available:
+      get:
+        description: |
+          Retrieves all rooms that are not occupied.
+        queryParameters:
+          space:
+            type: integer
+            required: false
+        responses:
+          200:
+            body:
+              application/json:
+                type: Rooms
+    /type:
+      get:
+        description: |
+          Retrieves all room types from the database.
+        queryParameters:
+          space:
+            type: integer
+            required: false
+        responses:
+          200:
+            body:
+              application/json:
+                type: RoomTypes
+      post:
+        description: |
+          Adds a room type to the database.
+        body:
+          application/json:
+            type: RoomType
+      /{_id}:
+        get:
+          description: |
+            Retrieves object by ID.
+          responses:
+            200:
+              body:
+                application/json:
+                  type: RoomType
+        put:
+          description: |
+            Updates Room type by ID.
+          body:
+            application/json:
+              type: RoomType
+        delete:
+          description: |
+            Deletes the Room type by ID.

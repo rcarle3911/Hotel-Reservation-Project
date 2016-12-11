@@ -1,10 +1,13 @@
 require('rootpath')();
+var osprey = require('osprey');
 var express = require('express');
+var join = require('path').join;
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
+var path = join(__dirname, 'controllers', 'api', 'api.raml');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
@@ -21,7 +24,8 @@ app.use('/api', express.static('./controllers/api'));
 app.use('/api/public/users', require('./controllers/api/public/users.controller.js'));
 app.use('/api/public/reservation', require('./controllers/api/public/reservation.controller.js'));
 app.use('/api/protected/users', require('./controllers/api/protected/users.controller.js'));
-
+app.use('/api/protected/room', require('./controllers/api/protected/room.controller.js'));
+app.use('/api/protected/reservation', require('./controllers/api/protected/reservation.controller.js'));
 
 // make '/app' default route
 app.get('/', function (req, res) {
@@ -36,8 +40,10 @@ app.get('/update', function (req, res) {
 	return res.redirect('/app');
 });
 
+//app.use('/api', osprey.server(path));
+
 app.listen(3000);
-console.log("Server running on port 3000");
+console.log("Server listening on port 3000");
 
 //Runs database tests
 //var test = require('test');

@@ -25,6 +25,13 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'register' }
             })
+            .state('forgotPass', {
+                url: '/forgotPass',
+                templateUrl: 'forgotPass/index.html',
+                controller: 'ForgotPass.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'forgotPass' }
+            })
     }
 
     //Bootstrap angular

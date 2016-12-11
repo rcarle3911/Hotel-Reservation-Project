@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h3>Add (Edit) User Account</h3>
+</div>
+<form name="form.userForm" ng-submit="submitForm()" novalidate>
+    <div class="modal-body">
+        <!-- FIRST NAME -->
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="firstname" class="form-control" ng-model="user.firstname" required>
+            <p ng-show="form.userForm.firstname.$invalid && !form.userForm.firstname.$pristine" class="help-block">Your firstname is required.</p>
+        </div>
+
+        <!-- LAST NAME -->
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="lastname" class="form-control" ng-model="user.lastname" required>
+            <p ng-show="form.userForm.lastname.$invalid && !form.userForm.lastname.$pristine" class="help-block">Your lastname is required.</p>
+        </div>
+
+        <!-- phone -->
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone" class="form-control" ng-model="user.phone" required>
+            <p ng-show="form.userForm.phone.$invalid && !form.userForm.phone.$pristine" class="help-block">Your phone number is required.</p>
+        </div>
+
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="user.email" required>
+            <p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>
+        
+        <!-- address -->
+        <div class="form-group">
+            <label>Address City, State Zip</label>
+            <input type="text" name="address" class="form-control" ng-model="user.address" required>
+            <p ng-show="form.userForm.address.$invalid && !form.userForm.address.$pristine" class="help-block">Your address is required.</p>
+        </div>
+
+        <!-- Membership --> 
+        <div class="form-group">
+            <label>Membership</label>
+            <select class="form-control" ng-model="user.group" required>
+                <option value="0" selected>Customer</option>
+                <option value="1">Employee</option>
+                <option value="2">Manager</option>
+            </select>
+        </div>
+
+         <!-- Membership --> 
+        <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" ng-model="user.status" data-show-icon="true" required>
+                <option value="1" selected>Enable</option>
+                <option value="2">Disable</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="ok()" ng-disabled="form.userForm.$invalid">OK</button>
+        <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-danger btn-lg" ng-click="delete()">Delete</button>
+    </div>
+</form>
