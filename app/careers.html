@@ -9,29 +9,13 @@
 <body>
 
 <div data-role="page">
-<div id="background2">
-<br>
-
-	<div id="search">
-		<form method="get" action="http://www.google.com/search">
-			<div style="border:padding:4px;maxwidth:30em;">
-				<table border="0" align="center" cellpadding="0">
-					<tr><td>
-					<input type="text" name="q" size="25" maxlength="255" value="" />
-					<input type="submit" value="Search" /></td></tr>
-					<tr><td align="center" style="font-size:75%">
-					</td></tr>
-				</table>
-			</div>
-		</form>
-	</div>
-	<br>
-	<br>
- 
-  <h1>Careers</h1>
+  <div data-role="header">
+    <h1>Welcome To My Homepage</h1>
+  </div>
+	<h1>Careers</h1>
   <br>
       <br>
-``<div id="rcorners">
+
     <h2>Work for us!</h2>
 
     <p>Join our team and enjoy a relaxing and fun atmosphere! We offer competitive wages and benefits.</p>
@@ -51,15 +35,14 @@
 	<li>Dishwasher</li>
   	<li>Alien Storyteller</li>	
     </ul>
-    
-    <!-- pop up employment form -->
-    <div data-role="page" class="ui-content">
-    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Apply Now</a>
+  <!-- pop up employment form -->
+    <div data-role="main" class="ui-content">
+    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Apply Now!</a>
 
-    <div data-role="popup" id="myPopup" class="ui-content" style="min-width:350px;">
+    <div data-role="popup" id="myPopup" class="ui-content" style="min-width:450px;">
      
       <!-- employment form -->    
-      <form action="mailto:motelmartian@gmail.com" id="EmploymentApplication" method="post" onsubmit="return ValidateForm(this);">
+      <form action="mailto:martianmotel@gmail.com" id="EmploymentApplication" method="post" onsubmit="return ValidateForm(this);">
         <script type="text/javascript">
         function ValidateForm(frm) {
         if (frm.First_Name.value == "") { alert('First name is required.'); frm.First_Name.focus(); return false; }
@@ -115,7 +98,9 @@
         </table>
         </form>
     </div>
-    </div>
+  </div>
+  
+  <h3>Apply today.</h3>
 
     <p>If you’re interested in any of these positions, please download and complete our <a href="#" target="_blank">employment application (PDF).&nbsp;</a></p>
 
@@ -126,8 +111,11 @@
     87999 Mars</p>
 
     <p>Fax to: (800) 222-0000</p>
-    </div>
-</div>
-	</div>
+
+  <div data-role="footer">
+    <h1>Footer Text</h1>
+  </div>
+</div> 
+
 </body>
 </html>
