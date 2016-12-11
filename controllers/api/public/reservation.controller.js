@@ -28,7 +28,6 @@ function reserve(req, res) {
 
 function isAvailable(req, res) {
 	req.query.space = Number.parseInt(req.query.space);
-	console.log(req.query);
 	resService.isAvailable(req.query)
 	.then(function(stuff) {
 		res.sendStatus(200);

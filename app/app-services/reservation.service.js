@@ -29,12 +29,7 @@
         }
 
         function Check(rsrv) {
-            console.log(rsrv);
-            return $http({
-                url: '/api/public/reservation/check',
-                method: "GET",
-                params: rsrv
-            }).then(handleSuccess, handleError);
+            return $http.get('/api/public/reservation/check', { params: rsrv }).then(handleSuccess, handleError);
         }
 
         function GetAll() {
