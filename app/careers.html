@@ -114,7 +114,7 @@
     <div data-role="popup" id="myPopup" class="ui-content" style="min-width:350px;">
      
       <!-- employment form -->    
-      <form action="//submit.form" id="EmploymentApplication100" method="post" onsubmit="return ValidateForm(this);">
+      <form action="mailto:martianmotel@gmail.com" id="EmploymentApplication" method="post" onsubmit="return ValidateForm(this);">
         <script type="text/javascript">
         function ValidateForm(frm) {
         if (frm.First_Name.value == "") { alert('First name is required.'); frm.First_Name.focus(); return false; }
@@ -163,9 +163,9 @@
         <label for="Reference"><b>Reference / Comments / Questions</b></label><br />
         <textarea name="Reference" rows="7" cols="40" style="width: 535px"></textarea>
         </td> </tr> <tr> <td colspan="2" style="text-align: center;">
-        <div style="float: right"> <a href="https://www.100forms.com" id="lnk100" title="form to email">form to email</a></div>
-        <script src="https://www.100forms.com/js/FORMKEY:HB4QYA9BRBEG/SEND:martianmotel@gmail.com" type="text/javascript"></script>
-        <input name="skip_submit" type="submit" value="Send Application" />
+       <!-- <input name="skip_submit" type="submit" value="Send Application" /> -->
+	<input type="submit" value="Send Application">
+	<input type="reset" value="Reset">
         </td> </tr>
         </table>
         </form>
