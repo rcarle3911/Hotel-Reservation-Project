@@ -1,11 +1,11 @@
 
 <script>
   $( function() {
-    $( "#checkin" ).datepicker();
+    $( "#startDate" ).datepicker();
   } );
   
   $( function() {
-    $( "#checkout" ).datepicker();
+    $( "#endDate" ).datepicker();
   } );
 </script>
 
@@ -33,17 +33,30 @@
 
 <legend>CHECK AVAILABILITY AND RATES</legend><br>
 
+<<<<<<< HEAD
 	<form name="availability">
 		<h5>Check-in:</h5> 
 			<input type="text" id="checkin" required ng-model="vm.res.startDate">
 		<br>
 		<h5>Check-out:</h5> 
 			<input type="text" id="checkout" required ng-model="vm.res.endDate">
+=======
+	<form name="availability" action="vm.checkAvail()" method="get">
+		<h5>Check-in:</h5> 
+			<input type="text" id="startDate" required>
+		<br>
+		<h5>Check-out:</h5> 
+			<input type="text" id="endDate" required>
+>>>>>>> 6346cb9d5c9cb3ea97761051468138532c04137b
 		<br>			
 
 		<fieldset>
 			<h5>Total Guests:</h5>
+<<<<<<< HEAD
 			<select tabindex="4" ng-model="vm.res.space" required>
+=======
+			<select tabindex="4" ng-model="formInfo.space" required>
+>>>>>>> 6346cb9d5c9cb3ea97761051468138532c04137b
 				<option value="">select</option>			
 				<option value="1">1</option>
 				<option value="2">2</option>
