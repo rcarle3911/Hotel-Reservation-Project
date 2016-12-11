@@ -17,14 +17,6 @@
             <p ng-show="form.userForm.lastname.$invalid && !form.userForm.lastname.$pristine" class="help-block">Your lastname is required.</p>
         </div>
 
-        <!-- DOB -->
-        <div class="form-group">
-            <label>Date of Birth</label>
-            <input type="text" name="dob" class="form-control" ng-model="user.dob" required>
-            <p ng-show="form.userForm.dob.$invalid && !form.userForm.dob.$pristine" class="help-block">Your Date of Birth is required.</p>
-        </div>
-
-
         <!-- phone -->
         <div class="form-group">
             <label>Phone Number</label>
@@ -51,9 +43,9 @@
         <div class="form-group">
             <label>Membership</label>
             <select class="form-control" ng-model="user.group" required>
-                <option value="1" selected>Customer</option>
-                <option value="2">Employee</option>
-                <option value="3">Manager</option>
+                <option value="0" selected>Customer</option>
+                <option value="1">Employee</option>
+                <option value="2">Manager</option>
             </select>
         </div>
 
@@ -68,7 +60,8 @@
 
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" ng-click="ok()" ng-disabled="form.userForm.$invalid">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="ok()" ng-disabled="form.userForm.$invalid">OK</button>
+        <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-danger btn-lg" ng-click="delete()">Delete</button>
     </div>
 </form>
