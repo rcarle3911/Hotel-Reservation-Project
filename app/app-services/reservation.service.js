@@ -28,8 +28,8 @@
             return $http.put('/api/protected/reservation/' + _id, rsrv).then(handleSuccess, handleError);
         }
 
-        function Check(_id, rsrv) {
-            return $http.get('/api/public/reservation/check', {params: rsrv}).then(handleSuccess, handleError);
+        function Check(rsrv) {
+            return $http.get('/api/public/reservation/check', { params: rsrv }).then(handleSuccess, handleError);
         }
 
         function GetAll() {

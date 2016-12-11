@@ -1,0 +1,573 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>&quot;src/raml1/lowLevelAST&quot; | RAML JS Parser 2</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">RAML JS Parser 2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="_src_raml1_lowlevelast_.html">&quot;src/raml1/lowLevelAST&quot;</a>
+				</li>
+			</ul>
+			<h1>External module &quot;src/raml1/lowLevelAST&quot;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum tsd-parent-kind-external-module tsd-is-external"><a href="../enums/_src_raml1_lowlevelast_.commandkind.html" class="tsd-kind-icon">Command<wbr>Kind</a></li>
+								<li class="tsd-kind-enum tsd-parent-kind-external-module tsd-is-external"><a href="../enums/_src_raml1_lowlevelast_.insertionpointtype.html" class="tsd-kind-icon">Insertion<wbr>Point<wbr>Type</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.astvisitor.html" class="tsd-kind-icon">ASTVisitor</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.iastlistener.html" class="tsd-kind-icon">IASTListener</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.icompilationunit.html" class="tsd-kind-icon">ICompilation<wbr>Unit</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-kind-icon">ILow<wbr>LevelASTNode</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelenvironment.html" class="tsd-kind-icon">ILow<wbr>Level<wbr>Environment</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.iproject.html" class="tsd-kind-icon">IProject</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.itextchangecommandlistener.html" class="tsd-kind-icon">IText<wbr>Change<wbr>Command<wbr>Listener</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.includereference.html" class="tsd-kind-icon">Include<wbr>Reference</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.insertionpoint.html" class="tsd-kind-icon">Insertion<wbr>Point</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.linemapper.html" class="tsd-kind-icon">Line<wbr>Mapper</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-external"><a href="../interfaces/_src_raml1_lowlevelast_.textposition.html" class="tsd-kind-icon">Text<wbr>Position</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#buildpath" class="tsd-kind-icon">build<wbr>Path</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#initramlfile" class="tsd-kind-icon">init<wbr>Raml<wbr>File</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#insertnode" class="tsd-kind-icon">insert<wbr>Node</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#islowlevelnode" class="tsd-kind-icon">is<wbr>Low<wbr>Level<wbr>Node</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#iswebpath" class="tsd-kind-icon">is<wbr>Web<wbr>Path</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#removenode" class="tsd-kind-icon">remove<wbr>Node</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#setattr" class="tsd-kind-icon">set<wbr>Attr</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#setattrstructured" class="tsd-kind-icon">set<wbr>Attr<wbr>Structured</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#setkey" class="tsd-kind-icon">set<wbr>Key</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_src_raml1_lowlevelast_.html#toabsolutepath" class="tsd-kind-icon">to<wbr>Absolute<wbr>Path</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="buildpath" class="tsd-anchor"></a>
+					<h3>build<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">build<wbr>Path<span class="tsd-signature-symbol">(</span>reference<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, unitPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, rootPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L404">src/raml1/lowLevelAST.ts:404</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Canonic way of resolving references in RAML specs:</p>
+									<ul>
+										<li>relative reference is regarded as relative to containing unit</li>
+										<li>absolute local path (starting with slash) is regarderd as relative to root RAML</li>
+										<li>absolute web paths are regarded as such</li>
+									</ul>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>reference: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>reference to be resolved</p>
+									</div>
+								</li>
+								<li>
+									<h5>unitPath: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>path of unit containing the reference, absolute or relative to root</p>
+									</div>
+								</li>
+								<li>
+									<h5>rootPath: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>path to root RAML</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>resolved path</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="initramlfile" class="tsd-anchor"></a>
+					<h3>init<wbr>Raml<wbr>File</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Raml<wbr>File<span class="tsd-signature-symbol">(</span>root<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a>, newroot<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L280">src/raml1/lowLevelAST.ts:280</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>root: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+								<li>
+									<h5>newroot: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="insertnode" class="tsd-anchor"></a>
+					<h3>insert<wbr>Node</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">insert<wbr>Node<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a>, child<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a>, insertAfter<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_src_raml1_lowlevelast_.insertionpoint.html" class="tsd-signature-type">InsertionPoint</a>, toSeq<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L274">src/raml1/lowLevelAST.ts:274</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+								<li>
+									<h5>child: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> insertAfter: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_src_raml1_lowlevelast_.insertionpoint.html" class="tsd-signature-type">InsertionPoint</a><span class="tsd-signature-symbol"> =&nbsp;null</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> toSeq: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="islowlevelnode" class="tsd-anchor"></a>
+					<h3>is<wbr>Low<wbr>Level<wbr>Node</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Low<wbr>Level<wbr>Node<span class="tsd-signature-symbol">(</span>object<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L458">src/raml1/lowLevelAST.ts:458</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>object: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="iswebpath" class="tsd-anchor"></a>
+					<h3>is<wbr>Web<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Web<wbr>Path<span class="tsd-signature-symbol">(</span>reference<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L452">src/raml1/lowLevelAST.ts:452</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if reference points to web resource</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>reference: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="removenode" class="tsd-anchor"></a>
+					<h3>remove<wbr>Node</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Node<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a>, child<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L269">src/raml1/lowLevelAST.ts:269</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+								<li>
+									<h5>child: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="setattr" class="tsd-anchor"></a>
+					<h3>set<wbr>Attr</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Attr<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L260">src/raml1/lowLevelAST.ts:260</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="setattrstructured" class="tsd-anchor"></a>
+					<h3>set<wbr>Attr<wbr>Structured</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Attr<wbr>Structured<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a>, value<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_highlevelast_.istructuredvalue.html" class="tsd-signature-type">IStructuredValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L263">src/raml1/lowLevelAST.ts:263</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+								<li>
+									<h5>value: <a href="../interfaces/_src_raml1_highlevelast_.istructuredvalue.html" class="tsd-signature-type">IStructuredValue</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="setkey" class="tsd-anchor"></a>
+					<h3>set<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Key<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L266">src/raml1/lowLevelAST.ts:266</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-signature-type">ILowLevelASTNode</a></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_src_raml1_lowlevelast_.astchangecommand.html" class="tsd-signature-type">ASTChangeCommand</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="toabsolutepath" class="tsd-anchor"></a>
+					<h3>to<wbr>Absolute<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Absolute<wbr>Path<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reference<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/raml-org/raml-js-parser-2/blob/develop/src/raml1/lowLevelAST.ts#L432">src/raml1/lowLevelAST.ts:432</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Resolving reference against context</p>
+									<ul>
+										<li>absolute local and web references are regarded as such</li>
+										<li>relative references are regarded as relative to the context</li>
+									</ul>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>context: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>absolute local or web path</p>
+									</div>
+								</li>
+								<li>
+									<h5>reference: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>resolved reference</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html">"src/raml1/low<wbr>LevelAST"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module tsd-is-external">
+						<a href="../enums/_src_raml1_lowlevelast_.commandkind.html" class="tsd-kind-icon">Command<wbr>Kind</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module tsd-is-external">
+						<a href="../enums/_src_raml1_lowlevelast_.insertionpointtype.html" class="tsd-kind-icon">Insertion<wbr>Point<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.astvisitor.html" class="tsd-kind-icon">ASTVisitor</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.iastlistener.html" class="tsd-kind-icon">IASTListener</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.icompilationunit.html" class="tsd-kind-icon">ICompilation<wbr>Unit</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelastnode.html" class="tsd-kind-icon">ILow<wbr>LevelASTNode</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.ilowlevelenvironment.html" class="tsd-kind-icon">ILow<wbr>Level<wbr>Environment</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.iproject.html" class="tsd-kind-icon">IProject</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.itextchangecommandlistener.html" class="tsd-kind-icon">IText<wbr>Change<wbr>Command<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.includereference.html" class="tsd-kind-icon">Include<wbr>Reference</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.insertionpoint.html" class="tsd-kind-icon">Insertion<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.linemapper.html" class="tsd-kind-icon">Line<wbr>Mapper</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="../interfaces/_src_raml1_lowlevelast_.textposition.html" class="tsd-kind-icon">Text<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#buildpath" class="tsd-kind-icon">build<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#initramlfile" class="tsd-kind-icon">init<wbr>Raml<wbr>File</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#insertnode" class="tsd-kind-icon">insert<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#islowlevelnode" class="tsd-kind-icon">is<wbr>Low<wbr>Level<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#iswebpath" class="tsd-kind-icon">is<wbr>Web<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#removenode" class="tsd-kind-icon">remove<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#setattr" class="tsd-kind-icon">set<wbr>Attr</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#setattrstructured" class="tsd-kind-icon">set<wbr>Attr<wbr>Structured</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#setkey" class="tsd-kind-icon">set<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_src_raml1_lowlevelast_.html#toabsolutepath" class="tsd-kind-icon">to<wbr>Absolute<wbr>Path</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

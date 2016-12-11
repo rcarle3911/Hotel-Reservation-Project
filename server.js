@@ -1,10 +1,13 @@
 require('rootpath')();
+var osprey = require('osprey');
 var express = require('express');
+var join = require('path').join;
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
+var path = join(__dirname, 'controllers', 'api', 'api.raml');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
@@ -37,8 +40,10 @@ app.get('/update', function (req, res) {
 	return res.redirect('/app');
 });
 
+//app.use('/api', osprey.server(path));
+
 app.listen(3000);
-console.log("Server running on port 3000");
+console.log("Server listening on port 3000");
 
 //Runs database tests
 //var test = require('test');

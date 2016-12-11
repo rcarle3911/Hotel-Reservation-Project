@@ -1,15 +1,3 @@
-
-<script>
-  $( function() {
-    $( "#checkin" ).datepicker();
-  } );
-  
-  $( function() {
-    $( "#checkout" ).datepicker();
-  } );
-</script>
-
-
 <div id="background">
 <br>
 
@@ -33,17 +21,17 @@
 
 <legend>CHECK AVAILABILITY AND RATES</legend><br>
 
-	<form name="availability" action="availability.html" onsubmit="return userAvailability()" method="post">
+	<form name="availability">
 		<h5>Check-in:</h5> 
-			<input type="text" id="checkin" required>
+			<input type="date" required ng-model="vm.res.startDate">
 		<br>
 		<h5>Check-out:</h5> 
-			<input type="text" id="checkout" required>
+			<input type="date" required ng-model="vm.res.endDate">
 		<br>			
 
 		<fieldset>
 			<h5>Total Guests:</h5>
-			<select tabindex="4" ng-model="formInfo.Adults" required>
+			<select tabindex="4" ng-model="vm.res.space" required>
 				<option value="">select</option>			
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -58,7 +46,7 @@
 		<br>
 		<div id="check">
 			<!--Button maps to checkAvail function in app/home/index.controller.js -->
-			<button type="submit" ng-click="saveData()" ng-click ="vm.checkAvail()">Check Availability</button>	
+			<button type="submit" ng-click="vm.checkAvail()">Check Availability</button>	
 		</div>
 	</form>
 </form>
