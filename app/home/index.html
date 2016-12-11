@@ -1,15 +1,3 @@
-
-<script>
-  $( function() {
-    $( "#startDate" ).datepicker();
-  } );
-  
-  $( function() {
-    $( "#endDate" ).datepicker();
-  } );
-</script>
-
-
 <div id="background">
 <br>
 
@@ -35,10 +23,10 @@
 
 	<form name="availability">
 		<h5>Check-in:</h5> 
-			<input type="text" id="startDate" required ng-model="vm.res.startDate">
+			<input type="date" required ng-model="vm.res.startDate">
 		<br>
 		<h5>Check-out:</h5> 
-			<input type="text" id="endDate" required ng-model="vm.res.endDate">
+			<input type="date" required ng-model="vm.res.endDate">
 		<br>			
 
 		<fieldset>

@@ -13,7 +13,6 @@
     function Controller($state, FlashService, ResService) {
         var vm = this; // Allows you to interact with the page. Think of it as $scope, but less chance of conflict.
         vm.res = {};
-        
         vm.checkAvail = checkAvail; // Links the checkAvail function defined here with checkAvail on the page through vm.
 
         initController();
@@ -33,6 +32,7 @@
             //Send reservation information to database
             //What do you expect back?
             console.log(vm.res);
+
             ResService.Check(vm.res)
                 .then(function () {
                     FlashService.Success("Dates Available");
