@@ -259,14 +259,14 @@ function isAvailable(resrvParam) {
         var deferred = Q.defer();
 
         db.rooms.count(
-            { rmType: rmType },
+            { rmType: mongojs.ObjectID(rmType) },
             function (err, total) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
                 db.futureRes.count(
                     { $and: [
                         { startDate: { $lte: resrvParam.endDate } },
                         { endDate: { $gte: resrvParam.startDate } },
-                        { roomType: resrvParam.roomType }
+                        { roomType: mongojs.ObjectID(rmType) }
                     ]},
                     function (err, futureCount) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
@@ -277,7 +277,7 @@ function isAvailable(resrvParam) {
                                 { $and: [
                                     { startDate: { $lte: resrvParam.endDate } },
                                     { endDate: { $gte: resrvParam.startDate } },
-                                    { roomType: resrvParam.roomType }
+                                    { roomType: mongojs.ObjectID(rmType) }
                                 ]},
                                 function (err, currentCount) {
                                     if (err) deferred.reject(err.name + ': ' + err.message)
