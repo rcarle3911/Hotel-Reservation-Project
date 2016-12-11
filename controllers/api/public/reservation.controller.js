@@ -15,6 +15,7 @@ router.get('/check', isAvailable);
 module.exports = router;
 
 function reserve(req, res) {
+	console.log("Request received");
     resService.create(req.body)
         .then(function () {
             res.sendStatus(200);
@@ -25,6 +26,7 @@ function reserve(req, res) {
 }
 
 function isAvailable(req, res) {
+	console.log("Request received");
 	resService.isAvailable(req.params)
 	.then(function(stuff) {
 		//res.sendStatus(200); //# of rooms available?
