@@ -1,14 +1,14 @@
 <div class="container-fluid" ng-controller="userCtrl">
     <div class="col-md-12">
-        <div class="col-md-1 pull-left" style="Padding: 5px;" ng-controller="modalUser">
-            <button type="button" class="btn btn-info btn-md" ng-click="showForm()">
+        <div class="col-md-1 pull-left" style="Padding: 5px;">
+            <button type="button" class="btn btn-info btn-md" ng-click="open()">
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
         <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
-                <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtFilter.text" />
-                <span ng-if="txtFilter.text" ng-click="clearFilter()" class="glyphicon glyphicon-remove form-control-feedback" 
-                style="cursor: pointer; pointer-events: all; margin-top: 5px;"
-                    uib-tooltip="clear">
+            <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtFilter.text"
+            />
+            <span ng-if="txtFilter.text" ng-click="clearFilter()" class="glyphicon glyphicon-remove form-control-feedback" style="cursor: pointer; pointer-events: all; margin-top: 5px;"
+                uib-tooltip="clear">
                 </span>
         </div>
     </div>
@@ -53,8 +53,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="user in users | filter:txtFilter.text | orderBy:orderByField:reverseSort">
-                    <td class="text-center" ng-controller="modalUser">
-                        <button type="button" class="btn btn-warning btn-lg" ng-click="showForm()">
+                    <td class="text-center">
+                        <button type="button" class="btn btn-warning btn-lg" ng-click="open(user)">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User {{user._id}}</button>
                     </td>
                     <td>{{user.lastname}}, {{user.firstname}}</td>
@@ -62,11 +62,10 @@
                     <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
                     <td class="text-center">
-                        <button ng-show="user.Status" type="button" class="btn btn-danger btn-lg">
-                            <i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disable</button>
-                        <button ng-hide="user.Status" type="button" class="btn btn-success btn-lg">
-                            <i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enable</button>
+                        <div ng-show="user.Status"><i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disabled</div>
+                        <div ng-hide="user.Status"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enabled</div>
                     </td>
+                    
                 </tr>
             </tbody>
         </table>
