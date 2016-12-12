@@ -55,20 +55,7 @@
                     </td>
                     <td>{{user.lastname}}, {{user.firstname}}</td>
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
-                    <td><script>
-                        if(user.group == 0)
-                            {
-                                return "Customer"; 
-                            }
-                            else if ({{user.group}} == 1)
-                            { 
-                                return "Employee"; 
-                            }
-                            else if ({{user.group}} == 2)
-                            { 
-                                return "Manager"; 
-                            }
-                    </script></td>
+                    <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
                     <td>{{user.status}}</td>
                 </tr>
