@@ -5,7 +5,7 @@
         .module('login')
         .controller('Registration.IndexController', Controller);
 
-    function Controller(LoginService, FlashService) {
+    function Controller($window, LoginService, FlashService) {
         var vm = this; 
 
         vm.user = null;
@@ -20,7 +20,8 @@
         function register() {
             LoginService.Create(vm.user)
             .then(function () {
-                FlashService.Success('Registration Successful');
+                FlashService.Success('Registration Successful', true);
+                $window.location = '/login';
             })
             .catch(function (error) {
                 FlashService.Error(error);
