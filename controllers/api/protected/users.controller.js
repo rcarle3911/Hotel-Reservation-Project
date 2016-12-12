@@ -73,7 +73,7 @@ function editUser(req, res) {
 
 function deleteUser(req, res) {
     var userId = req.user.sub;
-    if (req.params._id !== userId || req.user.group < 1) {
+    if (req.params._id !== userId && req.user.group < 1) {
         return res.status(401).send('You can only delete your own account');
     }
 
