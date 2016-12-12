@@ -98,6 +98,8 @@ function editGroup(_id, group) {
             deferred.resolve(doc);
         }
     );
+
+    return deferred.promise;
 }
 
 function edit(_id, userParam) {
@@ -131,7 +133,7 @@ function edit(_id, userParam) {
             phone: userParam.phone,
             email: userParam.email,
             address: userParam.address,
-            dateofbirth: userParam.dateofbirth   
+            dob: userParam.dateofbirth   
         };
 
         if (userParam.password) {
