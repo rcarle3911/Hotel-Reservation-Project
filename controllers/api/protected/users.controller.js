@@ -92,7 +92,7 @@ function getUserByEmail(req, res) {
 
 function editGroup(req, res) {
     if (req.user.group < 1) res.status(401).send("Only employees can edit groups");
-    else userService.editGroup(req.params._id, Number.parseInt(req.body.group))
+    else userService.editGroup(req.params._id, Number.parseInt(req.body))
         .then(function () {
             res.sendStatus(200);
         })
