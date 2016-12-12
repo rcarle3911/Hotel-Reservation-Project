@@ -9,7 +9,7 @@ router.get('/current', getCurrentUser);
 router.get('/:_id', getUserByID);
 router.put('/:_id', editUser);
 router.delete('/:_id', deleteUser);
-router.get('/invoice/:id', getInvoice);
+router.get('/invoice/:_id', getInvoice);
 router.get('/email/:email', getUserByEmail);
 
 module.exports = router;
@@ -49,21 +49,22 @@ function getCurrentUser(req, res) {
 
 function editUser(req, res) {
     
-    /**
-     * @todo give this api access to the JWT token
-     */
     var userId = req.user.sub;
-    if (req.params._id !== userId) {
-        // can only update own account
-        /**
-         * @todo protected path will allow employees and managers to edit anyone.
-         */
+    if (req.params._id !== userId && req.user.group < 1) {
         return res.status(401).send('You can only update your own account');
     }
 
-    userService.edit(userId, req.body)
+    userService.edit(req.params._id, req.body)
         .then(function () {
-            res.sendStatus(200);
+            if (req.user.group > 1 && req.body.group != null) {
+                userService.editGroup(req.params._id, req.body.group)
+                .then(function () {
+                    res.sendStatus(200);
+                })
+                .catch(function (err) {
+                    res.status(400).send(err);
+                })
+            } else res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);
@@ -72,11 +73,7 @@ function editUser(req, res) {
 
 function deleteUser(req, res) {
     var userId = req.user.sub;
-    if (req.params._id !== userId) {
-        // can only delete own account
-        /**
-         * @todo protected path will allow employees to delete any customer. managers can delete anyone.
-         */
+    if (req.params._id !== userId && req.user.group < 1) {
         return res.status(401).send('You can only delete your own account');
     }
 
@@ -93,7 +90,7 @@ function getUserByEmail(req, res) {
     userService.getUserByEmail(req.params.email)
         .then(function (user) {
             if (!user) res.status(404).send("No user found with " + req.params.email);
-            res.send(user);
+            else res.send(user);
         })
         .catch(function (err) {
             res.status(400).send(err);

@@ -8,11 +8,7 @@
 	
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">    
-
-	<!-- Datepicker theme -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">    
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">      
     
 	<title>Martian Motel</title>
     
@@ -73,7 +69,7 @@
 		  <h4>Employees</h4>
 		  <a href="{{isLoggedIn ? '/emp' : '/login'}}">{{isLoggedIn ? 'Employee Site' : 'Login'}}</a>
 		  <br>
-		  <a href="/careers">Careers</a>
+		  <a href="{active: activeTab === 'careers'}" ui-sref="careers">Careers</a>
           <br>
           <a href="/api/public">API</a>
         </div>

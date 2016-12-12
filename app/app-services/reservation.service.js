@@ -17,7 +17,7 @@
         return service;
 
         function Create(rsrv) {
-            return $http.post('/api/public/reservation', rsrv).then(handleSuccess, handleError);
+            return $http.post('/api/public/reservation/', rsrv).then(handleSuccess, handleError);
         }
 
         function Delete(_id) {
