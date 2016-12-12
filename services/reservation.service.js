@@ -148,11 +148,7 @@ function editRes(_id, resrvParam, group) {
 function createRes(resrvParam) {
     var deferred = Q.defer();
     var user = {firstName: "Guest"};
-    db.rmTypes.find(
-        { name: resrvParam.roomType },
-        function (err, rmTypes) {
-            resrvParam.roomType = rmTypes[0]._id
-        });
+
     db.users.findOne(
         { email: resrvParam.userEmail },
         function (err, userFound) {
