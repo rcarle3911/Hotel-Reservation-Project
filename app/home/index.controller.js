@@ -36,7 +36,6 @@
             ResService.Check(vm.res)
                 .then(function () {
                     FlashService.Success("Dates Available");
-					$window.location = '/reservations';
                 })
                 .catch(function (err) {
                     FlashService.Error(err);
