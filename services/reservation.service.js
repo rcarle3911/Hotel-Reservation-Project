@@ -148,7 +148,11 @@ function editRes(_id, resrvParam, group) {
 function createRes(resrvParam) {
     var deferred = Q.defer();
     var user = {firstName: "Guest"};
-
+    db.rmTypes.find(
+        { name: resrvParam.roomType },
+        function (err, rmTypes) {
+            resrvParam.roomType = rmTypes[0]._id
+        });
     db.users.findOne(
         { email: resrvParam.userEmail },
         function (err, userFound) {
@@ -163,33 +167,30 @@ function createRes(resrvParam) {
                     deferred.reject(err);
                 })
             }
+        });
+        
+        function createReservation() {
+            db.futureRes.insert(
+                resrvParam,
+                function (err, doc) {
+                    if (err) deferred.reject(err.name + ': ' + err.message);
+                    //Send email confirmation
+                    var htmlstream = fs.createReadStream('./services/resConfEmail.html');
+                    transporter.sendMail({
+                        from: '"Martian Motel" <motelmartian@gmail.com>',
+                        to: resrvParam.userEmail,
+                        subject: 'Welcome to the Martian Motel ' + resrvParam.Name,
+                        text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
+                        html: htmlstream
+                    }, function(error, info) {
+                        if (error) return console.log(error);
+                        console.log('Message sent: ' + info.response);
+                    });            
+                    deferred.resolve(doc);
+                });
+            }        
+            return deferred.promise;
         }
-    );
-
-    function createReservation() {
-        db.futureRes.insert(
-        resrvParam,
-        function (err, doc) {
-            if (err) deferred.reject(err.name + ': ' + err.message);
-            //Send email confirmation
-            var htmlstream = fs.createReadStream('./services/resConfEmail.html');
-            transporter.sendMail({
-                from: '"Martian Motel" <motelmartian@gmail.com>',
-                to: resrvParam.userEmail,
-                subject: 'Welcome to the Martian Motel ' + user.firstname,
-                text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
-                html: htmlstream
-            }, function(error, info) {
-                if (error) return console.log(error);
-                console.log('Message sent: ' + info.response);
-            });            
-            deferred.resolve(doc);
-            }
-        );
-    }        
-
-    return deferred.promise;
-}
 
 function _delete(_id) {
     var deferred = Q.defer();
@@ -227,7 +228,7 @@ function _delete(_id) {
  */
 function isAvailable(resrvParam) {
     var deferred = Q.defer();
-
+    
     if (resrvParam.roomType) {
         typeCount(resrvParam.roomType)
         .then(function () {
@@ -249,16 +250,15 @@ function isAvailable(resrvParam) {
                         deferred.resolve();
                     });
                 }
-                setTimeout(function() {
-                    if (!avail) deferred.reject("Timed Out");
-                }, 5000);
+                //setTimeout(function() {
+                //    
+                //}, 5000);
             }
         );
     }
 
     function typeCount (rmType) {
         var deferred = Q.defer();
-
         db.rooms.count(
             { rmType: mongojs.ObjectID(rmType) },
             function (err, total) {

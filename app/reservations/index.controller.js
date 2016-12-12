@@ -5,21 +5,22 @@
         .module('app')
         .controller('Res.IndexController', Controller);
 
-    function Controller($state, FlashService, $scope) {
+    function Controller($state, ResService, FlashService, $scope) {
+        var vm = this;
 
-        $scope.formInfo = {}
-        $scope.saveData = function() {
-                console.log($scope.formInfo);
-        };
-
-        $scope.submitForm = function(isValid) {
-            // check to make sure the form is completely valid
-            if (isValid) {
-                alert('Our form is amazing');
+        vm.formInfo = {}
+        vm.submitForm = submitForm;
+        
+        function submitForm() {
+            ResService.Create(vm.formInfo)
+                .then(function () {
+                    FlashService.Success('Reservation Completed');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
             }
-        };
-  
-    }
+        }
 
     
 })();
