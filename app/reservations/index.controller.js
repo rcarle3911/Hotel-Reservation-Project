@@ -7,7 +7,6 @@
 
     function Controller($state, ResService, FlashService, $scope) {
         var vm = this;
-
         vm.formInfo = {}
         vm.submitForm = submitForm;
         
@@ -16,8 +15,8 @@
                 .then(function () {
                     FlashService.Success('Reservation Completed');
                 })
-                .catch(function (error) {
-                    FlashService.Error(error);
+                .catch(function (err) {
+                    FlashService.Error(err);
                 });
             }
         }

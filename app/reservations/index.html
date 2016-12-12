@@ -1,13 +1,3 @@
-<script>
-  $( function() {
-    $( "#checkin" ).datepicker();
-  } );
-  
-  $( function() {
-    $( "#checkout" ).datepicker();
-  } );
-</script>
-
 <div id="background3">
     <br>
 
@@ -58,14 +48,16 @@
                         <option value="Queen Deluxe">Queen Deluxe</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="arrival">Arrival</label>
-                    <input type="text" class="form-control" id="checkin" placeholder="01/15/2017" ng-model="vm.formInfo.startDate" required />
+				<br>
+                <div class="form-group2>
+                    <label for="arrival">Check In</label>
+                    <input type="date" required ng-model="vm.res.startDate"  />
+					
+         
+                    <label for="departing">Check Out</label>
+                    <input type="date" required ng-model="vm.res.endDate"  />
                 </div>
-                <div class="form-group">
-                    <label for="departing">Departing</label>
-                    <input type="text" class="form-control" id="checkout" placeholder="01/16/2017" ng-model="vm.formInfo.endDate" required />
-                </div>
+				<br>
                 <div class="form-group">
                         <label for="adults">Total Guests</label>
                         <select required class="form-control" ng-model="vm.formInfo.numGuests">
@@ -78,7 +70,8 @@
 							<option value="7">7</option>
 							<option value="8">8</option>
                         </select>
-                </div>    
+                </div> 
+   
             </div>
         </div>
 
