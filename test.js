@@ -93,7 +93,7 @@
 	}
 
 	function elevateUser() {
-		userService.editGroup(user._id, group.MANAGER)
+		userService.editGroup(user._id, "2")
 			.then(function () {
 				console.log("User is now manager");
 			})
