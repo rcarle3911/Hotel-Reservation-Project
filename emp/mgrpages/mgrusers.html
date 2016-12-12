@@ -57,10 +57,7 @@
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
-                    <td class="text-center">
-                        <div ng-show="user.Status"><i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disabled</div>
-                        <div ng-hide="user.Status"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enabled</div>
-                    </td>
+                    <td>{{user.status}}</td>
                 </tr>
             </tbody>
         </table>
