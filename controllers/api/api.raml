@@ -28,7 +28,13 @@ types:
       phone: Phone
       email: string
       address: string
-      password: Password
+      password:
+        type: Password
+        required: false
+      group:
+        type: string
+        pattern: ^[0-2]$
+        required: false
   Users:
     type: User[]
     uniqueItems: true
@@ -117,6 +123,10 @@ types:
       body:
         application/json:
           type: User
+            properties:
+              password:
+                type: Password
+                required: true
   /forgotPass:
     post:
       description: |

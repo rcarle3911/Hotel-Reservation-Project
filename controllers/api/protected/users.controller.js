@@ -51,39 +51,39 @@ function editUser(req, res) {
     
     var userId = req.user.sub;
     if (req.params._id !== userId && req.user.group < 1) {
-        return res.status(401).send('You can only update your own account');
+        res.status(401).send('You can only update your own account');
+    } else {
+        userService.edit(req.params._id, req.body)
+            .then(function () {
+                if (req.user.group > 1 && req.body.group != null) {
+                    userService.editGroup(req.params._id, req.body.group)
+                    .then(function () {
+                        res.sendStatus(200);
+                    })
+                    .catch(function (err) {
+                        res.status(400).send(err);
+                    })
+                } else res.sendStatus(200);
+            })
+            .catch(function (err) {
+                res.status(400).send(err);
+            });
     }
-
-    userService.edit(req.params._id, req.body)
-        .then(function () {
-            if (req.user.group > 1 && req.body.group != null) {
-                userService.editGroup(req.params._id, req.body.group)
-                .then(function () {
-                    res.sendStatus(200);
-                })
-                .catch(function (err) {
-                    res.status(400).send(err);
-                })
-            } else res.sendStatus(200);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
 }
 
 function deleteUser(req, res) {
     var userId = req.user.sub;
     if (req.params._id !== userId && req.user.group < 1) {
-        return res.status(401).send('You can only delete your own account');
+        res.status(401).send('You can only delete your own account');
+    } else {
+        userService.delete(userId)
+            .then(function () {
+                res.sendStatus(200);
+            })
+            .catch(function (err) {
+                res.status(400).send(err);
+            });
     }
-
-    userService.delete(userId)
-        .then(function () {
-            res.sendStatus(200);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
 }
 
 function getUserByEmail(req, res) {
