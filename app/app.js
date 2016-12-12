@@ -51,6 +51,11 @@
                 url: '/gallery',
                 templateUrl: 'gallery/index.html',
                 data: { activeTab: 'gallery' }
+            })
+            .state('careers', {
+                url: '/careers',
+                templateUrl: 'careers/index.html',
+                data: { activeTab: 'careers' }
             });
     }
 
