@@ -11,7 +11,6 @@ router.put('/:_id', editUser);
 router.delete('/:_id', deleteUser);
 router.get('/invoice/:_id', getInvoice);
 router.get('/email/:email', getUserByEmail);
-router.post('/group/:_id', editGroup);
 
 module.exports = router;
 
@@ -51,13 +50,21 @@ function getCurrentUser(req, res) {
 function editUser(req, res) {
     
     var userId = req.user.sub;
-    if (req.params._id !== userId || req.user.group > 0) {
+    if (req.params._id !== userId && req.user.group < 1) {
         return res.status(401).send('You can only update your own account');
     }
 
-    userService.edit(userId, req.body)
+    userService.edit(req.params._id, req.body)
         .then(function () {
-            res.sendStatus(200);
+            if (req.user.group > 1 && req.body.group != null) {
+                userService.editGroup(req.params._id, req.body.group)
+                .then(function () {
+                    res.sendStatus(200);
+                })
+                .catch(function (err) {
+                    res.status(400).send(err);
+                })
+            } else res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);
@@ -66,7 +73,7 @@ function editUser(req, res) {
 
 function deleteUser(req, res) {
     var userId = req.user.sub;
-    if (req.params._id !== userId || req.user.group > 0) {
+    if (req.params._id !== userId || req.user.group < 1) {
         return res.status(401).send('You can only delete your own account');
     }
 
@@ -84,17 +91,6 @@ function getUserByEmail(req, res) {
         .then(function (user) {
             if (!user) res.status(404).send("No user found with " + req.params.email);
             else res.send(user);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
-}
-
-function editGroup(req, res) {
-    if (req.user.group < 1) res.status(401).send("Only employees can edit groups");
-    else userService.editGroup(req.params._id, Number.parseInt(req.body))
-        .then(function () {
-            res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);

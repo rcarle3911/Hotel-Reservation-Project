@@ -191,13 +191,6 @@ types:
               body:
                 application/json:
                   type: User
-    /group/{_id}:
-      post:
-        description: |
-          Edit which group the user belongs to.
-        body:
-          application/json:
-            type: ^[0-2]$
   /reservation:
     get:
       description: |

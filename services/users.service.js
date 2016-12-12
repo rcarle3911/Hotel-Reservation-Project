@@ -89,7 +89,8 @@ function create(userParam) {
  */
 function editGroup(_id, group) {
     var deferred = Q.defer();
-
+    group = Number.parseInt(group);
+    
     db.user.update(
         { _id: mongojs.ObjectID(_id) },
         { group: group},
