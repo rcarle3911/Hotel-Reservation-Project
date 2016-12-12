@@ -87,15 +87,17 @@ function create(userParam) {
 /**
  * This function should be protected.
  */
-function editGroup(_id, group) {
+function editGroup(_id, groupParam) {
     var deferred = Q.defer();
-    group = Number.parseInt(group);
     
-    db.user.update(
+    console.log("Elevate to group: " + groupParam);
+    
+    db.users.update(
         { _id: mongojs.ObjectID(_id) },
-        { group: group},
+        { $set: { group: groupParam } },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            console.log(doc);
             deferred.resolve(doc);
         }
     );
