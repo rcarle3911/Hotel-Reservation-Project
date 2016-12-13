@@ -30,15 +30,25 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
             }
         );
 
+    $scope.getRoomSpace = function (room) {
+        if (!$scope.rmtypes) {
+            return;
+        }
+        for (var c = 0; c < $scope.rmtypes.length; c++) {
+            var rt = $scope.rmtypes[c];
+            if (rt._id == room.rmType) { 
+                return rt.space;;
+            }
+        }
+    };
+    
     $scope.getRoomType = function (room) {
-        console.log(room);
         if (!$scope.rmtypes) {
             return;
         }
         for (var c = 0; c < $scope.rmtypes.length; c++) {
             var rt = $scope.rmtypes[c];
             if (rt._id == room.rmType) {
-                console.log(rt.name);
                 return rt.name;
             }
         }
@@ -85,6 +95,9 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
     $scope.room = room;
     $scope.rmtypes = [];
 
+    $scope.min = 1; 
+    $scope.max = 7; 
+
     $scope.cancelRoom = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -123,21 +136,26 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
             );
         $modalInstance.close();
     };
-    $scope.avail = function (request, response) {
-        console.log(room._id);
-        $http.patch('/api/protected/room/' + room._id, {
-                _id: room._id
-            })
-            .then(
-                function (response) {
-                    // success callback
-                    console.log("Toggle Availbility Sucessful");
-                },
-                function (response) {
-                    // failure callback
-                    console.log("Failed to Delete");
-                    console.log(JSON.stringify(response));
-                }
-            );
+     $scope.getRoomSpace = function (room) {
+        if (!$scope.rmtypes) {
+            return;
+        }
+        for (var c = 0; c < $scope.rmtypes.length; c++) {
+            var rt = $scope.rmtypes[c];
+            if (rt._id == room.rmType) {
+                $scope.selectedCapacity = rt.space; 
+                return rt.space;
+            }
+        }
+    };
+});
+
+angular.module('app').filter('range', function() {
+    return function(input, min, max) {
+        min = parseInt(min, 10);
+        max = parseInt(max, 10);
+        for (var i = min; i < max; i++)
+            input.push(i);
+        return input;
     };
 });
