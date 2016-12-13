@@ -40,10 +40,11 @@ app.get('/update', function (req, res) {
 	return res.redirect('/app');
 });
 
+//API Validator
 //app.use('/api', osprey.server(path));
 
 app.listen(3000);
 console.log("Server listening on port 3000");
 
 //Runs database tests, adds manager, rooms, reservations, rmtypes.
-var test = require('test');
+//var test = require('test');

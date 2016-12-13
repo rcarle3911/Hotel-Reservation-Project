@@ -6,11 +6,11 @@ var userService = require('services/users.service');
 // Routes to receive HTTP requests
 router.get('/', getUsers);
 router.get('/current', getCurrentUser);
+router.get('/invoice/:_id', getInvoice);
+router.get('/email/:email', getUserByEmail);
 router.get('/:_id', getUserByID);
 router.put('/:_id', editUser);
 router.delete('/:_id', deleteUser);
-router.get('/invoice/:_id', getInvoice);
-router.get('/email/:email', getUserByEmail);
 
 module.exports = router;
 

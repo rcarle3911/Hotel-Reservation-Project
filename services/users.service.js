@@ -89,12 +89,12 @@ function create(userParam) {
  */
 function editGroup(_id, groupParam) {
     var deferred = Q.defer();
-    
+    var group = Number.parseInt(groupParam);
     console.log("Elevate to group: " + groupParam);
     
     db.users.update(
         { _id: mongojs.ObjectID(_id) },
-        { $set: { group: groupParam } },
+        { $set: { group: group } },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             console.log(doc);
