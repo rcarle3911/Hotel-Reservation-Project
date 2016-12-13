@@ -286,6 +286,7 @@ function getUserByEmail(email) {
 
     db.users.findOne(
         { email: email },
+        { password: 0 }, // Excludes password field
         function (err, user) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             deferred.resolve(user);
