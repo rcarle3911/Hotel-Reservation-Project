@@ -20,6 +20,7 @@
     <script src="/emp/emp.js"></script>
     <script src="/emp/mgrpages/controllers/manager.controller.js"></script>
     <script src="/emp/mgrpages/controllers/mgrusers.controller.js"></script>
+    <script src="/emp/mgrpages/controllers/mgrrooms.controller.js"></script>
     <script src="/emp/pages/reservations.module.js"></script>
     <script src="/emp/pages/reservations.component.js"></script>
 </head>
@@ -51,34 +52,6 @@
     <div id="logo">
         <a href="/app"><img src="/app/app-content/textlogo.png" /></a>
     </div>
-    <!--<div ng-controller="EmpCtrl as view">
-        <tabset>
-            <tab>
-                <tab-heading>
-                   <h4><i class='glyphicon glyphicon-calendar'>  Reservations</i></h4>
-                </tab-heading>
-                <ng-include src="'/emp/pages/reservations.html'"></ng-include>
-         </tab>
-            <tab>
-                <tab-heading>
-                    <h4><i class='glyphicon glyphicon-log-in'>  Check In </i></h4>
-                </tab-heading>
-                <reservations action='checkin'></reservations>
-            </tab>
-            <tab>
-                <tab-heading>
-                   <h4><i class='glyphicon glyphicon-log-out'>  Check-Out </i></h4>
-                </tab-heading>
-                <reservations action='checkout'></reservations>
-            </tab>
-            <tab>
-                <tab-heading>
-                   <h4><i class='glyphicon glyphicon-wrench'>  Management </i></h4>
-                </tab-heading>
-                <ng-include src="'/emp/mgrpages/manager.html'"></ng-include>                
-            </tab>
-        </tabset>
-        </div>-->
     <div ng-controller="EmpCtrl">
         <tabset>
             <tab ng-repeat="tab in tabs">

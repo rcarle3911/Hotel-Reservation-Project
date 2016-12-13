@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3>Add (Edit) Rooms</h3>
+</div>
+<form name="form.roomForm" ng-submit="submitForm()" novalidate>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Room Number</label>
+            <input type="text" name="num" class="form-control" ng-model="room.num" required>
+            <p ng-show="form.roomForm.num.$invalid && !form.roomForm.nnum.$pristine" class="help-block">A Room number is required.</p>
+        </div>
+        <div class="form-group">
+            <label>Room Type</label>
+            <input type="text" name="rmType" class="form-control" ng-model="room.rmType" required>
+            <p ng-show="form.roomForm.rmType.$invalid && !form.roomForm.rmType.$pristine" class="help-block">Room Type is required.</p>
+        </div>
+        
+        <!-- Membership -->
+        <div class="form-group">
+            <label>Room Type</label>
+            <select class="form-control" ng-model="room.rmType" required ng-options="rt._id as rt.name for rt in rmtypes">"
+            
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Room Available</label>
+            <button ng-show="!room.avail" class="btn btn-danger btn-lg" ng-click="avail(room)">{{room.avail}}</button>
+            <button ng-show="room.avail" class="btn btn-success btn-lg" ng-click="avail(room)">{{room.avail}}</button>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="okRoom()" ng-disabled="form.roomFrom.$invalid">Update</button>
+        <button class="btn btn-warning btn-lg" ng-click="cancelRoom()">Cancel</button>
+    </div>
+</form>

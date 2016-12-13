@@ -48,16 +48,6 @@
                 <option value="2">Manager</option>
             </select>
         </div>
-
-         <!-- Membership --> 
-        <div class="form-group">
-            <label>Status</label>
-            <select class="form-control" ng-model="user.status" required>
-                <option value="Enabled" selected>Enabled</option>
-                <option value="Disabled">Disabled</option>
-            </select>
-        </div>
-
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-lg" ng-click="ok()" ng-disabled="form.userForm.$invalid">OK</button>
