@@ -4,7 +4,7 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
     $scope.reverseRoomSort = false;
 
     $scope.rooms = [];
-    //$scope.rmtypes = [];
+    $scope.rmtypes = [];
 
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
@@ -15,28 +15,51 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
     });
 
     // //not working yet
-    // $http.get('/api/protected/room/type')
-    //     .then(
-    //         function (res) {
-    //             $scope.rmtypes = res.data;
-    //             console.log(JSON.stringify(res.data));
-    //             console.log("API room Type pull:");
-    //             console.log($scope.rmtypes);
-    //         },
-    //         function (res) {
-    //             // failure callback
-    //             console.log("Failed to pull room types");
-    //             console.log(JSON.stringify(res));
+    $http.get('/api/protected/room/type')
+        .then(
+            function (res) {
+                $scope.rmtypes = res.data;
+                console.log(JSON.stringify(res.data));
+                console.log("API room Type pull:");
+                console.log($scope.rmtypes);
+            },
+            function (res) {
+                // failure callback
+                console.log("Failed to pull room types");
+                console.log(JSON.stringify(res));
+            }
+        );
 
-    //         }
-    //     );
+    $scope.getRoomSpace = function (room) {
+        if (!$scope.rmtypes) {
+            return;
+        }
+        for (var c = 0; c < $scope.rmtypes.length; c++) {
+            var rt = $scope.rmtypes[c];
+            if (rt._id == room.rmType) { 
+                return rt.space;;
+            }
+        }
+    };
+    
+    $scope.getRoomType = function (room) {
+        if (!$scope.rmtypes) {
+            return;
+        }
+        for (var c = 0; c < $scope.rmtypes.length; c++) {
+            var rt = $scope.rmtypes[c];
+            if (rt._id == room.rmType) {
+                return rt.name;
+            }
+        }
+    };
 
     $scope.clearRoomFilter = function () {
         $scope.txtRoomFilter = null;
     };
 
     $scope.deleteRoom = function (_room) {
-        console.log(_room); 
+        console.log(_room);
         $http.delete('/api/protected/room/' + _room._id, {
                 _id: _room._id
             })
@@ -71,6 +94,9 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
 app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, $http) {
     $scope.room = room;
     $scope.rmtypes = [];
+
+    $scope.min = 1; 
+    $scope.max = 7; 
 
     $scope.cancelRoom = function () {
         $modalInstance.dismiss('cancel');
@@ -110,21 +136,26 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
             );
         $modalInstance.close();
     };
-    $scope.avail = function (request, response) {
-        console.log(room._id);
-        $http.patch('/api/protected/room/' + room._id, {
-                _id: room._id
-            })
-            .then(
-                function (response) {
-                    // success callback
-                    console.log("Toggle Availbility Sucessful");
-                },
-                function (response) {
-                    // failure callback
-                    console.log("Failed to Delete");
-                    console.log(JSON.stringify(response));
-                }
-            );
+     $scope.getRoomSpace = function (room) {
+        if (!$scope.rmtypes) {
+            return;
+        }
+        for (var c = 0; c < $scope.rmtypes.length; c++) {
+            var rt = $scope.rmtypes[c];
+            if (rt._id == room.rmType) {
+                $scope.selectedCapacity = rt.space; 
+                return rt.space;
+            }
+        }
+    };
+});
+
+angular.module('app').filter('range', function() {
+    return function(input, min, max) {
+        min = parseInt(min, 10);
+        max = parseInt(max, 10);
+        for (var i = min; i < max; i++)
+            input.push(i);
+        return input;
     };
 });
