@@ -9,11 +9,11 @@ router.get('/', getUserRes);
 router.get('/past', getPastRes);
 router.get('/current', getPresentRes);
 router.get('/future', getFutureRes);
+router.get('/find', findRes);
 router.get('/:_id', getResByID);
 router.put('/:_id', editRes);
 router.delete('/:_id', deleteRes);
 router.patch('/:_id', checkInOut);
-router.get('/find', findRes);
 
 module.exports = router;
 
