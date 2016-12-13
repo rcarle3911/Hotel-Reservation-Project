@@ -4,7 +4,7 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
     $scope.reverseRoomSort = false;
 
     $scope.rooms = [];
-    //$scope.rmtypes = [];
+    $scope.rmtypes = [];
 
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
@@ -15,28 +15,41 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
     });
 
     // //not working yet
-    // $http.get('/api/protected/room/type')
-    //     .then(
-    //         function (res) {
-    //             $scope.rmtypes = res.data;
-    //             console.log(JSON.stringify(res.data));
-    //             console.log("API room Type pull:");
-    //             console.log($scope.rmtypes);
-    //         },
-    //         function (res) {
-    //             // failure callback
-    //             console.log("Failed to pull room types");
-    //             console.log(JSON.stringify(res));
+    $http.get('/api/protected/room/type')
+        .then(
+            function (res) {
+                $scope.rmtypes = res.data;
+                console.log(JSON.stringify(res.data));
+                console.log("API room Type pull:");
+                console.log($scope.rmtypes);
+            },
+            function (res) {
+                // failure callback
+                console.log("Failed to pull room types");
+                console.log(JSON.stringify(res));
+            }
+        );
 
-    //         }
-    //     );
+    $scope.getRoomType = function (room) {
+        console.log(room);
+        if (!$scope.rmtypes) {
+            return;
+        }
+        for (var c = 0; c < $scope.rmtypes.length; c++) {
+            var rt = $scope.rmtypes[c];
+            if (rt._id == room.rmType) {
+                console.log(rt.name);
+                return rt.name;
+            }
+        }
+    };
 
     $scope.clearRoomFilter = function () {
         $scope.txtRoomFilter = null;
     };
 
     $scope.deleteRoom = function (_room) {
-        console.log(_room); 
+        console.log(_room);
         $http.delete('/api/protected/room/' + _room._id, {
                 _id: _room._id
             })

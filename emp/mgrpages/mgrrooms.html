@@ -59,7 +59,7 @@
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit Room</button>
                     </td>
                     <td>{{room.num}}</td>
-                    <td>{{room.rmType}}</td>
+                    <td>{{getRoomType(room)}}</td>
                     <td></td>
                     <td>{{room.avail}}</td>
                     <td><button class="btn btn-danger btn-lg" ng-click="deleteRoom(room)">Delete</button></td>
