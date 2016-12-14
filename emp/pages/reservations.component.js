@@ -22,7 +22,7 @@ angular.
         
         if(!this.current)                   
             //Future Reservations for reservation and check in lists 
-            $http.get('/api/protected/reservation/past').then(function (res) {
+            $http.get('/api/protected/reservation/future').then(function (res) {
                 self.futureReservations = res.data;
           
                 self.futureReservations.forEach(function(resv){
