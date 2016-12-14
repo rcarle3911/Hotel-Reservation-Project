@@ -147,7 +147,7 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
                     console.log(JSON.stringify(response));
                 }
             );
-        loadData();
+        
         $modalInstance.close();
     };
 
