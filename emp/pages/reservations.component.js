@@ -10,6 +10,7 @@ angular.
         var self = this;
         self.futureReservations = [];
         self.currentReservations = [];
+        self.roomTypes = [];
         
         if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
         
@@ -17,7 +18,7 @@ angular.
         
         //get the room types to populate modal dropdown
         $http.get('/api/protected/room/type').then(function (res) {
-                self.roomType = res.data;
+                self.roomTypes = res.data;
         });  
         
         if(!this.current)                   
@@ -172,6 +173,7 @@ angular.
                     templateUrl: '/emp/pages/reservationsModal.html',
                     resolve: {                                              
                         roomTypes: function (){
+                            console.log(self.roomTypes);
                             return self.roomTypes;
                             },
                         res: function () {
@@ -212,9 +214,10 @@ angular.
      
   });
   
-  app.controller('ResModalInstanceCtrl', function ($scope, res, $modalInstance, $http) {
+  app.controller('ResModalInstanceCtrl', function ($scope, roomTypes, res, $modalInstance, $http) {
     $scope.res = res;
-    console.log(res); 
+    $scope.roomTypes = roomTypes;
+    console.log($scope.res); 
 
     $scope.cancel = function () {
         console.log("Cancel clicked");
@@ -238,16 +241,28 @@ angular.
     };
 
     $scope.ok = function () {
-            $http.put('/api/protected/reservation/' + res._id, res)
+            console.log($scope.res); 
+            $http.get('/api/protected/users/email/'+ $scope.res.userEmail).then(function (resp) {
+                resp.data.firstName = $scope.res.firstName;
+                resp.data.lastName = $scope.res.lastName;
+                
+                $http.put('/api/protected/users/' + resp.data._id, resp);
+            },
+            function (resp){
+                //should we create a user? need pw, addr, etc.
+                //$http.post('/public/users/register')
+            });
+            
+            $http.post('/api/public/reservation', $scope.res)
             .then(
                 function (response) {
                     // success callback
-                    console.log("Put Sucessful");
+                    console.log("Post Sucessful");
                     console.log(respone);
                 },
                 function (response) {
                     // failure callback
-                    console.log("Failed to Put");
+                    console.log("Failed to Post");
                     console.log(respone);
                 }
             );
