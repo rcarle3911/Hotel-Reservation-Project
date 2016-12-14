@@ -28,6 +28,7 @@ function checkInOut(req, res) {
 }
 
 function getUserRes(req, res) {
+    if (!req.user) return res.status(401).send("User not logged in");
     resService.getUserRes(req.user.sub)
     .then( function (list) {
         res.send(list);

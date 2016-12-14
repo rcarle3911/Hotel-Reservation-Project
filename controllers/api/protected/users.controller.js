@@ -34,6 +34,7 @@ function getUserByID(req, res) {
 }
 
 function getCurrentUser(req, res) {
+    if (!req.user) return res.status(401).send("User not logged in");
     userService.getById(req.user.sub)
         .then(function (user) {
             if (user) {
