@@ -217,7 +217,6 @@ angular.
   app.controller('ResModalInstanceCtrl', function ($scope, roomTypes, res, $modalInstance, $http) {
     $scope.res = res;
     $scope.roomTypes = roomTypes;
-    console.log($scope.res); 
 
     $scope.cancel = function () {
         console.log("Cancel clicked");
@@ -242,15 +241,32 @@ angular.
 
     $scope.ok = function () {
             console.log($scope.res); 
+            console.log($scope.res.firstname);
             $http.get('/api/protected/users/email/'+ $scope.res.userEmail).then(function (resp) {
-                resp.data.firstName = $scope.res.firstName;
-                resp.data.lastName = $scope.res.lastName;
+                //this put is unauthorized for the current employee,
+                //employees should have ability to update the customer's user record
                 
-                $http.put('/api/protected/users/' + resp.data._id, resp);
+                //resp.data.firstname = $scope.res.firstname;
+                //resp.data.lastname = $scope.res.lastname;
+                
+                //$http.put('/api/protected/users/' + resp.data._id, resp.data);
             },
             function (resp){
-                //should we create a user? need pw, addr, etc.
-                //$http.post('/public/users/register')
+                console.log("creating user");                
+                var createNewUser = {
+                    "firstname": $scope.res.firstname,
+                    "lastname": $scope.res.lastname,
+                    "dob": "1/1/1900",
+                    "phone": "8888888888",
+                    "email": $scope.res.userEmail,
+                    "address": "123",
+                    "password": "sadflksa2"
+                };
+                console.log($scope.res.firstname);
+                
+                $http.post('/api/public/users/register', createNewUser).then(function(r){
+                    console.log("Post User Sucessful");                
+                });
             });
             
             $http.post('/api/public/reservation', $scope.res)
@@ -258,12 +274,12 @@ angular.
                 function (response) {
                     // success callback
                     console.log("Post Sucessful");
-                    console.log(respone);
+                    console.log(response);
                 },
                 function (response) {
                     // failure callback
                     console.log("Failed to Post");
-                    console.log(respone);
+                    console.log(response);
                 }
             );
         console.log("ok clicked");
