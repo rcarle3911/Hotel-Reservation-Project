@@ -7,9 +7,31 @@ angular.module('app').controller('userCtrl', ['$scope', '$http', '$window', '$mo
 
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
-    $http.get('/api/protected/users').then(function (res) {
-        $scope.users = res.data;
-    });
+    loadUserData(); 
+
+    function loadUserData() {
+        $http.get('/api/protected/users').then(function (res) {
+            $scope.users = res.data;
+        });
+
+    }
+
+    $scope.delete = function (_user) {
+        $http.delete('/api/protected/users/' + _user._id, {
+                _id: _user._id
+            })
+            .then(
+                function () {
+                    // success callback
+                    $scope.users = []; 
+                    loadUserData(); 
+                },
+                function () {
+                    // failure callback
+                    console.log("falied to delete");
+                }
+            );
+    };
 
     $scope.clearFilter = function () {
         $scope.txtFilter = null;
@@ -32,26 +54,13 @@ angular.module('app').controller('userCtrl', ['$scope', '$http', '$window', '$mo
 app.controller('ModalInstanceCtrl', function ($scope, user, $modalInstance, $http) {
     $scope.user = user;
 
+    $scope.origUser = angular.copy($scope.user);  
+
     $scope.cancel = function () {
+        angular.copy($scope.origUser, $scope.user); 
         $modalInstance.dismiss('cancel');
     };
-
-    $scope.delete = function (request, response) {
-        $http.delete('/api/protected/users/' + user._id, {
-                _id: user._id
-            })
-            .then(
-                function (response) {
-                    // success callback
-                },
-                function (response) {
-                    // failure callback
-                    console.log(JSON.stringify(response));
-                }
-            );
-        $modalInstance.close();
-    };
-
+    
     $scope.ok = function (request, response) {
         $http.put('/api/protected/users/' + user._id, user)
             .then(
