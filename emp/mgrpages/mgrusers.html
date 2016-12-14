@@ -18,13 +18,23 @@
                     <th>Edit User</th>
                     <th>
                         <a href="#" ng-click="orderByField = 'lastname'; reverseSort = !reverseSort">
-                        Name 
+                        Last Name 
                         <span ng-show="orderByField == 'lastname'">
                             <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
                             <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
                         </span>
                         </a>
                     </th>
+                    <th>
+                        <a href="#" ng-click="orderByField = 'firstname'; reverseSort = !reverseSort">
+                        First Name 
+                        <span ng-show="orderByField == 'firstname'">
+                            <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                        </a>
+                    </th>
+                    
                     <th>
                         <a href="#" ng-click="orderByField = 'email'; reverseSort = !reverseSort">
                             Email
@@ -44,7 +54,7 @@
                         </a>
                     </th>
                     <th>Phone #</th>
-                    <th class="text-center">Disable/Enable</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,14 +63,12 @@
                         <button type="button" class="btn btn-warning btn-lg" ng-click="open(user)">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User</button>
                     </td>
-                    <td>{{user.lastname}}, {{user.firstname}}</td>
+                    <td>{{user.lastname}}</td>
+                    <td>{{user.firstname}}</td>
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
-                    <td class="text-center">
-                        <div ng-show="user.Status"><i class="glyphicon glyphicon-eye-close"></i>&nbsp;Disabled</div>
-                        <div ng-hide="user.Status"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;Enabled</div>
-                    </td>
+                    <td><button class="btn btn-danger btn-lg" ng-click="delete(user)">Delete</button></td>
                 </tr>
             </tbody>
         </table>

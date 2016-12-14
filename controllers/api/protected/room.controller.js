@@ -8,16 +8,16 @@ var roomTypeService = require('services/roomType.service.js');
 // Routes to receive HTTP requests
 router.get('/', getRooms);
 router.post('/', addRoom);
-router.get('/:_id', getRoomByID);
-router.put('/:_id', editRoom);
-router.delete('/:_id', deleteRoom);
-router.patch('/:_id', toggleRoom);
-router.get('/available', getAvailRooms);
 router.get('/type', getRoomTypes);
+router.get('/available', getAvailRooms);
 router.post('/type', addRoomType);
 router.get('/type/:_id', getRmTypeById);
 router.put('/type/:_id', editRmType);
 router.delete('/type/:_id', deleteRmType);
+router.get('/:_id', getRoomByID);
+router.put('/:_id', editRoom);
+router.delete('/:_id', deleteRoom);
+router.patch('/:_id', toggleRoom);
 
 module.exports = router;
 
@@ -34,6 +34,8 @@ function getRooms(req, res) {
 }
 
 function getRoomByID(req, res) {
+    console.log("Get Room By ID");
+    console.log(req.params);
     roomService.getRoomByID(req.params._id)
     .then( function (list) {
         if (list) res.send(list);
@@ -98,6 +100,7 @@ function getAvailRooms(req, res) {
 }
 
 function getRoomTypes(req, res) {
+    console.log("GET ROOM TYPES");
     roomTypeService.getAll()
         .then(function (rmTypes) {
             res.send(rmTypes);

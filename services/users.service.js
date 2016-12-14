@@ -87,17 +87,22 @@ function create(userParam) {
 /**
  * This function should be protected.
  */
-function editGroup(_id, group) {
+function editGroup(_id, groupParam) {
     var deferred = Q.defer();
-
-    db.user.update(
+    var group = Number.parseInt(groupParam);
+    console.log("Elevate to group: " + groupParam);
+    
+    db.users.update(
         { _id: mongojs.ObjectID(_id) },
-        { group: group},
+        { $set: { group: group } },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
+            console.log(doc);
             deferred.resolve(doc);
         }
     );
+
+    return deferred.promise;
 }
 
 function edit(_id, userParam) {
@@ -131,7 +136,7 @@ function edit(_id, userParam) {
             phone: userParam.phone,
             email: userParam.email,
             address: userParam.address,
-            dateofbirth: userParam.dateofbirth   
+            dob: userParam.dateofbirth   
         };
 
         if (userParam.password) {
@@ -281,6 +286,7 @@ function getUserByEmail(email) {
 
     db.users.findOne(
         { email: email },
+        { password: 0 }, // Excludes password field
         function (err, user) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             deferred.resolve(user);

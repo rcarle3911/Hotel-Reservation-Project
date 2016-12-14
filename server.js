@@ -23,6 +23,7 @@ app.use('/login', require('./controllers/login.controller'));
 app.use('/api', express.static('./controllers/api'));
 app.use('/api/public/users', require('./controllers/api/public/users.controller.js'));
 app.use('/api/public/reservation', require('./controllers/api/public/reservation.controller.js'));
+app.use('/api/public/room', require('./controllers/api/public/room.controller.js'));
 app.use('/api/protected/users', require('./controllers/api/protected/users.controller.js'));
 app.use('/api/protected/room', require('./controllers/api/protected/room.controller.js'));
 app.use('/api/protected/reservation', require('./controllers/api/protected/reservation.controller.js'));
@@ -40,10 +41,11 @@ app.get('/update', function (req, res) {
 	return res.redirect('/app');
 });
 
+//API Validator
 //app.use('/api', osprey.server(path));
 
 app.listen(3000);
 console.log("Server listening on port 3000");
 
-//Runs database tests
+//Runs database tests, adds manager, rooms, reservations, rmtypes.
 //var test = require('test');

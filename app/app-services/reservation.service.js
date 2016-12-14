@@ -17,7 +17,7 @@
         return service;
 
         function Create(rsrv) {
-            return $http.post('/api/public/reservation', rsrv).then(handleSuccess, handleError);
+            return $http.post('/api/public/reservation/', rsrv).then(handleSuccess, handleError);
         }
 
         function Delete(_id) {
@@ -38,11 +38,11 @@
 
         // private functions
         function handleSuccess(res) {
-            var arr = [];
-            for(var i = 0; i < res.data.length; i++){
-                arr = arr.concat(JSON.stringify(res.data[i]));
-            } 
-            return arr;      
+            //var arr = [];
+            //for(var i = 0; i < res.data.length; i++){
+            //    arr = arr.concat(JSON.stringify(res.data[i]));
+            //} 
+            return res.data;      
         }
 
         function handleError(res) {

@@ -80,13 +80,25 @@
 	function getUserId() {
 		userService.getUserByEmail(user.email)
 			.then(function (dbUser) {
-				console.log(dbUser._id);
+				console.log("UserID: " + dbUser._id);
 				user._id = dbUser._id;
+				elevateUser();
 				createRoomTypes();
 			})
 			.catch(function (err) {
 				console.log(err);
+				elevateUser();
 				createRoomTypes();
+			});
+	}
+
+	function elevateUser() {
+		userService.editGroup(user._id, "2")
+			.then(function () {
+				console.log("User is now manager");
+			})
+			.catch(function () {
+				console.log("User failed to elevate");
 			});
 	}
 
@@ -159,7 +171,7 @@
 	}
 
 	function createRes() {
-		for (var i = 0; i < 20; i++) {
+		for (var i = 0; i < rooms.length + 10; i++) {
 			var rsrvInput = JSON.parse(JSON.stringify(rsrv));
 			rsrvInput.roomType = rmTypes[i % rmTypes.length]._id;
 			resrvService.create(rsrvInput)
@@ -187,53 +199,28 @@
 		});
 	}
 
-	function checkIn() {
-		for (var i = 0; i < reservations.length; i++) {
-			resrvService.checkInOut(reservations[i]._id, new Date("12/20/2016"))
-			.then(function (doc) {
-				console.log("Checked In!");
-				console.log(doc);
-			})
-			.catch(function (err) {
-				console.log(err);
-			});
-		}
+	function checkIn() {		
+		resrvService.checkInOut(reservations[0]._id, new Date("12/20/2016"))
+		.then(function (doc) {
+			console.log("Checked In!");
+			console.log(doc);
+		})
+		.catch(function (err) {
+			console.log(err);
+		});		
 
 		setTimeout(checkOut, 5000);
 	}
 
-	function checkOut() {
-		for (var i = 0; i < reservations.length; i++) {
-			resrvService.checkInOut(reservations[i]._id, new Date("12/30/2016"))
-			.then(function (doc) {
-				console.log("Checked Out!");
-				console.log(doc);
-			})
-			.catch(function (err) {
-				console.log(err);
-			});
-		}
-	}	
-
-	function testRoomFunctions() {
-		roomService.getRooms()
-		.then(function (roomList) {
-			console.log("Room List");
-			console.log(roomList);
-			roomService.getAvailRooms()
-			.then(function (aRoomList) {
-				console.log("Available Room List");
-				console.log(aRoomList);
-			})
-			.catch(function(err) {
-				console.log(err);
-			});
+	function checkOut() {		
+		resrvService.checkInOut(reservations[0]._id, new Date("12/30/2016"))
+		.then(function (doc) {
+			console.log("Checked Out!");
+			console.log(doc);
 		})
 		.catch(function (err) {
 			console.log(err);
-		});
-
-	}
-
+		});		
+	}	
 
 })();
