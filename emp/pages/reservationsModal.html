@@ -36,7 +36,7 @@
                     <label>Room</label>
                     <select class="form-control" ng-model="res.roomType" required>
                         <option selected></option>                
-                        <option ng-repeat rmType in roomType.name>{{rmType}}</option>                
+                        <option ng-repeat = "rmType in roomTypes" value = {{rmType._id}}>{{rmType.name}}</option>                
                         <!--ption value="0">Standard</option>
                         <option value="1">Standard Plus</option>
                         <option value="2">Deluxe</option>
