@@ -7,38 +7,63 @@ angular.
     controller: ['datatable', '$scope','$http', '$window','$modal',
       function reservationsController(datatable, $scope, $http, $window, $modal) {
         this.query='';
-        $scope.futureReservations = [];
-        $scope.currentReservations = [];
+        var self = this;
+        self.futureReservations = [];
+        self.currentReservations = [];
         
-        //Future Reservations for reservation and check in lists
         if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
+        
+        //createData($http);
+        
+        //get the room types to populate modal dropdown
         $http.get('/api/protected/room/type').then(function (res) {
-                //$scope.roomTypes = res.data;
-                console.log(res.data);
-        });        
-        $http.get('/api/protected/reservation/future').then(function (res) {
-            $scope.futureReservations = res.data;
-            
-            $scope.futureReservations.forEach(function(resv){
-                $http.get('/api/protected/users/email/{resv.userEmail}').then(function (resp) {
-                    resv.assign(resp);
-                });                    
-            });
-        });
+                self.roomType = res.data;
+        });  
         
-
-        //Current Reservations for check out list
-        if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
-    
-        $http.get('/api/protected/reservation/current').then(function (res) {
-            $scope.currentReservations = res.data;
-            
-            $scope.currentReservations.forEach(function(resv){
-                $http.get('/api/protected/users/email/'+ resv.userEmail).then(function (resp) {
-                    resv.assign(resp);
-                });                    
-            });            
-        });
+        if(!this.current)                   
+            //Future Reservations for reservation and check in lists 
+            $http.get('/api/protected/reservation/past').then(function (res) {
+                self.futureReservations = res.data;
+          
+                self.futureReservations.forEach(function(resv){
+                    resv.roomTypeName = "";
+                    resv.startDateF = formatDate(new Date(resv.startDate));
+                    resv.endDateF = formatDate(new Date(resv.endDate));            
+                                        
+                    $http.get('/api/protected/room/type/'+ resv.roomType).then(function (resp) {                        
+                        resv.roomTypeName = resp.data.name;
+                    });
+                                        
+                    $http.get('/api/protected/users/email/'+ resv.userEmail).then(function (resp) {
+                        resv.firstName = resp.data.firstname;
+                        resv.lastName = resp.data.lastname;
+                    });                    
+                });
+                self.datatable.setData(self.futureReservations);            
+                
+            });           
+        else                
+            //Current Reservations for check out list  
+            $http.get('/api/protected/reservation/current').then(function (res) {
+                self.currentReservations = res.data;
+                
+                self.currentReservations.forEach(function(resv){
+                    resv.roomTypeName = "";
+                    resv.startDateF = formatDate(new Date(resv.startDate));
+                    resv.endDateF = formatDate(new Date(resv.endDate));            
+                                        
+                    $http.get('/api/protected/room/type/'+ resv.roomType).then(function (resp) {                        
+                        resv.roomTypeName = resp.data.name;
+                    });
+                                        
+                    $http.get('/api/protected/users/email/' + resv.userEmail).then(function (resp) {
+                        resv.firstName = resp.data.firstname;
+                        resv.lastName = resp.data.lastname;                        
+                    });                    
+                });
+                self.datatable.setData(self.currentReservations);            
+                        
+            });
                   
         this.btnVisible = 'visible';  
         switch(this.action){
@@ -79,16 +104,17 @@ angular.
                 },                
                 {
                     "header":"Check In Date",
-                    "property":"startDate",
+                    "property":"startDateF",
                     "order":true,
-                    "type":"date",
+                    "type":"text",
                     "format":"date"
+
                 },
                 {
                     "header":"Check Out Date",
-                    "property":"endDate",
+                    "property":"endDateF",
                     "order":true,
-                    "type":"date",
+                    "type":"text",
                     "format":"date"
                 },                
                 {
@@ -99,7 +125,7 @@ angular.
                 },
                 {
                     "header":"Room Type",
-                    "property":"roomType",
+                    "property":"roomTypeName",
                     "order":true,
                     "type":"text",
                 },
@@ -139,27 +165,21 @@ angular.
         
         //Init the datatable with his configuration
         this.datatable = datatable(datatableConfig);
-        //Set the data to the datatable
-        if(this.current)
-            this.datatable.setData($scope.currentReservations);
-        else
-            this.datatable.setData($scope.futureReservations);
-        self = this;    
+   
         $scope.open = function (_res) {
                 var modalInstance = $modal.open({
                     controller: "ResModalInstanceCtrl",
                     templateUrl: '/emp/pages/reservationsModal.html',
-                    resolve: {
+                    resolve: {                                              
                         roomTypes: function (){
                             return self.roomTypes;
-                        },                        
+                            },
                         res: function () {
                             return _res;
                         }
                     }
                 });
             }; 
-            
         $scope.ckin = function (_res) {
                 var modalInstance = $modal.open({
                     controller: "ResModalInstanceCtrl",
@@ -231,78 +251,87 @@ angular.
                     console.log(respone);
                 }
             );
-        console.log("ok clikced");
+        console.log("ok clicked");
         $modalInstance.close();
     };
+    
+
 });
+
+    function formatDate(dt) {
+        var dd = dt.getDate();
+        var mm = dt.getMonth() + 1;
+        var yyyy = dt.getFullYear();
+        return mm + "/" + dd + "/" + yyyy;
+}
   
   function createData($http){
         var testData = [{
             "userEmail" : "jward0@nature.com",
-            "roomType" : "Penthouse",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/18/2016",
             "endDate" : "12/21/2016",
             "numGuests" : 10,
             "price" : "887.40"
             }, {
             "userEmail" : "jhoward1@yolasite.com",
-            "roomType" : "Penthouse",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/18/2016",
             "endDate" : "12/22/2016",
             "numGuests" : 4,
             "price" : "556.83"
             }, {
             "userEmail" : "eknight2@mapy.cz",
-            "roomType" : "Deluxe",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/18/2016",
             "endDate" : "12/21/2016",
             "numGuests" : 2,
             "price" : "231.43"
             }, {
             "userEmail" : "rcastillo3@i2i.jp",
-            "roomType" : "Deluxe",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/18/2016",
             "endDate" : "12/22/2016",
             "numGuests" : 6,
             "price" : "726.18"
             }, {
             "userEmail" : "rgarza4@plala.or.jp",
-            "roomType" : "Deluxe",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/18/2016",
             "endDate" : "12/22/2016",
             "numGuests" : 4,
             "price" : "345.95"
             }, {
             "userEmail" : "ahughes5@domainmarket.com",
-            "roomType" : "Standard",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/19/2016",
             "endDate" : "12/21/2016",
             "numGuests" : 7,
             "price" : "448.57"
             }, {
             "userEmail" : "dgreen6@shareasale.com",
-            "roomType" : "Standard Plus",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/18/2016",
             "endDate" : "12/21/2016",
             "numGuests" : 8,
             "price" : "780.31"
             }, {
             "userEmail" : "ksanchez7@360.cn",
-            "roomType" : "Penthouse",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/18/2016",
             "endDate" : "12/21/2016",
             "numGuests" : 10,
             "price" : "327.79"
             }, {
             "userEmail" : "sferguson8@so-net.ne.jp",
-            "roomType" : "Deluxe",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/19/2016",
             "endDate" : "12/22/2016",
             "numGuests" : 10,
             "price" : "505.45"
             }, {
             "userEmail" : "tmoore9@indiegogo.com",
-            "roomType" : "Standard Plus",
+            "roomType" : "5850368baab11f4bb43476d2",
             "startDate" : "12/19/2016",
             "endDate" : "12/22/2016",
             "numGuests" : 7,
@@ -396,9 +425,9 @@ angular.
                  //$http.post('/api/public/users/register', usr);
                 //});                     
         
-       //testData.forEach(function(data){
-                 //$http.post('/api/public/reservation', data);
-                //});  
+       testData.forEach(function(data){
                  $http.post('/api/public/reservation', testData);
+                });  
+                
                        
   };
