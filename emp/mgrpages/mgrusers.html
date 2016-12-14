@@ -54,6 +54,7 @@
                         </a>
                     </th>
                     <th>Phone #</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,6 +68,7 @@
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
+                    <td><button class="btn btn-danger btn-lg" ng-click="delete(user)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
