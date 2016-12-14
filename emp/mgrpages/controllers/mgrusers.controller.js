@@ -1,5 +1,5 @@
 //User Accounts Page get all users / Clear filter (on mgrusers.html)
-angular.module('app').controller('userCtrl', ['$scope', '$http', '$window', '$modal', function ($scope, $http, $window, $modal) {
+angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$modal', function ($scope, $http, $window, $modal) {
     $scope.orderByField = 'lastname';
     $scope.reverseSort = false;
 
