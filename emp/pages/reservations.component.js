@@ -1,163 +1,65 @@
 'use strict';
 
 angular.
-  module('app').
+  module('emp').
   component('reservations', {
     templateUrl: '/emp/pages/reservations.template.html',
-    controller: ['datatable',
-      function reservationsController(datatable) {
+    controller: ['datatable', '$scope','$http', '$window','$modal',
+      function reservationsController(datatable, $scope, $http, $window, $modal) {
         this.query='';
-        this.reservations = [ //replace with get from resource (restful database service)
-          {
-            firstName : 'Joe',
-            lastName : 'Moe',
-            roomTypeID : '1',
-            startDate : '1/1/2017',
-            endDate : '1/5/2017',
-            numGuest : '2',
-            price : '500'  
-          },
-          {
-            firstName : 'Bob',
-            lastName : 'Kabob',
-            roomTypeID : '2',
-            startDate : '1/2/2017',
-            endDate : '1/7/2017',
-            numGuest : '3',
-            price : '520' 
-          },
-          {
-            firstName : 'Sam',
-            lastName : 'Iam',
-            roomTypeID : '1',
-            startDate : '1/2/2017',
-            endDate : '1/5/2017',
-            numGuest : '1',
-            price : '300' 
-          },
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          },
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          } ,
-          {
-            firstName : 'Roy',
-            lastName : 'Boy',
-            roomTypeID : '3',
-            startDate : '12/20/2016',
-            endDate : '1/3/2017',
-            numGuest : '5',
-            price : '1500' 
-          }           
-        ];
+        $scope.futureReservations = [];
+        $scope.currentReservations = [];
+        
+        //Future Reservations for reservation and check in lists
+        if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
+        $http.get('/api/protected/room/type').then(function (res) {
+                //$scope.roomTypes = res.data;
+                console.log(res.data);
+        });        
+        $http.get('/api/protected/reservation/future').then(function (res) {
+            $scope.futureReservations = res.data;
+            
+            $scope.futureReservations.forEach(function(resv){
+                $http.get('/api/protected/users/email/{resv.userEmail}').then(function (resp) {
+                    resv.assign(resp);
+                });                    
+            });
+        });
+        
+
+        //Current Reservations for check out list
+        if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
+    
+        $http.get('/api/protected/reservation/current').then(function (res) {
+            $scope.currentReservations = res.data;
+            
+            $scope.currentReservations.forEach(function(resv){
+                $http.get('/api/protected/users/email/'+ resv.userEmail).then(function (resp) {
+                    resv.assign(resp);
+                });                    
+            });            
+        });
+                  
         this.btnVisible = 'visible';  
         switch(this.action){
           case "create":
             this.btnIcon = "glyphicon glyphicon-plus";
             this.btnTxt = " New Reservation";
+            this.actionBtn = "<button type=\"button\" ng-click=\"open(res)\" class=\"btn btn-info btn-md\">Edit</button>";
+            this.current = false;
           break;
           
           case "checkin":
             this.btnIcon = "glyphicon glyphicon-plus";
             this.btnTxt = " Add Walk-in";
+            this.actionBtn = "<button type=\"button\" ng-click=\"ckin(res)\" class=\"btn btn-info btn-md\">Check-in</button>";            
+            this.current = false;
           break;
 
           case "checkout":
             this.btnVisible = 'hidden';
+            this.actionBtn = "<button type=\"button\" ng-click=\"ckout(res)\" class=\"btn btn-info btn-md\">Check-out</button>";            
+            this.current = true;
           break;
         }
         var datatableConfig = {
@@ -168,14 +70,13 @@ angular.
                     "property":"firstName",
                     "order":true,
                     "type":"text",
-                    "edit":true
                 },
                 {
                     "header":"Last Name",
                     "property":"lastName",
                     "order":true,
-                    "type":"text"
-                },
+                    "type":"text",
+                },                
                 {
                     "header":"Check In Date",
                     "property":"startDate",
@@ -189,31 +90,43 @@ angular.
                     "order":true,
                     "type":"date",
                     "format":"date"
+                },                
+                {
+                    "header":"Number of Guests",
+                    "property":"numGuests",
+                    "order":true,
+                    "type":"text",
+                },
+                {
+                    "header":"Room Type",
+                    "property":"roomType",
+                    "order":true,
+                    "type":"text",
                 },
                 {
                     "header":"",
                     "property":"",
                     "order":false,
                     "type":"text",
-                    "render":"<button type=\"button\" class=\"btn btn-info btn-md\">Edit</button>"
+                    "render":this.actionBtn
                                       
                 }
             ],
             "pagination":{
             "mode":'local',
             "numberRecordsPerPageList":[{
-                        number: 10,
-                        clazz: ''
-                    }, {
-                        number: 25,
-                        clazz: ''
-                    }]
-				    },
+                    number: 10,
+                    clazz: ''
+                }, {
+                    number: 25,
+                    clazz: ''
+                }]
+            },
             "order":{
                 "mode":'local'
             },
-            "remove":{
-                "active":true,
+            "remove":{ 
+                "active":false,
                 "mode":'local'
             },
              "filter":{
@@ -223,10 +136,54 @@ angular.
             },
             
         };
+        
         //Init the datatable with his configuration
         this.datatable = datatable(datatableConfig);
         //Set the data to the datatable
-        this.datatable.setData(this.reservations);
+        if(this.current)
+            this.datatable.setData($scope.currentReservations);
+        else
+            this.datatable.setData($scope.futureReservations);
+        self = this;    
+        $scope.open = function (_res) {
+                var modalInstance = $modal.open({
+                    controller: "ResModalInstanceCtrl",
+                    templateUrl: '/emp/pages/reservationsModal.html',
+                    resolve: {
+                        roomTypes: function (){
+                            return self.roomTypes;
+                        },                        
+                        res: function () {
+                            return _res;
+                        }
+                    }
+                });
+            }; 
+            
+        $scope.ckin = function (_res) {
+                var modalInstance = $modal.open({
+                    controller: "ResModalInstanceCtrl",
+                    templateUrl: '/emp/pages/checkinModal.html',
+                    resolve: {
+                        res: function () {
+                            return _res;
+                        }
+                    }
+                });
+            }; 
+            
+        $scope.ckout = function (_res) {
+                var modalInstance = $modal.open({
+                    controller: "ResModalInstanceCtrl",
+                    templateUrl: '/emp/pages/checkoutModal.html',
+                    resolve: {
+                        res: function () {
+                            return _res;
+                        }
+                    }
+                });
+            };                                            
+            
       }],
     bindings: {
       action: '@',
@@ -234,3 +191,214 @@ angular.
     }
      
   });
+  
+  app.controller('ResModalInstanceCtrl', function ($scope, res, $modalInstance, $http) {
+    $scope.res = res;
+    console.log(res); 
+
+    $scope.cancel = function () {
+        console.log("Cancel clicked");
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.delete = function () {
+        $http.delete('/api/protected/reservation/' + res._id, {_id: res._id})
+        .then(
+            function (response) {
+                // success callback
+                console.log("Delete Sucessful");
+            },
+            function (response) {
+                // failure callback
+               console.log("Failed to Delete");
+
+            }
+        ); 
+        $modalInstance.close();
+    };
+
+    $scope.ok = function () {
+            $http.put('/api/protected/reservation/' + res._id, res)
+            .then(
+                function (response) {
+                    // success callback
+                    console.log("Put Sucessful");
+                    console.log(respone);
+                },
+                function (response) {
+                    // failure callback
+                    console.log("Failed to Put");
+                    console.log(respone);
+                }
+            );
+        console.log("ok clikced");
+        $modalInstance.close();
+    };
+});
+  
+  function createData($http){
+        var testData = [{
+            "userEmail" : "jward0@nature.com",
+            "roomType" : "Penthouse",
+            "startDate" : "12/18/2016",
+            "endDate" : "12/21/2016",
+            "numGuests" : 10,
+            "price" : "887.40"
+            }, {
+            "userEmail" : "jhoward1@yolasite.com",
+            "roomType" : "Penthouse",
+            "startDate" : "12/18/2016",
+            "endDate" : "12/22/2016",
+            "numGuests" : 4,
+            "price" : "556.83"
+            }, {
+            "userEmail" : "eknight2@mapy.cz",
+            "roomType" : "Deluxe",
+            "startDate" : "12/18/2016",
+            "endDate" : "12/21/2016",
+            "numGuests" : 2,
+            "price" : "231.43"
+            }, {
+            "userEmail" : "rcastillo3@i2i.jp",
+            "roomType" : "Deluxe",
+            "startDate" : "12/18/2016",
+            "endDate" : "12/22/2016",
+            "numGuests" : 6,
+            "price" : "726.18"
+            }, {
+            "userEmail" : "rgarza4@plala.or.jp",
+            "roomType" : "Deluxe",
+            "startDate" : "12/18/2016",
+            "endDate" : "12/22/2016",
+            "numGuests" : 4,
+            "price" : "345.95"
+            }, {
+            "userEmail" : "ahughes5@domainmarket.com",
+            "roomType" : "Standard",
+            "startDate" : "12/19/2016",
+            "endDate" : "12/21/2016",
+            "numGuests" : 7,
+            "price" : "448.57"
+            }, {
+            "userEmail" : "dgreen6@shareasale.com",
+            "roomType" : "Standard Plus",
+            "startDate" : "12/18/2016",
+            "endDate" : "12/21/2016",
+            "numGuests" : 8,
+            "price" : "780.31"
+            }, {
+            "userEmail" : "ksanchez7@360.cn",
+            "roomType" : "Penthouse",
+            "startDate" : "12/18/2016",
+            "endDate" : "12/21/2016",
+            "numGuests" : 10,
+            "price" : "327.79"
+            }, {
+            "userEmail" : "sferguson8@so-net.ne.jp",
+            "roomType" : "Deluxe",
+            "startDate" : "12/19/2016",
+            "endDate" : "12/22/2016",
+            "numGuests" : 10,
+            "price" : "505.45"
+            }, {
+            "userEmail" : "tmoore9@indiegogo.com",
+            "roomType" : "Standard Plus",
+            "startDate" : "12/19/2016",
+            "endDate" : "12/22/2016",
+            "numGuests" : 7,
+            "price" : "720.52"
+            }];
+            
+        var userList = [{
+            "email" : "tmoore9@indiegogo.com",
+            "firstname" : "Alan",
+            "lastname" : "Ray",
+            "dob" : "6/24/1988",
+            "phone" : "62-(212)234-6329",
+            "address" : "0 Clyde Gallagher Avenue",
+            "password" : "2eXfe99"
+            }, {
+            "email" : "sferguson8@so-net.ne.jp",
+            "firstname" : "Paul",
+            "lastname" : "Rose",
+            "dob" : "8/7/1983",
+            "phone" : "86-(492)795-4453",
+            "address" : "0 Mendota Hill",
+            "password" : "hm7Cbw"
+            }, {
+            "email" : "ksanchez7@360.cn",
+            "firstname" : "Carolyn",
+            "lastname" : "Johnston",
+            "dob" : "4/4/1981",
+            "phone" : "84-(878)422-2328",
+            "address" : "84529 Melody Street",
+            "password" : "zVBTpk7"
+            }, {
+            "email" : "dgreen6@shareasale.com",
+            "firstname" : "Tammy",
+            "lastname" : "Parker",
+            "dob" : "12/6/1989",
+            "phone" : "86-(257)889-7962",
+            "address" : "526 Reinke Street",
+            "password" : "tIAbfDuPPTo"
+            }, {
+            "email" : "ahughes5@domainmarket.com",
+            "firstname" : "Andrea",
+            "lastname" : "Spencer",
+            "dob" : "5/24/1984",
+            "phone" : "86-(633)482-0050",
+            "address" : "1 Morning Circle",
+            "password" : "DAvkqI"
+            }, {
+            "email" : "rgarza4@plala.or.jp",
+            "firstname" : "Theresa",
+            "lastname" : "Hawkins",
+            "dob" : "11/6/1982",
+            "phone" : "1-(781)886-8829",
+            "address" : "1 Summit Point",
+            "password" : "BrB4X0Uq"
+            }, {
+            "email" : "jward0@nature.com",
+            "firstname" : "Carlos",
+            "lastname" : "Collins",
+            "dob" : "8/21/1989",
+            "phone" : "54-(776)316-1337",
+            "address" : "66593 Meadow Valley Center",
+            "password" : "032taFFvvjx"
+            }, {
+            "email" : "jhoward1@yolasite.com",
+            "firstname" : "Nicholas",
+            "lastname" : "Adams",
+            "dob" : "1/12/1989",
+            "phone" : "380-(406)100-6959",
+            "address" : "1611 Algoma Circle",
+            "password" : "bNPS9Vp"
+            }, {
+            "email" : "eknight2@mapy.cz",
+            "firstname" : "Amanda",
+            "lastname" : "Simmons",
+            "dob" : "8/10/1989",
+            "phone" : "48-(878)636-4357",
+            "address" : "6 Cordelia Pass",
+            "password" : "oYyckX"
+            }, {
+            "email" : "rcastillo3@i2i.jp",
+            "firstname" : "Phillip",
+            "lastname" : "Fuller",
+            "dob" : "7/9/1983",
+            "phone" : "86-(459)264-5431",
+            "address" : "7234 Pennsylvania Terrace",
+            "password" : "uq9e8C9b3cIL"
+            }];     
+
+        
+       //userList.forEach(function(usr){
+                 //$http.post('/api/public/users/register', usr);
+                //});                     
+        
+       //testData.forEach(function(data){
+                 //$http.post('/api/public/reservation', data);
+                //});  
+                 $http.post('/api/public/reservation', testData);
+                       
+  };
