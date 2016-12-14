@@ -1,0 +1,65 @@
+<div class="container-fluid" ng-controller="roomTypeCtrl">
+    <div class="col-md-12">
+        <div class="col-md-1 pull-left" style="Padding: 5px;">
+            <button type="button" class="btn btn-info btn-md" ng-click="openType('new')">
+            <i class="glyphicon glyphicon-plus"></i>Add Room Type</button>
+        </div>
+        <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
+            <input id="txtRoomTypeSearch" type="text" class="form-control" name="xType" placeholder="Filter Grid..." ng-model="txtRoomTypeFilter.text">
+            <span ng-if="txtRoomTypeFilter.text" ng-click="clearRoomTypeFilter()" class="glyphicon glyphicon-remove form-control-feedback" style="cursor: pointer; pointer-events: all; margin-top: 5px;"
+                uib-tooltip="clear">
+            </span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table id="tblRoomTypes" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Edit Room Type</th>
+                    <th>
+                        <a href="#" ng-click="orderByRoomTypeField = 'name'; reverseRoomTypeSort = !reverseRoomTypeSort">
+                        Room Name 
+                        <span ng-show="orderByRoomTypeField == 'name'">
+                            <i ng-show="!reverseRoomTypeSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseRoomTypeSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByRoomTypeField = 'desc'; reverseRoomTypeSort = !reverseRoomTypeSort">
+                        Room Type Description
+                        <span ng-show="orderByRoomTypeField == 'desc'">
+                            <i ng-show="!reverseRoomTypeSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseRoomTypeSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByRoomTypeField = 'space'; reverseRoomTypeSort = !reverseRoomTypeSort">
+                            Space
+                            <span ng-show="orderByRoomTypeField == 'space'">
+                                <i ng-show="!reverseRoomTypeSort" class="glyphicon glyphicon-triangle-top"></i>
+                                <i ng-show="reverseRoomTypeSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        Delete Room
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="roomType in roomTypes track by roomType._id | filter:txtRoomTypeFilter.text | orderBy:orderByRoomTypeField:reverseRoomTypeSort">
+                    <td class="text-center">
+                        <button type="button" class="btn btn-warning btn-lg" ng-click="openType(roomType)">
+                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit Room Type</button>
+                    </td>
+                    <td>{{roomType.name}}</td>
+                    <td>{{roomType.desc}}</td>
+                    <td>{{roomType.space}}</td>
+                    <td><button class="btn btn-danger btn-lg" ng-click="deleteRoomType(roomType)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

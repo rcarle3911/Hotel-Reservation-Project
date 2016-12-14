@@ -141,14 +141,11 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
                     }
                 );
         } else {
-
-            //build the Room 
             $http.post('/api/protected/room/', room).then(
                 function (response) {
                     // success callback
                     console.log("Put Sucessful");
                     console.log(JSON.stringify(response));
-                    console.log($scope.rooms);
                 },
                 function (response) {
                     // failure callback
