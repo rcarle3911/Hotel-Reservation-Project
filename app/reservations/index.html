@@ -38,24 +38,17 @@
                 </div>
                 <div class="form-group">
                     <label for="room-type" >Room Type</label>
-                    <select required class="form-control" ng-model="vm.formInfo.roomType" >
-                        <option selected></option>
-                        <option value="King Suite">King Suite</option>
-                        <option value="Double Queen">Double Queen</option>
-                        <option value="King Deluxe">King Deluxe</option>
-                        <option value="Double Queen Deluxe">Double Queen Deluxe</option>
-                        <option value="Queen Suite">Queen Suite</option>
-                        <option value="Queen Deluxe">Queen Deluxe</option>
+                    <select required class="form-control" ng-model="vm.formInfo.roomType" required ng-options="rt._id as rt.name for rt in vm.rmtypes">
                     </select>
                 </div>
 				<br>
-                <div class="form-group2>
+                <div class="form-group2">
                     <label for="arrival">Check In</label>
-                    <input type="date" required ng-model="vm.res.startDate"  />
+                    <input type="date" required ng-model="vm.formInfo.startDate"  />
 					
          
                     <label for="departing">Check Out</label>
-                    <input type="date" required ng-model="vm.res.endDate"  />
+                    <input type="date" required ng-model="vm.formInfo.endDate"  />
                 </div>
 				<br>
                 <div class="form-group">
@@ -126,7 +119,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nameoncard">Name on Card</label>
-                    <input type="text" class="form-control" id="nameoncard" placeholder="Luke Skywalker" ng-model="vm.formInfo.cardName"	required/>
+                    <input type="text" class="form-control" id="nameoncard" ng-model="vm.formInfo.cardName"	required/>
                 </div>
                 <div class="form-group">
                     <label for="comment">Additional Comments:</label>

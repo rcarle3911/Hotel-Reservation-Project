@@ -48,14 +48,37 @@
 		</div>
 
 		<div class="col-md-6">
-            <div class="form-container">
-				<form  method="get">
-					<div class="form-group">
-						<label for="comment">Upcoming Reservations</label>
-						<textarea class="form-control" rows="16" id="comment" ng-model="vm.reservations"></textarea>
-					</div>
-				</form>
-			</div>
-		</div>
+		<div class="form-container">
+			<form  method="get">
+				<div class="form-group">
+					<table id="tblRooms" class="table table-striped table-bordered" cellspacing="0">
+						<thead>
+							<tr>
+								<th class="text-center">Edit Reservation</th>
+								<!--<th class="text-center">Room Type</th>-->
+								<th class="text-center">Guests</th>
+								<th class="text-center">Check-In Date</th>
+								<th class="text-center">Check-Out Date</th>
+								<th class="text-center">Cancel Reservation</th>
+							</tr>
+						</thead>
+				<tbody>
+					<tr ng-repeat="reservations in vm.reservations">
+                    <td class="text-center">
+                        <button type="button" class="btn btn-warning btn-sm" ng-click="open(room)">
+                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit Reservation</button>
+					</td>
+                    <!--<td class="text-center">{{reservations.roomType}}</td>-->
+                    <td class="text-center">{{reservations.numGuests}}</td>
+                    <td class="text-center">{{reservations.startDate}}</td>
+                    <td class="text-center">{{reservations.endDate}}</td>
+                    <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="deleteRoom(room)">Cancel</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ </div>
+</form>
+
 	</form>
 </div>
