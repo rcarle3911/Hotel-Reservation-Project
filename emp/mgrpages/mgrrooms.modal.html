@@ -18,12 +18,6 @@
             <label>Room Available</label>
             <input class="form-control" type="checkbox" ng-model="room.avail">
         </div>
-        <div> 
-            <label>Space</label>
-            {{getRoomSpace(room)}}
-
-            <select class="form-control" ng-model="selectedCapacity" ng-options="item for item in [] | range:min:max"></select>
-    </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-lg" ng-click="okRoom()" ng-disabled="form.roomFrom.$invalid">Update</button>
         <button class="btn btn-warning btn-lg" ng-click="cancelRoom()">Cancel</button>

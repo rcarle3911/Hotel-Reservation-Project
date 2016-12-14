@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller="roomCtrl">
     <div class="col-md-12">
         <div class="col-md-1 pull-left" style="Padding: 5px;">
-            <button type="button" class="btn btn-info btn-md" ng-click="open()">
+            <button type="button" class="btn btn-info btn-md" ng-click="open('new')">
             <i class="glyphicon glyphicon-plus"></i>Add Room</button>
         </div>
         <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
@@ -36,9 +36,6 @@
                         </a>
                     </th>
                     <th>
-                        Room Space
-                    </th>
-                    <th>
                         <a href="#" ng-click="orderByRoomField = 'avail'; reverseRoomSort = !reverseRoomSort">
                             Available
                             <span ng-show="orderByRoomField == 'avail'">
@@ -60,7 +57,6 @@
                     </td>
                     <td>{{room.num}}</td>
                     <td>{{getRoomType(room)}}</td>
-                    <td>{{getRoomSpace(room)}}</td>
                     <td>{{room.avail}}</td>
                     <td><button class="btn btn-danger btn-lg" ng-click="deleteRoom(room)">Delete</button></td>
                 </tr>
