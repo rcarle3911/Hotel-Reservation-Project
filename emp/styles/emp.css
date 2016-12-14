@@ -1,0 +1,21 @@
+.tab-container {
+    width: 100%;
+}
+
+.tab-container ul {
+    text-align: center;
+    align-items: center;
+}
+
+.tab-container ul li {
+    width: 19.5%;
+}
+
+#logo {
+    text-align: center;
+}
+
+#logo img {
+    height: 75px;
+    width: 203px;
+}
