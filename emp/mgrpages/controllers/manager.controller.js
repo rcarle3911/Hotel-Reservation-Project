@@ -1,5 +1,5 @@
 //Manager Pages Tabs (on manager.html)
-angular.module('app').controller('mgrCtrl',['$scope', function ($scope) {
+angular.module('emp').controller('mgrCtrl',['$scope', function ($scope) {
         $scope.tabs = [{
             title: 'Users',
             contenturl: '/emp/mgrpages/mgrusers.html',

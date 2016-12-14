@@ -1,5 +1,5 @@
 //User Accounts Page get all Rooms / Clear filter (on mgrrooms.html)
-angular.module('app').controller('roomTypeCtrl', ['$scope', '$http', '$window', '$modal', function ($scope, $http, $window, $modal) {
+angular.module('emp').controller('roomTypeCtrl', ['$scope', '$http', '$window', '$modal', function ($scope, $http, $window, $modal) {
     $scope.orderRoomTypeByField = 'num';
     $scope.reverseRoomTypeSort = false;
 
@@ -117,7 +117,7 @@ app.controller('ModalInstanceRoomTypeCtrl', function ($scope, roomType, $modalIn
     };
 });
 
-angular.module('app').filter('range', function () {
+angular.module('emp').filter('range', function () {
     return function (input, min, max) {
         min = parseInt(min, 10);
         max = parseInt(max, 10);

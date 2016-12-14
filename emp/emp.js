@@ -12,7 +12,7 @@ $(function () {
 });
 
 //Controller Stuff
-var app = angular.module('app', ['ultimateDataTableServices', 'ui.bootstrap', 'reservations']);
+var app = angular.module('emp', ['ultimateDataTableServices', 'ui.bootstrap', 'reservations']);
 
 //Employee pages tabs (on /emp/index.html)
 app.controller('EmpCtrl', ['$scope', function ($scope) {

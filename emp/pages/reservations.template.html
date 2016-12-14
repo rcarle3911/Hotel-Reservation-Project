@@ -1,15 +1,7 @@
 <div class="container-fluid">
-    <div class="col-md-4 pull-right" style="Padding: 5px;">
-        <div class="input-group">
-            <!--input ng-model="$ctrl.query" type="text" class="form-control" placeholder="Filter Grid...">
-            <span class="input-group-addon">
-                <i class="glyphicon glyphicon-search"></i>
-            </span-->
-        </div>
-    </div>
     <div class="col-md-4" style="Padding: 5px;">
-        <button type="button" class="btn btn-info btn-md" style = 'visibility : {{$ctrl.btnVisible}}' data-toggle="modal" data-target="#myresModal">
-            <i ng-class="$ctrl.btnIcon"></i>{{$ctrl.btnTxt}}</button>
+        <button type="button" ng-click = "open()" class="btn btn-info btn-md" style = 'visibility : {{$ctrl.btnVisible}}' data-toggle="modal" data-target="#myresModal">
+            <i ng-class="$ctrl.btnIcon" ></i>{{$ctrl.btnTxt}}</button>
     </div>
 </div>
 
