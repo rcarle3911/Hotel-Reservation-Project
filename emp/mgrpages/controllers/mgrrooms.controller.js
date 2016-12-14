@@ -5,30 +5,33 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
 
     $scope.rooms = [];
     $scope.rmtypes = [];
-
+    
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
-    $http.get('/api/protected/room').then(function (res) {
-        $scope.rooms = res.data;
-        console.log("API room pull:");
-        console.log($scope.rooms);
-    });
+    loadData();
+    function loadData() {
+        $http.get('/api/protected/room').then(function (res) {
+            $scope.rooms = res.data;
+            console.log("API room pull:");
+            console.log($scope.rooms);
+        });
 
-    // //not working yet
-    $http.get('/api/protected/room/type')
-        .then(
-            function (res) {
-                $scope.rmtypes = res.data;
-                console.log(JSON.stringify(res.data));
-                console.log("API room Type pull:");
-                console.log($scope.rmtypes);
-            },
-            function (res) {
-                // failure callback
-                console.log("Failed to pull room types");
-                console.log(JSON.stringify(res));
-            }
-        );
+        // //not working yet
+        $http.get('/api/protected/room/type')
+            .then(
+                function (res) {
+                    $scope.rmtypes = res.data;
+                    console.log(JSON.stringify(res.data));
+                    console.log("API room Type pull:");
+                    console.log($scope.rmtypes);
+                },
+                function (res) {
+                    // failure callback
+                    console.log("Failed to pull room types");
+                    console.log(JSON.stringify(res));
+                }
+            );
+    };
 
     $scope.getRoomSpace = function (room) {
         if (!$scope.rmtypes) {
@@ -36,12 +39,12 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
         }
         for (var c = 0; c < $scope.rmtypes.length; c++) {
             var rt = $scope.rmtypes[c];
-            if (rt._id == room.rmType) { 
+            if (rt._id == room.rmType) {
                 return rt.space;;
             }
         }
     };
-    
+
     $scope.getRoomType = function (room) {
         if (!$scope.rmtypes) {
             return;
@@ -66,11 +69,12 @@ angular.module('app').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
             .then(
                 function () {
                     // success callback
+                    $scope.rooms = []; 
+                    loadData(); 
                 },
                 function () {
                     // failure callback
                     console.log("Failed to Delete");
-                    console.log(JSON.stringify(response));
                 }
             );
     };
@@ -95,30 +99,39 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
     $scope.room = room;
     $scope.rmtypes = [];
 
-    $scope.min = 1; 
-    $scope.max = 7; 
+    //orginal values
+    $scope.orig = angular.copy($scope.rooms);
+    $scope.origRoom = angular.copy($scope.room); 
+
+    $scope.min = 1;
+    $scope.max = 7;
 
     $scope.cancelRoom = function () {
+        //reset data to defaults
+        angular.copy($scope.origRoom, $scope.room); 
         $modalInstance.dismiss('cancel');
     };
 
-    //Load Room types 
-    //not working yet
-    $http.get('/api/protected/room/type')
-        .then(
-            function (res) {
-                $scope.rmtypes = res.data;
-                console.log(JSON.stringify(res.data));
-                console.log("API room Type pull:");
-                console.log($scope.rmtypes);
-            },
-            function (res) {
-                // failure callback
-                console.log("Failed to pull room types");
-                console.log(JSON.stringify(res));
+        $http.get('/api/protected/room/type')
+            .then(
+                function (res) {
+                    $scope.rmtypes = res.data;
+                    console.log(JSON.stringify(res.data));
+                    console.log("API room Type pull:");
+                    console.log($scope.rmtypes);
+                },
+                function (res) {
+                    // failure callback
+                    console.log("Failed to pull room types");
+                    console.log(JSON.stringify(res));
 
-            }
-        );
+                }
+            );
+        $http.get('/api/protected/room').then(function (res) {
+            $scope.rooms = res.data;
+            console.log("API room pull:");
+            console.log($scope.rooms);
+        });
 
     $scope.okRoom = function (request, response) {
         $http.put('/api/protected/room/' + room._id, room)
@@ -134,24 +147,26 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
                     console.log(JSON.stringify(response));
                 }
             );
+        loadData();
         $modalInstance.close();
     };
-     $scope.getRoomSpace = function (room) {
+
+    $scope.getRoomSpace = function (room) {
         if (!$scope.rmtypes) {
             return;
         }
         for (var c = 0; c < $scope.rmtypes.length; c++) {
             var rt = $scope.rmtypes[c];
             if (rt._id == room.rmType) {
-                $scope.selectedCapacity = rt.space; 
+                $scope.selectedCapacity = rt.space;
                 return rt.space;
             }
         }
     };
 });
 
-angular.module('app').filter('range', function() {
-    return function(input, min, max) {
+angular.module('app').filter('range', function () {
+    return function (input, min, max) {
         min = parseInt(min, 10);
         max = parseInt(max, 10);
         for (var i = min; i < max; i++)
