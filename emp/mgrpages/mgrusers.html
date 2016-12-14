@@ -10,12 +10,9 @@
             style="cursor: pointer; pointer-events: all; margin-top: 5px;" uib-tooltip="clear">
             </span>
         </div>
-    </div>
-    <div class="col-md-12">
         <table id="tblUsers" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Edit User</th>
                     <th>
                         <a href="#" ng-click="orderByField = 'lastname'; reverseSort = !reverseSort">
                         Last Name 
@@ -54,21 +51,21 @@
                         </a>
                     </th>
                     <th>Phone #</th>
-                    <th>Delete</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="user in users | filter:txtFilter.text | orderBy:orderByField:reverseSort">
-                    <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-lg" ng-click="open(user)">
-                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit User</button>
-                    </td>
                     <td>{{user.lastname}}</td>
                     <td>{{user.firstname}}</td>
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{user.group}}</td>
                     <td>{{user.phone}}</td>
-                    <td><button class="btn btn-danger btn-lg" ng-click="delete(user)">Delete</button></td>
+                    <td><button class="btn btn-danger btn-md" ng-click="delete(user)">
+                        <i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-warning btn-md" ng-click="open(user)">
+                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit</button>
                 </tr>
             </tbody>
         </table>

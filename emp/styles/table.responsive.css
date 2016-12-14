@@ -1,0 +1,82 @@
+    /* Generic Styling, for Desktops/Laptops */
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    td,
+    th {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+    
+    @media only screen and (max-width: 760px),
+    (min-device-width: 414px) and (max-device-width: 768px) {
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+        /* Hide table headers but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -99999px;
+            left: -99999px;
+        }
+        tr {
+            border: 1px solid #ccc;
+        }
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            text-align: right;
+        }
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            left: 6px;
+            white-space: nowrap;
+        }
+        /*	Label the data	*/
+        #tblRooms td:nth-of-type(1):before {
+            content: "Number";
+        }
+        #tblRooms td:nth-of-type(2):before {
+            content: "Type";
+        }
+        #tblRooms td:nth-of-type(3):before {
+            content: "Available";
+        }
+        #tblRoomTypes td:nth-of-type(1):before {
+            content: "Type";
+        }
+        #tblRoomTypes td:nth-of-type(2):before {
+            content: "Desc";
+        }
+        #tblRoomTypes td:nth-of-type(3):before {
+            content: "Space";
+        }
+        #tblUsers td:nth-of-type(1):before {
+            content: "Last Name";
+        }
+        #tblUsers td:nth-of-type(2):before {
+            content: "First Name";
+        }
+        #tblUsers td:nth-of-type(3):before {
+            content: "Email";
+        }
+        #tblUsers td:nth-of-type(4):before {
+            content: "Group";
+        }
+        #tblUsers td:nth-of-type(5):before {
+            content: "Phone";
+        }
+    }
