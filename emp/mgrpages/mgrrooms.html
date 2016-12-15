@@ -47,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="room in rooms track by room._id | filter:txtRoomFilter.text | orderBy:orderByRoomField:reverseRoomSort">
+                <tr ng-repeat="room in rooms  | filter:txtRoomFilter.text | orderBy:orderByRoomField:reverseRoomSort track by room._id">
                     <td>{{room.num}}</td>
                     <td>{{getRoomType(room)}}</td>
                     <td>{{room.avail}}</td>

@@ -1,12 +1,12 @@
 <div class="container-fluid" ng-controller="userCtrl">
     <div class="col-md-12">
         <div class="col-md-1 pull-left" style="Padding: 5px;">
-            <button type="button" class="btn btn-info btn-md" ng-click="open()">
+            <button type="button" class="btn btn-info btn-md" ng-click="open('new')">
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
         <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
-            <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtFilter.text"/>
-            <span ng-if="txtFilter.text" ng-click="clearFilter()" class="glyphicon glyphicon-remove form-control-feedback" 
+            <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtUserFilter.text"/>
+            <span ng-if="txtUserFilter.text" ng-click="clearUserFilter()" class="glyphicon glyphicon-remove form-control-feedback" 
             style="cursor: pointer; pointer-events: all; margin-top: 5px;" uib-tooltip="clear">
             </span>
         </div>
@@ -14,39 +14,39 @@
             <thead>
                 <tr>
                     <th>
-                        <a href="#" ng-click="orderByField = 'lastname'; reverseSort = !reverseSort">
+                        <a href="#" ng-click="orderByUserField = 'lastname'; reverseUserSort = !reverseUserSort">
                         Last Name 
-                        <span ng-show="orderByField == 'lastname'">
-                            <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
-                            <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        <span ng-show="orderByUserField == 'lastname'">
+                            <i ng-show="!reverseUserSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseUserSort" class="glyphicon glyphicon-triangle-bottom"></i>
                         </span>
                         </a>
                     </th>
                     <th>
-                        <a href="#" ng-click="orderByField = 'firstname'; reverseSort = !reverseSort">
+                        <a href="#" ng-click="orderByUserField = 'firstname'; reverseUserSort = !reverseUserSort">
                         First Name 
-                        <span ng-show="orderByField == 'firstname'">
-                            <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
-                            <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        <span ng-show="orderByUserField == 'firstname'">
+                            <i ng-show="!reverseUserSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseUserSort" class="glyphicon glyphicon-triangle-bottom"></i>
                         </span>
                         </a>
                     </th>
                     
                     <th>
-                        <a href="#" ng-click="orderByField = 'email'; reverseSort = !reverseSort">
+                        <a href="#" ng-click="orderByUserField = 'email'; reverseUserSort = !reverseUserSort">
                             Email
-                            <span ng-show="orderByField == 'email'">
-                                <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
-                                <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                            <span ng-show="orderByUserField == 'email'">
+                                <i ng-show="!reverseUserSort" class="glyphicon glyphicon-triangle-top"></i>
+                                <i ng-show="reverseUserSort" class="glyphicon glyphicon-triangle-bottom"></i>
                             </span>
                         </a>
                     </th>
                     <th>
-                        <a href="#" ng-click="orderByField = 'group'; reverseSort = !reverseSort">
+                        <a href="#" ng-click="orderByUserField = 'group'; reverseUserSort = !reverseUserSort">
                         User group
-                        <span ng-show="orderByField == 'group'">
-                            <i ng-show="!reverseSort" class="glyphicon glyphicon-triangle-top"></i>
-                            <i ng-show="reverseSort" class="glyphicon glyphicon-triangle-bottom"></i>
+                        <span ng-show="orderByUserField == 'group'">
+                            <i ng-show="!reverseUserSort" class="glyphicon glyphicon-triangle-top"></i>
+                            <i ng-show="reverseUserSort" class="glyphicon glyphicon-triangle-bottom"></i>
                         </span>
                         </a>
                     </th>
@@ -55,11 +55,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in users | filter:txtFilter.text | orderBy:orderByField:reverseSort">
+                <tr ng-repeat="user in users | filter:txtUserFilter.text | orderBy:orderByUserField:reverseUserSort track by user._id">
                     <td>{{user.lastname}}</td>
                     <td>{{user.firstname}}</td>
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
-                    <td>{{user.group}}</td>
+                    <td>{{getUserGroup(user)}}</td>
                     <td>{{user.phone}}</td>
                     <td><button class="btn btn-danger btn-md" ng-click="delete(user)">
                         <i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button>
