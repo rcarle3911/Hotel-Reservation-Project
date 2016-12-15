@@ -3,7 +3,7 @@ angular.module('emp').controller('mgrCtrl',['$scope', function ($scope) {
         $scope.tabs = [{
             title: 'Users',
             contenturl: '/emp/mgrpages/mgrusers.html',
-            icon: 'glyphicon glyphicon-user'
+            icon: 'glyphicon glyphicon-user',
         }, {
             title: 'Rooms',
             contenturl: '/emp/mgrpages/mgrrooms.html',

@@ -40,7 +40,7 @@
     </div>
     <div ng-controller="EmpCtrl">
         <tabset>
-            <tab ng-repeat="tab in tabs">
+            <tab ng-repeat="tab in tabs" ng-hide="tab.disable" >
                 <tab-heading>
                     <i class={{tab.icon}}></i> &nbsp; {{tab.title}}
                 </tab-heading>
