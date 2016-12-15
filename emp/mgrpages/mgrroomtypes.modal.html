@@ -1,6 +1,25 @@
- <!--<div> 
-            <label>Space</label>
-            {{getRoomSpace(room)}}
+<div class="modal-header">
+    <h3>Add (Edit) Room Type</h3>
+</div>
+<form name="form.roomTypeForm" ng-submit="submitForm()" novalidate>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Room Type Name</label>
+            <input type="text" name="name" class="form-control" ng-model="roomType.name" required>
+            <p ng-show="form.roomTypeForm.name.$invalid && !form.roomTypeForm.name.$pristine" class="help-block">A name is required.</p>
+        </div>
+        <div class="form-group">
+            <label>Room Type Description</label>
+            <input type="text" name="desc" class="form-control" ng-model="roomType.desc" required>
+            <p ng-show="form.roomTypeForm.desc.$invalid && !form.roomTypeForm.desc.$pristine" class="help-block">A desc is required.</p>
+        </div>
+        <div class="form-group">
+            <label>Room Type Space</label>
+            <select class="form-control" ng-model="roomType.space" ng-options="item for item in [] | range:min:max"></select>
+        </div>
 
-            <select class="form-control" ng-model="selectedCapacity" ng-options="item for item in [] | range:min:max"></select>
-    </div>-->
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="okRoomType()" ng-disabled="form.roomFrom.$invalid">Update</button>
+        <button class="btn btn-warning btn-lg" ng-click="cancelRoomType()">Cancel</button>
+    </div>
+</form>
