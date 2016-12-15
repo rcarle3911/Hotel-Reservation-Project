@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller="userCtrl">
     <div class="col-md-12">
         <div class="col-md-1 pull-left" style="Padding: 5px;">
-            <button type="button" class="btn btn-info btn-md" ng-click="open('new')">
+            <button type="button" class="btn btn-info btn-md" ng-click="openUser('new')">
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
         <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
@@ -61,10 +61,10 @@
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{getUserGroup(user)}}</td>
                     <td>{{user.phone}}</td>
-                    <td><button class="btn btn-danger btn-md" ng-click="delete(user)">
+                    <td><button class="btn btn-danger btn-md" ng-click="deleteUser(user)">
                         <i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button>
                         &nbsp;
-                        <button type="button" class="btn btn-warning btn-md" ng-click="open(user)">
+                        <button type="button" class="btn btn-warning btn-md" ng-click="openUser(user)">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit</button>
                 </tr>
             </tbody>

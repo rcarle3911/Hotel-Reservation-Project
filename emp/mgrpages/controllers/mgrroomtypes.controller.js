@@ -59,7 +59,7 @@ app.controller('ModalInstanceRoomTypeCtrl', function ($scope, roomType, $modalIn
 
     if (roomType == "new") {
         console.clear();
-        $scope.newReq = true;
+        $scope.newRT = true;
         //fake room
         roomType = {
             name: "",
@@ -75,7 +75,7 @@ app.controller('ModalInstanceRoomTypeCtrl', function ($scope, roomType, $modalIn
 
     $scope.cancelRoomType = function () {
         //reset data to defaults
-        if (!$scope.newReq) {
+        if (!$scope.newRT) {
             angular.copy($scope.origRoomType, $scope.roomType);
         }
         $modalInstance.dismiss('cancel');
@@ -85,8 +85,8 @@ app.controller('ModalInstanceRoomTypeCtrl', function ($scope, roomType, $modalIn
 
     $scope.okRoomType = function (request, response) {
         console.log(roomType);
-        if (!$scope.newReq) {
-            $http.put('/api/protected/room/' + roomType._id, roomType)
+        if (!$scope.newRT) {
+            $http.put('/api/protected/room/type/' + roomType._id, roomType)
                 .then(
                     function (response) {
                         // success callback
@@ -100,7 +100,7 @@ app.controller('ModalInstanceRoomTypeCtrl', function ($scope, roomType, $modalIn
                     }
                 );
         } else {
-            $http.post('/api/protected/room/', roomType).then(
+            $http.post('/api/protected/room/type/', roomType).then(
                 function (response) {
                     // success callback
                     console.log("Put Sucessful");
