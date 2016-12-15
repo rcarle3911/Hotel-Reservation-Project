@@ -2,6 +2,7 @@ $(function () {
     $.get('/emp/token', function (token) {
         if (token) {
             window.jwtToken = token;
+            console.log(window.jwtToken);
         } else {
             window.location.href = '/login';
         }
@@ -13,25 +14,20 @@ var app = angular.module('emp', ['ultimateDataTableServices', 'ui.bootstrap', 'r
 
 
 
-
 //Employee pages tabs (on /emp/index.html)
 app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
-    var cUser = {};
+    // if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
-    if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
-
-        $http.get('/api/protected/users/current').then(function (res) {
-            $scope.cUser = res.data;
-        });
-
-    console.log(cUser.group);
-
-    if (cUser.group == 2) {
-        //show manager 
-        
-    }
-
+    // $http.get('/api/protected/users/current').then(function (res) {
+    //     $scope.cUser = res.data;
+    //     console.log("success");
+    //     console.log($scope.cUser);
+    // }, function (res) {
+    //     //faliure
+    //     console.log("error");
+    //     console.log(res.data);
+    // });
 
     $scope.tabs = [{
         title: 'Reservations',
@@ -56,6 +52,6 @@ app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http
         contenturl: '/emp/mgrpages/manager.html',
         icon: 'glyphicon glyphicon-wrench',
         usesres: 'hidden',
-        disable: !(cUser.group == 2)
+        disable: false
     }];
 }]);
