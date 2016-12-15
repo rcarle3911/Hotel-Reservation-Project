@@ -1,6 +1,6 @@
 //User Accounts Page get all Rooms / Clear filter (on mgrrooms.html)
 angular.module('emp').controller('roomCtrl', ['$scope', '$http', '$window', '$modal', function ($scope, $http, $window, $modal) {
-    $scope.orderRoomByField = 'num';
+    $scope.orderByRoomField = 'num';
     $scope.reverseRoomSort = false;
 
     $scope.rooms = [];

@@ -1,7 +1,7 @@
 //User Accounts Page get all users / Clear filter (on mgrusers.html)
 angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$modal', function ($scope, $http, $window, $modal) {
-    $scope.orderByField = 'lastname';
-    $scope.reverseSort = false;
+    $scope.orderByUserField = 'lastname';
+    $scope.reverseUserSort = false;
 
     $scope.users = [];
 
@@ -33,8 +33,23 @@ angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$mo
             );
     };
 
-    $scope.clearFilter = function () {
-        $scope.txtFilter = null;
+    $scope.getUserGroup = function (_user) {
+        if(_user.group == 1)
+        {
+            return "Employee";
+        }
+        else if(_user.group == 2)
+        {
+            return "Manager";
+        }
+        else 
+        {
+            return "Customer";
+        }
+    }
+
+    $scope.clearUserFilter = function () {
+        $scope.txtUserFilter = null;
     };
     // MODAL WINDOW
     $scope.open = function (_user) {
