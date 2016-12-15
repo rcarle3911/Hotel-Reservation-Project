@@ -63,6 +63,7 @@ angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$mo
             }
         });
         modalInstance.result.then(function () {
+$scope.users = []; 
             loadUserData();
         });
     };
