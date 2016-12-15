@@ -17,7 +17,6 @@ angular.module('emp').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
             console.log($scope.rooms);
         });
 
-        // //not working yet
         $http.get('/api/protected/room/type')
             .then(
                 function (res) {
@@ -94,7 +93,7 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
     if (room == "new") {
         console.clear();
         $scope.newReq = true;
-        //fake room
+        //remp room
         room = {
             avail: true,
             num: "",
