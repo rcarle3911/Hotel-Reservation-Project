@@ -10,7 +10,7 @@ $(function () {
 });
 
 //Controller Stuff
-var app = angular.module('emp', ['ultimateDataTableServices', 'ui.bootstrap', 'reservations']);
+var app = angular.module('emp', ['ultimateDataTableServices', 'ui.bootstrap', 'chart.js', 'reservations']);
 
 
 
