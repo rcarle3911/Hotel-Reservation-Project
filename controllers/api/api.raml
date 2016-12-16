@@ -1,12 +1,14 @@
 #%RAML 1.0
 title: Martian Motel
 version: 1.0
-baseUri: http://martianmotel.ddns.net/api
+baseUri: http://localhost:3000/api
 types:
   Password:
     minLength: 8
   Phone:
     pattern: ^[0-9()-]+$
+  email: string
+  _id: string
   Reservation:
     properties:
       userEmail: string
@@ -17,6 +19,12 @@ types:
       endDate: datetime
       numGuests: integer
       price: number
+      firstname:
+        type: string
+        required: false
+      lastname:
+        type: string
+        required: false
   Reservations:
     type: Reservation[]
     uniqueItems: true
@@ -191,7 +199,7 @@ types:
             application/json:
               type: User
   /email:
-    /{email}:
+    /{Email}:
       get:
         description: |
           Retrieves the user in the database that matches the given email.

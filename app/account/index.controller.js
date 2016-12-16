@@ -16,6 +16,8 @@
         vm.user = null;
         vm.saveUser = saveUser;
         vm.deleteUser = deleteUser;
+        vm.editRes = editRes;
+        vm.deleteRes = deleteRes;
 
         initController();
 
@@ -50,6 +52,22 @@
                 .catch(function (error) {
                     FlashService.Error(error);
                 });
+        }
+
+        function editRes(reservation) {
+            //$window.location = '/app/#/reservations';
+            console.log(reservation._id)
+        }
+
+        function deleteRes(_id) {
+            ResService.Delete(_id)
+            .then(function() {
+                FlashService.Success('Reservation Cancelled');
+                $window.location.reload();
+            })
+            .catch(function (error) {
+                    FlashService.Error(error);
+            });
         }
     }
 

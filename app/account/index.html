@@ -65,14 +65,14 @@
 				<tbody>
 					<tr ng-repeat="reservations in vm.reservations">
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-sm" ng-click="open(room)">
+                        <button type="button" class="btn btn-warning btn-sm" ng-click="vm.editRes(reservations)">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit Reservation</button>
 					</td>
                     <!--<td class="text-center">{{reservations.roomType}}</td>-->
                     <td class="text-center">{{reservations.numGuests}}</td>
                     <td class="text-center">{{reservations.startDate}}</td>
                     <td class="text-center">{{reservations.endDate}}</td>
-                    <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="deleteRoom(room)">Cancel</button></td>
+                    <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.deleteRes(reservations._id)">Cancel</button></td>
                 </tr>
             </tbody>
         </table>
