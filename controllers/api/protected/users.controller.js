@@ -1,16 +1,21 @@
-var config = require('config.json');
-var express = require('express');
-var router = express.Router();
 var userService = require('services/users.service');
+
+var osprey = require('osprey');
+var join = require('path').join;
+var raml = join(__dirname, '../', 'api.raml');
+var handler = osprey.server(raml);
+var router = osprey.Router({ ramlUriParameters: handler.ramlUriParameters }); 
+
+console.log(raml);
 
 // Routes to receive HTTP requests
 router.get('/', getUsers);
 router.get('/current', getCurrentUser);
-router.get('/invoice/:_id', getInvoice);
-router.get('/email/:email', getUserByEmail);
-router.get('/:_id', getUserByID);
-router.put('/:_id', editUser);
-router.delete('/:_id', deleteUser);
+router.get('/invoice/{_id}', getInvoice);
+router.get('/email/{email}', getUserByEmail);
+router.get('/{_id}', getUserByID);
+router.put('/{_id}', editUser);
+router.delete('/{_id}', deleteUser);
 
 module.exports = router;
 

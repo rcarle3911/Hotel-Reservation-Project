@@ -7,6 +7,8 @@ types:
     minLength: 8
   Phone:
     pattern: ^[0-9()-]+$
+  email: string
+  _id: string
   Reservation:
     properties:
       userEmail: string
@@ -197,7 +199,7 @@ types:
             application/json:
               type: User
   /email:
-    /{email}:
+    /{Email}:
       get:
         description: |
           Retrieves the user in the database that matches the given email.

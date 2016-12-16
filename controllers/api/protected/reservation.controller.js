@@ -1,8 +1,10 @@
-var config = require('config.json');
-var express = require('express');
-var app = express();
-var router = express.Router();
 var resService = require('services/reservation.service.js');
+
+var osprey = require('osprey');
+var join = require('path').join;
+var raml = join(__dirname, '../', 'api.raml');
+var handler = osprey.server(raml);
+var router = osprey.Router({ ramlUriParameters: handler.ramlUriParameters }); 
 
 // Routes to receive HTTP requests
 router.get('/', getUserRes);
@@ -10,10 +12,10 @@ router.get('/past', getPastRes);
 router.get('/current', getPresentRes);
 router.get('/future', getFutureRes);
 router.get('/find', findRes);
-router.get('/:_id', getResByID);
-router.put('/:_id', editRes);
-router.delete('/:_id', deleteRes);
-router.patch('/:_id', checkInOut);
+router.get('/{_id}', getResByID);
+router.put('/{_id}', editRes);
+router.delete('/{_id}', deleteRes);
+router.patch('/{_id}', checkInOut);
 
 module.exports = router;
 
@@ -28,7 +30,6 @@ function checkInOut(req, res) {
 }
 
 function getUserRes(req, res) {
-    if (!req.user) return res.status(401).send("User not logged in");
     resService.getUserRes(req.user.sub)
     .then( function (list) {
         res.send(list);
