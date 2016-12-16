@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "http-server ./ -a localhost -p 3000 -c-1"
-    
   },
   "repository": {
     "type": "git",
@@ -25,6 +24,7 @@
   },
   "homepage": "https://github.com/rcarle3911/hotel-reservation-project#readme",
   "dependencies": {
+    "angular-chart.js": "^1.1.1",
     "bcryptjs": "^2.1.0",
     "body-parser": "^1.15.2",
     "ejs": "^2.3.3",
