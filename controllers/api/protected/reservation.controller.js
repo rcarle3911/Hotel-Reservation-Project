@@ -53,7 +53,6 @@ function getPastRes(req, res) {
     resService.getPastRes()
     .then( function (list) {
         if (list) res.send(list);
-        //else res.status(404)
         else res.status(400).send("No Reservations Found");
     })
     .catch( function(err) {
@@ -65,7 +64,6 @@ function getPresentRes(req, res) {
     resService.getPresentRes()
     .then( function (list) {
         if (list) res.send(list);
-        //else res.status(404)
         else res.status(400).send("No Reservations Found");
     })
     .catch( function(err) {
@@ -77,7 +75,6 @@ function getResByID(req, res) {
     resService.getResByID(req.params._id)
     .then( function (list) {
         if (list) res.send(list);
-        //else res.status(404)
         else res.status(400).send("No Reservations Found");
     })
     .catch( function(err) {
@@ -86,7 +83,7 @@ function getResByID(req, res) {
 }
 
 function editRes(req, res) {
-    resService.edit(req.params._id, req.body)
+    resService.edit(req.params._id, req.body, req.user.group)
         .then(function () {
             res.sendStatus(200);
         })

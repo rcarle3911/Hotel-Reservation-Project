@@ -1,7 +1,7 @@
 #%RAML 1.0
 title: Martian Motel
 version: 1.0
-baseUri: http://martianmotel.ddns.net/api
+baseUri: http://localhost:3000/api
 types:
   Password:
     minLength: 8
@@ -17,6 +17,12 @@ types:
       endDate: datetime
       numGuests: integer
       price: number
+      firstname:
+        type: string
+        required: false
+      lastname:
+        type: string
+        required: false
   Reservations:
     type: Reservation[]
     uniqueItems: true

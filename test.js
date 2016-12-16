@@ -32,6 +32,8 @@
 	rooms = [],
 	
 	rsrv = {
+		firstname: user.firstname,
+		lastname: user.lastname,
 		userEmail: user.email,
 		roomType: null, //Must get from DB
 		startDate: new Date("12/20/2016"),

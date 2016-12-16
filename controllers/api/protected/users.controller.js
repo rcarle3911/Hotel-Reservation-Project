@@ -34,7 +34,7 @@ function getUserByID(req, res) {
 }
 
 function getCurrentUser(req, res) {
-    if (!req.user) return res.status(401).send("User not logged in");
+
     userService.getById(req.user.sub)
         .then(function (user) {
             if (user) {
@@ -73,11 +73,12 @@ function editUser(req, res) {
 }
 
 function deleteUser(req, res) {
+
     var userId = req.user.sub;
     if (req.params._id !== userId && req.user.group < 1) {
         res.status(401).send('You can only delete your own account');
     } else {
-        userService.delete(userId)
+        userService.delete(req.params._id)
             .then(function () {
                 res.sendStatus(200);
             })
