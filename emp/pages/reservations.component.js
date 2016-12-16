@@ -30,7 +30,7 @@ angular.
                     resv.roomTypeName = "";
                     resv.startDateF = formatDate(new Date(resv.startDate));
                     resv.endDateF = formatDate(new Date(resv.endDate));          
-
+                    
                     resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
                         return obj._id === resv.roomType;
                     })[0].name;
@@ -47,7 +47,7 @@ angular.
                 self.currentReservations.forEach(function(resv){
                     resv.roomTypeName = "";
                     resv.startDateF = formatDate(new Date(resv.startDate));
-                    resv.endDateF = formatDate(new Date(resv.endDate));            
+                    resv.endDateF = formatDate(new Date(resv.endDate));
                                         
                     $http.get('/api/protected/room/type/'+ resv.roomType).then(function (resp) {                        
                         resv.roomTypeName = resp.data.name;
@@ -62,20 +62,20 @@ angular.
           case "create":
             this.btnIcon = "glyphicon glyphicon-plus";
             this.btnTxt = " New Reservation";
-            this.actionBtn = "<button type=\"button\" ng-click=\"open(res)\" class=\"btn btn-info btn-md\">Edit</button>";
+            this.actionBtn = "<button type=\"button\"  class=\"btn btn-info btn-md\">Edit</button>";
             this.current = false;
           break;
           
           case "checkin":
             this.btnIcon = "glyphicon glyphicon-plus";
             this.btnTxt = " Add Walk-in";
-            this.actionBtn = "<button type=\"button\" ng-click=\"ckin(res)\" class=\"btn btn-info btn-md\">Check-in</button>";            
+            this.actionBtn = "<button type=\"button\" class=\"btn btn-info btn-md\">Check-in</button>";            
             this.current = false;
           break;
 
           case "checkout":
             this.btnVisible = 'hidden';
-            this.actionBtn = "<button type=\"button\" ng-click=\"ckout(res)\" class=\"btn btn-info btn-md\">Check-out</button>";            
+            this.actionBtn = "<button type=\"button\"  class=\"btn btn-info btn-md\">Check-out</button>";            
             this.current = true;
           break;
         }
@@ -87,48 +87,53 @@ angular.
                     "property":"firstname",
                     "order":true,
                     "type":"text",
+                    "hide" : true,
                 },
                 {
                     "header":"Last Name",
                     "property":"lastname",
                     "order":true,
                     "type":"text",
+                    "hide" : true,
                 },                
                 {
                     "header":"Check In Date",
                     "property":"startDateF",
                     "order":true,
                     "type":"text",
-                    "format":"date"
-
+                    "format":"date",
+                    "hide" : true,
                 },
                 {
                     "header":"Check Out Date",
                     "property":"endDateF",
                     "order":true,
                     "type":"text",
-                    "format":"date"
+                    "format":"date",
+                    "hide" : true,
                 },                
                 {
                     "header":"Number of Guests",
                     "property":"numGuests",
                     "order":true,
                     "type":"text",
+                    "hide" : true,
                 },
                 {
                     "header":"Room Type",
                     "property":"roomTypeName",
                     "order":true,
                     "type":"text",
+                    "hide" : true,
                 },
                 {
                     "header":"",
-                    "property":"",
+                    "property":"edit",
                     "order":false,
                     "type":"text",
-                    "render":this.actionBtn
-                                      
-                }
+                    "render":this.actionBtn,
+                    "hide" : false,                                     
+                },
             ],
             "pagination":{
             "mode":'local',
@@ -147,53 +152,86 @@ angular.
                 "active":false,
                 "mode":'local'
             },
-             "filter":{
+            "hide":{
+                "active":true,
+                "byDefault":undefined,
+                "showButton":true
+            },            
+            "filter":{
                 "active":true,
                 "higlight":true,
                 "showbutiton":true
             },
+            "select":{
+                "active":false,
+            },
+            "mouseevents":{
+                "active": true,
+                "clickCallback": function(line, data){
+                    switch(self.action){
+                        case "create":                   
+                            $scope.editRes(data._id);
+                        break;
+                        case "checkin":
+                            $scope.ckin(data._id);
+                        break;
+                        case "checkout":
+                            $scope.ckout(data._id);
+                        break;
+                    }
+                }
+            }
             
         };
         
         //Init the datatable with his configuration
         this.datatable = datatable(datatableConfig);
-   
-        $scope.open = function (_res) {
-                var modalInstance = $modal.open({
-                    controller: "ResModalInstanceCtrl",
-                    templateUrl: '/emp/pages/reservationsModal.html',
-                    resolve: {                                              
-                        roomTypes: function (){
-                            console.log(self.roomTypes);
-                            return self.roomTypes;
-                            },
-                        res: function () {
-                            return _res;
-                        }
-                    }
-                });
+        
+        $scope.editRes = function (_resId) {
+                var _res = {};
+                console.log(_resId);
+                if(_resId !=  undefined){
+                    $http.get('/api/protected/reservation/'+ _resId).then(function (resp) {                        
+                        _res = resp.data;
+                        var modalInstance = $modal.open({
+                            controller: "ResModalInstanceCtrl",
+                            templateUrl: '/emp/pages/reservationsModal.html',
+                            resolve: {                                              
+                                roomTypes: function (){
+                                    console.log(self.roomTypes);
+                                    return self.roomTypes;
+                                    },
+                                res: function () {
+                                    return _res;
+                                }
+                            }
+                        });                        
+                    });
+                }                 
+                
+
             }; 
-        $scope.ckin = function (_res) {
+        $scope.ckin = function (_resId) {
                 var modalInstance = $modal.open({
                     controller: "ResModalInstanceCtrl",
                     templateUrl: '/emp/pages/checkinModal.html',
-                    resolve: {
-                        res: function () {
-                            return _res;
-                        }
-                    }
+                    //resolve: {
+                    //    res: function () {
+                    //        return _res;
+                    //     }
+                   // }
                 });
             }; 
             
-        $scope.ckout = function (_res) {
+        $scope.ckout = function (_resId) {
                 var modalInstance = $modal.open({
                     controller: "ResModalInstanceCtrl",
                     templateUrl: '/emp/pages/checkoutModal.html',
-                    resolve: {
-                        res: function () {
-                            return _res;
-                        }
-                    }
+                    //resolve: {
+                    //    res: function () {
+                    //        return _res;
+                    //    }
+                    //}
                 });
             };                                            
             
@@ -231,9 +269,9 @@ angular.
     };
 
     $scope.ok = function () {
-            console.log($scope.res); 
-            console.log($scope.res.firstname);
-            $http.get('/api/protected/users/email/'+ $scope.res.userEmail).then(function (resp) {
+
+            //Updates user name, if user exists
+            //$http.get('/api/protected/users/email/'+ $scope.res.userEmail).then(function (resp) {
                 //this put is unauthorized for the current employee,
                 //employees should have ability to update the customer's user record
                 
@@ -241,24 +279,7 @@ angular.
                 //resp.data.lastname = $scope.res.lastname;
                 
                 //$http.put('/api/protected/users/' + resp.data._id, resp.data);
-            },
-            function (resp){
-                console.log("creating user");                
-                var createNewUser = {
-                    "firstname": $scope.res.firstname,
-                    "lastname": $scope.res.lastname,
-                    "dob": "1/1/1900",
-                    "phone": "8888888888",
-                    "email": $scope.res.userEmail,
-                    "address": "123",
-                    "password": "sadflksa2"
-                };
-                console.log($scope.res.firstname);
-                
-                $http.post('/api/public/users/register', createNewUser).then(function(r){
-                    console.log("Post User Sucessful");                
-                });
-            });
+            //});
             
             $http.post('/api/public/reservation', $scope.res)
             .then(
