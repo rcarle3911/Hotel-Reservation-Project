@@ -29,16 +29,12 @@ angular.
                 self.futureReservations.forEach(function(resv){
                     resv.roomTypeName = "";
                     resv.startDateF = formatDate(new Date(resv.startDate));
-                    resv.endDateF = formatDate(new Date(resv.endDate));            
-                                        
-                    $http.get('/api/protected/room/type/'+ resv.roomType).then(function (resp) {                        
-                        resv.roomTypeName = resp.data.name;
-                    });
-                                        
-                    $http.get('/api/protected/users/email/'+ resv.userEmail).then(function (resp) {
-                        resv.firstName = resp.data.firstname;
-                        resv.lastName = resp.data.lastname;
-                    });                    
+                    resv.endDateF = formatDate(new Date(resv.endDate));          
+
+                    resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
+                        return obj._id === resv.roomType;
+                    })[0].name;
+
                 });
                 self.datatable.setData(self.futureReservations);            
                 
@@ -55,12 +51,7 @@ angular.
                                         
                     $http.get('/api/protected/room/type/'+ resv.roomType).then(function (resp) {                        
                         resv.roomTypeName = resp.data.name;
-                    });
-                                        
-                    $http.get('/api/protected/users/email/' + resv.userEmail).then(function (resp) {
-                        resv.firstName = resp.data.firstname;
-                        resv.lastName = resp.data.lastname;                        
-                    });                    
+                    });                 
                 });
                 self.datatable.setData(self.currentReservations);            
                         
@@ -93,13 +84,13 @@ angular.
             "columns":[
                 {
                     "header":"First Name",
-                    "property":"firstName",
+                    "property":"firstname",
                     "order":true,
                     "type":"text",
                 },
                 {
                     "header":"Last Name",
-                    "property":"lastName",
+                    "property":"lastname",
                     "order":true,
                     "type":"text",
                 },                
