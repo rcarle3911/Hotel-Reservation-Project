@@ -48,14 +48,14 @@
 		</div>
 
 		<div class="col-md-6">
-		<div class="form-container">
+		<div class="form-container2">
 			<form  method="get">
 				<div class="form-group">
 					<table id="tblRooms" class="table table-striped table-bordered" cellspacing="0">
 						<thead>
 							<tr>
 								<th class="text-center">Edit Reservation</th>
-								<!--<th class="text-center">Room Type</th>-->
+								<th class="text-center">Room Type</th>
 								<th class="text-center">Guests</th>
 								<th class="text-center">Check-In Date</th>
 								<th class="text-center">Check-Out Date</th>
@@ -65,10 +65,10 @@
 				<tbody>
 					<tr ng-repeat="reservations in vm.reservations">
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-sm" ng-click="vm.editRes(reservations)">
+						<button type="button" class="btn btn-warning btn-sm" ng-click="vm.editRes(reservations._id)">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit Reservation</button>
 					</td>
-                    <!--<td class="text-center">{{reservations.roomType}}</td>-->
+					<td class="text-center">{{vm.getRoomType(reservations)}}</td>
                     <td class="text-center">{{reservations.numGuests}}</td>
                     <td class="text-center">{{reservations.startDate}}</td>
                     <td class="text-center">{{reservations.endDate}}</td>

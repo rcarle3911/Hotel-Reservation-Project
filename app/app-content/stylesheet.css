@@ -364,6 +364,22 @@ legend{
 	box-shadow: 0px 8px 16px 0px black;	
 }
 
+.form-container2{
+	clear:both;
+	overflow:scroll;
+	font-size:14px;
+	color:#808080;
+	text-align:left;
+	background-color:#222222;
+    border-radius: 10px;
+    border: 1px solid black;
+	padding: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: auto;
+	box-shadow: 0px 8px 16px 0px black;	
+}
+
 .row{
 	clear:both;
 	display:-webkit-flex;
