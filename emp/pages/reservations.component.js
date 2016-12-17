@@ -370,7 +370,7 @@ angular.
             
     };
     
-    $scope.checkInOut = function (){
+    $scope.checkInOut = function (inout){
             console.log($scope.res);
 
             $http.put('/api/protected/reservation/' + $scope.res._id ,$scope.res)
@@ -385,12 +385,17 @@ angular.
                             // success callback
                             console.log("Patch Sucessful");
                             console.log(response);
-                            switch(self.action){
+                            switch(inout){
                             case "checkin":
                                 alert("Check-in Sucessful");
+                                console.log("Check-in clicked");
                             break;
                             case "checkout":
                                 alert("Check-Out Sucessful");
+                                console.log("Check-out clicked");
+                            break;
+                            default:
+                                console.log(inout);                                
                             break;
                             };
                         },
@@ -407,7 +412,6 @@ angular.
                     console.log(response);
                 }
             );
-        console.log("Check-in clicked");
         $modalInstance.close();            
     };
 
