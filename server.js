@@ -42,7 +42,7 @@ app.get('/update', function (req, res) {
 });
 
 //API Validator
-//app.use('/api', osprey.server(path));
+app.use('/api', osprey.server(path));
 
 app.listen(3000);
 console.log("Server listening on port 3000");

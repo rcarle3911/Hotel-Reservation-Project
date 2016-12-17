@@ -1,9 +1,11 @@
-var config = require('config.json');
-var express = require('express');
-var app = express();
-var router = express.Router();
 var roomService = require('services/room.service.js');
 var roomTypeService = require('services/roomType.service.js');
+
+var osprey = require('osprey');
+var join = require('path').join;
+var raml = join(__dirname, '../', 'api.raml');
+var handler = osprey.server(raml);
+var router = osprey.Router({ ramlUriParameters: handler.ramlUriParameters }); 
 
 // Routes to receive HTTP requests
 router.get('/', getRooms);
@@ -11,13 +13,13 @@ router.post('/', addRoom);
 router.get('/type', getRoomTypes);
 router.get('/available', getAvailRooms);
 router.post('/type', addRoomType);
-router.get('/type/:_id', getRmTypeById);
-router.put('/type/:_id', editRmType);
-router.delete('/type/:_id', deleteRmType);
-router.get('/:_id', getRoomByID);
-router.put('/:_id', editRoom);
-router.delete('/:_id', deleteRoom);
-router.patch('/:_id', toggleRoom);
+router.get('/type/{_id}', getRmTypeById);
+router.put('/type/{_id}', editRmType);
+router.delete('/type/{_id}', deleteRmType);
+router.get('/{_id}', getRoomByID);
+router.put('/{_id}', editRoom);
+router.delete('/{_id}', deleteRoom);
+router.patch('/{_id}', toggleRoom);
 
 module.exports = router;
 

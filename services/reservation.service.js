@@ -166,6 +166,7 @@ function createRes(resrvParam) {
         });
         
         function createReservation() {
+            resrvParam.roomType = mongojs.ObjectID(resrvParam.roomType);
             db.futureRes.insert(
                 resrvParam,
                 function (err, doc) {
@@ -238,27 +239,39 @@ function isAvailable(resrvParam) {
             { space: {$gte: resrvParam.space} }, //Returns an array of room types that meet the space requirement
             function (err, rmTypes) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
-                var avail = false;
+                if (rmTypes.length === 0) deferred.reject("No rooms exist for that capacity");
+                var count = 0;
                 for (var i = 0; i < rmTypes.length; i++) {
                     typeCount(rmTypes[i]._id)
                     .then(function () {
+                        console.log("Available");
                         avail = true;
                         deferred.resolve();
+                    })
+                    .catch(function (err) {
+                        count++;
+                        console.log("Count: " + count);
+                        console.log("RoomTypes: " + rmTypes.length);
+                        if (count >= rmTypes.length) {
+                            deferred.reject("No availability");
+                        }
                     });
                 }
-                //setTimeout(function() {
-                //    
-                //}, 5000);
+                setTimeout(function() {
+                    deferred.reject("Server Busy...Try again later");
+                }, 5000);
             }
         );
     }
 
     function typeCount (rmType) {
         var deferred = Q.defer();
+        console.log(rmType);
         db.rooms.count(
             { rmType: mongojs.ObjectID(rmType) },
             function (err, total) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
+                console.log("Rooms Found: " + total);
                 db.futureRes.count(
                     { $and: [
                         { startDate: { $lte: resrvParam.endDate } },
@@ -267,6 +280,7 @@ function isAvailable(resrvParam) {
                     ]},
                     function (err, futureCount) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
+                        console.log("Reservations found: " + futureCount);
                         if (futureCount >= total) {                
                             deferred.reject("No Availability");
                         } else {

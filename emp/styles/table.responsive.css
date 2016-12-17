@@ -80,6 +80,21 @@
             content: "Phone";
         }
         table[class="table table-condensed table-hover table-bordered"] td:nth-of-type(1):before {
-            content: "Phone";
+            content: "First Name";
+        }
+        table[class="table table-condensed table-hover table-bordered"] td:nth-of-type(2):before {
+            content: "Last Name";
+        }
+        table[class="table table-condensed table-hover table-bordered"] td:nth-of-type(3):before {
+            content: "Check-In";
+        }
+        table[class="table table-condensed table-hover table-bordered"] td:nth-of-type(4):before {
+            content: "Check-Out";
+        }
+        table[class="table table-condensed table-hover table-bordered"] td:nth-of-type(5):before {
+            content: "Guests";
+        }
+        table[class="table table-condensed table-hover table-bordered"] td:nth-of-type(6):before {
+            content: "Room";
         }
     }

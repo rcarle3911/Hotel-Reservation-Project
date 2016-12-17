@@ -1,7 +1,7 @@
-var config = require('config.json');
-var express = require('express');
-var router = express.Router();
 var userService = require('services/users.service');
+
+var osprey = require('osprey');
+var router = osprey.Router();
 
 // Routes to receive HTTP requests
 router.post('/register', register);
@@ -32,6 +32,7 @@ function login(req, res) {
 }
 
 function register(req, res) {
+    console.log(req.body);
     userService.create(req.body)
         .then(function () {
             res.sendStatus(200);
