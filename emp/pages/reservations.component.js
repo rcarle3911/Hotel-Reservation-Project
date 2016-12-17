@@ -146,13 +146,7 @@ angular.
             ],
             "pagination":{
             "mode":'local',
-            "numberRecordsPerPageList":[{
-                    number: 10,
-                    clazz: ''
-                }, {
-                    number: 25,
-                    clazz: ''
-                }]
+            "numberRecordsPerPage":10       
             },
             "order":{
                 "mode":'local'
@@ -164,7 +158,7 @@ angular.
             "hide":{
                 "active":true,
                 "byDefault":undefined,
-                "showButton":true
+                "showButton":false
             },            
             "filter":{
                 "active":true,
