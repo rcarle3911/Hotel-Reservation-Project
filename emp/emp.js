@@ -26,13 +26,14 @@ var app = angular
 //Employee pages tabs (on /emp/index.html)
 app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
+
+
     $http.get('/api/protected/users/current').then(function (res) {
         $scope.cUser = res.data;
-        var user = $scope.cUser; 
-        if(user.group == 0)
-        {
+        var user = $scope.cUser;
+        if (user.group == 0) {
             //kick them out.
-           return $window.location.href = '/app'; 
+            return $window.location.href = '/app';
         }
 
         $scope.tabs = [{
@@ -60,6 +61,12 @@ app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http
             usesres: 'hidden',
             disable: !(user.group > 1)
         }];
+
+        $scope.logout = function () {
+            $window.jwtToken = null;
+            $window.isLoggedIn = false;
+            $window.location.href = '/  ';
+        }
     }, function (res) {
         //faliure
         console.log(res.data);
