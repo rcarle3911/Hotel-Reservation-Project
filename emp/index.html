@@ -42,11 +42,14 @@
     <link rel="stylesheet" href="/emp/styles/emp.css">
 
 </head>
-<body>
+<body ng-controller="EmpCtrl">>
     <div id="logo" class="logo">
         <a href="/app"><img src="/app/app-content/textlogo.png" /></a>
     </div>
-    <div ng-controller="EmpCtrl">
+    <div>
+        <button type="button" class="btn btn-warning btn-md pull-right" ng-click="logout()">Logout</button>
+        </div>
+    <div>
         <tabset>
             <tab ng-repeat="tab in tabs" ng-hide="tab.disable" >
                 <tab-heading>
