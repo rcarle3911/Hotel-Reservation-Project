@@ -19,3 +19,7 @@
     height: 75px;
     width: 203px;
 }
+
+button[data-toggle="dropdown"] {
+        display: none;
+    }

@@ -146,13 +146,7 @@ angular.
             ],
             "pagination":{
             "mode":'local',
-            "numberRecordsPerPageList":[{
-                    number: 10,
-                    clazz: ''
-                }, {
-                    number: 25,
-                    clazz: ''
-                }]
+            "numberRecordsPerPage":10       
             },
             "order":{
                 "mode":'local'
@@ -164,7 +158,7 @@ angular.
             "hide":{
                 "active":true,
                 "byDefault":undefined,
-                "showButton":true
+                "showButton":false
             },            
             "filter":{
                 "active":true,
@@ -370,7 +364,7 @@ angular.
             
     };
     
-    $scope.checkInOut = function (){
+    $scope.checkInOut = function (inout){
             console.log($scope.res);
 
             $http.put('/api/protected/reservation/' + $scope.res._id ,$scope.res)
@@ -385,12 +379,17 @@ angular.
                             // success callback
                             console.log("Patch Sucessful");
                             console.log(response);
-                            switch(self.action){
+                            switch(inout){
                             case "checkin":
                                 alert("Check-in Sucessful");
+                                console.log("Check-in clicked");
                             break;
                             case "checkout":
                                 alert("Check-Out Sucessful");
+                                console.log("Check-out clicked");
+                            break;
+                            default:
+                                console.log(inout);                                
                             break;
                             };
                         },
@@ -407,7 +406,6 @@ angular.
                     console.log(response);
                 }
             );
-        console.log("Check-in clicked");
         $modalInstance.close();            
     };
 
