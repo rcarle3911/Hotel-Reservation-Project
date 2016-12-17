@@ -148,9 +148,9 @@
     </div>
     
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-lg" ng-click="ok()" ng-disabled="form.userForm.$invalid">OK</button>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="ok()" ng-disabled="form.resForm.$invalid">OK</button>
         <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
-        <button class="btn btn-danger btn-lg" ng-click="delete()">Delete</button>
+        <button class="btn btn-danger btn-lg" ng-click="delete()" style = 'visibility : {{noDel}}'>Delete</button>
     </div>
 
 

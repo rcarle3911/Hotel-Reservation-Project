@@ -12,7 +12,6 @@ angular.
         self.currentReservations = [];
         self.roomTypes = [];
         
-
         this.btnVisible = 'visible';  
         switch(this.action){
           case "create":
@@ -216,9 +215,22 @@ angular.
                             }
                         });                        
                     });
+                }
+                else
+                {
+                    var modalInstance = $modal.open({
+                        controller: "ResModalInstanceCtrl",
+                        templateUrl: '/emp/pages/reservationsModal.html',
+                        resolve: {                                                                                 
+                            roomTypes: function (){
+                                return self.roomTypes;
+                                },
+                            res: function () {
+                                return _res;
+                            }
+                        }
+                    });                       
                 }                 
-                
-
             }; 
         $scope.ckin = function (_resId) {
                 var _res = {};
@@ -279,8 +291,12 @@ angular.
   
   app.controller('ResModalInstanceCtrl', function ($scope, roomTypes, res, $modalInstance, $http) {
     $scope.res = res;
+    $scope.noDel = 'visible';
+    if($scope.res._id == undefined)
+        $scope.noDel = 'hidden';
     $scope.roomTypes = roomTypes;
-
+    console.log ('Res_id = ' + $scope.res._id + ' noDel = ' + $scope.noDel);
+    
     $scope.cancel = function () {
         console.log("Cancel clicked");
         $modalInstance.dismiss('cancel');
@@ -292,6 +308,7 @@ angular.
             function (response) {
                 // success callback
                 console.log("Delete Sucessful");
+                alert("Delete Sucessful");
             },
             function (response) {
                 // failure callback
@@ -315,22 +332,42 @@ angular.
                 //$http.put('/api/protected/users/' + resp.data._id, resp.data);
             //});
             console.log($scope.res);
-
-            $http.put('/api/protected/reservation/' + $scope.res._id ,$scope.res)
+            if($scope.res._id !=  undefined){
+                $http.put('/api/protected/reservation/' + $scope.res._id ,$scope.res)
+                .then(
+                    function (response) {
+                        // success callback
+                        console.log("Put Sucessful");
+                        console.log(response);
+                        alert("Reservation Updated");
+                    },
+                    function (response) {
+                        // failure callback
+                        console.log("Failed to Put");
+                        console.log(response);
+                    }
+                );
+            }
+            else{
+            $http.post('/api/public/reservation', $scope.res)
             .then(
                 function (response) {
                     // success callback
-                    console.log("Put Sucessful");
+                    console.log("Post Sucessful");
+                        alert("Reservation Created");
                     console.log(response);
                 },
                 function (response) {
                     // failure callback
-                    console.log("Failed to Put");
+                    console.log("Failed to Post");
                     console.log(response);
                 }
             );
+            }
+
         console.log("ok clicked");
         $modalInstance.close();
+            
     };
     
     $scope.checkInOut = function (){
@@ -348,6 +385,14 @@ angular.
                             // success callback
                             console.log("Patch Sucessful");
                             console.log(response);
+                            switch(self.action){
+                            case "checkin":
+                                alert("Check-in Sucessful");
+                            break;
+                            case "checkout":
+                                alert("Check-Out Sucessful");
+                            break;
+                            };
                         },
                         function (response) {
                             // failure callback
