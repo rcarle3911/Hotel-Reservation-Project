@@ -91,6 +91,9 @@ function editRes(_id, resrvParam, group) {
             price: resrvParam.price
         };
 
+        if (resrvParam.firstname) set.firstname = resrvParam.firstname;
+        if (resrvParam.lastname) set.lastname = resrvParam.lastname;
+
         //Only employees and managers can directly set check in and check out dates.
         if (group > 0) {
             if (resrvParam.checkIn) set.checkIn = resrvParam.checkIn;
