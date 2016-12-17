@@ -65,7 +65,7 @@ app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http
         $scope.logout = function () {
             $window.jwtToken = null;
             $window.isLoggedIn = false;
-            $window.location.href = '/  ';
+            $window.location.href = '/login';
         }
     }, function (res) {
         //faliure
