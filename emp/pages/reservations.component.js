@@ -12,51 +12,7 @@ angular.
         self.currentReservations = [];
         self.roomTypes = [];
         
-        if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
-        
-        //createData($http);
-        
-        //get the room types to populate modal dropdown
-        $http.get('/api/protected/room/type').then(function (res) {
-                self.roomTypes = res.data;
-        });  
-        
-        if(!this.current)                   
-            //Future Reservations for reservation and check in lists 
-            $http.get('/api/protected/reservation/future').then(function (res) {
-                self.futureReservations = res.data;
-          
-                self.futureReservations.forEach(function(resv){
-                    resv.roomTypeName = "";
-                    resv.startDateF = formatDate(new Date(resv.startDate));
-                    resv.endDateF = formatDate(new Date(resv.endDate));          
-                    
-                    resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
-                        return obj._id === resv.roomType;
-                    })[0].name;
 
-                });
-                self.datatable.setData(self.futureReservations);            
-                
-            });           
-        else                
-            //Current Reservations for check out list  
-            $http.get('/api/protected/reservation/current').then(function (res) {
-                self.currentReservations = res.data;
-                
-                self.currentReservations.forEach(function(resv){
-                    resv.roomTypeName = "";
-                    resv.startDateF = formatDate(new Date(resv.startDate));
-                    resv.endDateF = formatDate(new Date(resv.endDate));
-                                        
-                    $http.get('/api/protected/room/type/'+ resv.roomType).then(function (resp) {                        
-                        resv.roomTypeName = resp.data.name;
-                    });                 
-                });
-                self.datatable.setData(self.currentReservations);            
-                        
-            });
-                  
         this.btnVisible = 'visible';  
         switch(this.action){
           case "create":
@@ -77,8 +33,62 @@ angular.
             this.btnVisible = 'hidden';
             this.actionBtn = "<button type=\"button\"  class=\"btn btn-info btn-md\">Check-out</button>";            
             this.current = true;
+            console.log("setting checkout");             
           break;
         }
+
+
+
+        if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
+        
+        //createData($http);
+        
+        //get the room types to populate modal dropdown
+        $http.get('/api/protected/room/type').then(function (res) {
+            self.roomTypes = res.data;
+            if(!self.current){                   
+                //Future Reservations for reservation and check in lists
+                console.log("getting future"); 
+                $http.get('/api/protected/reservation/future').then(function (res) {
+                    self.futureReservations = res.data;
+            
+                    self.futureReservations.forEach(function(resv){
+                        resv.roomTypeName = "";
+                        resv.startDateF = formatDate(new Date(resv.startDate));
+                        resv.endDateF = formatDate(new Date(resv.endDate));          
+                        
+                        resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
+                            return obj._id === resv.roomType;
+                        })[0].name;
+
+                    });
+                    self.datatable.setData(self.futureReservations);            
+                    
+                });
+            }           
+            else{                
+                //Current Reservations for check out list  
+                console.log("getting current"); 
+                $http.get('/api/protected/reservation/current').then(function (res) {
+                    self.currentReservations = res.data;
+                    
+                    self.currentReservations.forEach(function(resv){
+                        resv.roomTypeName = "";
+                        resv.startDateF = formatDate(new Date(resv.startDate));
+                        resv.endDateF = formatDate(new Date(resv.endDate));
+
+                        console.log(resv.roomType);                    
+                        resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
+                            return obj._id === resv.roomType;
+                        })[0].name;
+                
+                    });
+                    self.datatable.setData(self.currentReservations);            
+                            
+                });
+            }
+        });
+                  
         var datatableConfig = {
             "name":"Reservations",
             "columns":[
@@ -196,9 +206,8 @@ angular.
                         var modalInstance = $modal.open({
                             controller: "ResModalInstanceCtrl",
                             templateUrl: '/emp/pages/reservationsModal.html',
-                            resolve: {                                              
+                            resolve: {                                                                                 
                                 roomTypes: function (){
-                                    console.log(self.roomTypes);
                                     return self.roomTypes;
                                     },
                                 res: function () {
@@ -212,30 +221,55 @@ angular.
 
             }; 
         $scope.ckin = function (_resId) {
-                var modalInstance = $modal.open({
-                    controller: "ResModalInstanceCtrl",
-                    templateUrl: '/emp/pages/checkinModal.html',
-                    //resolve: {
-                    //    res: function () {
-                    //        return _res;
-                    //     }
-                   // }
-                });
-            }; 
+                var _res = {};
+                console.log(_resId);
+                if(_resId !=  undefined){
+                    $http.get('/api/protected/reservation/'+ _resId).then(function (resp) {         
+                        _res = resp.data;
+                        var modalInstance = $modal.open({
+                            controller: "ResModalInstanceCtrl",
+                            templateUrl: '/emp/pages/checkinModal.html',
+                            resolve: {                                                                             
+                                roomTypes: function (){
+                                    return self.roomTypes;
+                                    },
+                                res: function () {
+                                    return _res;
+                                }
+                            }
+                        });
+                    });
+                } 
+            };
+
             
         $scope.ckout = function (_resId) {
-                var modalInstance = $modal.open({
-                    controller: "ResModalInstanceCtrl",
-                    templateUrl: '/emp/pages/checkoutModal.html',
-                    //resolve: {
-                    //    res: function () {
-                    //        return _res;
-                    //    }
-                    //}
-                });
-            };                                            
-            
-      }],
+                var _res = {};
+                console.log(_resId);
+                if(_resId !=  undefined){
+                    $http.get('/api/protected/reservation/'+ _resId).then(function (resp) {         
+                        _res = resp.data;
+                        _res.roomTypeName = self.roomTypes.filter(function ( obj ) {
+                            return obj._id === _res.roomType;
+                        })[0].name;                        
+                        console.log(_res);
+                        var modalInstance = $modal.open({
+                            controller: "ResModalInstanceCtrl",
+                            templateUrl: '/emp/pages/checkoutModal.html',
+                            resolve: {
+                                roomTypes: function (){
+                                    return self.roomTypes;
+                                    },                                                                   
+                                res: function () {
+                                    return _res;
+                                }
+                            }
+                        });
+                    });                                            
+                }
+        };
+    }],
+      
     bindings: {
       action: '@',
       datatable: '&'
@@ -253,7 +287,7 @@ angular.
     };
 
     $scope.delete = function () {
-        $http.delete('/api/protected/reservation/' + res._id, {_id: res._id})
+        $http.delete('/api/protected/reservation/' + $scope.res._id, {_id: $scope.res._id})
         .then(
             function (response) {
                 // success callback
@@ -280,17 +314,18 @@ angular.
                 
                 //$http.put('/api/protected/users/' + resp.data._id, resp.data);
             //});
-            
-            $http.post('/api/public/reservation', $scope.res)
+            console.log($scope.res);
+
+            $http.put('/api/protected/reservation/' + $scope.res._id ,$scope.res)
             .then(
                 function (response) {
                     // success callback
-                    console.log("Post Sucessful");
+                    console.log("Put Sucessful");
                     console.log(response);
                 },
                 function (response) {
                     // failure callback
-                    console.log("Failed to Post");
+                    console.log("Failed to Put");
                     console.log(response);
                 }
             );
@@ -298,6 +333,38 @@ angular.
         $modalInstance.close();
     };
     
+    $scope.checkInOut = function (){
+            console.log($scope.res);
+
+            $http.put('/api/protected/reservation/' + $scope.res._id ,$scope.res)
+            .then(
+                function (response) {
+                    // success callback
+                    console.log("Put Sucessful");
+                    console.log(response);
+                    $http.patch('/api/protected/reservation/' + $scope.res._id ,{_id: $scope.res._id})
+                    .then(
+                        function (response) {
+                            // success callback
+                            console.log("Patch Sucessful");
+                            console.log(response);
+                        },
+                        function (response) {
+                            // failure callback
+                            console.log("Failed to Patch");
+                            console.log(response);
+                        }
+                    );
+                },
+                function (response) {
+                    // failure callback
+                    console.log("Failed to Put");
+                    console.log(response);
+                }
+            );
+        console.log("Check-in clicked");
+        $modalInstance.close();            
+    };
 
 });
 
