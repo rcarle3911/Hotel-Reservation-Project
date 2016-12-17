@@ -10,14 +10,17 @@
      * The services are defined in the app/app-services folder and loaded on the app/index.html page.
      * This controller is loaded in the app/index.html page as well and linked to the appropriate 
      */
-    function Controller($window, ResService, UserService, FlashService) {
+    function Controller($window, ResService, UserService, FlashService, $http) {
         var vm = this;
         
         vm.user = null;
+        vm.rmtypes = [];
         vm.saveUser = saveUser;
         vm.deleteUser = deleteUser;
         vm.editRes = editRes;
         vm.deleteRes = deleteRes;
+        vm.getRoomType = getRoomType;
+        
 
         initController();
 
@@ -29,7 +32,26 @@
             ResService.GetAll().then(function(reservations) {
                 vm.reservations = reservations;
             });
+            $http.get('/api/protected/room/type')
+                .then(function (res) {
+                    vm.rmtypes = res.data;
+                })
+                .catch(function (res) {
+                    console.log("Failed to pull room types");
+                });              
         }
+
+        function getRoomType(room) {
+            if (!vm.rmtypes) {
+                return;
+            }
+            for (var c = 0; c < vm.rmtypes.length; c++) { 
+                var rt = vm.rmtypes[c];
+                if (rt._id == room.roomType) {
+                    return rt.name;
+                }
+            }
+        };
 
         function saveUser() {
             UserService.Update(vm.user)
@@ -54,10 +76,9 @@
                 });
         }
 
-        function editRes(reservation) {
-            //$window.location = '/app/#/reservations';
-            console.log(reservation._id)
-        }
+        function editRes(_id) {
+            return;
+        }; 
 
         function deleteRes(_id) {
             ResService.Delete(_id)
