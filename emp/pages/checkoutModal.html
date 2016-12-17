@@ -1,1 +1,152 @@
-Test Data
+<!--phone # and room # -->
+
+<div class="modal-header">
+    <h3>Check-Out Reservervation</h3>
+</div>
+    <div class="modal-body">
+        <div class="container-fluid">
+        <form name="form.resForm" ng-submit="submitForm()" novalidate>
+            <!-- FIRST NAME -->
+            <div class="col-md-6">
+                <div class="form-group">            
+                    <label>First Name</label>
+                    <input type="text" name="fName" class="form-control" ng-model="res.firstname" required>
+                    <p ng-show="form.resForm.fName.$invalid && !form.resForm.fName.$pristine" class="help-block">Your First Name is required.</p>
+                </div>
+            </div>
+            <!-- LAST NAME -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lName" class="form-control" ng-model="res.lastname" required>
+                    <p ng-show="form.resForm.lName.$invalid && !form.resForm.lName.$pristine" class="help-block">Your Last Name is required.</p>
+                </div>
+            </div>        
+            <!-- email -->
+            <div class="col-md-12">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" ng-model="res.userEmail" required>
+                <p ng-show="form.resForm.email.$invalid && !form.resForm.email.$pristine" class="help-block">Your email is required.</p>
+            </div>                        
+            </div>                        
+            <!-- Room --> 
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label>Room</label>
+                    <input type="text" name="roomType" class="form-control" ng-model="res.roomTypeName" readonly>
+                </div>
+            </div>
+            <!-- Space -->
+            <div class="col-md-1">
+                
+            </div>     
+            <!-- # of Guests --> 
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Guests</label>
+                    <input type="text" name="guests" class="form-control" ng-model="res.numGuests" readonly>                  
+                </div>
+            </div>  
+            <!-- Check in date -->
+            <div class="col-md-12">
+            <div class="form-group">
+                <label>Check-in Date</label>
+                <input type="text" id="ckin" name="ckin" class="form-control" placeholder="01/15/2017" ng-model="res.startDate" readonly>
+            </div> 
+            </div> 
+            <!-- Check out date -->
+            <div class="col-md-12">
+            <div class="form-group">
+                <label>Check-out Date</label>
+                <input type="text" id="ckout" name="ckout" class="form-control" placeholder="01/30/2017" ng-model="res.endDate" required>
+                <p ng-show="form.resForm.ckout.$invalid && !form.resForm.ckout.$pristine" class="help-block">Check-out Date is required.</p>
+            </div> 
+            </div> 
+            <!--Card Type --> 
+            <div class="col-md-12">
+            <div class="form-group">
+                <label>Card Type</label>
+                <select class="form-control" ng-model="res.cardType" required>
+                    <option selected></option>
+                    <option value="1">MasterCard</option>
+                    <option value="2">Chase</option>
+                    <option value="3">American Express</option>
+                    <option value="4">Discover</option>
+                    <option value="5">Visa</option>
+                </select>
+            </div>                
+            </div>                
+            <!-- Card Number -->
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" name="cardNum" class="form-control" placeholder="8888 8888 8888 8888" ng-model="res.cardNum" required>
+                    <p ng-show="form.resForm.cardNum.$invalid && !form.resForm.cardNum.$pristine"  class="help-block">Your Card Number is required.</p>
+                </div>
+            </div>
+            <!-- Card Month -->        
+            <div class="col-md-4">
+                <div class="form-group"	>           
+                    <label>Month</label>
+                    <select required class="form-control" ng-model="res.cardMonth">
+                        <option selected>01</option>
+                        <option >02</option>
+                        <option >03</option>
+                        <option >04</option>
+                        <option >05</option>
+                        <option >06</option>
+                        <option >07</option>
+                        <option >08</option>
+                        <option >09</option>
+                        <option >10</option>
+                        <option >11</option>
+                        <option >12</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Card Year -->
+            <div class="col-md-4">
+                <div class="form-group"	>
+                    <label>Year</label>
+                    <select required class="form-control" ng-model="res.cardYear" >
+                        <option selected>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                    </select>
+                </div>
+            </div> 
+            <!-- Space -->
+            <div class="col-md-1">
+                
+            </div>
+            <!-- Card CVV -->
+            <div class="col-md-3">
+                <div class="form-group"	>
+                    <label>CVV Code</label>
+                    <input type="text" name="cardccv" class="form-control" placeholder="111"  ng-model="res.cardccv" required>
+                    <p ng-show="form.resForm.cardccv.$invalid && !form.resForm.cardccv.$pristine" class="help-block">Your Card CCV Code is required.</p>                
+                </div>
+            </div>
+            </div>
+        </form>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="checkInOut()" ng-disabled="form.resForm.$invalid">Check-Out</button>
+        <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+    </div>
+
+
+<script>
+    console.log("Hi");  
+    console.log($( "#ckin" ));
+    $( "#ckin" ).datepicker();
+  
+  
+  $( function() {
+    $( "#ckout" ).datepicker();
+  } );
+</script>
