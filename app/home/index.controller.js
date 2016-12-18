@@ -36,6 +36,7 @@
             ResService.Check(vm.res)
                 .then(function () {
                     FlashService.Success("Dates Available");
+					$state.go('reservations', {toParams: vm.res});
                 })
                 .catch(function (err) {
                     FlashService.Error(err);

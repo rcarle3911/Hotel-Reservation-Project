@@ -41,7 +41,7 @@
                 data: { activeTab: 'services' }
             })
             .state('reservations', {
-                url: '/reservations',
+                url: '/reservations:res',
                 templateUrl: 'reservations/index.html',
                 controller: 'Res.IndexController',
                 controllerAs: 'vm',

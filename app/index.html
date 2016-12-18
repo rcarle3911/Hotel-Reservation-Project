@@ -46,7 +46,7 @@
 				</a>
             </div>
 			<li><a a href="/login" ng-click="logout()" target="_self">{{isLoggedIn ? 'Logout' : 'Login'}}</a></li>
-			<li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
+			<li ng-show="isLoggedIn" ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
 			<li ng-class="{active: activeTab === 'contact'}"><a ui-sref="contact">Contact Us</a></li>
 			<li ng-class="{active: activeTab === 'gallery'}"><a ui-sref="gallery">Gallery</a></li>
 			<li ng-class="{active: activeTab === 'reservations'}"><a ui-sref="reservations">Reservations</a></li>
