@@ -42,9 +42,7 @@
         <!-- Membership --> 
         <div class="form-group">
             <label>Membership</label>
-            <select class="form-control" ng-model="user.group" required>
-                <option ng-repeat="x in mbrs" ng-selected="{{user.group == x.group}}" value="{{x.group}}">{{x.name}}</option>
-
+            <select class="form-control" ng-model="user.group" required ng-options="x.group as x.Membership for x in mbrs">
             </select>
         </div>
     </div>

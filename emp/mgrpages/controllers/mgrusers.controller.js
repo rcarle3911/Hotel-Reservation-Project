@@ -62,7 +62,7 @@ app.controller('ModalInstanceCtrl', function ($scope, user, $modalInstance, $htt
         }
 
     }
-    $scope.mbrs = [{name: "Customer", group: 0}, {name: "Employee", group: 1},{name: "Manager", group: 2}];
+    $scope.mbrs = [{Membership: "Customer", group: 0}, {Membership: "Employee", group: 1},{Membership: "Manager", group: 2}];
 
 
     $scope.user = user;
