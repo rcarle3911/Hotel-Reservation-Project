@@ -79,13 +79,14 @@ function edit(_id, resrvParam) {
 
 function editRes(_id, resrvParam, group) {
     var deferred = Q.defer()
-    
+    console.log(resrvParam);
     db.futureRes.findOne(
         { _id: mongojs.ObjectID(_id) },
         function (err, doc) {
-            if (doc.startDate === resrvParam.startDate &&
-                doc.endDate === resrvParam.endDate &&
-                doc.roomType === resrvParam.roomType) {
+            console.log(doc);
+            if (doc.startDate == resrvParam.startDate &&
+                doc.endDate == resrvParam.endDate &&
+                doc.roomType == resrvParam.roomType) {
                     edit();
             } else {
                     isAvailable(resrvParam, _id).then(edit).catch(function (err) {
