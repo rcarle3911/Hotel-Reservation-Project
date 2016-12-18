@@ -13,8 +13,6 @@ angular.module('emp').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
     function loadData() {
         $http.get('/api/protected/room').then(function (res) {
             $scope.rooms = res.data;
-            console.log("API room pull:");
-            console.log($scope.rooms);
         });
 
         $http.get('/api/protected/room/type')
