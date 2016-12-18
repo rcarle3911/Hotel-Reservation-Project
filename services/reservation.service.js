@@ -80,8 +80,22 @@ function edit(_id, resrvParam) {
 function editRes(_id, resrvParam, group) {
     var deferred = Q.defer()
     
-    isAvailable(resrvParam)
-    .then( function () {
+    db.futureRes.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, doc) {
+            if (doc.startDate === resrvParam.startDate &&
+                doc.endDate === resrvParam.endDate &&
+                doc.roomType === resrvParam.roomType) {
+                    isAvailable(resrvParam).then(edit).catch(function (err) {
+                        deferred.reject(err.name + ': ' + err.message);
+                    });
+            } else {
+                edit();
+            }
+        }
+    )
+    
+    function edit() {
         var set = {
             userEmail: resrvParam.userEmail,
             roomType: resrvParam.roomType,
