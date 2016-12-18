@@ -48,7 +48,7 @@
             <tbody>
                 <tr ng-repeat="roomType in roomTypes | filter:txtRoomTypeFilter.text | orderBy:orderByRoomTypeField:reverseRoomTypeSort track by roomType._id">
                     <td>{{roomType.name}}</td>
-                    <td>{{roomType.desc}}</td>
+                    <td>{{roomType.desc | limitTo: 50}} {{roomType.desc.length < 50 ? '' : '...'}}</td>
                     <td>{{roomType.space}}</td>
                     <td>
                     <button type="button" class="btn btn-info btn-md" ng-click="openType(roomType)">
