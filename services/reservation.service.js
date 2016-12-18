@@ -149,11 +149,7 @@ function editRes(_id, resrvParam, group) {
                 }
             }
         );
-    })
-    .catch( function (err) {
-        deferred.reject(err);
-    });
-    
+    }    
 
     return deferred.promise;
 }
