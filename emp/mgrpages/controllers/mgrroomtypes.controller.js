@@ -1,15 +1,15 @@
 //User Accounts Page get all Rooms / Clear filter (on mgrrooms.html)
 angular.module('emp').controller('roomTypeCtrl', ['$scope', '$http', '$window', '$modal', function ($scope, $http, $window, $modal) {
-    $scope.orderRoomTypeByField = 'num';
+    $scope.orderRoomTypeByField = 'name';
     $scope.reverseRoomTypeSort = false;
 
     $scope.roomTypes = [];
 
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
-    loadData();
+    loadRTData();
 
-    function loadData() {
+    function loadRTData() {
         $http.get('/api/protected/room/type').then(function (res) {
             $scope.roomTypes = res.data;
         });
@@ -17,21 +17,6 @@ angular.module('emp').controller('roomTypeCtrl', ['$scope', '$http', '$window', 
 
     $scope.clearRoomTypeFilter = function () {
         $scope.txtRoomTypeFilter = null;
-    };
-
-    $scope.deleteRoomType = function (_room) {
-        console.log(_room);
-        $http.delete('/api/protected/room/type/' + _room._id, {_id: _room._id}).then(
-                function () {
-                    // success callback
-                    $scope.roomTypes = [];
-                    loadData();
-                },
-                function () {
-                    // failure callback
-                    console.log("Failed to Delete");
-                }
-            );
     };
 
     // MODAL WINDOW
@@ -46,7 +31,7 @@ angular.module('emp').controller('roomTypeCtrl', ['$scope', '$http', '$window', 
             }
         });
         modalInstance.result.then(function () {
-            loadData();
+            loadRTData();
         });
     };
 }]);
@@ -81,7 +66,23 @@ app.controller('ModalInstanceRoomTypeCtrl', function ($scope, roomType, $modalIn
         $modalInstance.dismiss('cancel');
     };
 
-
+    $scope.deleteRoomType = function (request, response) {
+        $http.delete('/api/protected/room/type/' + roomType._id, {
+            _id: roomType._id
+        }).then(
+            function () {
+                // success callback
+                console.log("Room Deleted");
+                $scope.roomTypes = [];
+                loadRTData();
+            },
+            function () {
+                // failure callback
+                console.log("Failed to Delete");
+            }
+        );
+        $modalInstance.close();
+    };
 
     $scope.okRoomType = function (request, response) {
         console.log(roomType);
@@ -125,4 +126,4 @@ angular.module('emp').filter('range', function () {
             input.push(i);
         return input;
     };
-}); 
+});
