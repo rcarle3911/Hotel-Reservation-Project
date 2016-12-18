@@ -150,7 +150,9 @@ function editRes(_id, resrvParam, group) {
  */
 function createRes(resrvParam) {
     var deferred = Q.defer();
-    var user = {firstName: "Guest"};
+    var user = {};
+    if (resrvParam.firstname) user.firstname = resrvParam.firstname;
+    else user.firstname = "Guest";
 
     db.users.findOne(
         { email: resrvParam.userEmail },
@@ -179,7 +181,7 @@ function createRes(resrvParam) {
                     transporter.sendMail({
                         from: '"Martian Motel" <motelmartian@gmail.com>',
                         to: resrvParam.userEmail,
-                        subject: 'Welcome to the Martian Motel ' + resrvParam.Name,
+                        subject: 'Welcome to the Martian Motel ' + user.firstname,
                         text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
                         html: htmlstream
                     }, function(error, info) {
