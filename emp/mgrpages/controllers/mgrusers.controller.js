@@ -3,13 +3,12 @@ angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$mo
     $scope.orderByUserField = 'lastname';
     $scope.reverseUserSort = false;
 
-    $scope.users = [];
-
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
     loadUserData();
 
     function loadUserData() {
+        $scope.users = [];
         $http.get('/api/protected/users').then(function (res) {
             $scope.users = res.data;
             angular.forEach($scope.users, function (obj) {
@@ -22,7 +21,6 @@ angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$mo
                 }
             });
         });
-
     };
 
 
@@ -42,7 +40,6 @@ angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$mo
             }
         });
         modalInstance.result.then(function () {
-            $scope.users = [];
             loadUserData();
         });
     };
@@ -65,6 +62,7 @@ app.controller('ModalInstanceCtrl', function ($scope, user, $modalInstance, $htt
         }
 
     }
+    $scope.mbrs = [{name: "Customer", group: 0}, {name: "Employee", group: 1},{name: "Manager", group: 2}];
 
 
     $scope.user = user;
