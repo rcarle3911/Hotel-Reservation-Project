@@ -102,7 +102,6 @@ function getAvailRooms(req, res) {
 }
 
 function getRoomTypes(req, res) {
-    console.log("GET ROOM TYPES");
     roomTypeService.getAll()
         .then(function (rmTypes) {
             res.send(rmTypes);

@@ -97,9 +97,10 @@ function delRmByNum(num) {
 }
 
 function edit(_id, rmParam) {
+    console.log(rmParam);
     var deferred = Q.defer(),
         set = {
-            rmType: rmParam.rmType,
+            rmType: mongojs.ObjectID(rmParam.rmType),
             num: rmParam.num,
             avail: rmParam.avail
         };
@@ -108,7 +109,7 @@ function edit(_id, rmParam) {
         { num: rmParam.num },
         function (err, foundRoom) {
             if (err) deferred.reject(err.name + ': ' + err.message);
-            if (foundRoom && foundRoom._id !== _id) {
+            if (foundRoom && foundRoom._id != _id) {
                 deferred.reject('Room number ' + rmParam.num + ' already exists');
             } else {
                 db.rooms.findAndModify({
