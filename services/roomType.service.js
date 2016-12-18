@@ -65,7 +65,7 @@ function edit(_id, rmType) {
         { name: rmType.name },
         function (err, foundType) {
             if (err) deferred.reject(err.name + ': ' + err.message);
-            if (foundType && foundType._id !== _id) {
+            if (foundType && foundType._id != _id) {
                 deferred.reject('Room Type with name ' + rmType.name + ' already exists.');
             } else {
                 db.rmTypes.findAndModify({
