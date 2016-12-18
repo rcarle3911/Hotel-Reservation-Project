@@ -61,7 +61,7 @@ app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http
             usesres: 'hidden',
             disable: !(user.group > 1)
         }];
-
+        
         $scope.logout = function () {
             $window.jwtToken = null;
             $window.isLoggedIn = false;
@@ -71,10 +71,4 @@ app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http
         //faliure
         console.log(res.data);
     });
-
-
-
-
-
-
 }]);

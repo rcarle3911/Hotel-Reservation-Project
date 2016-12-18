@@ -42,10 +42,7 @@
         <!-- Membership --> 
         <div class="form-group">
             <label>Membership</label>
-            <select class="form-control" ng-model="user.group" required>
-                <option value="0" selected>Customer</option>
-                <option value="1">Employee</option>
-                <option value="2">Manager</option>
+            <select class="form-control" ng-model="user.group" required ng-options="x.group as x.Membership for x in mbrs">
             </select>
         </div>
     </div>

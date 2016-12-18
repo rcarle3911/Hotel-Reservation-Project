@@ -3,44 +3,27 @@ angular.module('emp').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
     $scope.orderByRoomField = 'num';
     $scope.reverseRoomSort = false;
 
-    $scope.rooms = [];
-    $scope.rmtypes = [];
-
     if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
 
     loadData();
 
     function loadData() {
+        $scope.rooms = [];
         $http.get('/api/protected/room').then(function (res) {
             $scope.rooms = res.data;
         });
-
-        $http.get('/api/protected/room/type')
-            .then(
-                function (res) {
-                    $scope.rmtypes = res.data;
-                    console.log(JSON.stringify(res.data));
-                    console.log("API room Type pull:");
-                    console.log($scope.rmtypes);
-                },
-                function (res) {
-                    // failure callback
-                    console.log("Failed to pull room types");
-                    console.log(JSON.stringify(res));
+        $scope.rmtypes = [];
+        $http.get('/api/protected/room/type').then(function (res) {
+            $scope.rmtypes = res.data;
+            angular.forEach($scope.rooms, function (obj) {
+                for (var c = 0; c < $scope.rmtypes.length; c++) {
+                    var rt = $scope.rmtypes[c];
+                    if (rt._id == obj.rmType) {
+                        obj.rtName = rt.name;
+                    }
                 }
-            );
-    };
-
-    $scope.getRoomType = function (room) {
-        if (!$scope.rmtypes) {
-            return;
-        }
-        for (var c = 0; c < $scope.rmtypes.length; c++) {
-            var rt = $scope.rmtypes[c];
-            if (rt._id == room.rmType) {
-                return rt.name;
-            }
-        }
+            });
+        });
     };
 
     $scope.clearRoomFilter = function () {
@@ -80,7 +63,7 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
             rmType: "584ee981f69dbedfbeac42fc"
         };
     }
-
+    
     $scope.rmtypes = [];
     $http.get('/api/protected/room/type').then(function (res) {
         $scope.rmtypes = res.data;
@@ -102,8 +85,10 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
     };
 
     $scope.deleteRoom = function (request, response) {
-        $http.delete('/api/protected/room/' + room._id, { _id: room._id})
-                  .then(
+        $http.delete('/api/protected/room/' + room._id, {
+                _id: room._id
+            })
+            .then(
                 function (response) {
                     // success callback
                 },
@@ -112,11 +97,12 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
                     console.log("Failed to Delete");
                 }
             );
-            $modalInstance.close();
+        $modalInstance.close();
     };
 
     $scope.okRoom = function (request, response) {
         console.log(room);
+        room = _.omit(room, 'rtName');
         if (!$scope.newReq) {
             $http.put('/api/protected/room/' + room._id, room)
                 .then(
