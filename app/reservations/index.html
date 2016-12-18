@@ -28,31 +28,39 @@
         <div class="col-md-6">
             <div class="form-container">
                 <h2>Contact Information</h2>
-                <div class="form-group">
-                    <label for="inputName">Name</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Luke Skywalker" ng-model="vm.formInfo.Name" required/>
+            <!-- FIRST NAME -->
+            <div class="col-md-6">
+                <div class="form-group">            
+                    <label>First Name</label>
+                    <input type="text" name="fName" class="form-control" ng-model="vm.formInfo.firstname" required>
                 </div>
+            </div>
+            <!-- LAST NAME -->
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="inputEmail">Email</label>
-                    <input type="text" class="form-control" id="InputEmail" placeholder="luke.skywalker@deathstar.com" ng-model="vm.formInfo.userEmail" required/>
+                    <label>Last Name</label>
+                    <input type="text" name="lName" class="form-control" ng-model="vm.formInfo.lastname" required>
                 </div>
+            </div>     
+            <!-- email -->
+            <div class="col-md-12">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" ng-model="vm.formInfo.userEmail" required>
+            </div>                        
+            </div>  
+            <!-- Room --> 
+            <div class="col-md-9">
                 <div class="form-group">
-                    <label for="room-type" >Room Type</label>
+                    <label>Room</label>
                     <select required class="form-control" ng-model="vm.formInfo.roomType" required ng-options="rt._id as rt.name for rt in vm.rmtypes">
                     </select>
                 </div>
-				<br>
-                <div class="form-group2">
-                    <label for="arrival">Check In</label>
-                    <input type="date" required ng-model="vm.formInfo.startDate"  />
-					
-         
-                    <label for="departing">Check Out</label>
-                    <input type="date" required ng-model="vm.formInfo.endDate"  />
-                </div>
-				<br>
+            </div>
+            <!-- # of Guests --> 
+            <div class="col-md-2">
                 <div class="form-group">
-                        <label for="adults">Total Guests</label>
+                        <label for="adults">Guests</label>
                         <select required class="form-control" ng-model="vm.formInfo.numGuests">
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -64,9 +72,23 @@
 							<option value="8">8</option>
                         </select>
                 </div> 
-   
+            </div>
+            <!-- Check In Date -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Check In</label>
+                    <input type="date" class="form-control" ng-model="vm.formInfo.startDate" required>
+                </div>		
+            </div>	
+            <!-- Check Out Date -->	
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Check Out</label>
+                    <input type="date" class="form-control" ng-model="vm.formInfo.endDate" required>
+                </div>
             </div>
         </div>
+    </div>
 
         <div class="col-md-6">
             <div class="form-container">
@@ -84,7 +106,7 @@
                 </div>
                 <div class="form-group">
                     <label for="creditcardnumber">Credit Card Number</label>
-                    <input type="text" class="form-control" id="cardnumber" placeholder="8888 8888 8888 8888" ng-model="vm.formInfo.cardNumber" 	required/>
+                    <input type="text" class="form-control" id="cardnumber" placeholder="8888 8888 8888 8888" ng-model="vm.formInfo.cardNum" 	required/>
                 </div>
                 <div class="form-group"	>
                     <div class="col-xs-6">
