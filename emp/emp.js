@@ -71,10 +71,4 @@ app.controller('EmpCtrl', ['$scope', '$http', '$window', function ($scope, $http
         //faliure
         console.log(res.data);
     });
-
-
-
-
-
-
 }]);
