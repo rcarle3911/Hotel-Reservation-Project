@@ -47,24 +47,6 @@ angular.module('emp').controller('roomCtrl', ['$scope', '$http', '$window', '$mo
         $scope.txtRoomFilter = null;
     };
 
-    $scope.deleteRoom = function (_room) {
-        console.log(_room);
-        $http.delete('/api/protected/room/' + _room._id, {
-                _id: _room._id
-            })
-            .then(
-                function () {
-                    // success callback
-                    $scope.rooms = [];
-                    loadData();
-                },
-                function () {
-                    // failure callback
-                    console.log("Failed to Delete");
-                }
-            );
-    };
-
     // MODAL WINDOW
     $scope.open = function (_room) {
         var modalInstance = $modal.open({
@@ -119,7 +101,19 @@ app.controller('ModalInstanceRoomCtrl', function ($scope, room, $modalInstance, 
         $modalInstance.dismiss('cancel');
     };
 
-
+    $scope.deleteRoom = function (request, response) {
+        $http.delete('/api/protected/room/' + room._id, { _id: room._id})
+                  .then(
+                function (response) {
+                    // success callback
+                },
+                function (response) {
+                    // failure callback
+                    console.log("Failed to Delete");
+                }
+            );
+            $modalInstance.close();
+    };
 
     $scope.okRoom = function (request, response) {
         console.log(room);

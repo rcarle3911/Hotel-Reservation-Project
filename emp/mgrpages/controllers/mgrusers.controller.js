@@ -16,23 +16,6 @@ angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$mo
 
     }
 
-    $scope.deleteUser = function (_user) {
-        $http.delete('/api/protected/users/' + _user._id, {
-                _id: _user._id
-            })
-            .then(
-                function () {
-                    // success callback
-                    $scope.users = []; 
-                    loadUserData(); 
-                },
-                function () {
-                    // failure callback
-                    console.log("falied to delete");
-                }
-            );
-    };
-
     $scope.getUserGroup = function (_user) {
         if(_user.group == 1)
         {
@@ -102,6 +85,20 @@ app.controller('ModalInstanceCtrl', function ($scope, user, $modalInstance, $htt
         $modalInstance.dismiss('cancel');
     };
     
+    $scope.deleteUser = function (request, response) {
+        $http.delete('/api/protected/users/' + user._id, { _id: user._id })
+            .then(
+                function (response) {
+                    // success callback
+                },
+                function (response) {
+                    // failure callback
+                    console.log("falied to delete");
+                }
+            );
+            $modalInstance.close();
+    };
+
     $scope.okUser = function (request, response) {
         if(!$scope.newUser)
         {
