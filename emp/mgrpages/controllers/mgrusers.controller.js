@@ -23,7 +23,7 @@ angular.module('emp').controller('userCtrl', ['$scope', '$http', '$window', '$mo
             });
         });
 
-    }
+    };
 
 
 
@@ -97,6 +97,9 @@ app.controller('ModalInstanceCtrl', function ($scope, user, $modalInstance, $htt
     };
 
     $scope.okUser = function (request, response) {
+        console.log(user);
+        user = _.omit(user, 'Membership');
+        console.log(user);
         if (!$scope.newUser) {
             $http.put('/api/protected/users/' + user._id, user)
                 .then(
