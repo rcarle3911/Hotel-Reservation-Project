@@ -22,7 +22,7 @@ module.exports = router;
 function checkInOut(req, res) {
     resService.checkInOut(req.params._id, new Date())
     .then( function () {
-        res.status(200);
+        res.sendStatus(200);
     })
     .catch( function (error) {
         res.status(400).send(err);

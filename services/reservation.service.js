@@ -488,6 +488,7 @@ function checkInOut(_id, date) {
             deleteFuture(_id);
             db.presentRes.insert(resrv,
             function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
                 deferred.resolve(doc);
             });
         }
@@ -496,6 +497,7 @@ function checkInOut(_id, date) {
             deletePresent(_id);
             db.pastRes.insert(resrv,
             function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
                 deferred.resolve(doc);
             });
         }

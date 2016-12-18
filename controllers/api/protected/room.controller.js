@@ -114,7 +114,7 @@ function getRoomTypes(req, res) {
 function addRoomType(req, res) {
     roomTypeService.create(req.body)
         .then(function () {
-            res.status(200);
+            res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);
@@ -134,7 +134,7 @@ function getRmTypeById(req, res) {
 function editRmType(req, res) {
     roomTypeService.edit(req.params._id, req.body)
         .then(function () {
-            res.status(200);
+            res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);
@@ -144,7 +144,7 @@ function editRmType(req, res) {
 function deleteRmType(req, res) {
     roomTypeService.delete(req.params._id)
         .then(function () {
-            res.status(200);
+            res.sendStatus(200);
         })
         .catch(function (err) {
             res.status(400).send(err);
