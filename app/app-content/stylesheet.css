@@ -181,6 +181,7 @@ footer{
 }
 #rcorners{
 	clear:both;
+	overflow:scroll;
 	font-size:14px;
 	color:white;
 	text-align:left;
@@ -192,6 +193,7 @@ footer{
 	margin-top: 5px;
 	margin-right: 50px;
 	max-width:480px;
+	max-height:550px;
 	box-shadow: 0px 8px 16px 0px black;
 }
 #rcorners2{
@@ -211,7 +213,7 @@ footer{
 }
 #rcorners3{
 	clear:both;
-	font-size:12px;
+	font-size:14px;
 	line-height:15px;
 	overflow:scroll;
 	color:white;

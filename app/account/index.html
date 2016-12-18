@@ -1,20 +1,6 @@
 <div id="background">
 <br>
 
-<div id="search">
-	<form method="get" action="http://www.google.com/search">
-		<div style="border:padding:4px;maxwidth:30em;">
-			<table border="0" align="center" cellpadding="0">
-				<tr><td>
-				<input type="text" name="q" size="25" maxlength="255" value="" />
-				<input type="submit" value="Search" /></td></tr>
-				<tr><td align="center" style="font-size:75%">
-				</td></tr>
-			</table>
-		</div>
-	</form>
-</div>
-<br>
 
 <h1>My Account</h1>
 <br>
@@ -54,24 +40,19 @@
 					<table id="tblRooms" class="table table-striped table-bordered" cellspacing="0">
 						<thead>
 							<tr>
-								<th class="text-center">Edit Reservation</th>
-								<th class="text-center">Room Type</th>
-								<th class="text-center">Guests</th>
 								<th class="text-center">Check-In Date</th>
 								<th class="text-center">Check-Out Date</th>
+								<th class="text-center">Room Type</th>
+								<th class="text-center">Guests</th>
 								<th class="text-center">Cancel Reservation</th>
 							</tr>
 						</thead>
 				<tbody>
 					<tr ng-repeat="reservations in vm.reservations">
-                    <td class="text-center">
-						<button type="button" class="btn btn-warning btn-sm" ng-click="vm.editRes(reservations._id)">
-                            <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit Reservation</button>
-					</td>
+					<td class="text-center">{{reservations.startDate | date : "MM/dd/yyyy"}}</td>
+                    <td class="text-center">{{reservations.endDate | date : "MM/dd/yyyy"}}</td>
 					<td class="text-center">{{vm.getRoomType(reservations)}}</td>
                     <td class="text-center">{{reservations.numGuests}}</td>
-                    <td class="text-center">{{reservations.startDate}}</td>
-                    <td class="text-center">{{reservations.endDate}}</td>
                     <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.deleteRes(reservations._id)">Cancel</button></td>
                 </tr>
             </tbody>

@@ -5,9 +5,10 @@
             <i class="glyphicon glyphicon-plus"></i>Add User</button>
         </div>
         <div class="col-md-4 input-group pull-right" style="Padding: 5px;">
-            <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtUserFilter.text"/>
-            <span ng-if="txtUserFilter.text" ng-click="clearUserFilter()" class="glyphicon glyphicon-remove form-control-feedback" 
-            style="cursor: pointer; pointer-events: all; margin-top: 5px;" uib-tooltip="clear">
+            <input id="txtUserSearch" type="text" class="form-control" name="x" placeholder="Filter Grid..." ng-model="txtUserFilter.text"
+            />
+            <span ng-if="txtUserFilter.text" ng-click="clearUserFilter()" class="glyphicon glyphicon-remove form-control-feedback" style="cursor: pointer; pointer-events: all; margin-top: 5px;"
+                uib-tooltip="clear">
             </span>
         </div>
         <table id="tblUsers" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -31,7 +32,6 @@
                         </span>
                         </a>
                     </th>
-                    
                     <th>
                         <a href="#" ng-click="orderByUserField = 'email'; reverseUserSort = !reverseUserSort">
                             Email
@@ -61,10 +61,8 @@
                     <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
                     <td>{{getUserGroup(user)}}</td>
                     <td>{{user.phone}}</td>
-                    <td><button class="btn btn-danger btn-md" ng-click="deleteUser(user)">
-                        <i class="glyphicon glyphicon-remove"></i>&nbsp;Delete</button>
-                        &nbsp;
-                        <button type="button" class="btn btn-warning btn-md" ng-click="openUser(user)">
+                    <td>
+                        <button type="button" class="btn btn-info btn-md" ng-click="openUser(user)">
                             <i class="glyphicon glyphicon-pencil"></i>&nbsp;Edit</button>
                 </tr>
             </tbody>

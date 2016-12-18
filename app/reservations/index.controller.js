@@ -21,7 +21,8 @@
             if ($window.jwtToken) {
                 UserService.GetCurrent()
                 .then(function (user) {
-                    vm.formInfo.Name = user.firstname + " " + user.lastname;
+                    vm.formInfo.firstname = user.firstname;
+                    vm.formInfo.lastname = user.lastname;
                     vm.formInfo.userEmail = user.email;
                 })
                 .catch(function (err) {

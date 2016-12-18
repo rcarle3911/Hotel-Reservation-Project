@@ -79,9 +79,24 @@ function edit(_id, resrvParam) {
 
 function editRes(_id, resrvParam, group) {
     var deferred = Q.defer()
+    console.log(resrvParam);
+    db.futureRes.findOne(
+        { _id: mongojs.ObjectID(_id) },
+        function (err, doc) {
+            console.log(doc);
+            if (doc.startDate == resrvParam.startDate &&
+                doc.endDate == resrvParam.endDate &&
+                doc.roomType == resrvParam.roomType) {
+                    edit();
+            } else {
+                    isAvailable(resrvParam, _id).then(edit).catch(function (err) {
+                        deferred.reject(err.name + ': ' + err.message);
+                    });                
+            }
+        }
+    )
     
-    isAvailable(resrvParam)
-    .then( function () {
+    function edit() {
         var set = {
             userEmail: resrvParam.userEmail,
             roomType: resrvParam.roomType,
@@ -135,11 +150,7 @@ function editRes(_id, resrvParam, group) {
                 }
             }
         );
-    })
-    .catch( function (err) {
-        deferred.reject(err);
-    });
-    
+    }    
 
     return deferred.promise;
 }
@@ -150,7 +161,9 @@ function editRes(_id, resrvParam, group) {
  */
 function createRes(resrvParam) {
     var deferred = Q.defer();
-    var user = {firstName: "Guest"};
+    var user = {};
+    if (resrvParam.firstname) user.firstname = resrvParam.firstname;
+    else user.firstname = "Guest";
 
     db.users.findOne(
         { email: resrvParam.userEmail },
@@ -179,7 +192,7 @@ function createRes(resrvParam) {
                     transporter.sendMail({
                         from: '"Martian Motel" <motelmartian@gmail.com>',
                         to: resrvParam.userEmail,
-                        subject: 'Welcome to the Martian Motel ' + resrvParam.Name,
+                        subject: 'Welcome to the Martian Motel ' + user.firstname,
                         text: 'Your reservation for ' + resrvParam.startDate + ' is booked!',
                         html: htmlstream
                     }, function(error, info) {
@@ -226,7 +239,7 @@ function _delete(_id) {
 /**
  * Check for availability here
  */
-function isAvailable(resrvParam) {
+function isAvailable(resrvParam, _id) {
     var deferred = Q.defer();
     
     if (resrvParam.roomType) {
@@ -279,7 +292,8 @@ function isAvailable(resrvParam) {
                     { $and: [
                         { startDate: { $lte: resrvParam.endDate } },
                         { endDate: { $gte: resrvParam.startDate } },
-                        { roomType: mongojs.ObjectID(rmType) }
+                        { roomType: mongojs.ObjectID(rmType) },
+                        { _id: { $ne: _id } }
                     ]},
                     function (err, futureCount) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
@@ -291,7 +305,8 @@ function isAvailable(resrvParam) {
                                 { $and: [
                                     { startDate: { $lte: resrvParam.endDate } },
                                     { endDate: { $gte: resrvParam.startDate } },
-                                    { roomType: mongojs.ObjectID(rmType) }
+                                    { roomType: mongojs.ObjectID(rmType) },
+                                    { _id: { $ne: _id } }
                                 ]},
                                 function (err, currentCount) {
                                     if (err) deferred.reject(err.name + ': ' + err.message)
