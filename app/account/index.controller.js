@@ -17,7 +17,6 @@
         vm.rmtypes = [];
         vm.saveUser = saveUser;
         vm.deleteUser = deleteUser;
-        vm.editRes = editRes;
         vm.deleteRes = deleteRes;
         vm.getRoomType = getRoomType;
         
@@ -75,10 +74,6 @@
                     FlashService.Error(error);
                 });
         }
-
-        function editRes(_id) {
-            return;
-        }; 
 
         function deleteRes(_id) {
             ResService.Delete(_id)
