@@ -4,13 +4,15 @@ angular.
   module('emp').
   component('reservations', {
     templateUrl: '/emp/pages/reservations.template.html',
-    controller: ['datatable', '$scope','$http', '$window','$modal',
-      function reservationsController(datatable, $scope, $http, $window, $modal) {
+    controller: ['datatable', '$scope','$http', '$window','$modal','$rootScope',
+      function reservationsController(datatable, $scope, $http, $window, $modal, $rootScope) {
+
         this.query='';
         var self = this;
         self.futureReservations = [];
         self.currentReservations = [];
         self.roomTypes = [];
+        self.$rootScope = $rootScope;
         
         this.btnVisible = 'visible';  
         switch(this.action){
@@ -40,54 +42,12 @@ angular.
 
         if ($window.jwtToken) $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
         
-        //createData($http);
-        
-        //get the room types to populate modal dropdown
-        $http.get('/api/protected/room/type').then(function (res) {
-            self.roomTypes = res.data;
-            if(!self.current){                   
-                //Future Reservations for reservation and check in lists
-                console.log("getting future"); 
-                $http.get('/api/protected/reservation/future').then(function (res) {
-                    self.futureReservations = res.data;
-            
-                    self.futureReservations.forEach(function(resv){
-                        resv.roomTypeName = "";
-                        resv.startDateF = formatDate(new Date(resv.startDate));
-                        resv.endDateF = formatDate(new Date(resv.endDate));          
-                        
-                        resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
-                            return obj._id === resv.roomType;
-                        })[0].name;
-
-                    });
-                    self.datatable.setData(self.futureReservations);            
-                    
-                });
-            }           
-            else{                
-                //Current Reservations for check out list  
-                console.log("getting current"); 
-                $http.get('/api/protected/reservation/current').then(function (res) {
-                    self.currentReservations = res.data;
-                    
-                    self.currentReservations.forEach(function(resv){
-                        resv.roomTypeName = "";
-                        resv.startDateF = formatDate(new Date(resv.startDate));
-                        resv.endDateF = formatDate(new Date(resv.endDate));
-
-                        console.log(resv.roomType);                    
-                        resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
-                            return obj._id === resv.roomType;
-                        })[0].name;
-                
-                    });
-                    self.datatable.setData(self.currentReservations);            
-                            
-                });
-            }
+        $scope.$on('resTableReload', function () {
+            loadUserData(self, $http);
         });
-                  
+
+        loadUserData(self, $http);
+
         var datatableConfig = {
             "name":"Reservations",
             "columns":[
@@ -167,6 +127,7 @@ angular.
             },
             "select":{
                 "active":false,
+                "showbutiton":true
             },
             "mouseevents":{
                 "active": true,
@@ -205,7 +166,16 @@ angular.
                                     },
                                 res: function () {
                                     return _res;
-                                }
+                                },
+                                datatable: function(){
+                                    return self.datatable;
+                                },
+                                current: function(){
+                                    return self.current;
+                                },
+                                $rootScope: function(){
+                                    return self.$rootScope;
+                                } 
                             }
                         });                        
                     });
@@ -221,7 +191,17 @@ angular.
                                 },
                             res: function () {
                                 return _res;
-                            }
+                            },
+                            datatable: function(){
+                                return self.datatable;
+                            },
+                            current: function(){
+                                return self.current;
+                            },
+                            $rootScope: function(){
+                                return self.$rootScope;
+                            }                                                                    
+                                                                                     
                         }
                     });                       
                 }                 
@@ -241,7 +221,16 @@ angular.
                                     },
                                 res: function () {
                                     return _res;
-                                }
+                                },
+                                datatable: function(){
+                                    return self.datatable;
+                                },
+                                current: function(){
+                                    return self.current;
+                                },
+                                $rootScope: function(){
+                                    return self.$rootScope;
+                                }                                                                  
                             }
                         });
                     });
@@ -265,10 +254,19 @@ angular.
                             resolve: {
                                 roomTypes: function (){
                                     return self.roomTypes;
-                                    },                                                                   
+                                },                                                                   
                                 res: function () {
                                     return _res;
-                                }
+                                },
+                                datatable: function(){
+                                    return self.datatable;
+                                },
+                                current: function(){
+                                    return self.current;
+                                },
+                                $rootScope: function(){
+                                    return self.$rootScope;
+                                }                                  
                             }
                         });
                     });                                            
@@ -283,7 +281,13 @@ angular.
      
   });
   
-  app.controller('ResModalInstanceCtrl', function ($scope, roomTypes, res, $modalInstance, $http) {
+  app.controller('ResModalInstanceCtrl', function ($scope, roomTypes, res, $modalInstance, $http, datatable, current, $rootScope) {
+    var self = this;
+    self.datatable = datatable;
+    self.futureReservations = [];
+    self.currentReservations = [];
+    self.roomTypes = [];
+    self.current = current;
     $scope.res = res;
     $scope.noDel = 'visible';
     if($scope.res._id == undefined)
@@ -302,7 +306,8 @@ angular.
             function (response) {
                 // success callback
                 console.log("Delete Sucessful");
-                alert("Delete Sucessful");
+                alert("Delete Sucessful");                
+                fireEvent($rootScope);
             },
             function (response) {
                 // failure callback
@@ -314,17 +319,6 @@ angular.
     };
 
     $scope.ok = function () {
-
-            //Updates user name, if user exists
-            //$http.get('/api/protected/users/email/'+ $scope.res.userEmail).then(function (resp) {
-                //this put is unauthorized for the current employee,
-                //employees should have ability to update the customer's user record
-                
-                //resp.data.firstname = $scope.res.firstname;
-                //resp.data.lastname = $scope.res.lastname;
-                
-                //$http.put('/api/protected/users/' + resp.data._id, resp.data);
-            //});
             console.log($scope.res);
             if($scope.res._id !=  undefined){
                 $http.put('/api/protected/reservation/' + $scope.res._id ,$scope.res)
@@ -334,6 +328,7 @@ angular.
                         console.log("Put Sucessful");
                         console.log(response);
                         alert("Reservation Updated");
+                        fireEvent($rootScope);                  
                     },
                     function (response) {
                         // failure callback
@@ -350,6 +345,7 @@ angular.
                     console.log("Post Sucessful");
                         alert("Reservation Created");
                     console.log(response);
+                    fireEvent($rootScope);               
                 },
                 function (response) {
                     // failure callback
@@ -361,7 +357,6 @@ angular.
 
         console.log("ok clicked");
         $modalInstance.close();
-            
     };
     
     $scope.checkInOut = function (inout){
@@ -399,6 +394,7 @@ angular.
                             console.log(response);
                         }
                     );
+                    fireEvent($rootScope);               
                 },
                 function (response) {
                     // failure callback
@@ -584,3 +580,65 @@ angular.
                 
                        
   };
+
+function fireEvent($rootScope){
+    console.log('fireEvent');
+    //Broadcast or emit your event here.
+
+    // firing an event upwards
+    //$scope.$emit('yourEvent', 'data');
+
+    // firing an event downwards
+    $rootScope.$broadcast('resTableReload', {
+    tab: 'value'
+    });    
+}  
+
+function loadUserData(self, $http) {  
+ 
+    //get the room types to populate modal dropdown
+    $http.get('/api/protected/room/type').then(function (res) {
+        self.roomTypes = res.data;
+        if(!self.current){                   
+            //Future Reservations for reservation and check in lists
+            console.log("getting future"); 
+            $http.get('/api/protected/reservation/future').then(function (res) {
+                self.futureReservations = res.data;
+        
+                self.futureReservations.forEach(function(resv){
+                    resv.roomTypeName = "";
+                    resv.startDateF = formatDate(new Date(resv.startDate));
+                    resv.endDateF = formatDate(new Date(resv.endDate));          
+                    
+                    resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
+                        return obj._id === resv.roomType;
+                    })[0].name;
+
+                });
+                self.datatable.setData(self.futureReservations);            
+                
+            });
+        }           
+        else{                
+            //Current Reservations for check out list  
+            console.log("getting current"); 
+            $http.get('/api/protected/reservation/current').then(function (res) {
+                self.currentReservations = res.data;
+                
+                self.currentReservations.forEach(function(resv){
+                    resv.roomTypeName = "";
+                    resv.startDateF = formatDate(new Date(resv.startDate));
+                    resv.endDateF = formatDate(new Date(resv.endDate));
+
+                    console.log(resv.roomType);                    
+                    resv.roomTypeName = self.roomTypes.filter(function ( obj ) {
+                        return obj._id === resv.roomType;
+                    })[0].name;
+            
+                });
+                self.datatable.setData(self.currentReservations);            
+                        
+            });
+        }
+    });
+};          
