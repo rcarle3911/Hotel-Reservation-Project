@@ -86,11 +86,11 @@ function editRes(_id, resrvParam, group) {
             if (doc.startDate === resrvParam.startDate &&
                 doc.endDate === resrvParam.endDate &&
                 doc.roomType === resrvParam.roomType) {
-                    isAvailable(resrvParam).then(edit).catch(function (err) {
-                        deferred.reject(err.name + ': ' + err.message);
-                    });
+                    edit();
             } else {
-                edit();
+                    isAvailable(resrvParam, _id).then(edit).catch(function (err) {
+                        deferred.reject(err.name + ': ' + err.message);
+                    });                
             }
         }
     )
@@ -238,7 +238,7 @@ function _delete(_id) {
 /**
  * Check for availability here
  */
-function isAvailable(resrvParam) {
+function isAvailable(resrvParam, _id) {
     var deferred = Q.defer();
     
     if (resrvParam.roomType) {
@@ -291,7 +291,8 @@ function isAvailable(resrvParam) {
                     { $and: [
                         { startDate: { $lte: resrvParam.endDate } },
                         { endDate: { $gte: resrvParam.startDate } },
-                        { roomType: mongojs.ObjectID(rmType) }
+                        { roomType: mongojs.ObjectID(rmType) },
+                        { _id: { $ne: _id } }
                     ]},
                     function (err, futureCount) {
                         if (err) deferred.reject(err.name + ': ' + err.message);
@@ -303,7 +304,8 @@ function isAvailable(resrvParam) {
                                 { $and: [
                                     { startDate: { $lte: resrvParam.endDate } },
                                     { endDate: { $gte: resrvParam.startDate } },
-                                    { roomType: mongojs.ObjectID(rmType) }
+                                    { roomType: mongojs.ObjectID(rmType) },
+                                    { _id: { $ne: _id } }
                                 ]},
                                 function (err, currentCount) {
                                     if (err) deferred.reject(err.name + ': ' + err.message)
