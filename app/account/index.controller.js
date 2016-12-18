@@ -24,6 +24,9 @@
         initController();
 
         function initController() {
+            if (!$window.jwtToken) {
+                $window.location.href = '/login';
+            }
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
                 
