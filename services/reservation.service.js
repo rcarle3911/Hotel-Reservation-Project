@@ -2,12 +2,19 @@ var Q = require('q');
 var fs = require('fs')
 var mongojs = require('mongojs');
 var db = mongojs('hotel', ['pastRes', 'presentRes', 'futureRes', 'users', 'rooms', 'rmTypes']);
+/**
+var MongoClient = require('mongodb').MongoClient;
+var uri = "mongodb://rcarle3911:bmZlU4PtbWRr1p8P@cluster0-shard-00-00-hae7k.mongodb.net:27017,cluster0-shard-00-01-hae7k.mongodb.net:27017,cluster0-shard-00-02-hae7k.mongodb.net:27017/hotel?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+MongoClient.connect(uri, function(err, db) {
+    db.close();
+});
+**/
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport('smtps://motelmartian%40gmail.com:CMSC495@UMUC@smtp.gmail.com');
 var config = require('config.json');
 var lock;
 
-var service = {};
+var service = {},
     group = Object.freeze({
 		CUSTOMER: 0,
 		EMPLOYEE: 1,
